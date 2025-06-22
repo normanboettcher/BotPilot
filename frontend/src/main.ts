@@ -1,18 +1,47 @@
 import './style.css'
 import type { BotResponse } from './types';
 
-const questionInput = document.querySelector<HTMLInputElement>('#question')!;
-const sendButton = document.querySelector<HTMLButtonElement>('#send')!;
-const responseText = document.querySelector<HTMLParagraphElement>('#response')!;
+const createChatWidget = () => {
+  const button = document.createElement('button');
+  const container = document.createElement('div');
+  const chatBox = document.createElement('div');
+  const input = document.createElement('input');
+  const sendBtn = document.createElement('button');
+  const response = document.createElement('div');
 
-sendButton.addEventListener('click', async () => {
-  const question = questionInput.value.trim();
-  if (!question) return;
+  // Styles und IDs
+  button.id = 'chatbot-toggle';
+  button.innerText = '💬';
 
-  const res = await fetch(`http://localhost:8000/chat?q=${encodeURIComponent(question)}`);
-  const json = await res.json()
-  console.log('json', JSON.stringify(json))
-  const data = json as BotResponse;
+  container.id = 'chatbot-container';
+  chatBox.id = 'chatbox';
+  input.placeholder = 'Frage eingeben...';
+  input.id = 'chatbot-input';
+  sendBtn.innerText = '➤';
+  sendBtn.id = 'chatbot-send';
+  response.id = 'chatbot-response';
 
-  responseText.innerText = data.response;
-});
+  chatBox.appendChild(input);
+  chatBox.appendChild(sendBtn);
+  chatBox.appendChild(response);
+  container.appendChild(button);
+  container.appendChild(chatBox);
+  document.body.appendChild(container);
+
+  // Anzeige-Logik
+  button.onclick = () => {
+    chatBox.classList.toggle('visible');
+  };
+
+  // Anfrage senden
+  sendBtn.onclick = async () => {
+    const frage = input.value;
+    if (!frage) return;
+
+    const res = await fetch(`http://localhost:8000/chat?q=${encodeURIComponent(frage)}`);
+    const data = await res.json() as BotResponse;
+    response.innerText = data.response;
+  };
+};
+
+window.addEventListener('DOMContentLoaded', createChatWidget);
