@@ -1,5 +1,5 @@
-import './style.css';
-import { BotResponse } from './types';
+import './style.css'
+import type { BotResponse } from './types';
 
 const questionInput = document.querySelector<HTMLInputElement>('#question')!;
 const sendButton = document.querySelector<HTMLButtonElement>('#send')!;
@@ -10,7 +10,9 @@ sendButton.addEventListener('click', async () => {
   if (!question) return;
 
   const res = await fetch(`http://localhost:8000/chat?q=${encodeURIComponent(question)}`);
-  const data = (await res.json()) as BotResponse;
+  const json = await res.json()
+  console.log('json', JSON.stringify(json))
+  const data = json as BotResponse;
 
   responseText.innerText = data.response;
 });
