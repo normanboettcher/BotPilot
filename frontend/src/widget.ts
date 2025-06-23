@@ -44,4 +44,3 @@ const createChatWidget = () => {
 };
 
 window.addEventListener('DOMContentLoaded', createChatWidget);
-*/
