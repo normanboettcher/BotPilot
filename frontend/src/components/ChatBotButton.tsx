@@ -1,15 +1,16 @@
+import Chat from "@mui/icons-material/Chat";
 import { Box, Button } from "@mui/material";
 import React from "react";
 
 type Props = {
-    onClick: React.MouseEventHandler<HTMLButtonElement> | undefined
-}
+  onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+};
 
-const ChatBotButton: React.FC<Props> = ({onClick}) => {
+const ChatBotButton: React.FC<Props> = ({ onClick }) => {
   return (
     <Box>
       <Button
-        id='chatbot-toggle'
+        id="chatbot-toggle"
         onClick={onClick}
         sx={{
           background: "#3b82f6",
@@ -25,7 +26,9 @@ const ChatBotButton: React.FC<Props> = ({onClick}) => {
             backgroundColor: "#2563eb",
           },
         }}
-      >💬</Button>
+      >
+        <Chat />
+      </Button>
     </Box>
   );
 };

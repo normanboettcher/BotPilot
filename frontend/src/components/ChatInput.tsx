@@ -3,23 +3,36 @@ import React, { useState, type ChangeEventHandler } from "react";
 import SendButton from "./SendButton";
 import { useChatverlauf } from "../context/ChatContext";
 import type { ChatMessage } from "../domain/ChatMessage";
+import type { BotResponse } from "../types";
 
 const ChatInput: React.FC = () => {
   const { addMessage } = useChatverlauf();
   const [question, setQuestion] = useState<ChatMessage | undefined>();
-  const onClick = () => {
-    question && addMessage(question);
+  const onClick = async () => {
+    if (!question) return;
+    addMessage(question);
+    const res = await fetch(
+      `http://localhost:8000/chat?q=${encodeURIComponent(question.message)}`
+    );
+    const data = (await res.json()) as BotResponse;
+    const botMessage = createChatMessage(data.response, 'bot');
+    addMessage(botMessage)
+  };
+
+  const createChatMessage = (text: string, sender: "user" | "bot") => {
+    const date: Date = new Date();
+    const chatMessage: ChatMessage = {
+      sender: sender,
+      message: text,
+      timestamp: `${date.getDay()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`,
+    };
+    return chatMessage;
   };
 
   const onChange: ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement | undefined
   > = (e) => {
-    const date: Date = new Date();
-    const chatMessage: ChatMessage = {
-      sender: "user",
-      message: e.target.value,
-      timestamp: `${date.getDay()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`,
-    };
+    const chatMessage = createChatMessage(e.target.value, 'user');
     setQuestion(chatMessage);
   };
 

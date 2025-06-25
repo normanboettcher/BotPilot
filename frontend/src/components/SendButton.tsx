@@ -1,6 +1,5 @@
 import { Box, Button } from "@mui/material";
 import React from "react";
-import { useChatverlauf } from "../context/ChatContext";
 
 type Props = {
   onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
