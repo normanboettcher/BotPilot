@@ -15,7 +15,7 @@ const Chatverlauf: React.FC = () => {
     >
       {messages &&
         messages.map((msg, index) => (
-          <ListItem key={index} alignItems="flex-start">
+          <ListItem key={index}>
                 <ChatMessageContainer chatMessage={msg}/>
           </ListItem>
         ))}
