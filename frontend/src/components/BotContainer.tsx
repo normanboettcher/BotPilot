@@ -18,7 +18,7 @@ const BotContainer = (): React.ReactNode => {
       }}
     >
       <ChatBotButton onClick={() => setVisible(!visible)} />
-      <Chatbox visible={visible} />
+      <Chatbox visible={true} />
     </Box>
   );
 };

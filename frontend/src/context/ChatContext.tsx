@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { ChatMessage } from "../domain/ChatMessage"
+import type { ChatMessage } from "../domain/ChatMessage.types.ts"
 import React from "react";
 
 interface ChatContextType {

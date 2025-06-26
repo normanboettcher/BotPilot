@@ -1,8 +1,7 @@
 import { Box, Stack } from "@mui/material";
 import React from "react";
 import ChatInput from "./ChatInput";
-import SendButton from "./SendButton";
-import ChatResponse from "./ChatResponse";
+import ChatMessage from "./ChatMessage.tsx";
 import Chatverlauf from "./Chatverlauf";
 
 type Props = {
@@ -10,7 +9,6 @@ type Props = {
 };
 
 const Chatbox: React.FC<Props> = ({ visible }) => {
-  console.log("vsible", visible);
   return (
     <Box
       id="chatbox"
@@ -31,7 +29,7 @@ const Chatbox: React.FC<Props> = ({ visible }) => {
         <Chatverlauf/>
         <ChatInput />
       </Stack>
-      <ChatResponse />
+      <ChatMessage />
     </Box>
   );
 };

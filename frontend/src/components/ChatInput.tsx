@@ -2,12 +2,12 @@ import { Box, Stack, TextField } from "@mui/material";
 import React, { useState, type ChangeEventHandler } from "react";
 import SendButton from "./SendButton";
 import { useChatverlauf } from "../context/ChatContext";
-import type { ChatMessage } from "../domain/ChatMessage";
 import type { BotResponse } from "../types";
+import type {ChatMessageType} from "../domain/ChatMessage.types.ts";
 
 const ChatInput: React.FC = () => {
   const { addMessage } = useChatverlauf();
-  const [question, setQuestion] = useState<ChatMessage | undefined>();
+  const [question, setQuestion] = useState<ChatMessageType | undefined>();
   const onClick = async () => {
     if (!question) return;
     addMessage(question);
@@ -21,7 +21,7 @@ const ChatInput: React.FC = () => {
 
   const createChatMessage = (text: string, sender: "user" | "bot") => {
     const date: Date = new Date();
-    const chatMessage: ChatMessage = {
+    const chatMessage: ChatMessageType = {
       sender: sender,
       message: text,
       timestamp: `${date.getDay()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`,
