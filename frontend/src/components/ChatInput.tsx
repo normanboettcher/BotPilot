@@ -20,12 +20,12 @@ const ChatInput: React.FC = () => {
             const data = (await res.json()) as BotResponse;
             const botMessage = createChatMessage(data.response, 'bot');
             addMessage(botMessage)
-        } catch(error) {
+        } catch (error) {
             console.error('Fehler beim Abrufen der Antwort:', error);
             const errorMessage = createChatMessage('Fehler bei der Verbindung zum Server:', 'bot');
             addMessage(errorMessage);
         }
-   };
+    };
 
     const createChatMessage = (text: string, sender: "user" | "bot") => {
         const date: Date = new Date();
@@ -44,39 +44,40 @@ const ChatInput: React.FC = () => {
     };
 
     return (
-        <Box
-            id="chatbot-input"
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                height: "100vh",
-                marginBottom: "0.5rem",
-                flex: 1,
-                "& .MuiInputBase-root": {
-                    padding: "0.5rem",
-                },
-            }}
-        >
-            <Stack direction={"column"} spacing={1}>
-                <TextField
-                    variant="outlined"
-                    multiline
-                    maxRows={4}
-                    onChange={onChange}
-                    value={input}
-                    onKeyDown={async (e) => {
-                        if (e.key === "Enter" && !e.shiftKey) {
-                            e.preventDefault();
-                            await handleSend();
-                            setInput('')
-                        }
-                    }}
-                    placeholder="Frage eingeben..."
-                    size="small"
-                    fullWidth
-                />
-                <SendButton onClick={handleSend}/>
-            </Stack>
+        <Box maxHeight={280}>
+            <Box
+                id="chatbot-input"
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    marginBottom: "0.5rem",
+                    flex: 1,
+                    "& .MuiInputBase-root": {
+                        padding: "0.5rem",
+                    },
+                }}
+            >
+                <Stack direction={"column"} spacing={1}>
+                    <TextField
+                        variant="outlined"
+                        multiline
+                        maxRows={4}
+                        onChange={onChange}
+                        value={input}
+                        onKeyDown={async (e) => {
+                            if (e.key === "Enter" && !e.shiftKey) {
+                                e.preventDefault();
+                                await handleSend();
+                                setInput('')
+                            }
+                        }}
+                        placeholder="Frage eingeben..."
+                        size="small"
+                        fullWidth
+                    />
+                    <SendButton onClick={handleSend}/>
+                </Stack>
+            </Box>
         </Box>
     );
 };
