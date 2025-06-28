@@ -1,4 +1,4 @@
-import type {BotResponse} from "./types.ts";
+import type {BotResponse} from "./domain/BotResponse.ts";
 
 const createChatWidget = () => {
     const button = document.createElement('button');

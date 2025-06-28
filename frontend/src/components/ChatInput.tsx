@@ -2,7 +2,7 @@ import {Box, Stack, TextField} from "@mui/material";
 import React, {useState, type ChangeEventHandler} from "react";
 import SendButton from "./SendButton";
 import {useChatverlauf} from "../context/ChatContext";
-import type {BotResponse} from "../types";
+import type {BotResponse} from "../domain/BotResponse.ts";
 import type {ChatMessageType} from "../domain/ChatMessage.types.ts";
 
 const ChatInput: React.FC = () => {
@@ -27,15 +27,6 @@ const ChatInput: React.FC = () => {
         }
     };
 
-    const createChatMessage = (text: string, sender: "user" | "bot") => {
-        const date: Date = new Date();
-        const chatMessage: ChatMessageType = {
-            sender: sender,
-            message: text,
-            timestamp: `${date.getDay() + 1}.${date.getMonth() + 1}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`,
-        };
-        return chatMessage;
-    };
 
     const onChange: ChangeEventHandler<
         HTMLInputElement | HTMLTextAreaElement | undefined
