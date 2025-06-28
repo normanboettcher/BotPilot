@@ -1,5 +1,5 @@
 import type {ChatMessageType} from "../domain/ChatMessage.types.ts";
-import type {BotResponse} from "../domain/BotResponse.ts";
+import type {Sender} from "../domain/Sender.ts";
 
 const useMessageCreator = () => {
 
@@ -12,11 +12,11 @@ const useMessageCreator = () => {
         minute: "numeric",
     }
 
-    const createChatMessage = (botResponse: BotResponse) => {
+    const createChatMessage = (text: string, sender: Sender) => {
         const date = new Date().toLocaleDateString("de-DE", dateOptions);
         const chatMessage: ChatMessageType = {
-            sender: botResponse.sender,
-            message: botResponse.text,
+            sender: sender,
+            message: text,
             timestamp: date
         };
         return chatMessage;

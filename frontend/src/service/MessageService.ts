@@ -2,9 +2,9 @@ import useRestClient from "./RestClient.ts";
 import type {BotResponse} from "../domain/BotResponse.ts";
 import useMessageCreator from "./MessageCreator.ts";
 
-const MessageService = () => {
+const useMessageService = () => {
 
-    const sendMessage = async (message: string) => {
+    const sendMessageAndGetResponse = async (message: string) => {
         const {send} = useRestClient();
         const {createChatMessage} = useMessageCreator();
         try {
@@ -13,15 +13,15 @@ const MessageService = () => {
                 return undefined;
             }
             const messageData = await messageResponse.json() as BotResponse;
-            return createChatMessage(messageData);
+            return createChatMessage(messageData.text, 'bot');
         } catch (error) {
             console.error(error);
             throw Error(`Failed to send message. Received Error: ${JSON.stringify(error)}`);
         }
     }
     return {
-        sendMessage
+        sendMessageAndGetResponse
     }
 }
 
-export default MessageService;
+export default useMessageService;
