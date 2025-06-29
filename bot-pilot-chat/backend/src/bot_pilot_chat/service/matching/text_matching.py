@@ -1,21 +1,25 @@
 from sentence_transformers import SentenceTransformer, util
 import json
+
+from bot_pilot_chat.config.config import app_config
 from bot_pilot_chat.domain.response import BotResponse
 
-model = SentenceTransformer('all-MiniLM-L6-v2')
+model = SentenceTransformer("all-MiniLM-L6-v2")
 
-##Top Level for caching
+# Top Level for caching
 _faqs = None
 _faq_embeddings = None
 
 
 def load_faq_embeddings():
     global _faqs, _faq_embeddings
+    config = app_config()
+    data_path = config["FAQ_DATA_PATH"]
+    print(f"loaded data path: {data_path}")
     if _faqs is None or _faq_embeddings is None:
-        with open('/bot_pilot_chat/data/faqs.json',
-                  encoding='utf-8') as f:
+        with open(data_path, encoding="utf-8") as f:
             _faqs = json.load(f)
-        faq_questions = [faq['question'] for faq in _faqs]
+        faq_questions = [faq["question"] for faq in _faqs]
         _faq_embeddings = model.encode(faq_questions, convert_to_tensor=True)
     return _faqs, _faq_embeddings
 
@@ -29,6 +33,6 @@ def find_most_similar(user_question, top_k=1, threshold=0.5):
     best_idx = int(similarities.argmax().item())
 
     if best_score >= threshold:
-        answer = faqs[best_idx]['answer']
+        answer = faqs[best_idx]["answer"]
         return BotResponse.with_answer_and_score(answer, best_score)
     return BotResponse.no_answer_found()

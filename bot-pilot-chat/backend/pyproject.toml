@@ -6,17 +6,41 @@ build-backend = "setuptools.build_meta"
 where = ["src"]
 
 [tool.tox]
-envlist = ["py312", "lint", "format"]
+envlist = ["unit_tests", "integration_test", "lint", "format"]
 
+[tool.tox.env.base_deps]
+description = "install all required libraries in base step"
+skip_install = true
+allowlist_externals = ["sh"]
+deps = ["-rrequirements.txt"]
+commands = [
+    ["sh", "-c", "echo", "✔ requirements.txt geladen"]
+]
 
-[tool.tox.env.py312]
+[tool.tox.env.unit_tests]
 description = "Run tests with Python 3.12"
+#depends = ["base_deps"]
 deps = [
     "-rrequirements.txt",
+    "pytest",
+    "pytest-cov"
 ]
 commands = [
-    ["pytest", "--cov=model_api", "--cov-report=term-missing", "tests/"]
+    ["python", "-m", "pytest", "tests/"]
 ]
+
+[tool.tox.env.integration_test]
+description = "Run integration tests with Python 3.12"
+#depends = ["base_deps"]
+deps = [
+    "-rrequirements.txt",
+    "pytest",
+    "pytest-cov"
+]
+commands = [
+    ["python", "-m", "pytest", "integration_tests/"]
+]
+
 
 [tool.tox.env.lint]
 description = "Run flake8 linter"
@@ -34,11 +58,14 @@ commands = [
 
 [tool.tox.env.coverage]
 description = "Run tests and generate HTML coverage report"
+#depends = ["base_deps"]
 deps = [
-    "-rrequirements.txt"
+    "-rrequirements.txt",
+    "pytest",
+    "pytest-cov"
 ]
 commands = [
-    ["pytest", "--cov=model_api", "--cov-report=html", "tests/"]
+    ["python", "-m", "pytest", "tests/"]
 ]
 
 [project]

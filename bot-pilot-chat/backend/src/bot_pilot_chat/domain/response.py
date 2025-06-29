@@ -30,5 +30,5 @@ class BotResponse:
             "answer": self._answer,
             "success": self._success,
             "timestamp": self._timestamp,
-            "score": self._score
+            "score": self._score,
         }
