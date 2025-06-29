@@ -27,7 +27,7 @@ repos:
     rev: 1.7.4
     hooks:
       - id: bandit
-        args: [ "-r", "bot-pilot-chat/backend/src/bot_pilot_chat" ]
+        args: [ "-r", "bot-pilot-chat/backend/src" ]
         exclude: 'tests/|test_.*\.py$'
 
   - repo: https://github.com/Yelp/detect-secrets
