@@ -1,10 +1,115 @@
 [
   {
-    "question": "Welche Unterlagen brauche ich für die Steuererklärung?",
-    "answer": "Sie benötigen Einkommensnachweise, Belege zu Werbungskosten und Sonderausgaben."
+    "id": 1,
+    "question": "Was brauche ich für meine Steuererklärung?",
+    "answer": "Sie benötigen Gehaltsabrechnungen, Nachweise über Werbungskosten, Sonderausgaben und ggf. Belege zu Vermietung oder Kapitalerträgen.",
+    "category": "Steuern",
+    "tags": [
+      "Steuererklärung",
+      "Unterlagen",
+      "Belege"
+    ]
   },
   {
+    "id": 2,
+    "question": "Bis wann muss ich die Steuererklärung abgeben?",
+    "answer": "In der Regel ist die Abgabefrist der 31. Juli des Folgejahres. Bei Nutzung eines Steuerberaters verlängert sich die Frist auf Ende Februar des übernächsten Jahres.",
+    "category": "Steuern",
+    "tags": [
+      "Frist",
+      "Abgabe",
+      "Steuerberater"
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Welche Ausgaben kann ich steuerlich absetzen?",
+    "answer": "Dazu zählen u. a. Arbeitsmittel, Fahrtkosten, Fortbildungen, doppelte Haushaltsführung, Kinderbetreuungskosten und Spenden.",
+    "category": "Steuern",
+    "tags": [
+      "Absetzen",
+      "Werbungskosten",
+      "Sonderausgaben"
+    ]
+  },
+  {
+    "id": 4,
     "question": "Wie buche ich einen Termin?",
-    "answer": "Bitte nutzen Sie unser Kontaktformular oder rufen Sie uns direkt an."
+    "answer": "Nutzen Sie unser Kontaktformular auf der Website oder rufen Sie uns direkt unter der angegebenen Telefonnummer an.",
+    "category": "Organisation",
+    "tags": [
+      "Termin",
+      "Kontakt",
+      "Buchung"
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Wo finde ich Ihre Kanzlei?",
+    "answer": "Unsere Kanzlei befindet sich in der Musterstraße 10, 12345 Musterstadt. Eine Anfahrtsbeschreibung finden Sie auf unserer Website.",
+    "category": "Organisation",
+    "tags": [
+      "Adresse",
+      "Standort",
+      "Anfahrt"
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Kann ich die Kosten für die Kita absetzen?",
+    "answer": "Ja, zwei Drittel der Betreuungskosten für Kinder unter 14 Jahren sind bis zu 4.000 € pro Kind und Jahr absetzbar.",
+    "category": "Familie",
+    "tags": [
+      "Kinder",
+      "Kita",
+      "Kinderbetreuung",
+      "Absetzen"
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Wie versteuere ich Einkünfte aus Kryptowährungen?",
+    "answer": "Gewinne aus dem Verkauf von Kryptowährungen sind steuerpflichtig, wenn sie innerhalb eines Jahres erzielt wurden.",
+    "category": "Finanzen",
+    "tags": [
+      "Krypto",
+      "Bitcoin",
+      "Steuern",
+      "Kapitalerträge"
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Was kann ich im Homeoffice absetzen?",
+    "answer": "Sie können eine Pauschale von 6 € pro Tag für bis zu 210 Tage geltend machen, wenn kein anderer Arbeitsplatz zur Verfügung steht.",
+    "category": "Arbeit",
+    "tags": [
+      "Homeoffice",
+      "Arbeitszimmer",
+      "Steuerpauschale"
+    ]
+  },
+  {
+    "id": 9,
+    "question": "Welche Arbeitsmittel kann ich steuerlich absetzen?",
+    "answer": "Zum Beispiel Büromöbel, Laptop, Drucker, Software oder Fachliteratur – sofern sie beruflich genutzt werden.",
+    "category": "Arbeit",
+    "tags": [
+      "Arbeitsmittel",
+      "Laptop",
+      "Beruf",
+      "Kosten"
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Wie lange dauert eine Steuererstattung?",
+    "answer": "Meist erfolgt die Erstattung wenige Tage nach dem Steuerbescheid. In der Regel innerhalb von 2 Wochen.",
+    "category": "Steuern",
+    "tags": [
+      "Erstattung",
+      "Steuerbescheid",
+      "Finanzamt"
+    ]
   }
 ]
