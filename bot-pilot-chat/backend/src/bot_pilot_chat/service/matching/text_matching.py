@@ -12,7 +12,7 @@ _faq_embeddings = None
 def load_faq_embeddings():
     global _faqs, _faq_embeddings
     if _faqs is None or _faq_embeddings is None:
-        with open('/home/norman/Projekte/bot-pilot/bot-pilot-chat/backend/src/bot_pilot_chat/data/faqs.json',
+        with open('/bot_pilot_chat/data/faqs.json',
                   encoding='utf-8') as f:
             _faqs = json.load(f)
         faq_questions = [faq['question'] for faq in _faqs]
