@@ -53,4 +53,4 @@ repos:
     hooks:
       - id: prettier
         additional_dependencies: [ "prettier" ]
-        files: ^bot-pilot-chat/frontend/.*\.(ts|tsx)$
+        files: ^bot-pilot-chat/frontend/src/.*\.(ts|tsx)$
