@@ -33,17 +33,18 @@ jobs:
           corepack enable
           corepack prepare yarn@4.9.2 --activate
 
-      - name: Set nodeLinker to PnP
-        run: echo "nodeLinker:pnp" > .yarnrc.yml
-
       - name: Install dependencies
         run: yarn install --immutable
+        working-directory: bot-pilot-chat/frontend
 
       - name: Lint
         run: yarn lint
+        working-directory: bot-pilot-chat/frontend
 
       - name: Run Unit Tests
         run: yarn test:unit
+        working-directory: bot-pilot-chat/frontend
 
       - name: Build frontend
         run: yarn build
+        working-directory: bot-pilot-chat/frontend
