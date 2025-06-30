@@ -27,6 +27,7 @@ jobs:
         with:
           node-version: "22.16.0"
           cache: "yarn"
+        working-directory: bot-pilot-chat/frontend
 
       - name: Enable Corepack and activate Yarn 4.9.2
         run: |

@@ -1,6 +1,9 @@
 import type { Sender } from "./Sender.ts";
 
 export interface BotResponse {
-  text: string;
+  answer: string;
   sender: Sender;
+  success: boolean;
+  score?: number;
+  timestamp: string;
 }
