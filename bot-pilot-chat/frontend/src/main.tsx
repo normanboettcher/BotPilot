@@ -10,5 +10,5 @@ root.render(
     <ChatContextProvider>
       <App />
     </ChatContextProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

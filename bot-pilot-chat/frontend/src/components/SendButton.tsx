@@ -3,10 +3,9 @@ import React from "react";
 
 type Props = {
   onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
-}
+};
 
-const SendButton: React.FC<Props> = ({onClick}) => {
-
+const SendButton: React.FC<Props> = ({ onClick }) => {
   return (
     <Box>
       <Button

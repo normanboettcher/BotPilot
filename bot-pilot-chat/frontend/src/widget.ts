@@ -1,46 +1,48 @@
-import type {BotResponse} from "./domain/BotResponse.ts";
+import type { BotResponse } from "./domain/BotResponse.ts";
 
 const createChatWidget = () => {
-    const button = document.createElement('button');
-    const container = document.createElement('div');
-    const chatBox = document.createElement('div');
-    const input = document.createElement('input');
-    const sendBtn = document.createElement('button');
-    const response = document.createElement('div');
+  const button = document.createElement("button");
+  const container = document.createElement("div");
+  const chatBox = document.createElement("div");
+  const input = document.createElement("input");
+  const sendBtn = document.createElement("button");
+  const response = document.createElement("div");
 
-    // Styles und IDs
-    button.id = 'chatbot-toggle';
-    button.innerText = '💬';
+  // Styles und IDs
+  button.id = "chatbot-toggle";
+  button.innerText = "💬";
 
-    container.id = 'chatbot-container';
-    chatBox.id = 'chatbox';
-    input.placeholder = 'Frage eingeben...';
-    input.id = 'chatbot-input';
-    sendBtn.innerText = '➤';
-    sendBtn.id = 'chatbot-send';
-    response.id = 'chatbot-response';
+  container.id = "chatbot-container";
+  chatBox.id = "chatbox";
+  input.placeholder = "Frage eingeben...";
+  input.id = "chatbot-input";
+  sendBtn.innerText = "➤";
+  sendBtn.id = "chatbot-send";
+  response.id = "chatbot-response";
 
-    chatBox.appendChild(input);
-    chatBox.appendChild(sendBtn);
-    chatBox.appendChild(response);
-    container.appendChild(button);
-    container.appendChild(chatBox);
-    document.body.appendChild(container);
+  chatBox.appendChild(input);
+  chatBox.appendChild(sendBtn);
+  chatBox.appendChild(response);
+  container.appendChild(button);
+  container.appendChild(chatBox);
+  document.body.appendChild(container);
 
-    // Anzeige-Logik
-    button.onclick = () => {
-        chatBox.classList.toggle('visible');
-    };
+  // Anzeige-Logik
+  button.onclick = () => {
+    chatBox.classList.toggle("visible");
+  };
 
-    // Anfrage senden
-    sendBtn.onclick = async () => {
-        const frage = input.value;
-        if (!frage) return;
+  // Anfrage senden
+  sendBtn.onclick = async () => {
+    const frage = input.value;
+    if (!frage) return;
 
-        const res = await fetch(`http://localhost:8000/chat?q=${encodeURIComponent(frage)}`);
-        const data = await res.json() as BotResponse;
-        response.innerText = data.response;
-    };
+    const res = await fetch(
+      `http://localhost:8000/chat?q=${encodeURIComponent(frage)}`,
+    );
+    const data = (await res.json()) as BotResponse;
+    response.innerText = data.text;
+  };
 };
 
-window.addEventListener('DOMContentLoaded', createChatWidget);
+window.addEventListener("DOMContentLoaded", createChatWidget);

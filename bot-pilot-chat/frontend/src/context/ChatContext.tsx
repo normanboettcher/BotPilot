@@ -1,38 +1,37 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { ChatMessage } from "../domain/ChatMessage.types.ts"
 import React from "react";
+import type { ChatMessageType } from "../domain/ChatMessage.types";
 
 interface ChatContextType {
-    messages: ChatMessage[];
-    addMessage: (msg: ChatMessage) => void;
-    resetMessages: () => void;
+  messages: ChatMessageType[];
+  addMessage: (msg: ChatMessageType) => void;
+  resetMessages: () => void;
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
-export const ChatContextProvider = ({children}: {children: ReactNode}) => {
-    const [messages, setMessages] = useState<ChatMessage[]>([]);
-    
-    const resetMessages = () => {
-        setMessages([]);
-    }
+export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
+  const [messages, setMessages] = useState<ChatMessageType[]>([]);
 
-    const addMessage = (msg: ChatMessage) => {
-        setMessages(prev => [...prev, msg])
-    }
+  const resetMessages = () => {
+    setMessages([]);
+  };
 
-    return (
-        <ChatContext.Provider value={{messages, addMessage, resetMessages}}>
-            {children}
-        </ChatContext.Provider>
-    )
-}
+  const addMessage = (msg: ChatMessageType) => {
+    setMessages((prev) => [...prev, msg]);
+  };
+
+  return (
+    <ChatContext.Provider value={{ messages, addMessage, resetMessages }}>
+      {children}
+    </ChatContext.Provider>
+  );
+};
 
 export const useChatverlauf = (): ChatContextType => {
   const context = useContext(ChatContext);
   if (!context) {
-    throw new Error('useChat must be used within a ChatProvider');
+    throw new Error("useChat must be used within a ChatProvider");
   }
   return context;
 };
-

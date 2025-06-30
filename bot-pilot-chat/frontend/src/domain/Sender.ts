@@ -1,1 +1,1 @@
-export type Sender = 'user' | 'bot';
+export type Sender = "user" | "bot";

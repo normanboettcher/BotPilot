@@ -1,0 +1,49 @@
+name: Frontend CI
+
+on:
+  push:
+    paths:
+      - "bot-pilot-chat/frontend/**"
+      - ".github/workflows/frontend.yml"
+  pull_request:
+    paths:
+      - "bot-pilot-chat/frontend/**"
+
+jobs:
+  build:
+    name: Build Frontend
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: bot-pilot-chat/frontend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 22.16.0 with Corepack
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.16.0"
+          cache: "yarn"
+
+      - name: Enable Corepack and activate Yarn 4.9.2
+        run: |
+          corepack enable
+          corepack prepare yarn@4.9.2 --activate
+
+      - name: Set nodeLinker to PnP
+        run: echo "nodeLinker:pnp" > .yarnrc.yml
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Run Unit Tests
+        run: yarn test:unit
+
+      - name: Build frontend
+        run: yarn build
