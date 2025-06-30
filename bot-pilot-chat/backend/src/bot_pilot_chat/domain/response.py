@@ -3,11 +3,12 @@ from datetime import datetime
 
 class BotResponse:
 
-    def __init__(self, answer: str, success: bool, score=None):
+    def __init__(self, answer: str, success: bool, score=None, sender=None):
         self._success = success
         self._timestamp = datetime.now().strftime("%d.%m.%Y, %H:%M")
         self._answer = answer
         self._score = score
+        self._sender = sender
 
     @staticmethod
     def no_answer_found():
@@ -15,15 +16,15 @@ class BotResponse:
             Zu dieser Anfrage konnte ich leider keine passende Antwort finden.
             Bitte formulieren Sie Ihre Frage anders.
             """
-        return BotResponse(not_found_message, success=False)
+        return BotResponse(not_found_message, success=False, sender="bot")
 
     @staticmethod
     def with_answer(answer: str):
-        return BotResponse(answer, success=True)
+        return BotResponse(answer, success=True, sender="bot")
 
     @staticmethod
     def with_answer_and_score(answer: str, score: float):
-        return BotResponse(answer, success=True, score=score)
+        return BotResponse(answer, success=True, score=score, sender="bot")
 
     def as_dict(self) -> dict:
         return {
@@ -31,4 +32,5 @@ class BotResponse:
             "success": self._success,
             "timestamp": self._timestamp,
             "score": self._score,
+            "sender": self._sender,
         }
