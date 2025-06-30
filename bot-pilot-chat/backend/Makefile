@@ -15,3 +15,6 @@ format:
 test: unit integration
 
 build: format lint test
+
+dev:
+	uvicorn bot_pilot_chat.main:app --reload
