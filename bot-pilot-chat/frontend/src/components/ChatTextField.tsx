@@ -1,9 +1,17 @@
 import React from "react";
-import { TextField, type TextFieldProps } from "@mui/material";
+import { InputAdornment, TextField, type TextFieldProps } from "@mui/material";
+import type { BotTextFieldProps } from "../domain/BotTextFieldProps.ts";
 
-const ChatTextField: React.FC<TextFieldProps> = ({ ...props }) => {
+const ChatTextField: React.FC<TextFieldProps & BotTextFieldProps> = ({
+  ...props
+}) => {
   return (
     <TextField
+      InputProps={{
+        endAdornment: props.sendButton && (
+          <InputAdornment position={"end"}>{props.sendButton}</InputAdornment>
+        ),
+      }}
       variant="outlined"
       multiline
       maxRows={4}

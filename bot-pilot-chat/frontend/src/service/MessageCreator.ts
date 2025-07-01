@@ -1,4 +1,4 @@
-import type { ChatMessageType } from "../domain/ChatMessage.types.ts";
+import type { ChatMessageType } from "../domain/ChatMessage.ts";
 import type { Sender } from "../domain/Sender.ts";
 
 const useMessageCreator = () => {

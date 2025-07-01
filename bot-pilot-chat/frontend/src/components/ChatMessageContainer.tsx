@@ -1,6 +1,6 @@
 import React from "react";
 import SenderAvatar from "./SenderAvatar.tsx";
-import type { ChatMessageType } from "../domain/ChatMessage.types.ts";
+import type { ChatMessageType } from "../domain/ChatMessage.ts";
 import { Stack } from "@mui/material";
 import ChatMessage from "./ChatMessage.tsx";
 

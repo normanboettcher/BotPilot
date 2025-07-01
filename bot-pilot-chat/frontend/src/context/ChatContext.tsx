@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import React from "react";
-import type { ChatMessageType } from "../domain/ChatMessage.types";
+import type { ChatMessageType } from "../domain/ChatMessage.ts";
 
 interface ChatContextType {
   messages: ChatMessageType[];

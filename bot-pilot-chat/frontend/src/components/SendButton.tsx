@@ -1,11 +1,8 @@
 import { Box, Button } from "@mui/material";
 import React from "react";
+import type { GeneralButtonProps } from "../domain/GeneralButtonProps.ts";
 
-type Props = {
-  onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
-};
-
-const SendButton: React.FC<Props> = ({ onClick }) => {
+const SendButton: React.FC<GeneralButtonProps> = ({ onClick }) => {
   return (
     <Box>
       <Button

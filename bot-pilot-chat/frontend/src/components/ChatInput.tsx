@@ -5,6 +5,7 @@ import { useChatverlauf } from "../context/ChatContext";
 import useMessageService from "../service/MessageService.ts";
 import useMessageCreator from "../service/MessageCreator.ts";
 import ChatTextField from "./ChatTextField.tsx";
+import SendIconButton from "./SendIconButton.tsx";
 
 const ChatInput: React.FC = () => {
   const { addMessage } = useChatverlauf();
@@ -53,6 +54,7 @@ const ChatInput: React.FC = () => {
         <Stack direction={"column"} spacing={1}>
           <ChatTextField
             onChange={onChange}
+            sendButton={<SendIconButton onClick={handleSend} />}
             value={input}
             onKeyDown={async (e) => {
               if (e.key === "Enter" && !e.shiftKey) {
@@ -62,7 +64,9 @@ const ChatInput: React.FC = () => {
               }
             }}
           />
-          <SendButton onClick={handleSend} />
+          {/**
+           <SendButton onClick={handleSend} />
+           */}
         </Stack>
       </Box>
     </Box>
