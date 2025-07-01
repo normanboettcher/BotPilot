@@ -1,6 +1,5 @@
 import { Box, Stack } from "@mui/material";
 import React, { useState, type ChangeEventHandler } from "react";
-import SendButton from "./SendButton";
 import { useChatverlauf } from "../context/ChatContext";
 import useMessageService from "../service/MessageService.ts";
 import useMessageCreator from "../service/MessageCreator.ts";
