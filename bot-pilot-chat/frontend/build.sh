@@ -2,7 +2,7 @@
 set -e
 
 # Node & Yarn Setup via Corepack
-export NODE_VERSION=22.16.0
+export NODE_VERSION=22.17.0
 export YARN_VERSION=4.9.2
 
 echo "▶ Installing Node.js $NODE_VERSION and Yarn $YARN_VERSION..."
