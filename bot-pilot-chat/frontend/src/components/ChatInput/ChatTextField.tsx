@@ -1,6 +1,6 @@
 import React from "react";
 import { InputAdornment, TextField, type TextFieldProps } from "@mui/material";
-import type { BotTextFieldProps } from "../domain/BotTextFieldProps.ts";
+import type { BotTextFieldProps } from "../../domain/BotTextFieldProps.ts";
 
 const ChatTextField: React.FC<TextFieldProps & BotTextFieldProps> = ({
   ...props

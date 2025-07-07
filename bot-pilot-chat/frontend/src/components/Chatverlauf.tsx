@@ -2,7 +2,7 @@ import { Box, List, ListItem } from "@mui/material";
 import React, { useEffect, useRef } from "react";
 import { useChatverlauf } from "../context/ChatContext";
 
-import ChatMessageContainer from "./ChatMessageContainer.tsx";
+import ChatMessageContainer from "./ChatMessage/ChatMessageContainer.tsx";
 
 const Chatverlauf: React.FC = () => {
   const { messages } = useChatverlauf();

@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import React, { useState } from "react";
-import ChatBotButton from "./ChatBotButton";
+import ChatBotButton from "./Buttons/ChatBotButton.tsx";
 import Chatbox from "./Chatbox";
 
 const BotContainer = (): React.ReactNode => {

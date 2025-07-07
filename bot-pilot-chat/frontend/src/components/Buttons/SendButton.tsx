@@ -1,6 +1,6 @@
 import { Box, Button } from "@mui/material";
 import React from "react";
-import type { GeneralButtonProps } from "../domain/GeneralButtonProps.ts";
+import type { GeneralButtonProps } from "../../domain/GeneralButtonProps.ts";
 
 const SendButton: React.FC<GeneralButtonProps> = ({ onClick }) => {
   return (

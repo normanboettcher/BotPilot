@@ -1,5 +1,5 @@
 import React from "react";
-import type { Sender } from "../domain/Sender";
+import type { Sender } from "../../domain/Sender.ts";
 import { Avatar } from "@mui/material";
 import SmartToy from "@mui/icons-material/SmartToy";
 import Person from "@mui/icons-material/Person";

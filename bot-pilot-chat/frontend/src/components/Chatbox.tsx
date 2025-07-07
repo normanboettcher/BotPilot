@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import React from "react";
-import ChatInput from "./ChatInput";
+import ChatInput from "./ChatInput/ChatInput.tsx";
 import Chatverlauf from "./Chatverlauf";
 
 type Props = {

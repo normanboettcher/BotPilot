@@ -1,5 +1,5 @@
 import React from "react";
-import type { Sender } from "../domain/Sender.ts";
+import type { Sender } from "../../domain/Sender.ts";
 import LargeChatMessageComponent from "./LargeChatMessageComponent.tsx";
 import SmallChatMessageComponent from "./SmallChatMessageComponent.tsx";
 

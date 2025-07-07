@@ -1,10 +1,10 @@
 import { Box, Stack } from "@mui/material";
 import React, { useState, type ChangeEventHandler } from "react";
-import { useChatverlauf } from "../context/ChatContext";
-import useMessageService from "../service/MessageService.ts";
-import useMessageCreator from "../service/MessageCreator.ts";
+import { useChatverlauf } from "../../context/ChatContext.tsx";
+import useMessageService from "../../service/MessageService.ts";
+import useMessageCreator from "../../service/MessageCreator.ts";
 import ChatTextField from "./ChatTextField.tsx";
-import SendIconButton from "./SendIconButton.tsx";
+import SendIconButton from "../Buttons/SendIconButton.tsx";
 
 const ChatInput: React.FC = () => {
   const { addMessage } = useChatverlauf();
