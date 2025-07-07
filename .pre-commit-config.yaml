@@ -53,6 +53,8 @@ repos:
     rev: v2.7.1
     hooks:
       - id: prettier
+        name: prettier (frontend)
+        entry: yarn prettier
         additional_dependencies: [ "prettier" ]
         files: "^bot-pilot-chat/frontend/src/.*\\.(ts|tsx)$"
         exclude: '^\.idea/'
