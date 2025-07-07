@@ -5,7 +5,7 @@ def app_config():
     return {
         "APP_PREFIX": "api",
         "FAQ_DATA_PATH": os.path.join(
-            "/home/norman/Projekte",
+            "/home/norman/projects",
             "bot-pilot",
             "bot-pilot-chat",
             "backend",

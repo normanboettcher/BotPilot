@@ -1,6 +1,7 @@
 import React from "react";
 import type { Sender } from "../domain/Sender.ts";
-import { Box, Chip, Typography } from "@mui/material";
+import LargeChatMessageComponent from "./LargeChatMessageComponent.tsx";
+import SmallChatMessageComponent from "./SmallChatMessageComponent.tsx";
 
 type Props = {
   text: string;
@@ -16,45 +17,21 @@ const ChatMessage: React.FC<Props> = ({ text, sender }) => {
   const useChip = text.length > 50;
   if (useChip) {
     return (
-      <Chip
-        sx={{
-          alignSelf: align,
-          color: textColor,
-          height: "auto",
-          "& .MuiChip-label": {
-            display: "block",
-            whiteSpace: "normal",
-          },
-          borderRadius: "16px",
-          p: 1.5,
-          maxWidth: "80%",
-          whiteSpace: "normal",
-          wordBreak: "break-word",
-          fontSize: "0.875rem",
-          backgroundColor,
-        }}
-        size="medium"
-        variant="filled"
-        label={text}
+      <SmallChatMessageComponent
+        align={align}
+        backgroundColor={backgroundColor}
+        textColor={textColor}
+        text={text}
       />
     );
   }
   return (
-    <Box
-      sx={{
-        alignSelf: align,
-        backgroundColor,
-        color: textColor,
-        borderRadius: 2,
-        p: 1.5,
-        m: 0.5,
-        maxWidth: "70%",
-        whiteSpace: "pre-wrap",
-        wordBreak: "break-word",
-      }}
-    >
-      <Typography variant="body2">{text}</Typography>
-    </Box>
+    <LargeChatMessageComponent
+      align={align}
+      backgroundColor={backgroundColor}
+      textColor={textColor}
+      text={text}
+    ></LargeChatMessageComponent>
   );
 };
 
