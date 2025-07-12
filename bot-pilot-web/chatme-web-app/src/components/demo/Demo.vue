@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import DemoIntro from '@/components/demo/DemoIntro.vue'
-import DemoSlideShow from '@/components/demo/DemoSlideShow.vue'
-import AdvantagesList from '@/components/advantages/AdvantagesList.vue'
-import PilotForm from '@/components/form/pilot/PilotForm.vue'
+import DemoIntro from '@components/demo/DemoIntro.vue'
+import DemoSlideShow from '@components/demo/DemoSlideShow.vue'
+import AdvantagesList from '@components/advantages/AdvantagesList.vue'
+import PilotForm from '@components/form/pilot/PilotForm.vue'
 </script>
 
 <template>

@@ -1,5 +1,12 @@
 {
   "files": [],
+  "compilerOptions": {
+    "paths": {
+      "@components/*": [
+        "./src/components/*"
+      ]
+    }
+  },
   "references": [
     {
       "path": "./tsconfig.node.json"
