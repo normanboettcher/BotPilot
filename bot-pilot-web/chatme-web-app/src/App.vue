@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import BotPilotHeader from '@/components/header/BotPilotHeader.vue'
+import HomeView from '@/views/HomeView.vue'
 </script>
 
 <template>
-  <BotPilotHeader />
-  <RouterView />
+  <v-app>
+    <HomeView />
+  </v-app>
 </template>
 
 <style scoped></style>

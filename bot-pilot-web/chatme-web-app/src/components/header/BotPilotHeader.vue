@@ -26,6 +26,7 @@ nav {
   font-size: 16px;
   text-align: center;
   margin-top: 2rem;
+  color: var(--color-text);
 }
 
 nav a.router-link-exact-active {

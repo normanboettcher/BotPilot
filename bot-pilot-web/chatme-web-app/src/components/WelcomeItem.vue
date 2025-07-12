@@ -7,6 +7,9 @@
       <h3>
         <slot name="heading"></slot>
       </h3>
+      <h4>
+        <slot name="subheading"></slot>
+      </h4>
       <slot></slot>
     </div>
   </div>
@@ -38,6 +41,12 @@ h3 {
   font-size: 1.2rem;
   font-weight: 500;
   margin-bottom: 0.4rem;
+  color: var(--color-heading);
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: 400;
   color: var(--color-heading);
 }
 

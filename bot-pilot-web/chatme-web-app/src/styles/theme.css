@@ -1,0 +1,39 @@
+/* LIGHT MODE */
+:root {
+  --color-heading: #1D3557;           /* Dunkles Marineblau */
+  --color-background: #F9FAFB;        /* Sehr helles Grau/Weiß */
+  --color-primary: #06B6D4;           /* Frisches Türkis */
+  --color-secondary: #457B9D;         /* Gedämpftes Blau */
+  --color-text: #1A1A1A;              /* Tiefes Anthrazit */
+  --color-muted-text: #6B7280;        /* Grau für weniger dominante Texte */
+  --color-border: #E5E7EB;            /* Helle Rahmenlinien */
+  --color-card: #FFFFFF;              /* Weiße Karten-Hintergründe */
+  --color-accent: #FBBF24;            /* Sanftes Gelb für CTA-Highlights */
+
+  --font-family: 'Inter', 'Segoe UI', sans-serif;
+  --font-size-base: 16px;
+  --font-size-heading: 28px;
+  --border-radius: 8px;
+  --shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* DARK MODE */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-heading: #E0F2F1;         /* Helles Grünblau */
+    --color-background: #121212;      /* Tiefdunkel für Background */
+    --color-primary: #4DD0E1;         /* Helleres Türkis */
+    --color-secondary: #7CB9E8;       /* Gedämpftes Hellblau */
+    --color-text: #F0F0F0;            /* Fast Weiß */
+    --color-muted-text: #A0A0A0;      /* Hellgrau für untergeordnete Inhalte */
+    --color-border: #2C2C2C;          /* Dunkler Border für Karten */
+    --color-card: #1E1E1E;            /* Dunkles Grau für Karten */
+    --color-accent: #FCD34D;          /* Hellgelb als Akzent */
+
+    --font-family: 'Inter', 'Segoe UI', sans-serif;
+    --font-size-base: 16px;
+    --font-size-heading: 28px;
+    --border-radius: 8px;
+    --shadow-soft: none;
+  }
+}
