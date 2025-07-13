@@ -51,6 +51,7 @@ const submitForm = () => {
           label="Telefonnummer"
           type="tel"
         />
+        <v-textarea label="Anmerkungen:" outlined />
         <v-divider></v-divider>
         <div class="faq-scroll-wrapper">
           <div class="faq-list-container" v-for="i in 10" :key="i">
@@ -60,7 +61,9 @@ const submitForm = () => {
             <v-divider></v-divider>
           </div>
         </div>
-        <v-btn color="primary" @click="submitForm">Absenden</v-btn>
+        <v-row class="absenden-button-row pr-5 pt-4 pb-4" align="end" justify="end">
+          <v-btn color="primary" @click="submitForm">Absenden</v-btn>
+        </v-row>
       </v-form>
     </v-card-text>
   </v-card>
