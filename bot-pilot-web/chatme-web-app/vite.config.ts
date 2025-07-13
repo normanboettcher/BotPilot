@@ -12,6 +12,7 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '@components': fileURLToPath(new URL('./src/components', import.meta.url)),
+      '@domain': fileURLToPath(new URL('./src/components/domain', import.meta.url)),
     },
   },
 })

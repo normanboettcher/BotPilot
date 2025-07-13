@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AdvantagesComponent from '@/components/advantages/AdvantagesComponent.vue'
+import AdvantageItem from '@/components/advantages/AdvantageItem.vue'
 import type { Advantage } from '@/components/domain/Advantage.ts'
 
 const advantages: Advantage[] = [
@@ -46,7 +46,7 @@ const advantages: Advantage[] = [
     </v-row>
     <v-row class="advantages-list" dense>
       <v-col v-for="(advantage, index) in advantages" :key="index" cols="12" sm="6" md="4">
-        <advantages-component :advantage="advantage" />
+        <advantage-item :advantage="advantage" />
       </v-col>
     </v-row>
   </v-container>
