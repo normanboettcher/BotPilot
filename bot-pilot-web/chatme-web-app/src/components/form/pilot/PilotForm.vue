@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import type { Faq } from '@/components/domain/Faq.ts'
 import type { Kontaktdaten } from '@/components/domain/Kontaktdaten.ts'
 import PilotFormTextField from '@/components/form/pilot/PilotFormTextField.vue'
+import KontaktdatenForm from '@/components/form/pilot/KontaktdatenForm.vue'
 
 type FormData = {
   kontaktdaten: Kontaktdaten
@@ -40,18 +41,7 @@ const submitForm = () => {
     <v-card-text class="pilot-form-content">
       <div class="kontaktdaten-heading">Kontaktdaten</div>
       <v-form>
-        <pilot-form-text-field
-          id="ansprechpartner"
-          v-model="formData.kontaktdaten.ansprechpartner"
-          label="Ansprechpartner"
-        />
-        <pilot-form-text-field v-model="formData.kontaktdaten.email" label="E-Mail" type="email" />
-        <pilot-form-text-field
-          v-model="formData.kontaktdaten.email"
-          label="Telefonnummer"
-          type="tel"
-        />
-        <v-textarea label="Anmerkungen:" outlined />
+        <kontaktdaten-form v-model="formData.kontaktdaten" />
         <v-divider></v-divider>
         <div class="faq-scroll-wrapper">
           <div class="faq-list-container" v-for="i in 10" :key="i">
