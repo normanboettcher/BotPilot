@@ -9,11 +9,14 @@ const model = defineModel<Kontaktdaten>({
     ansprechpartner: '',
     email: '',
     telefon: '',
+    anmerkungen: '',
+    kanzlei: '',
   }),
 })
 </script>
 
 <template>
+  <pilot-form-text-field id="kanzlei" v-model="model.kanzlei" label="Kanzlei" />
   <pilot-form-text-field
     id="ansprechpartner"
     v-model="model.ansprechpartner"
@@ -21,7 +24,11 @@ const model = defineModel<Kontaktdaten>({
   />
   <pilot-form-text-field v-model="model.email" label="E-Mail" type="email" />
   <pilot-form-text-field v-model="model.telefon" label="Telefonnummer" type="tel" />
-  <v-textarea label="Anmerkungen:" outlined />
+  <v-textarea v-model="model.anmerkungen" label="Anmerkungen:" outlined />
 </template>
 
-<style scoped></style>
+<style scoped>
+.v-textarea {
+  color: var(--color-text);
+}
+</style>

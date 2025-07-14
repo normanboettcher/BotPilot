@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { Faq } from '@/components/domain/Faq.ts'
-import type { Kontaktdaten } from '@/components/domain/Kontaktdaten.ts'
-import PilotFormTextField from '@/components/form/pilot/PilotFormTextField.vue'
-import KontaktdatenForm from '@/components/form/pilot/KontaktdatenForm.vue'
+import type { Faq } from '@components/domain/Faq.ts'
+import type { Kontaktdaten } from '@components/domain/Kontaktdaten.ts'
+import KontaktdatenForm from '@components/form/pilot/KontaktdatenForm.vue'
+import FaqList from '@components/form/pilot/FaqList.vue'
 
 type FormData = {
   kontaktdaten: Kontaktdaten
@@ -18,6 +18,7 @@ const formData = ref<FormData>({
     email: '',
     telefon: '',
     kanzlei: '',
+    anmerkungen: '',
   },
   faqs: faqs.value,
 })
@@ -43,14 +44,7 @@ const submitForm = () => {
       <v-form>
         <kontaktdaten-form v-model="formData.kontaktdaten" />
         <v-divider></v-divider>
-        <div class="faq-scroll-wrapper">
-          <div class="faq-list-container" v-for="i in 10" :key="i">
-            <h3>{{ i }}. FAQ</h3>
-            <pilot-form-text-field label="Frage:" />
-            <v-textarea v-model="faqs[i]" label="Antwort:" required outlined></v-textarea>
-            <v-divider></v-divider>
-          </div>
-        </div>
+        <faq-list v-model="formData.faqs" />
         <v-row class="absenden-button-row pr-5 pt-4 pb-4" align="end" justify="end">
           <v-btn color="primary" @click="submitForm">Absenden</v-btn>
         </v-row>
@@ -60,28 +54,6 @@ const submitForm = () => {
 </template>
 
 <style scoped>
-.v-textarea {
-  color: var(--color-text);
-}
-
-.faq-scroll-wrapper {
-  max-height: 400px; /* passt du je nach Design an */
-  overflow-y: auto;
-  padding-right: 8px; /* damit Scrollbar nicht überlappt */
-}
-
-@media (min-width: 600px) {
-  .faq-scroll-wrapper {
-    max-height: 500px;
-  }
-}
-
-@media (max-width: 599px) {
-  .faq-scroll-wrapper {
-    max-height: 300px;
-  }
-}
-
 .pilot-form-heading {
   font-size: var(--font-size-heading);
   margin-bottom: 1rem;
@@ -109,10 +81,6 @@ h3 {
   font-weight: 400;
   color: var(--color-text);
   margin-bottom: 0.5rem;
-}
-
-.faq-list-container {
-  margin-top: 0.5rem;
 }
 
 .v-btn {
