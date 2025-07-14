@@ -8,7 +8,7 @@ import FeatureList from '@/components/feature/FeatureList.vue'
 
 <template>
   <v-container class="demo-container">
-    <v-card class="demo-card">
+    <v-container class="demo-container">
       <demo-intro />
       <v-divider class="demo-divider" />
       <demo-slide-show />
@@ -18,19 +18,22 @@ import FeatureList from '@/components/feature/FeatureList.vue'
       <feature-list />
       <v-divider class="demo-divider" />
       <pilot-form />
-    </v-card>
+    </v-container>
   </v-container>
 </template>
 
 <style scoped>
+.demo-divider {
+  padding: 1rem;
+}
+
 .demo-container {
   background-color: var(--color-card);
 }
 
-.demo-card {
+.demo-container {
   background-color: var(--color-card);
   width: 100%;
-  padding: 2rem;
   //border: var(--color-border);
 }
 </style>

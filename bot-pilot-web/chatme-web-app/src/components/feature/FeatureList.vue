@@ -27,18 +27,17 @@ const futureFeatures: FeatureItemType[] = [
 </script>
 
 <template>
-  <v-card class="feature-list-container">
+  <v-container class="feature-list-container">
     <v-row class="feature-list-row">
       <feature-section title="Aktuelle Features" :features="currentFeatures" />
       <feature-section title="Zukünftige Features" :features="futureFeatures" />
     </v-row>
-  </v-card>
+  </v-container>
 </template>
 
 <style scoped>
 .feature-list-container {
   background-color: var(--color-card);
-  padding-top: 1rem;
   border-radius: var(--border-radius);
   width: 100%;
 }
