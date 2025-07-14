@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import type { Faq } from '@components/domain/Faq.ts'
 import type { Kontaktdaten } from '@components/domain/Kontaktdaten.ts'
 import KontaktdatenForm from '@components/form/pilot/KontaktdatenForm.vue'
@@ -10,19 +10,36 @@ type FormData = {
   faqs: Array<Faq>
 }
 
-const faqs = ref<Array<Faq>>([])
+const kontaktdaten = ref<Kontaktdaten>({
+  ansprechpartner: '',
+  email: '',
+  telefon: '',
+  kanzlei: '',
+  anmerkungen: '',
+})
+const faqs = ref<Array<Faq>>(Array(10).fill({ answer: '', question: '' }))
 
 const formData = ref<FormData>({
-  kontaktdaten: {
-    ansprechpartner: '',
-    email: '',
-    telefon: '',
-    kanzlei: '',
-    anmerkungen: '',
-  },
+  kontaktdaten: kontaktdaten.value,
   faqs: faqs.value,
 })
 
+const kontaktdatenModel = computed({
+  get() {
+    return formData.value.kontaktdaten
+  },
+  set(value: Kontaktdaten) {
+    formData.value.kontaktdaten = value
+  },
+})
+const faqsModel = computed({
+  get() {
+    return formData.value.faqs
+  },
+  set(value: Array<Faq>) {
+    formData.value.faqs = value
+  },
+})
 const submitForm = () => {
   // Hier können Sie die Logik zum Absenden des Formulars implementieren
   console.log('Formulardaten:', formData.value)
@@ -42,9 +59,9 @@ const submitForm = () => {
     <v-card-text class="pilot-form-content">
       <div class="kontaktdaten-heading">Kontaktdaten</div>
       <v-form>
-        <kontaktdaten-form v-model="formData.kontaktdaten" />
+        <kontaktdaten-form v-model="kontaktdatenModel" />
         <v-divider></v-divider>
-        <faq-list v-model="formData.faqs" />
+        <faq-list v-model="faqsModel" />
         <v-row class="absenden-button-row pr-5 pt-4 pb-4" align="end" justify="end">
           <v-btn color="primary" @click="submitForm">Absenden</v-btn>
         </v-row>
@@ -74,13 +91,6 @@ const submitForm = () => {
 .pilot-form-content {
   background-color: var(--color-card);
   border-radius: var(--border-radius);
-}
-
-h3 {
-  font-size: var(--font-size-base);
-  font-weight: 400;
-  color: var(--color-text);
-  margin-bottom: 0.5rem;
 }
 
 .v-btn {
