@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
-import type { FeatureItemType } from '@domain/Feature.ts'
+import { defineProps } from 'vue';
+import type { FeatureItemType } from '@domain/Feature.ts';
 
-defineProps<{ feature: FeatureItemType }>()
+defineProps<{ feature: FeatureItemType }>();
 </script>
 
 <template>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Advantage } from '@/components/domain/Advantage.ts'
-import {defineProps} from 'vue'
+import type { Advantage } from '@/components/domain/Advantage.ts';
+import { defineProps } from 'vue';
 
-defineProps<{ advantage: Advantage }>()
+defineProps<{ advantage: Advantage }>();
 </script>
 
 <template>

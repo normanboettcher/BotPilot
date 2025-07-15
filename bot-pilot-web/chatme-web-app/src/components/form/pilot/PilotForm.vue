@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import type { Faq } from '@components/domain/Faq.ts'
-import type { Kontaktdaten } from '@components/domain/Kontaktdaten.ts'
-import KontaktdatenForm from '@components/form/pilot/KontaktdatenForm.vue'
-import FaqList from '@components/form/pilot/FaqList.vue'
+import { computed, ref } from 'vue';
+import type { Faq } from '@components/domain/Faq.ts';
+import type { Kontaktdaten } from '@components/domain/Kontaktdaten.ts';
+import KontaktdatenForm from '@components/form/pilot/KontaktdatenForm.vue';
+import FaqList from '@components/form/pilot/FaqList.vue';
 
 type FormData = {
-  kontaktdaten: Kontaktdaten
-  faqs: Array<Faq>
-}
+  kontaktdaten: Kontaktdaten;
+  faqs: Array<Faq>;
+};
 
 const kontaktdaten = ref<Kontaktdaten>({
   ansprechpartner: '',
@@ -16,40 +16,40 @@ const kontaktdaten = ref<Kontaktdaten>({
   telefon: '',
   kanzlei: '',
   anmerkungen: '',
-})
-const faqs = ref<Array<Faq>>(Array(10).fill({ answer: '', question: '' }))
+});
+const faqs = ref<Array<Faq>>(Array(10).fill({ answer: '', question: '' }));
 
 const formData = ref<FormData>({
   kontaktdaten: kontaktdaten.value,
   faqs: faqs.value,
-})
+});
 
 const kontaktdatenModel = computed({
   get() {
-    return formData.value.kontaktdaten
+    return formData.value.kontaktdaten;
   },
   set(value: Kontaktdaten) {
-    formData.value.kontaktdaten = value
+    formData.value.kontaktdaten = value;
   },
-})
+});
 const faqsModel = computed({
   get() {
-    return formData.value.faqs
+    return formData.value.faqs;
   },
   set(value: Array<Faq>) {
-    formData.value.faqs = value
+    formData.value.faqs = value;
   },
-})
+});
 const submitForm = () => {
   // Hier können Sie die Logik zum Absenden des Formulars implementieren
-  console.log('Formulardaten:', formData.value)
+  console.log('Formulardaten:', formData.value);
   // Beispiel: Senden der Daten an einen Server oder eine API
   // axios.post('/api/pilot', formData.value).then(response => {
   //   console.log('Erfolgreich gesendet:', response.data)
   // }).catch(error => {
   //   console.error('Fehler beim Senden:', error)
   // })
-}
+};
 </script>
 <template>
   <v-card class="pilot-form-card" elevation="2">

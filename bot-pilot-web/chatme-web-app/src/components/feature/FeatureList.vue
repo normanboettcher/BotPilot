@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { FeatureItemType } from '@/components/domain/Feature.ts'
-import FeatureItem from '@/components/feature/FeatureItem.vue'
-import FeatureSection from '@/components/feature/FeatureSection.vue'
+import type { FeatureItemType } from '@/components/domain/Feature.ts';
+import FeatureItem from '@/components/feature/FeatureItem.vue';
+import FeatureSection from '@/components/feature/FeatureSection.vue';
 
 const currentFeatures: FeatureItemType[] = [
   {
@@ -12,7 +12,7 @@ const currentFeatures: FeatureItemType[] = [
     title: 'Current Feature 2',
     icon: 'mdi-check-circle',
   },
-]
+];
 
 const futureFeatures: FeatureItemType[] = [
   {
@@ -23,7 +23,7 @@ const futureFeatures: FeatureItemType[] = [
     title: 'Future Feature 2',
     icon: 'mdi-alert-circle',
   },
-]
+];
 </script>
 
 <template>

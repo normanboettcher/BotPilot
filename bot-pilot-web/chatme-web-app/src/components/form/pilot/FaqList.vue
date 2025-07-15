@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import PilotFormTextField from '@/components/form/pilot/PilotFormTextField.vue'
-import type { Faq } from '@/components/domain/Faq.ts'
-import { defineProps, defineEmits } from 'vue'
-import { isStringInputEmpty } from '@/components/form/pilot/utils/pilotform.utils.ts'
+import PilotFormTextField from '@/components/form/pilot/PilotFormTextField.vue';
+import type { Faq } from '@/components/domain/Faq.ts';
+import { defineProps, defineEmits } from 'vue';
+import { isStringInputEmpty } from '@/components/form/pilot/utils/pilotform.utils.ts';
 
-const props = defineProps<{ modelValue: Array<Faq> }>()
-const emit = defineEmits(['update:modelValue'])
+const props = defineProps<{ modelValue: Array<Faq> }>();
+const emit = defineEmits(['update:modelValue']);
 
 function updateFaq(index: number, field: 'question' | 'answer', value: string | undefined) {
   if (isStringInputEmpty(value)) {
-    return
+    return;
   }
-  const newFaqs = [...props.modelValue]
-  newFaqs[index] = { ...newFaqs[index], [field]: value }
-  emit('update:modelValue', newFaqs)
+  const newFaqs = [...props.modelValue];
+  newFaqs[index] = { ...newFaqs[index], [field]: value };
+  emit('update:modelValue', newFaqs);
 }
 </script>
 

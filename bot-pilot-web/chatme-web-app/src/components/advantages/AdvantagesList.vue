@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AdvantageItem from '@/components/advantages/AdvantageItem.vue'
-import type { Advantage } from '@/components/domain/Advantage.ts'
+import AdvantageItem from '@/components/advantages/AdvantageItem.vue';
+import type { Advantage } from '@/components/domain/Advantage.ts';
 
 const advantages: Advantage[] = [
   {
@@ -33,7 +33,7 @@ const advantages: Advantage[] = [
     label: 'Fast Performance',
     description: 'Optimized for speed and efficiency.',
   },
-]
+];
 </script>
 
 <template>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { PilotFormTextField } from '@/components/domain/PilotFormTextField.ts'
+import type { PilotFormTextField } from '@/components/domain/PilotFormTextField.ts';
 
-import { defineProps, defineModel } from 'vue'
+import { defineProps, defineModel } from 'vue';
 
-const props = defineProps<PilotFormTextField>()
-const modelValue = defineModel<string>()
+const props = defineProps<PilotFormTextField>();
+const modelValue = defineModel<string>();
 </script>
 
 <template>

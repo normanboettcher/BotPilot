@@ -18,7 +18,7 @@ const slides = [
     title: 'Einfache Integration in Ihre Kanzlei-Website',
     description: '100% DSGVO-konform und anpassbar.',
   },
-]
+];
 </script>
 
 <template>
