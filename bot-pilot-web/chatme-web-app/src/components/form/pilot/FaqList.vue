@@ -2,11 +2,15 @@
 import PilotFormTextField from '@/components/form/pilot/PilotFormTextField.vue'
 import type { Faq } from '@/components/domain/Faq.ts'
 import { defineProps, defineEmits } from 'vue'
+import { isStringInputEmpty } from '@/components/form/pilot/utils/pilotform.utils.ts'
 
 const props = defineProps<{ modelValue: Array<Faq> }>()
 const emit = defineEmits(['update:modelValue'])
 
-function updateFaq(index: number, field: 'question' | 'answer', value: string) {
+function updateFaq(index: number, field: 'question' | 'answer', value: string | undefined) {
+  if (isStringInputEmpty(value)) {
+    return
+  }
   const newFaqs = [...props.modelValue]
   newFaqs[index] = { ...newFaqs[index], [field]: value }
   emit('update:modelValue', newFaqs)
@@ -17,8 +21,18 @@ function updateFaq(index: number, field: 'question' | 'answer', value: string) {
   <div class="faq-scroll-wrapper">
     <div class="faq-list-container" v-for="(faq, i) in props.modelValue" :key="i">
       <h3>{{ i + 1 }}. FAQ</h3>
-      <pilot-form-text-field :model-value="faq.question" label="Frage:" />
-      <v-textarea :model-value="faq.response" label="Antwort:" required outlined></v-textarea>
+      <pilot-form-text-field
+        :model-value="faq.question"
+        label="Frage:"
+        @update:model-value="(value) => updateFaq(i, 'question', value)"
+      />
+      <v-textarea
+        :model-value="faq.response"
+        label="Antwort:"
+        @update:model-value="(value) => updateFaq(i, 'answer', value)"
+        required
+        outlined
+      ></v-textarea>
       <v-divider></v-divider>
     </div>
   </div>
