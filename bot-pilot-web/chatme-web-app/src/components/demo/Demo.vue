@@ -29,11 +29,7 @@ import FeatureList from '@/components/feature/FeatureList.vue';
 
 .demo-container {
   background-color: var(--color-card);
-}
-
-.demo-container {
-  background-color: var(--color-card);
   width: 100%;
-  //border: var(--color-border);
+  border: none;
 }
 </style>

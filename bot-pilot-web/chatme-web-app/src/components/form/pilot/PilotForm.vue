@@ -52,7 +52,7 @@ const submitForm = () => {
 };
 </script>
 <template>
-  <v-card class="pilot-form-card" elevation="2">
+  <v-card id="pilot-form" class="pilot-form-card" elevation="2">
     <v-card-text class="pilot-form-heading">
       Nehmen Sie jetzt an der Pilotgruppe teil und bestellen Sie Ihren individuellen Chatbot!
     </v-card-text>

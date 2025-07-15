@@ -2,7 +2,6 @@
 import type { Kontaktdaten } from '@/components/domain/Kontaktdaten.ts';
 import PilotFormTextField from '@/components/form/pilot/PilotFormTextField.vue';
 import { defineProps, defineEmits, computed } from 'vue';
-import { isStringInputEmpty } from '@/components/form/pilot/utils/pilotform.utils.ts';
 
 const props = defineProps<{
   modelValue: Kontaktdaten;
@@ -12,7 +11,7 @@ const emit = defineEmits<{
 }>();
 
 const updateKontaktdaten = (field: keyof Kontaktdaten, value: string | undefined) => {
-  if (isStringInputEmpty(value)) {
+  if (!value) {
     return;
   }
   const newValue = { ...props.modelValue, [field]: value };

@@ -2,13 +2,12 @@
 import PilotFormTextField from '@/components/form/pilot/PilotFormTextField.vue';
 import type { Faq } from '@/components/domain/Faq.ts';
 import { defineProps, defineEmits } from 'vue';
-import { isStringInputEmpty } from '@/components/form/pilot/utils/pilotform.utils.ts';
 
 const props = defineProps<{ modelValue: Array<Faq> }>();
 const emit = defineEmits(['update:modelValue']);
 
 function updateFaq(index: number, field: 'question' | 'answer', value: string | undefined) {
-  if (isStringInputEmpty(value)) {
+  if (!value) {
     return;
   }
   const newFaqs = [...props.modelValue];

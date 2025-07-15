@@ -1,50 +1,42 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const onClick = (element: string) => {
+  document.getElementById(element)?.scrollIntoView({ behavior: 'smooth' });
+};
+</script>
 
 <template>
   <header>
     <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
-      <RouterLink to="/pilot">BotPilot</RouterLink>
+      <v-btn class="nav-button">Home</v-btn>
+      <v-btn class="nav-button">BotPilot</v-btn>
+      <v-btn class="nav-button">Ihre Vorteile</v-btn>
+      <v-btn class="nav-button">Features</v-btn>
+      <v-btn class="nav-button" @click="() => onClick('pilot-form')">Jetzt teilnehmen!</v-btn>
     </nav>
   </header>
 </template>
 
 <style scoped>
 header {
-  line-height: 3;
+  line-height: 1;
   max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+  background-color: var(--color-background);
+  align-content: center;
 }
 
 nav {
   width: 100%;
-  font-size: 16px;
-  text-align: center;
-  margin-top: 2rem;
+  font-size: 14px;
   color: var(--color-text);
 }
 
-nav a.router-link-exact-active {
+.nav-button {
   color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
   background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 @media (min-width: 1024px) {
@@ -60,16 +52,13 @@ nav a:first-of-type {
 
   header .wrapper {
     display: flex;
-    place-items: flex-start;
+    place-items: stretch;
     flex-wrap: wrap;
   }
 
   nav {
-    text-align: left;
-    margin-left: -1rem;
+    text-align: center;
     font-size: 1rem;
-
-    padding: 1rem 0;
     margin-top: 1rem;
   }
 }
