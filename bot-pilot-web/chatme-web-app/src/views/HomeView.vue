@@ -3,7 +3,7 @@ import Demo from '@/components/demo/Demo.vue';
 </script>
 
 <template>
-  <v-container class="full-height" fluid>
+  <v-container id="home-view" class="full-height" fluid>
     <v-row align="center" justify="center">
       <v-col cols="12" md="11" lg="10" xl="9">
         <Demo />

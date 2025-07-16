@@ -27,7 +27,7 @@ const futureFeatures: FeatureItemType[] = [
 </script>
 
 <template>
-  <v-container class="feature-list-container">
+  <v-container id="feature-list" class="feature-list-container">
     <v-row class="feature-list-row">
       <feature-section title="Aktuelle Features" :features="currentFeatures" />
       <feature-section title="Zukünftige Features" :features="futureFeatures" />

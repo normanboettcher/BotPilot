@@ -37,7 +37,7 @@ const advantages: Advantage[] = [
 </script>
 
 <template>
-  <v-container class="advantages-section" fluid>
+  <v-container id="advantages-list" class="advantages-section" fluid>
     <v-row justify="center" class="advantages-header mb-8">
       <v-col cols="12" md="8" class="text-center">
         <v-icon size="40" color="primary">mdi-star-circle-outline</v-icon>

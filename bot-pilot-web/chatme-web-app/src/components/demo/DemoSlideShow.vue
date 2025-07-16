@@ -22,7 +22,7 @@ const slides = [
 </script>
 
 <template>
-  <v-carousel height="400" show-arrows hide-delimiters cycle>
+  <v-carousel id="pilot-demo" height="400" show-arrows hide-delimiters cycle>
     <v-carousel-item v-for="(slide, i) in slides" :key="i">
       <v-img :src="slide.image" :alt="slide.alt" height="100%" cover />
       <div class="caption">
