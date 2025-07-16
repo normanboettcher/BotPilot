@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Demo from '@/components/demo/Demo.vue';
-import BotPilotHeader from '@components/header/BotPilotHeader.vue';
 </script>
 
 <template>

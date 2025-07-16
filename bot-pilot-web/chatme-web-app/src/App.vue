@@ -5,8 +5,8 @@ import BotPilotHeader from '@components/header/BotPilotHeader.vue';
 
 <template>
   <v-app>
+    <BotPilotHeader />
     <v-main class="page-wrapper">
-      <BotPilotHeader />
       <HomeView />
     </v-main>
   </v-app>

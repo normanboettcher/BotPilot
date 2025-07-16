@@ -1,65 +1,33 @@
 <script setup lang="ts">
-const onClick = (element: string) => {
-  document.getElementById(element)?.scrollIntoView({ behavior: 'smooth' });
-};
+import { ref } from 'vue';
+import HeaderButtons from '@components/header/HeaderButtons.vue';
+
+const drawer = ref(false);
 </script>
 
 <template>
-  <header>
-    <nav>
-      <v-btn class="nav-button">Home</v-btn>
-      <v-btn class="nav-button">BotPilot</v-btn>
-      <v-btn class="nav-button">Ihre Vorteile</v-btn>
-      <v-btn class="nav-button">Features</v-btn>
-      <v-btn class="nav-button" @click="() => onClick('pilot-form')">Jetzt teilnehmen!</v-btn>
-    </nav>
-  </header>
+  <v-app-bar class="bot-pilot-header rounded-lg" app color="primary">
+    <!-- Nav Icon for Mobile Navigation -->
+    <v-app-bar-nav-icon @click="drawer = !drawer" class="d-sm-none" />
+
+    <v-app-bar-title>Willkommen bei BotPilot</v-app-bar-title>
+    <v-spacer></v-spacer>
+
+    <!-- Desktop NavButtons -->
+    <div class="d-none d-sm-flex">
+      <header-buttons />
+    </div>
+  </v-app-bar>
+
+  <v-navigation-drawer v-model="drawer" app temporary class="d-sm-none">
+    <v-list>
+      <v-list-item title="Home"></v-list-item>
+      <v-list-item title="BotPilot"></v-list-item>
+      <v-list-item title="Ihre Vorteile"></v-list-item>
+      <v-list-item title="Features"></v-list-item>
+      <v-list-item title="Jetzt teilnehmen!"></v-list-item>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
-<style scoped>
-header {
-  line-height: 1;
-  max-height: 100vh;
-  background-color: var(--color-background);
-  align-content: center;
-}
-
-nav {
-  width: 100%;
-  font-size: 14px;
-  color: var(--color-text);
-}
-
-.nav-button {
-  color: var(--color-text);
-  background-color: transparent;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: stretch;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: center;
-    font-size: 1rem;
-    margin-top: 1rem;
-  }
-}
-</style>
+<style scoped></style>
