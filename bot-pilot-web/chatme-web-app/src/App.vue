@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HomeView from '@/views/HomeView.vue';
 import BotPilotHeader from '@components/header/BotPilotHeader.vue';
+import BotPilotFooter from '@components/footer/BotPilotFooter.vue';
 </script>
 
 <template>
@@ -9,6 +10,7 @@ import BotPilotHeader from '@components/header/BotPilotHeader.vue';
     <v-main class="page-wrapper">
       <HomeView />
     </v-main>
+    <bot-pilot-footer />
   </v-app>
 </template>
 

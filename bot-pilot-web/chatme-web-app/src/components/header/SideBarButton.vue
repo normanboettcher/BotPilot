@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, inject } from 'vue';
+import { defineProps, inject } from 'vue';
 import onMenuClick from '@components/header/functions/MenuClick.functions.ts';
 
 defineProps<{
