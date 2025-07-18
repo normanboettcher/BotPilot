@@ -1,14 +1,19 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps, defineEmits } from 'vue';
 
 defineProps<{
   title: string;
   clickable?: boolean;
 }>();
+const emit = defineEmits<{
+  (event: 'footer:click'): void;
+}>();
 </script>
 
 <template>
-  <v-btn v-if="clickable" class="footer-select-item font-weight-bold">{{ title }}</v-btn>
+  <v-btn v-if="clickable" @click="emit('footer:click')" class="footer-select-item pl-0">{{
+    title
+  }}</v-btn>
   <span v-else>{{ title }}</span>
 </template>
 

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import FooterItem from '@components/footer/FooterItem.vue';
 import FooterProductItem from '@components/footer/FooterProductItem.vue';
+import FooterItemList from '@components/footer/FooterItemList.vue';
+import FooterNavigationList from '@components/footer/FooterNavigationList.vue';
 
 const dateItem = `${new Date().getFullYear()}` + ' - All rights reserved.';
 </script>
@@ -10,6 +12,9 @@ const dateItem = `${new Date().getFullYear()}` + ' - All rights reserved.';
     <v-container>
       <v-row class="d-flex">
         <footer-product-item />
+      </v-row>
+      <v-row class="d-flex">
+        <footer-navigation-list />
       </v-row>
       <v-row class="d-flex">
         <footer-item :title="dateItem" />
