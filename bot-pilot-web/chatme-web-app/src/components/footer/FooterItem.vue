@@ -4,6 +4,7 @@ import { defineProps, defineEmits } from 'vue';
 defineProps<{
   title: string;
   clickable?: boolean;
+  icon?: string;
 }>();
 const emit = defineEmits<{
   (event: 'footer:click'): void;
@@ -11,7 +12,8 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <v-list-item>
+  <v-list-item class="d-flex">
+    <v-icon class="mr-2" v-if="icon" :icon="icon" />
     <v-btn v-if="clickable" @click="emit('footer:click')" class="footer-select-item pl-0"
       >{{ title }}
     </v-btn>

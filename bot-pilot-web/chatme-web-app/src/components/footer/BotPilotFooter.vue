@@ -4,6 +4,7 @@ import FooterProductItem from '@components/footer/FooterProductItem.vue';
 import FooterItemList from '@components/footer/FooterItemList.vue';
 import FooterNavigationList from '@components/footer/FooterNavigationList.vue';
 import FooterRechtlichesList from '@components/footer/FooterRechtlichesList.vue';
+import FooterKontaktList from '@components/footer/FooterKontaktList.vue';
 
 const dateItem = `${new Date().getFullYear()}` + ' - All rights reserved.';
 </script>
@@ -17,6 +18,7 @@ const dateItem = `${new Date().getFullYear()}` + ' - All rights reserved.';
       <v-row class="d-flex">
         <footer-navigation-list />
         <footer-rechtliches-list />
+        <footer-kontakt-list />
       </v-row>
       <v-row class="d-flex">
         <footer-item :title="dateItem" />
