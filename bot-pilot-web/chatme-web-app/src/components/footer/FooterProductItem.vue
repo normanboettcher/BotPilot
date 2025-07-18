@@ -3,16 +3,13 @@ import FooterItem from '@components/footer/FooterItem.vue';
 </script>
 
 <template>
-  <v-col class="d-flex text-center">
-    <v-icon class="mr-2">mdi-robot</v-icon>
-    <footer-item title="BotPilot - Your AI Assistant" />
-    <v-divider class="ml-2 mr-2" thickness="2" vertical opacity="3"></v-divider>
-    <footer-item title="2025 SNB technologies UG" />
+  <v-col class="text-center align-center">
+    <div class="d-flex align-center">
+      <v-icon>mdi-robot</v-icon>
+      <footer-item class="pt-3" title="BotPilot - Your AI Assistant" />
+    </div>
+    <footer-item class="pl-10" title="© 2025 SNB technologies UG" />
   </v-col>
 </template>
 
-<style scoped>
-v-divider {
-  color: var(--color-text);
-}
-</style>
+<style scoped></style>

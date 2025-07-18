@@ -22,7 +22,7 @@ defineProps<{
 </template>
 
 <style scoped>
-.v-list {
+.footer-item-list-slot {
   color: var(--color-text);
   background-color: var(--color-background);
 }

@@ -20,7 +20,7 @@ const dateItem = `${new Date().getFullYear()}` + ' - All rights reserved.';
         <footer-rechtliches-list />
         <footer-kontakt-list />
       </v-row>
-      <v-row class="d-flex">
+      <v-row class="d-flex justify-center">
         <footer-item :title="dateItem" />
       </v-row>
     </v-container>
