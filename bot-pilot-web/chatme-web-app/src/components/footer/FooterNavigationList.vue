@@ -7,29 +7,11 @@ import onMenuClick from '@components/header/functions/MenuClick.functions.ts';
 <template>
   <footer-item-list title="Navigation" icon="mdi-home">
     <template #FooterItems>
-      <v-list-item>
-        <footer-item title="Home" clickable @footer:click="onMenuClick('home-view')" />
-      </v-list-item>
-      <v-list-item>
-        <footer-item title="BotPilot" clickable @footer:click="onMenuClick('pilot-demo')" />
-      </v-list-item>
-      <v-list-item>
-        <footer-item
-          title="Ihre Vorteile"
-          clickable
-          @footer:click="onMenuClick('advantages-list')"
-        />
-      </v-list-item>
-      <v-list-item>
-        <footer-item title="Features" clickable @footer:click="onMenuClick('feature-list')" />
-      </v-list-item>
-      <v-list-item>
-        <footer-item
-          title="Jetzt teilnehmen!"
-          clickable
-          @footer:click="onMenuClick('pilot-form')"
-        />
-      </v-list-item>
+      <footer-item title="Home" clickable @footer:click="onMenuClick('home-view')" />
+      <footer-item title="BotPilot" clickable @footer:click="onMenuClick('pilot-demo')" />
+      <footer-item title="Ihre Vorteile" clickable @footer:click="onMenuClick('advantages-list')" />
+      <footer-item title="Features" clickable @footer:click="onMenuClick('feature-list')" />
+      <footer-item title="Jetzt teilnehmen!" clickable @footer:click="onMenuClick('pilot-form')" />
     </template>
   </footer-item-list>
 </template>

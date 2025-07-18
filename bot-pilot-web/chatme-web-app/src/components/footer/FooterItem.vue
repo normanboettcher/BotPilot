@@ -11,10 +11,12 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <v-btn v-if="clickable" @click="emit('footer:click')" class="footer-select-item pl-0">{{
-    title
-  }}</v-btn>
-  <span v-else>{{ title }}</span>
+  <v-list-item>
+    <v-btn v-if="clickable" @click="emit('footer:click')" class="footer-select-item pl-0"
+      >{{ title }}
+    </v-btn>
+    <span v-else>{{ title }}</span>
+  </v-list-item>
 </template>
 
 <style scoped>
