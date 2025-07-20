@@ -37,15 +37,15 @@ const advantages: Advantage[] = [
 </script>
 
 <template>
-  <v-container id="advantages-list" class="advantages-section" fluid>
+  <v-container id="advantages-list" class="advantages-section">
     <v-row justify="center" class="advantages-header mb-8">
-      <v-col cols="12" md="8" class="text-center">
+      <v-col class="text-center">
         <v-icon size="40" color="primary">mdi-star-circle-outline</v-icon>
         <h2 class="advantages-title">Ihre Vorteile</h2>
       </v-col>
     </v-row>
     <v-row class="advantages-list" dense>
-      <v-col v-for="(advantage, index) in advantages" :key="index" cols="12" sm="6" md="4">
+      <v-col v-for="(advantage, index) in advantages" cols="12" sm="6" md="6" lg="4" :key="index">
         <advantage-item :advantage="advantage" />
       </v-col>
     </v-row>
@@ -54,9 +54,9 @@ const advantages: Advantage[] = [
 
 <style scoped>
 .advantages-section {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
   background-color: var(--color-background);
+  border-radius: var(--border-radius);
 }
 
 .advantages-header {

@@ -7,19 +7,15 @@ defineProps<{ feature: FeatureItemType }>();
 
 <template>
   <div class="feature-item-presentation">
-    <v-icon class="feature-icon">{{ feature.icon ?? '' }}</v-icon>
-    <div class="feature-title">{{ feature.title }}</div>
+    <div class="feature-item-presentation d-flex pt-1 pl-2">
+      <v-icon class="feature-icon pr-3">{{ feature.icon ?? '' }}</v-icon>
+      <div class="feature-title text=left text-wrap">{{ feature.title }}</div>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.v-icon {
-  padding-right: 1rem;
-}
-
 .feature-item-presentation {
-  display: flex;
-  align-items: flex-start;
   background-color: var(--color-background);
   color: var(--color-text);
 }

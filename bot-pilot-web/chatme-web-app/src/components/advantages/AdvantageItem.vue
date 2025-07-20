@@ -6,7 +6,7 @@ defineProps<{ advantage: Advantage }>();
 </script>
 
 <template>
-  <v-card class="advantage-card" elevation="2">
+  <v-card class="advantage-card pa-4" elevation="2">
     <v-card-text>
       <div class="advantages-icon">
         <v-icon size="36" color="primary" class="advantage-icon">{{ advantage.icon ?? '' }}</v-icon>
@@ -28,9 +28,6 @@ defineProps<{ advantage: Advantage }>();
   padding: 1.5rem;
   text-align: center;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
 }
 
 .advantage-icon {
@@ -38,7 +35,7 @@ defineProps<{ advantage: Advantage }>();
 }
 
 .advantage-label {
-  font-size: 1.2rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem) !important;
   font-weight: 600;
   margin-bottom: 0.5rem;
   color: var(--color-heading);
@@ -46,9 +43,9 @@ defineProps<{ advantage: Advantage }>();
 }
 
 .advantage-description {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 1.5vw, 1rem) !important;
   color: var(--color-text);
-  font-family: var(--font-family) .sans-serif;
+  font-family: var(--font-family), sans-serif;
   line-height: 1.4;
 }
 </style>

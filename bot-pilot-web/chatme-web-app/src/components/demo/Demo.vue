@@ -8,25 +8,17 @@ import FeatureList from '@/components/feature/FeatureList.vue';
 
 <template>
   <v-container class="demo-container">
-    <v-container class="demo-container">
-      <demo-intro />
-      <v-divider class="demo-divider" />
-      <demo-slide-show />
-      <v-divider class="demo-divider" />
-      <advantages-list />
-      <v-divider class="demo-divider" />
+    <demo-intro />
+    <demo-slide-show />
+    <advantages-list />
+    <div class="pb-4">
       <feature-list />
-      <v-divider class="demo-divider" />
-      <pilot-form />
-    </v-container>
+    </div>
+    <pilot-form />
   </v-container>
 </template>
 
 <style scoped>
-.demo-divider {
-  padding: 1rem;
-}
-
 .demo-container {
   background-color: var(--color-card);
   width: 100%;

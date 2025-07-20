@@ -24,7 +24,7 @@ import BotPilotFooter from '@components/footer/BotPilotFooter.vue';
 
 @media (max-width: 600px) {
   .page-wrapper {
-    padding: 2rem 1rem;
+    padding: 2rem 0 0;
   }
 }
 </style>

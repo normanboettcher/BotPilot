@@ -22,7 +22,10 @@ const longTitle = props.title.length > 30;
   <v-list-item v-else class="d-flex footer-select-item">
     <div v-if="longTitle" class="d-flex">
       <v-icon v-if="icon" :icon="icon" />
-      <v-btn v-if="!clickable" class="footer-select-item pointer-events-none pl-2 text-left">
+      <v-btn
+        v-if="!clickable"
+        class="footer-select-item pointer-events-none pl-2 text-left align-content-start"
+      >
         <span class="text-wrap long-title align-content-start">{{ title }}</span>
       </v-btn>
     </div>
