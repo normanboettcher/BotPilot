@@ -9,9 +9,9 @@ import SideBarButton from '@components/header/SideBarButton.vue';
       <v-divider></v-divider>
       <side-bar-button title="BotPilot" icon="mdi-robot" element="pilot-demo" />
       <v-divider></v-divider>
-      <side-bar-button title="Ihre Vorteile" icon="mdi-star" element="advantages-list" />
+      <side-bar-button title="Ihre Vorteile" icon="mdi-thumb-up" element="advantages-list" />
       <v-divider></v-divider>
-      <side-bar-button title="Features" icon="mdi-puzzle" element="feature-list" />
+      <side-bar-button title="Was kann BotPilot?" icon="mdi-puzzle" element="feature-list" />
       <v-divider></v-divider>
       <side-bar-button title="Jetzt teilnehmen!" icon="mdi-rocket-launch" element="pilot-form" />
       <v-divider></v-divider>
