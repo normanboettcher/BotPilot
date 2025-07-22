@@ -4,7 +4,7 @@ import type { Faq } from '@components/domain/Faq.ts';
 import type { Kontaktdaten } from '@components/domain/Kontaktdaten.ts';
 import KontaktdatenForm from '@components/form/pilot/KontaktdatenForm.vue';
 import FaqList from '@components/form/pilot/FaqList.vue';
-import SuccessDialog from '@components/form/pilot/SuccessDialog.vue';
+import SuccessDialog from '@components/form/pilot/dialog/SuccessDialog.vue';
 
 type FormData = {
   kontaktdaten: Kontaktdaten;
