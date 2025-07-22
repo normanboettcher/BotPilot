@@ -44,8 +44,6 @@ repos:
         entry: ./run_eslint.sh
         language: system
         types: [ javascript, jsx, ts, tsx ]
-        pass_filenames: false
-        additional_dependencies: [ ]
         files: "^bot-pilot-chat/frontend/src/.*\\.(ts|tsx)$"
 
   - repo: local
