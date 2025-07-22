@@ -18,6 +18,7 @@ commands = [
 ]
 
 [tool.tox.env.unit_tests]
+set_env = { file = 'conf{/}local.env' }
 description = "Run tests with Python 3.12"
 #depends = ["base_deps"]
 deps = [
@@ -30,6 +31,7 @@ commands = [
 ]
 
 [tool.tox.env.integration_test]
+set_env = { file = 'conf{/}local.env' }
 description = "Run integration tests with Python 3.12"
 #depends = ["base_deps"]
 deps = [
@@ -57,6 +59,7 @@ commands = [
 ]
 
 [tool.tox.env.coverage]
+set_env = { file = 'conf{/}local.env' }
 description = "Run tests and generate HTML coverage report"
 #depends = ["base_deps"]
 deps = [
