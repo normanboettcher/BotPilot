@@ -3,18 +3,21 @@ import FeatureItem from '@/components/feature/FeatureItem.vue';
 import type { FeatureItemType } from '@/components/domain/Feature.ts';
 import { defineProps } from 'vue';
 
-defineProps<{ features: FeatureItemType[]; title: string }>();
+defineProps<{ features: FeatureItemType[]; title: string; icon: string }>();
 </script>
 
 <template>
-  <v-card class="feature-card pa-4">
+  <v-card class="feature-card pa-4" elevation="2">
     <div class="feature-heading d-flex align-center">
-      <v-icon size="30" color="primary">mdi-airplane</v-icon>
+      <v-icon size="30" color="primary">{{ icon }}</v-icon>
       <h4 class="feature-col-title ml-2">{{ title }}</h4>
     </div>
-    <div class="feature-item" v-for="(featureItem, index) in features" :key="index">
-      <feature-item :feature="featureItem" />
-    </div>
+    <v-card-text>
+      <div class="feature-item" v-for="(featureItem, index) in features" :key="index">
+        <feature-item :feature="featureItem" />
+        <div class="pt-1"></div>
+      </div>
+    </v-card-text>
   </v-card>
 </template>
 
@@ -22,7 +25,6 @@ defineProps<{ features: FeatureItemType[]; title: string }>();
 .feature-card {
   background-color: var(--color-background);
   width: 100%;
-  padding: 4rem;
 }
 
 .feature-col-title {

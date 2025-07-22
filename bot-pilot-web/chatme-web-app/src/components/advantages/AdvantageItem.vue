@@ -46,6 +46,5 @@ defineProps<{ advantage: Advantage }>();
   font-size: clamp(0.9rem, 1.5vw, 1rem) !important;
   color: var(--color-text);
   font-family: var(--font-family), sans-serif;
-  line-height: 1.4;
 }
 </style>

@@ -43,7 +43,7 @@ const longTitle = props.title.length > 30;
   color: var(--color-text) !important;
   background-color: var(--color-background) !important;
   font-family: var(--font-family), serif !important;
-  font-size: clamp(0.8rem, 1.5vw, 0.9rem) !important;
+  font-size: clamp(0.8rem, 1.3vw, 0.9rem) !important;
   word-break: break-word;
 }
 </style>

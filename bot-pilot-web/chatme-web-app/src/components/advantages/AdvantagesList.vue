@@ -40,7 +40,7 @@ const advantages: Advantage[] = [
   <v-container id="advantages-list" class="advantages-section">
     <v-row justify="center" class="advantages-header mb-8">
       <v-col class="text-center">
-        <v-icon size="40" color="primary">mdi-star-circle-outline</v-icon>
+        <v-icon size="40" color="primary">mdi-thumb-up-outline</v-icon>
         <h2 class="advantages-title">Ihre Vorteile</h2>
       </v-col>
     </v-row>

@@ -28,12 +28,20 @@ const futureFeatures: FeatureItemType[] = [
 
 <template>
   <div id="feature-list" class="feature-list-container pt-4">
-    <v-row class="feature-list-row justify-start align-stretch">
-      <v-col class="h-100" cols="12" sm="12" lg="6" md="6">
-        <feature-section title="Aktuelle Features" :features="currentFeatures" />
+    <v-row class="feature-list-row justify-start align-stretch" dense>
+      <v-col class="h-100" cols="12" sm="6" lg="6" md="6">
+        <feature-section
+          title="Aktuelle Features"
+          :features="currentFeatures"
+          icon="mdi-puzzle-outline"
+        />
       </v-col>
-      <v-col class="h-100" cols="12" sm="12" lg="6" md="6">
-        <feature-section title="Zukünftige Features" :features="futureFeatures" />
+      <v-col class="h-100" cols="12" sm="6" lg="6" md="6">
+        <feature-section
+          title="Zukünftige Features"
+          :features="futureFeatures"
+          icon="mdi-arrow-top-right-bold-outline"
+        />
       </v-col>
     </v-row>
   </div>

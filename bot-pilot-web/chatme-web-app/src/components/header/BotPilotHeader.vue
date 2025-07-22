@@ -14,10 +14,10 @@ provide('closeDrawer', () => {
     <!-- Nav Icon for Mobile Navigation -->
     <v-app-bar-nav-icon @click="drawer = !drawer" class="d-md-none" />
 
-    <v-app-bar-title class="d-lg-flex d-none text-h5 font-weight-bold"
-      >Willkommen bei BotPilot
+    <v-app-bar-title class="d-lg-flex d-none text-h5 font-weight-bold">
+      Willkommen bei BotPilot
     </v-app-bar-title>
-    <v-app-bar-title class="d-flex d-lg-none text-h6 font-weight-bold">BotPilot</v-app-bar-title>
+    <v-app-bar-title class="d-flex d-lg-none text-h6 font-weight-bold"> BotPilot</v-app-bar-title>
     <v-spacer></v-spacer>
 
     <!-- Desktop NavButtons -->

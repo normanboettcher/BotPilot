@@ -3,7 +3,7 @@ import type { Query } from "../domain/Query";
 const useRestClient = () => {
   const send = async (query: Query) => {
     try {
-      return await fetch(`http://localhost:8000/api/faqs`, {
+      return await fetch(`http://192.168.178.67:8000/api/faqs`, {
         method: "POST",
         headers: {
           Accept: "application/json",
