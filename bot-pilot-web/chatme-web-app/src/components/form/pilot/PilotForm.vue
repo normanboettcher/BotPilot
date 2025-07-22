@@ -4,12 +4,14 @@ import type { Faq } from '@components/domain/Faq.ts';
 import type { Kontaktdaten } from '@components/domain/Kontaktdaten.ts';
 import KontaktdatenForm from '@components/form/pilot/KontaktdatenForm.vue';
 import FaqList from '@components/form/pilot/FaqList.vue';
+import SuccessDialog from '@components/form/pilot/SuccessDialog.vue';
 
 type FormData = {
   kontaktdaten: Kontaktdaten;
   faqs: Array<Faq>;
 };
 
+const dialogOpen = ref(false);
 const kontaktdaten = ref<Kontaktdaten>({
   ansprechpartner: '',
   email: '',
@@ -49,6 +51,7 @@ const submitForm = () => {
   // }).catch(error => {
   //   console.error('Fehler beim Senden:', error)
   // })
+  dialogOpen.value = true; // Dialog öffnen, um Erfolg anzuzeigen
 };
 </script>
 <template>
@@ -58,16 +61,17 @@ const submitForm = () => {
     </v-card-text>
     <v-card-text class="pilot-form-content">
       <div class="kontaktdaten-heading">Kontaktdaten</div>
-      <v-form>
+      <v-form @submit.prevent="submitForm">
         <kontaktdaten-form v-model="kontaktdatenModel" />
         <v-divider></v-divider>
         <faq-list v-model="faqsModel" />
         <v-row class="absenden-button-row pr-5 pt-4 pb-4" align="end" justify="end">
-          <v-btn color="primary" @click="submitForm">Absenden</v-btn>
+          <v-btn color="primary" type="submit">Absenden</v-btn>
         </v-row>
       </v-form>
     </v-card-text>
   </v-card>
+  <success-dialog v-model="dialogOpen" @update:modelValue="() => (dialogOpen = false)" />
 </template>
 
 <style scoped>

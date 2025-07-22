@@ -39,7 +39,7 @@ function updateFaq(index: number, field: 'question' | 'answer', value: string | 
 
 <style scoped>
 .faq-scroll-wrapper {
-  max-height: 400px; /* passt du je nach Design an */
+  max-height: 400px;
   overflow-y: auto;
   padding-right: 8px; /* damit Scrollbar nicht überlappt */
 }

@@ -26,24 +26,24 @@ const kontaktdaten = computed(() => props.modelValue);
     id="kanzlei"
     @update:model-value="(value) => updateKontaktdaten('kanzlei', value)"
     :model-value="kontaktdaten.kanzlei"
-    label="Kanzlei"
+    label="Kanzlei:"
   />
   <pilot-form-text-field
     id="ansprechpartner"
     @update:model-value="(value) => updateKontaktdaten('ansprechpartner', value)"
     v-model="kontaktdaten.ansprechpartner"
-    label="Ansprechpartner"
+    label="Ansprechpartner:"
   />
   <pilot-form-text-field
     v-model="kontaktdaten.email"
-    label="E-Mail"
+    label="E-Mail:"
     @update:model-value="(value) => updateKontaktdaten('email', value)"
     type="email"
   />
   <pilot-form-text-field
     v-model="kontaktdaten.telefon"
     @update:model-value="(value) => updateKontaktdaten('telefon', value)"
-    label="Telefonnummer"
+    label="Telefonnummer:"
     type="tel"
   />
   <v-textarea
