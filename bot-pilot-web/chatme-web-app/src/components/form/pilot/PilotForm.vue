@@ -61,7 +61,7 @@ const submitForm = () => {
     </v-card-text>
     <v-card-text class="pilot-form-content">
       <div class="kontaktdaten-heading">Kontaktdaten</div>
-      <v-form @submit.prevent="submitForm">
+      <v-form @submit.prevent="submitForm" v-model="formData">
         <kontaktdaten-form v-model="kontaktdatenModel" />
         <v-divider></v-divider>
         <faq-list v-model="faqsModel" />

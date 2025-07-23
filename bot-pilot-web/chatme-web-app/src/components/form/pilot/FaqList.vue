@@ -20,10 +20,12 @@ function updateFaq(index: number, field: 'question' | 'answer', value: string | 
   <div class="faq-scroll-wrapper">
     <div class="faq-list-container" v-for="(faq, i) in props.modelValue" :key="i">
       <h3>{{ i + 1 }}. FAQ</h3>
-      <pilot-form-text-field
+      <v-text-field
         :model-value="faq.question"
         label="Frage:"
         @update:model-value="(value) => updateFaq(i, 'question', value)"
+        required
+        outlined
       />
       <v-textarea
         :model-value="faq.response"
@@ -62,6 +64,10 @@ function updateFaq(index: number, field: 'question' | 'answer', value: string | 
 
 .faq-list-container {
   margin-top: 0.5rem;
+}
+
+.v-text-field {
+  color: var(--color-text);
 }
 
 h3 {

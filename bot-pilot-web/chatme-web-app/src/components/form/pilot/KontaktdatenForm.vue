@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Kontaktdaten } from '@/components/domain/Kontaktdaten.ts';
-import PilotFormTextField from '@/components/form/pilot/PilotFormTextField.vue';
 import { defineProps, defineEmits, computed } from 'vue';
+import usePilotFormRules from '@components/form/pilot/rules/usePilotFormRules.ts';
 
 const props = defineProps<{
   modelValue: Kontaktdaten;
@@ -19,43 +19,61 @@ const updateKontaktdaten = (field: keyof Kontaktdaten, value: string | undefined
 };
 
 const kontaktdaten = computed(() => props.modelValue);
+const { emailRules, textFieldRules, phoneRules } = usePilotFormRules();
 </script>
 
 <template>
-  <pilot-form-text-field
+  <v-text-field
     id="kanzlei"
     @update:model-value="(value) => updateKontaktdaten('kanzlei', value)"
     :model-value="kontaktdaten.kanzlei"
+    :rules="[textFieldRules]"
     label="Kanzlei:"
+    required
+    outlined
   />
-  <pilot-form-text-field
+  <v-text-field
     id="ansprechpartner"
     @update:model-value="(value) => updateKontaktdaten('ansprechpartner', value)"
     v-model="kontaktdaten.ansprechpartner"
+    :rules="[textFieldRules]"
     label="Ansprechpartner:"
+    required
+    outlined
   />
-  <pilot-form-text-field
+  <v-text-field
     v-model="kontaktdaten.email"
     label="E-Mail:"
     @update:model-value="(value) => updateKontaktdaten('email', value)"
+    :rules="[emailRules]"
     type="email"
+    outlined
+    required
   />
-  <pilot-form-text-field
+  <v-text-field
     v-model="kontaktdaten.telefon"
     @update:model-value="(value) => updateKontaktdaten('telefon', value)"
     label="Telefonnummer:"
+    :rules="[phoneRules]"
     type="tel"
+    required
+    outlined
   />
   <v-textarea
     v-model="kontaktdaten.anmerkungen"
     @update:model-value="(value) => updateKontaktdaten('anmerkungen', value)"
     label="Anmerkungen:"
+    :rules="[textFieldRules]"
     outlined
   />
 </template>
 
 <style scoped>
 .v-textarea {
+  color: var(--color-text);
+}
+
+.v-text-field {
   color: var(--color-text);
 }
 </style>
