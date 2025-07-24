@@ -1,10 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import FormModal from '@components/form/pilot/modal/FormModal.vue';
+</script>
 
 <template>
   <v-card-title class="text-wrap">Ein smarter Chatbot für Ihre Kanzlei</v-card-title>
   <v-card-text>
     Automatisieren Sie Ihre häufigsten Anfragen, sparen Sie Zeit und bieten Sie rund um die Uhr
     Service.
+    <form-modal />
   </v-card-text>
 </template>
 

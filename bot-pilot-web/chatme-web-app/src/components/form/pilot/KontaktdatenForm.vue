@@ -27,7 +27,7 @@ const { emailRules, textFieldRules, phoneRules } = usePilotFormRules();
     id="kanzlei"
     @update:model-value="(value) => updateKontaktdaten('kanzlei', value)"
     :model-value="kontaktdaten.kanzlei"
-    :rules="[textFieldRules]"
+    :rules="[textFieldRules[0]]"
     label="Kanzlei:"
     required
     outlined
