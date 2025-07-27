@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Faq } from '@/components/domain/Faq.ts';
 import { defineProps, defineEmits } from 'vue';
+import usePilotFormRules from '@components/form/pilot/rules/usePilotFormRules.ts';
 
 const props = defineProps<{ modelValue: Array<Faq> }>();
 const emit = defineEmits(['update:modelValue']);
@@ -13,6 +14,8 @@ function updateFaq(index: number, field: 'question' | 'answer', value: string | 
   newFaqs[index] = { ...newFaqs[index], [field]: value };
   emit('update:modelValue', newFaqs);
 }
+
+const { textFieldRules } = usePilotFormRules();
 </script>
 
 <template>
@@ -23,6 +26,7 @@ function updateFaq(index: number, field: 'question' | 'answer', value: string | 
         v-model="faq.question"
         label="Frage:"
         @update:model-value="(value) => updateFaq(i, 'question', value)"
+        :rules="[...textFieldRules]"
         required
         outlined
       />
@@ -30,6 +34,7 @@ function updateFaq(index: number, field: 'question' | 'answer', value: string | 
         v-model="faq.response"
         label="Antwort:"
         @update:model-value="(value) => updateFaq(i, 'answer', value)"
+        :rules="[...textFieldRules]"
         required
         outlined
       ></v-textarea>

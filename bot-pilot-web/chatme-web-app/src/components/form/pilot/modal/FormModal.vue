@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import useFormData from '@components/form/pilot/modal/composables/useFormData.ts';
 import AbsendenModal from '@components/form/pilot/modal/steps/AbsendenModal.vue';
 import ModalHeader from '@components/form/pilot/modal/ModalHeader.vue';
@@ -20,26 +20,48 @@ const closeModal = () => {
 const submitForm = () => {
   console.log('submitForm', formData);
 };
-const { kontaktdatenValid, faqsValid, formDataValid } = useFormValidations(formData);
+const kontakdatenValid = ref<boolean>();
+const faqsValid = ref<boolean>();
 </script>
 
 <template>
   <v-dialog v-model="showModal" max-width="600px">
     <v-stepper v-model="step">
-      <modal-header
-        :all-valid="formDataValid"
-        :valid-faq="faqsValid"
-        :valid-kontaktdaten="kontaktdatenValid"
-      />
+      <v-stepper-header class="flex align-center">
+        <v-stepper-item value="1" title="Willlkommen" color="primary" :complete="step > 0" />
+        <v-divider class="pl-6 grey" opacity="1"></v-divider>
+        <v-stepper-item
+          value="2"
+          color="primary"
+          title="Kontaktdaten"
+          :rules="[kontakdatenValid ? () => true : () => false]"
+          :complete="kontakdatenValid && step > 1"
+        />
+        <v-divider class="pl-6 grey" opacity="1"></v-divider>
+        <v-stepper-item
+          title="FAQs"
+          value="3"
+          color="primary"
+          :rules="[faqsValid ? () => true : () => false]"
+          :complete="faqsValid && step > 2"
+        />
+        <v-divider class="pl-6 grey" opacity="1"></v-divider>
+        <v-stepper-item title="Absenden" value="4" color="primary" />
+      </v-stepper-header>
+
       <v-stepper-window>
         <v-stepper-window-item value="1">
           <willkommen-modal v-model="step" />
         </v-stepper-window-item>
         <v-stepper-window-item value="2">
-          <kontaktdaten-modal v-model="step" :kontaktdaten="formData.kontaktdaten" />
+          <v-form v-model="kontakdatenValid" lazy-validation>
+            <kontaktdaten-modal v-model="step" :kontaktdaten="formData.kontaktdaten" />
+          </v-form>
         </v-stepper-window-item>
         <v-stepper-window-item value="3">
-          <faq-modal v-model="step" :faqs="formData.faqs" />
+          <v-form v-model="faqsValid" lazy-validation>
+            <faq-modal v-model="step" :faqs="formData.faqs" />
+          </v-form>
         </v-stepper-window-item>
         <v-stepper-window-item value="4">
           <absenden-modal v-model="step" @modal:submit="submitForm" />
