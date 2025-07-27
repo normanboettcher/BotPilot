@@ -82,6 +82,10 @@ const faqsValid = ref<boolean>();
   color: var(--color-text);
 }
 
+.v-stepper-item {
+  pointer-events: none;
+}
+
 .v-stepper-header {
   background-color: var(--color-card);
   color: var(--color-text);
