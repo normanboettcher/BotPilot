@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import { defineModel, defineProps } from 'vue';
+import { defineProps, defineEmits } from 'vue';
 
 defineProps<{
   hasBackButton: boolean;
   title: string;
+  submit?: () => void;
 }>();
-const modelValue = defineModel<number>();
+const emit = defineEmits<{
+  (event: 'modal:next'): void;
+  (event: 'modal:back'): void;
+}>();
 </script>
 
 <template>
@@ -15,11 +19,20 @@ const modelValue = defineModel<number>();
     </v-card-text>
     <slot name="content"></slot>
     <v-card-actions>
-      <v-btn v-if="hasBackButton" color="primary" rounded @click="--modelValue">Zurück</v-btn>
-      <v-spacer />
-      <v-btn color="primary" rounded @click="modelValue++">Weiter</v-btn>
+      <v-btn v-if="hasBackButton" color="primary" title="Zurück" @click="emit('modal:back')"
+        >Zurück</v-btn
+      >
+      <v-spacer></v-spacer>
+      <v-btn color="primary" @click="submit ?? emit('modal:next')"
+        >{{ submit ? 'Abschicken' : 'Weiter' }}
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
-<style scoped></style>
+<style scoped>
+.v-card {
+  background-color: var(--color-card);
+  color: var(--color-text);
+}
+</style>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import PilotFormTextField from '@/components/form/pilot/PilotFormTextField.vue';
 import type { Faq } from '@/components/domain/Faq.ts';
 import { defineProps, defineEmits } from 'vue';
 
@@ -21,14 +20,14 @@ function updateFaq(index: number, field: 'question' | 'answer', value: string | 
     <div class="faq-list-container" v-for="(faq, i) in props.modelValue" :key="i">
       <h3>{{ i + 1 }}. FAQ</h3>
       <v-text-field
-        :model-value="faq.question"
+        v-model="faq.question"
         label="Frage:"
         @update:model-value="(value) => updateFaq(i, 'question', value)"
         required
         outlined
       />
       <v-textarea
-        :model-value="faq.response"
+        v-model="faq.response"
         label="Antwort:"
         @update:model-value="(value) => updateFaq(i, 'answer', value)"
         required

@@ -37,13 +37,7 @@ const usePilotFormRules = () => {
   const { rules: emailRules } = useEmailValidation();
   const { rules: phoneRules } = usePhoneNumberValidation();
   return {
-    textFieldRules: [
-      (value: string) => !!value || 'Bitte geben Sie einen gültigen Text ein.',
-      (value: string) => {
-        const onlyLetters = /^[a-zA-ZäöüßÄÖÜ\s-?_+;,.:]+$/;
-        return onlyLetters.test(value) || 'Bitte verwenden Sie nur Buchstaben und Leerzeichen.';
-      },
-    ],
+    textFieldRules: [(value: string) => !!value || 'Bitte geben Sie einen gültigen Text ein.'],
     emailRules,
     phoneRules,
   };
