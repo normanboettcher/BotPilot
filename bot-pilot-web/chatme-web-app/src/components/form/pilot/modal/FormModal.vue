@@ -73,7 +73,7 @@ const allValid = computed(() => kontakdatenValid.value && faqsValid.value);
       <v-btn color="primary" rounded @click="closeModal">Schließen</v-btn>
     </div>
   </v-dialog>
-  <v-btn @click="onClick">Test</v-btn>
+  <v-btn color="primary" rounded @click="onClick">Jetzt an Pilotgruppe teilnehmen!</v-btn>
 </template>
 
 <style scoped>
