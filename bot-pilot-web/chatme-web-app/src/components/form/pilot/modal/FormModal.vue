@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import useFormData from '@components/form/pilot/modal/composables/useFormData.ts';
 import AbsendenModal from '@components/form/pilot/modal/steps/AbsendenModal.vue';
 import KontaktdatenModal from '@components/form/pilot/modal/steps/KontaktdatenModal.vue';
@@ -17,9 +17,11 @@ const closeModal = () => {
 };
 const submitForm = () => {
   console.log('submitForm', formData);
+  console.log(allValid.value);
 };
 const kontakdatenValid = ref<boolean>();
 const faqsValid = ref<boolean>();
+const allValid = computed(() => kontakdatenValid.value && faqsValid.value);
 </script>
 
 <template>

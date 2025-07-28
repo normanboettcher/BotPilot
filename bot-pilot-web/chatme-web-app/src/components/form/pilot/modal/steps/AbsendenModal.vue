@@ -12,10 +12,10 @@ const emit = defineEmits<{
   <modal-card
     v-model="modelValue"
     title="Fast geschafft!"
-    :submit="() => emit('modal:submit')"
     has-back-button
     @modal:back="modelValue--"
     @modal:next="emit('modal:submit')"
+    weiter-title="Abschicken"
   >
     <template #content>
       <h3>Was als nächstes passiert</h3>

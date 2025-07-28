@@ -4,7 +4,7 @@ import { defineProps, defineEmits } from 'vue';
 defineProps<{
   hasBackButton: boolean;
   title: string;
-  submit?: () => void;
+  weiterTitle?: string;
 }>();
 const emit = defineEmits<{
   (event: 'modal:next'): void;
@@ -23,9 +23,7 @@ const emit = defineEmits<{
         >Zurück</v-btn
       >
       <v-spacer></v-spacer>
-      <v-btn color="primary" @click="submit ?? emit('modal:next')"
-        >{{ submit ? 'Abschicken' : 'Weiter' }}
-      </v-btn>
+      <v-btn color="primary" @click="emit('modal:next')">{{ weiterTitle ?? 'Weiter' }} </v-btn>
     </v-card-actions>
   </v-card>
 </template>
