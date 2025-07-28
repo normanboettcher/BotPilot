@@ -1,31 +1,19 @@
 <script setup lang="ts">
 import type { Faq } from '@/components/domain/Faq.ts';
-import { defineProps, defineEmits } from 'vue';
+import { defineModel } from 'vue';
 import usePilotFormRules from '@components/form/pilot/rules/usePilotFormRules.ts';
 
-const props = defineProps<{ modelValue: Array<Faq> }>();
-const emit = defineEmits(['update:modelValue']);
-
-function updateFaq(index: number, field: 'question' | 'answer', value: string | undefined) {
-  if (!value) {
-    return;
-  }
-  const newFaqs = [...props.modelValue];
-  newFaqs[index] = { ...newFaqs[index], [field]: value };
-  emit('update:modelValue', newFaqs);
-}
-
+defineModel<Array<Faq>>();
 const { textFieldRules } = usePilotFormRules();
 </script>
 
 <template>
   <div class="faq-scroll-wrapper">
-    <div class="faq-list-container" v-for="(faq, i) in props.modelValue" :key="i">
+    <div class="faq-list-container" v-for="(faq, i) in modelValue" :key="i">
       <h3>{{ i + 1 }}. FAQ</h3>
       <v-text-field
         v-model="faq.question"
         label="Frage:"
-        @update:model-value="(value) => updateFaq(i, 'question', value)"
         :rules="[...textFieldRules]"
         required
         outlined
@@ -33,7 +21,6 @@ const { textFieldRules } = usePilotFormRules();
       <v-textarea
         v-model="faq.response"
         label="Antwort:"
-        @update:model-value="(value) => updateFaq(i, 'answer', value)"
         :rules="[...textFieldRules]"
         required
         outlined

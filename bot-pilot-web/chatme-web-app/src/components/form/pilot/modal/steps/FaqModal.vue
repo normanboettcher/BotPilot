@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import FaqList from '@components/form/pilot/FaqList.vue';
 import ModalCard from '@components/form/pilot/modal/ModalCard.vue';
-import { computed, defineModel, defineProps } from 'vue';
+import { defineModel } from 'vue';
 import type { Faq } from '@domain/Faq.ts';
 
 const modelValue = defineModel<number>();
-const props = defineProps<{
-  faqs: Faq[];
-}>();
-const faqs = computed(() => props.faqs);
+const faqs = defineModel<Array<Faq>>('faqs');
 </script>
 
 <template>

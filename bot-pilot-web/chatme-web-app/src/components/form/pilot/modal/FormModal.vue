@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import useFormData from '@components/form/pilot/modal/composables/useFormData.ts';
 import AbsendenModal from '@components/form/pilot/modal/steps/AbsendenModal.vue';
-import ModalHeader from '@components/form/pilot/modal/ModalHeader.vue';
 import KontaktdatenModal from '@components/form/pilot/modal/steps/KontaktdatenModal.vue';
 import WillkommenModal from '@components/form/pilot/modal/steps/WillkommenModal.vue';
 import FaqModal from '@components/form/pilot/modal/steps/FaqModal.vue';
-import useFormValidations from '@components/form/pilot/modal/composables/useFormValidations.ts';
 
 const { formData } = useFormData();
 const showModal = ref<boolean>(false);
@@ -60,7 +58,7 @@ const faqsValid = ref<boolean>();
         </v-stepper-window-item>
         <v-stepper-window-item value="3">
           <v-form v-model="faqsValid" lazy-validation>
-            <faq-modal v-model="step" :faqs="formData.faqs" />
+            <faq-modal v-model="step" v-model:faqs="formData.faqs" />
           </v-form>
         </v-stepper-window-item>
         <v-stepper-window-item value="4">

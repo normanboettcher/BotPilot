@@ -1,13 +1,13 @@
 import type { Kontaktdaten } from '@domain/Kontaktdaten.ts';
 import type { Faq } from '@domain/Faq.ts';
-import { ref } from 'vue';
+import { reactive } from 'vue';
 
 export type FormData = {
   kontaktdaten: Kontaktdaten;
   faqs: Array<Faq>;
 };
 const useFormData = () => {
-  const formData = ref<FormData>({
+  const formData = reactive<FormData>({
     kontaktdaten: {
       anmerkungen: '',
       kanzlei: '',
@@ -15,7 +15,10 @@ const useFormData = () => {
       email: '',
       ansprechpartner: '',
     },
-    faqs: Array(10).fill({ question: '', response: '' }),
+    faqs: Array.from({ length: 10 }, () => ({
+      question: '',
+      response: '',
+    })),
   });
   return { formData };
 };
