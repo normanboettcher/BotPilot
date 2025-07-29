@@ -9,6 +9,8 @@ import FaqModal from '@components/form/pilot/modal/steps/FaqModal.vue';
 const { formData } = useFormData();
 const showModal = ref<boolean>(false);
 const step = ref(0);
+const sending = ref(false);
+const success = ref(false);
 const onClick = () => {
   showModal.value = true;
 };
@@ -16,8 +18,13 @@ const closeModal = () => {
   showModal.value = false;
 };
 const submitForm = () => {
+  sending.value = true;
   console.log('submitForm', formData);
   console.log(allValid.value);
+  setTimeout(() => {
+    sending.value = false;
+    success.value = true;
+  }, 2000);
 };
 const kontakdatenValid = ref<boolean>();
 const faqsValid = ref<boolean>();
@@ -64,7 +71,15 @@ const allValid = computed(() => kontakdatenValid.value && faqsValid.value);
           </v-form>
         </v-stepper-window-item>
         <v-stepper-window-item value="4">
-          <absenden-modal v-model="step" @modal:submit="submitForm" />
+          <absenden-modal
+            v-if="!sending"
+            v-model:success="success"
+            v-model="step"
+            @modal:submit="submitForm"
+          />
+          <div v-else class="d-flex justify-center align-center" style="height: 100%">
+            <v-progress-circular indeterminate color="primary" size="64" />
+          </div>
         </v-stepper-window-item>
       </v-stepper-window>
     </v-stepper>

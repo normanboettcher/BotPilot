@@ -1,19 +1,18 @@
 <script setup lang="ts">
 import ModalCard from '@components/form/pilot/modal/ModalCard.vue';
 import { defineModel } from 'vue';
+import ModalActions from '@components/form/pilot/modal/ModalActions.vue';
 
 const modelValue = defineModel<number>();
 </script>
 
 <template>
-  <modal-card
-    title="Willkommen bei unserer Pilotgruppe"
-    @modal:next="modelValue++"
-    @modal:back="modelValue--"
-    :has-back-button="false"
-  >
+  <modal-card title="Willkommen bei unserer Pilotgruppe">
     <template #content-title>
       Willkommen zu unserem Formular. Bitte folgen Sie den Schritten, um fortzufahren.
+    </template>
+    <template #actions>
+      <modal-actions @modal:next="modelValue++" @modal:back="modelValue--" />
     </template>
   </modal-card>
 </template>
