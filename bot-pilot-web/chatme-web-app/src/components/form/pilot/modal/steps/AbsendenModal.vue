@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import ModalCard from '@components/form/pilot/modal/ModalCard.vue';
 import { defineModel, defineEmits, computed } from 'vue';
-import ModalActions from '@components/form/pilot/modal/ModalActions.vue';
 
 const modelValue = defineModel<number>();
 const success = defineModel<boolean>('success');

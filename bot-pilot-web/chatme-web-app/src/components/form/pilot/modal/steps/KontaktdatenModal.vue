@@ -3,7 +3,6 @@ import ModalCard from '@components/form/pilot/modal/ModalCard.vue';
 import type { Kontaktdaten } from '@domain/Kontaktdaten.ts';
 import { defineProps, defineModel, computed } from 'vue';
 import KontaktdatenForm from '@components/form/pilot/KontaktdatenForm.vue';
-import ModalActions from '@components/form/pilot/modal/ModalActions.vue';
 
 const modelValue = defineModel<number>();
 

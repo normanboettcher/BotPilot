@@ -3,7 +3,6 @@ import FaqList from '@components/form/pilot/FaqList.vue';
 import ModalCard from '@components/form/pilot/modal/ModalCard.vue';
 import { defineModel } from 'vue';
 import type { Faq } from '@domain/Faq.ts';
-import ModalActions from '@components/form/pilot/modal/ModalActions.vue';
 
 const modelValue = defineModel<number>();
 const faqs = defineModel<Array<Faq>>('faqs');
