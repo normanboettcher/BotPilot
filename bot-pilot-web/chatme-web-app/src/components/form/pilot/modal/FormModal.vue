@@ -73,6 +73,7 @@ const allValid = computed(() => kontakdatenValid.value && faqsValid.value);
         <v-stepper-window-item value="4">
           <absenden-modal
             v-if="!sending"
+            v-model:form-valid="allValid"
             v-model:success="success"
             v-model="step"
             @modal:submit="submitForm"

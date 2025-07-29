@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-  <v-card flat>
+  <v-card flat class="modal-card pa-2">
     <v-card-title class="text-wrap">{{ title }}</v-card-title>
     <v-card-text>
       <slot name="content-title"></slot>
@@ -21,7 +21,7 @@ defineProps<{
 </template>
 
 <style scoped>
-.v-card {
+.modal-card {
   background-color: var(--color-card);
   color: var(--color-text);
 }
