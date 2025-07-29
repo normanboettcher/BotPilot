@@ -19,7 +19,9 @@ const kontaktdaten = computed(() => props.kontaktdaten);
       <kontaktdaten-form v-model="kontaktdaten" />
     </template>
     <template #actions>
-      <modal-actions has-back-button @modal:next="modelValue++" @modal:back="modelValue--" />
+      <v-btn color="primary" title="Zurück" @click="modelValue--">Zurück</v-btn>
+      <v-spacer></v-spacer>
+      <v-btn color="primary" @click="modelValue++">Weiter</v-btn>
     </template>
   </modal-card>
 </template>

@@ -12,7 +12,8 @@ const modelValue = defineModel<number>();
       Willkommen zu unserem Formular. Bitte folgen Sie den Schritten, um fortzufahren.
     </template>
     <template #actions>
-      <modal-actions @modal:next="modelValue++" @modal:back="modelValue--" />
+      <v-spacer></v-spacer>
+      <v-btn color="primary" @click="modelValue++">Weiter</v-btn>
     </template>
   </modal-card>
 </template>

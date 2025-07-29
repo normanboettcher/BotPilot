@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ModalCard from '@components/form/pilot/modal/ModalCard.vue';
-import { defineModel, defineEmits } from 'vue';
+import { defineModel, defineEmits, computed } from 'vue';
 import ModalActions from '@components/form/pilot/modal/ModalActions.vue';
 
 const modelValue = defineModel<number>();
@@ -8,7 +8,9 @@ const success = defineModel<boolean>('success');
 const emit = defineEmits<{
   (e: 'modal:submit'): void;
 }>();
-const title = success ? 'Vielen Dank! Ihr Upload war erfolgreich' : 'Fast geschafft!';
+const title = computed(() =>
+  success.value ? 'Vielen Dank! Ihr Upload war erfolgreich' : 'Fast geschafft!',
+);
 </script>
 
 <template>
@@ -20,11 +22,9 @@ const title = success ? 'Vielen Dank! Ihr Upload war erfolgreich' : 'Fast gescha
       </div>
     </template>
     <template #actions>
-      <modal-actions
-        has-back-button
-        @modal:next="emit('modal:submit')"
-        @modal:back="modelValue--"
-      />
+      <v-btn color="primary" title="Zurück" @click="modelValue--">Zurück </v-btn>
+      <v-spacer></v-spacer>
+      <v-btn v-if="!success" color="primary" @click="emit('modal:submit')">Abschicken</v-btn>
     </template>
   </modal-card>
 </template>
