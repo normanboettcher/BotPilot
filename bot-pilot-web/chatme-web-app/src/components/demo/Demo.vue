@@ -14,7 +14,6 @@ import FeatureList from '@/components/feature/FeatureList.vue';
     <div class="pb-4">
       <feature-list />
     </div>
-    <pilot-form />
   </v-container>
 </template>
 
