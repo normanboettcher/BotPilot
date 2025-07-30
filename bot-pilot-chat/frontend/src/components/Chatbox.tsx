@@ -11,8 +11,8 @@ const Chatbox: React.FC<Props> = ({visible}) => {
     return (
         <Box
             id="chatbox"
-            maxHeight={280}
             sx={{
+                width: '100%',
                 display: visible ? "flex" : "none",
                 flexDirection: "column",
                 backgroundColor: "#fef9f3",
@@ -20,10 +20,18 @@ const Chatbox: React.FC<Props> = ({visible}) => {
                 borderRadius: "12px",
                 padding: "0.3rem",
                 paddingTop: "1rem",
-                width: "380px",
                 marginBottom: "10px",
                 boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
                 mt: 2,
+                transform: {
+                    xs: 'scale(1.05)',
+                    sm: 'scale(1)',
+                },
+                transformOrigin: 'bottom right',
+                fontSize: {
+                    xs: '0.9rem',
+                    sm: '1rem',
+                }
             }}
         >
             <Chatverlauf/>

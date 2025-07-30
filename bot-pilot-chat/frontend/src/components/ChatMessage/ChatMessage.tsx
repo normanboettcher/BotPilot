@@ -30,8 +30,19 @@ const ChatMessage: React.FC<Props> = ({msg}) => {
                 maxWidth: '80%',
             }}
         >
-            <Typography variant={'body2'} pb={1} pt={0}>{text}</Typography>
-            <Typography sx={{display: 'flex', alignSelf: 'flex-end'}} variant={'caption'}>{timestamp}</Typography>
+            <Typography variant={'body2'} pb={1} pt={0}
+                        sx={{
+                            width: {
+                                xs: '100%',
+                                sm: '100%',
+                                md: '100%',
+                                lg: '100%'
+                            },
+
+                        }}
+            > {text}</Typography>
+            <Typography sx={{display: 'flex', alignSelf: 'flex-end'}}
+                        variant={'caption'}>{timestamp}</Typography>
         </Box>
     )
 };

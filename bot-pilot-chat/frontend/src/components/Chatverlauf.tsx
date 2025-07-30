@@ -38,19 +38,19 @@ const Chatverlauf: React.FC = () => {
                     ))}
                 {test.map((msg, index) => (
                     <ListItem key={index} sx={{
-                        padding: 1,
-                        paddingLeft: msg.sender === 'bot' ? 0 : 1,
-                        paddingRight: msg.sender === 'user' ? 0 : 1
-                    }}>
+                padding: 1,
+                paddingLeft: msg.sender === 'bot' ? 0 : 1,
+                paddingRight: msg.sender === 'user' ? 0 : 1
+            }}>
 
-                        <ChatMessageContainer chatMessage={msg}/>
-                    </ListItem>
-                ))}
-                <div ref={endRef}/>
-            </List>
-        </Box>
-    )
-        ;
+                <ChatMessageContainer chatMessage={msg}/>
+            </ListItem>
+            ))}
+            <div ref={endRef}/>
+        </List>
+</Box>
+)
+    ;
 };
 
 export default Chatverlauf;
