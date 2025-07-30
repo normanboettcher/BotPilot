@@ -9,16 +9,20 @@ type Props = {
 };
 
 const ChatMessageContainer: React.FC<Props> = ({chatMessage}) => {
-    const {sender, message} = chatMessage;
+    const {sender} = chatMessage;
     return (
         <Box
             width={"100%"}
             display={"flex"}
             justifyContent={sender === "user" ? "flex-end" : "flex-start"}
         >
-            <Stack direction={sender === "user" ? "row-reverse" : "row"} spacing={1}>
-                <SenderAvatar sender={sender}/>
-                <ChatMessage sender={sender} text={message}/>
+            <Stack alignItems={"flex-start"} direction={sender === "user" ? "row-reverse" : "row"} spacing={1}>
+                <Box sx={{position: "relative", top: '-15px'}}>
+                    <SenderAvatar sender={sender}/>
+                </Box>
+                <Box width={'80%'}>
+                    <ChatMessage msg={chatMessage}/>
+                </Box>
             </Stack>
         </Box>
     );

@@ -44,6 +44,7 @@ const ChatInput: React.FC = () => {
                     display: "flex",
                     flexDirection: "column",
                     marginBottom: "0.5rem",
+                    backgroundColor: "#f0f4f8",
                     flex: 1,
                     padding: "0.5rem",
                     "& .MuiInputBase-root": {
