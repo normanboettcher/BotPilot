@@ -17,6 +17,7 @@ const BotContainer = (): React.ReactNode => {
                 right: isMobile ? 0 : 16,
                 left: isMobile ? 0 : 'auto',
                 top: isMobile ? 0 : 'auto',
+                padding: '1rem',
                 fontFamily: "sans-serif",
                 zIndex: 9999,
             }}

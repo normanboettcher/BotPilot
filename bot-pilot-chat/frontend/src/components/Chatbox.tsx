@@ -16,18 +16,18 @@ const Chatbox: React.FC<Props> = ({visible}) => {
             elevation={4}
             sx={{
                 width: isMobile ? '100vw' : 400,
-                height: isMobile ? '100vh' : 500,
+                maxWidth: isMobile ? 360 : 400,
+                height: isMobile ? '90vh' : 360,
                 display: visible ? "flex" : "none",
                 flexDirection: "column",
-                justifyContent: "space-between",
+                justifyContent: "flex-end",
                 backgroundColor: "#fef9f3",
                 border: "1px solid #ccc",
                 borderRadius: "12px",
-                padding: "0.3rem",
-                paddingTop: "2rem",
-                marginBottom: isMobile ? 0 : ' 10px',
+                padding: "1rem",
                 boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
                 mt: isMobile ? 0 : 2,
+                boxSizing: "border-box",
             }}
         >
             <Chatverlauf/>
