@@ -1,4 +1,4 @@
-import {Box, Stack} from "@mui/material";
+import {Box,} from "@mui/material";
 import React, {useState, type ChangeEventHandler} from "react";
 import {useChatverlauf} from "../../context/ChatContext.tsx";
 import useMessageService from "../../service/MessageService.ts";
@@ -41,34 +41,26 @@ const ChatInput: React.FC = () => {
             <Box
                 id="chatbot-input"
                 sx={{
-                    display: "flex",
-                    flexDirection: "column",
                     marginBottom: "0.5rem",
                     backgroundColor: "#f0f4f8",
-                    flex: 1,
-                    padding: "0.5rem",
+                    padding: "1rem",
                     "& .MuiInputBase-root": {
                         padding: "0.5rem",
                     },
                 }}
             >
-                <Stack direction={"column"} spacing={1}>
-                    <ChatTextField
-                        onChange={onChange}
-                        sendButton={<SendIconButton onClick={handleSend}/>}
-                        value={input}
-                        onKeyDown={async (e) => {
-                            if (e.key === "Enter" && !e.shiftKey) {
-                                e.preventDefault();
-                                await handleSend();
-                                setInput("");
-                            }
-                        }}
-                    />
-                    {/**
-                     <SendButton onClick={handleSend} />
-                     */}
-                </Stack>
+                <ChatTextField
+                    onChange={onChange}
+                    sendButton={<SendIconButton onClick={handleSend}/>}
+                    value={input}
+                    onKeyDown={async (e) => {
+                        if (e.key === "Enter" && !e.shiftKey) {
+                            e.preventDefault();
+                            await handleSend();
+                            setInput("");
+                        }
+                    }}
+                />
             </Box>
         </Box>
     );

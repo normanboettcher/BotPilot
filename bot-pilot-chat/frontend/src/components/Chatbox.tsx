@@ -1,42 +1,38 @@
-import {Box} from "@mui/material";
+import {Paper} from "@mui/material";
 import React from "react";
 import ChatInput from "./ChatInput/ChatInput.tsx";
 import Chatverlauf from "./Chatverlauf";
+import useBotResponsive from "../hooks/useBotResponsive.ts";
 
 type Props = {
     visible: boolean;
 };
 
 const Chatbox: React.FC<Props> = ({visible}) => {
+    const {isMobile} = useBotResponsive();
     return (
-        <Box
+        <Paper
             id="chatbox"
+            elevation={4}
             sx={{
-                width: '100%',
+                width: isMobile ? '100vw' : 400,
+                height: isMobile ? '100vh' : 500,
                 display: visible ? "flex" : "none",
                 flexDirection: "column",
+                justifyContent: "space-between",
                 backgroundColor: "#fef9f3",
                 border: "1px solid #ccc",
                 borderRadius: "12px",
                 padding: "0.3rem",
-                paddingTop: "1rem",
-                marginBottom: "10px",
+                paddingTop: "2rem",
+                marginBottom: isMobile ? 0 : ' 10px',
                 boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-                mt: 2,
-                transform: {
-                    xs: 'scale(1.05)',
-                    sm: 'scale(1)',
-                },
-                transformOrigin: 'bottom right',
-                fontSize: {
-                    xs: '0.9rem',
-                    sm: '1rem',
-                }
+                mt: isMobile ? 0 : 2,
             }}
         >
             <Chatverlauf/>
             <ChatInput/>
-        </Box>
+        </Paper>
     );
 };
 
