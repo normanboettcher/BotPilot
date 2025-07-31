@@ -1,15 +1,16 @@
 import React from "react";
-import type { Sender } from "../../domain/Sender.ts";
-import { Avatar } from "@mui/material";
-import SmartToy from "@mui/icons-material/SmartToy";
-import Person from "@mui/icons-material/Person";
+import type {Sender} from "../../domain/Sender.ts";
+import BotAvatar from "./icons/BotAvatar.tsx";
+import UserAvatar from "./icons/UserAvatar.tsx";
 
 type Props = {
-  sender: Sender;
+    sender: Sender;
 };
 
-const SenderAvatar: React.FC<Props> = ({ sender }) => {
-  return <Avatar>{sender === "user" ? <Person /> : <SmartToy />}</Avatar>;
-};
+const SenderAvatar: React.FC<Props> = ({sender}) => {
+    return (
+        sender === "user" ? <UserAvatar/> : <BotAvatar/>
+    );
+}
 
 export default SenderAvatar;

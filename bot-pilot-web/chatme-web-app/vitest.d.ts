@@ -1,11 +1,5 @@
 /// <reference types="vitest" />
 
-declare module 'vitest' {
-  export interface TestContext {
-    // add any custom properties to the test context here if needed
-  }
-}
-
 export {};
 // Declare the global variables
 declare global {

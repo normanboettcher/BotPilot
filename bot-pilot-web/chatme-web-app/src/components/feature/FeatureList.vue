@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { FeatureItemType } from '@/components/domain/Feature.ts';
-import FeatureItem from '@/components/feature/FeatureItem.vue';
 import FeatureSection from '@/components/feature/FeatureSection.vue';
 
 const currentFeatures: FeatureItemType[] = [

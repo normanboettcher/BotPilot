@@ -6,14 +6,13 @@ const modelValue = defineModel<number>();
 </script>
 
 <template>
-  <modal-card
-    title="Willkommen bei unserer Pilotgruppe"
-    @modal:next="modelValue++"
-    @modal:back="modelValue--"
-    :has-back-button="false"
-  >
+  <modal-card title="Willkommen bei unserer Pilotgruppe">
     <template #content-title>
       Willkommen zu unserem Formular. Bitte folgen Sie den Schritten, um fortzufahren.
+    </template>
+    <template #actions>
+      <v-spacer></v-spacer>
+      <v-btn color="primary" @click="modelValue++">Weiter</v-btn>
     </template>
   </modal-card>
 </template>

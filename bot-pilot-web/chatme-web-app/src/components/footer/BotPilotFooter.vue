@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import FooterItem from '@components/footer/FooterItem.vue';
 import FooterProductItem from '@components/footer/FooterProductItem.vue';
-import FooterItemList from '@components/footer/FooterItemList.vue';
 import FooterNavigationList from '@components/footer/FooterNavigationList.vue';
 import FooterRechtlichesList from '@components/footer/FooterRechtlichesList.vue';
 import FooterKontaktList from '@components/footer/FooterKontaktList.vue';

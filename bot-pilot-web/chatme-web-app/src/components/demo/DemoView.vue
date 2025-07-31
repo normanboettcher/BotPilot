@@ -2,7 +2,6 @@
 import DemoIntro from '@components/demo/DemoIntro.vue';
 import DemoSlideShow from '@components/demo/DemoSlideShow.vue';
 import AdvantagesList from '@components/advantages/AdvantagesList.vue';
-import PilotForm from '@components/form/pilot/PilotForm.vue';
 import FeatureList from '@/components/feature/FeatureList.vue';
 </script>
 

@@ -1,14 +1,4 @@
-<script setup lang="ts">
-const submitForm = () => {
-  // Hier können Sie die Logik zum Absenden des Formulars implementieren
-  // Beispiel: Senden der Daten an einen Server oder eine API
-  // axios.post('/api/pilot', formData.value).then(response => {
-  //   console.log('Erfolgreich gesendet:', response.data)
-  // }).catch(error => {
-  //   console.error('Fehler beim Senden:', error)
-  // })
-};
-</script>
+<script setup lang="ts"></script>
 <template>
   <v-card id="pilot-form" class="pilot-form-card" elevation="2">
     <v-card-text class="pilot-form-heading">

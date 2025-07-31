@@ -13,15 +13,14 @@ const kontaktdaten = computed(() => props.kontaktdaten);
 </script>
 
 <template>
-  <modal-card
-    v-model="modelValue"
-    @modal:next="modelValue++"
-    @modal:back="modelValue--"
-    title="Willkommen bei unserer Pilotgruppe"
-    has-back-button
-  >
+  <modal-card v-model="modelValue" title="Willkommen bei unserer Pilotgruppe">
     <template #content>
       <kontaktdaten-form v-model="kontaktdaten" />
+    </template>
+    <template #actions>
+      <v-btn color="primary" title="Zurück" @click="modelValue--">Zurück</v-btn>
+      <v-spacer></v-spacer>
+      <v-btn color="primary" @click="modelValue++">Weiter</v-btn>
     </template>
   </modal-card>
 </template>
