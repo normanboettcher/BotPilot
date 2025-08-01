@@ -55,3 +55,8 @@
   color: #333;
 }
 */
+
+body,
+html {
+  overflow-y: auto;
+}

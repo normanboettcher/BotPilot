@@ -1,11 +1,11 @@
-import {useMediaQuery, useTheme} from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const useBotResponsive = () => {
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-    return {
-        isMobile
-    }
-}
+  return {
+    isMobile,
+  };
+};
 export default useBotResponsive;
