@@ -19,7 +19,10 @@ const Chatverlauf: React.FC = () => {
     }, [messages]);
 
     return (
-        <Box style={{maxHeight: 280, overflow: "auto"}}>
+        <Box style={{
+            overflow: "auto",
+            height: "100%",
+        }}>
             <List
                 sx={{
                     p: 1,
@@ -38,19 +41,19 @@ const Chatverlauf: React.FC = () => {
                     ))}
                 {test.map((msg, index) => (
                     <ListItem key={index} sx={{
-                padding: 1,
-                paddingLeft: msg.sender === 'bot' ? 0 : 1,
-                paddingRight: msg.sender === 'user' ? 0 : 1
-            }}>
+                        padding: 1,
+                        paddingLeft: msg.sender === 'bot' ? 0 : 1,
+                        paddingRight: msg.sender === 'user' ? 0 : 1
+                    }}>
 
-                <ChatMessageContainer chatMessage={msg}/>
-            </ListItem>
-            ))}
-            <div ref={endRef}/>
-        </List>
-</Box>
-)
-    ;
+                        <ChatMessageContainer chatMessage={msg}/>
+                    </ListItem>
+                ))}
+                <div ref={endRef}/>
+            </List>
+        </Box>
+    )
+        ;
 };
 
 export default Chatverlauf;

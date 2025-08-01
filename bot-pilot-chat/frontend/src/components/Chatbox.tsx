@@ -15,19 +15,16 @@ const Chatbox: React.FC<Props> = ({visible}) => {
             id="chatbox"
             elevation={4}
             sx={{
-                width: isMobile ? '100vw' : 400,
+                width: isMobile ? '90wv' : 400,
                 maxWidth: isMobile ? 360 : 400,
-                height: isMobile ? '90vh' : 360,
+                height: isMobile ? '90%' : 'auto',
                 display: visible ? "flex" : "none",
                 flexDirection: "column",
-                justifyContent: "flex-end",
+                justifyContent: "space-between",
                 backgroundColor: "#fef9f3",
                 border: "1px solid #ccc",
-                borderRadius: "12px",
                 padding: "1rem",
                 boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-                mt: isMobile ? 0 : 2,
-                boxSizing: "border-box",
             }}
         >
             <Chatverlauf/>
