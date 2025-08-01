@@ -1,5 +1,5 @@
 /** @type {import("prettier").Config} */
-module.exports = {
+export default {
   printWidth: 100, // maximale Zeilenlänge
   tabWidth: 2, // Größe von Tabs
   useTabs: false, // statt Tabs -> Leerzeichen

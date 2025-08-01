@@ -1,6 +1,8 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import type { ChatMessageType } from "../../domain/ChatMessage.ts";
+import useBotResponsive from "../../hooks/useBotResponsive.ts";
+import AlarmClock from "../icons/AlarmClock.tsx";
 
 type Props = {
   msg: ChatMessageType;
@@ -9,9 +11,10 @@ type Props = {
 const ChatMessage: React.FC<Props> = ({ msg }) => {
   const { sender, message: text, timestamp } = msg;
   const isUser = sender === "user";
+  const { isMobile } = useBotResponsive();
   // Farben & Styles je nach Absender
-  const backgroundColor = isUser ? "primary.main" : "grey.200";
-  const textColor = isUser ? "white" : "black";
+  const backgroundColor = isUser ? "primary.main" : "grey.700";
+  const textColor = "white";
   const align = isUser ? "flex-end" : "flex-start";
   return (
     <Box
@@ -26,32 +29,26 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
         borderTopRightRadius: sender === "user" ? "0px" : "16px",
         p: 1.5,
         m: 0.5,
-        minWidth: "80%",
-        maxWidth: "80%",
+        maxWidth: "100%",
+        textShadow: "0 1px 1px rgba(0, 0, 0, 0.2)",
       }}
     >
-      <Typography
-        variant={"body2"}
-        pb={1}
-        pt={0}
-        sx={{
-          width: {
-            xs: "100%",
-            sm: "100%",
-            md: "100%",
-            lg: "100%",
-          },
-        }}
-      >
-        {" "}
+      <Typography variant={isMobile ? "body1" : "body2"} pb={1} pt={0}>
         {text}
       </Typography>
-      <Typography
-        sx={{ display: "flex", alignSelf: "flex-end" }}
-        variant={"caption"}
+      <Stack
+        direction={"row"}
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "start",
+        }}
       >
-        {timestamp}
-      </Typography>
+        <AlarmClock />
+        <Typography variant={"caption"} sx={{ paddingLeft: "5px" }}>
+          {timestamp}
+        </Typography>
+      </Stack>
     </Box>
   );
 };

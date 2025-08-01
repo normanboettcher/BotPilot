@@ -42,7 +42,6 @@ const ChatInput: React.FC = () => {
         id="chatbot-input"
         sx={{
           marginBottom: "0.5rem",
-          backgroundColor: "#f0f4f8",
           padding: "1rem",
           "& .MuiInputBase-root": {
             padding: "0.5rem",

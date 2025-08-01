@@ -21,7 +21,7 @@ const Chatbox: React.FC<Props> = ({ visible }) => {
         display: visible ? "flex" : "none",
         flexDirection: "column",
         justifyContent: "space-between",
-        backgroundColor: "#fef9f3",
+        backgroundColor: "grey.200",
         border: "1px solid #ccc",
         padding: "1rem",
         boxShadow: "0 4px 12px rgba(0,0,0,0.2)",

@@ -26,6 +26,7 @@ const Chatverlauf: React.FC = () => {
       style={{
         overflow: "auto",
         height: "100%",
+        width: "100%",
       }}
     >
       <List

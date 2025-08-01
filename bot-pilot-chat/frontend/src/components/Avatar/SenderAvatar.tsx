@@ -1,7 +1,7 @@
 import React from "react";
 import type { Sender } from "../../domain/Sender.ts";
-import BotAvatar from "./icons/BotAvatar.tsx";
-import UserAvatar from "./icons/UserAvatar.tsx";
+import BotAvatar from "../icons/BotAvatar.tsx";
+import UserAvatar from "../icons/UserAvatar.tsx";
 
 type Props = {
   sender: Sender;

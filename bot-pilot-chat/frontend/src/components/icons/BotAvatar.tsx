@@ -27,7 +27,7 @@ function MessageChatbot(props?: SVGProps<SVGSVGElement>) {
 }
 
 const BotAvatar = () => {
-  const style = { bgcolor: grey[500] };
+  const style = { bgcolor: grey[700] };
   return <Avatar sx={style}>{MessageChatbot()}</Avatar>;
 };
 export default BotAvatar;

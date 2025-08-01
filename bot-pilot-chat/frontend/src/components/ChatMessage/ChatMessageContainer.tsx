@@ -20,11 +20,17 @@ const ChatMessageContainer: React.FC<Props> = ({ chatMessage }) => {
         alignItems={"flex-start"}
         direction={sender === "user" ? "row-reverse" : "row"}
         spacing={1}
+        width={"100%"}
       >
         <Box sx={{ position: "relative", top: "-15px" }}>
           <SenderAvatar sender={sender} />
         </Box>
-        <Box width={"80%"}>
+        <Box
+          sx={{
+            minWidth: "60%",
+            maxWidth: "60%",
+          }}
+        >
           <ChatMessage msg={chatMessage} />
         </Box>
       </Stack>

@@ -1,6 +1,5 @@
 import type { SVGProps } from "react";
 import React from "react";
-import { blue } from "@mui/material/colors";
 import { Avatar } from "@mui/material";
 
 function User3Fill(props?: SVGProps<SVGSVGElement>) {
@@ -21,7 +20,7 @@ function User3Fill(props?: SVGProps<SVGSVGElement>) {
 }
 
 const UserAvatar = () => {
-  const style = { bgcolor: blue[500] };
+  const style = { bgcolor: "primary.main" };
   return <Avatar sx={style}>{User3Fill()}</Avatar>;
 };
 
