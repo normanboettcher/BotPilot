@@ -1,4 +1,4 @@
-import type {Sender} from "../../domain/Sender.ts";
+import type { Sender } from "../../domain/Sender.ts";
 
 export interface ChatMessageComponentProps {
   backgroundColor: string;

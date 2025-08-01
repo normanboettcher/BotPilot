@@ -56,6 +56,7 @@
 }
 */
 
-body, html {
-    overflow-y: auto;
+body,
+html {
+  overflow-y: auto;
 }
