@@ -1,18 +1,18 @@
-import type { Query } from "../domain/Query";
+import type { Query } from '../domain/Query';
 
 const useRestClient = () => {
   const send = async (query: Query) => {
     try {
       return await fetch(`http://192.168.178.67:8000/api/faqs`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(query),
       });
     } catch (error) {
-      console.log("Error when sending the question to Backend Server", error);
+      console.log('Error when sending the question to Backend Server', error);
     }
   };
   return {

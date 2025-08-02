@@ -1,5 +1,5 @@
-import React from "react";
-import BotContainer from "./components/BotContainer.tsx";
+import React from 'react';
+import BotContainer from './components/BotContainer.tsx';
 
 const App = (): React.ReactNode => {
   return <BotContainer />;
