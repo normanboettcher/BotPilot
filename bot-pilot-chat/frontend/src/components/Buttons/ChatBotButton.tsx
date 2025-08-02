@@ -1,7 +1,6 @@
-import Chat from '@mui/icons-material/Chat';
 import { Box, Button } from '@mui/material';
 import React from 'react';
-import BotAvatar, { MessageChatbot } from '../icons/BotAvatar.tsx';
+import { MessageChatbot } from '../icons/BotAvatar.tsx';
 
 type Props = {
   onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;

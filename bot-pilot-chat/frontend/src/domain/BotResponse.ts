@@ -1,4 +1,4 @@
-import type { Sender } from "./Sender.ts";
+import type { Sender } from './Sender.ts';
 
 export interface BotResponse {
   answer: string;

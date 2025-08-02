@@ -5,8 +5,8 @@ export default {
   useTabs: false, // statt Tabs -> Leerzeichen
   semi: true, // Semikolons am Zeilenende
   singleQuote: true, // einfache statt doppelte Anführungszeichen
-  trailingComma: "es5", // abschließende Kommas wo sinnvoll
+  trailingComma: 'es5', // abschließende Kommas wo sinnvoll
   bracketSpacing: true, // Leerzeichen zwischen geschweiften Klammern
-  arrowParens: "always", // Klammern um Arrow-Function-Parameter
-  endOfLine: "lf", // Line-Endings erzwingen (lf = Unix)
+  arrowParens: 'always', // Klammern um Arrow-Function-Parameter
+  endOfLine: 'lf', // Line-Endings erzwingen (lf = Unix)
 };

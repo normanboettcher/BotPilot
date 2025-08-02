@@ -1,7 +1,7 @@
-import useRestClient from "./RestClient.ts";
-import type { BotResponse } from "../domain/BotResponse.ts";
-import useMessageCreator from "./MessageCreator.ts";
-import type { Query } from "../domain/Query.ts";
+import useRestClient from './RestClient.ts';
+import type { BotResponse } from '../domain/BotResponse.ts';
+import useMessageCreator from './MessageCreator.ts';
+import type { Query } from '../domain/Query.ts';
 
 const useMessageService = () => {
   const sendMessageAndGetResponse = async (message: string) => {
@@ -18,9 +18,7 @@ const useMessageService = () => {
       return createChatMessage(messageData.answer, messageData.sender);
     } catch (error) {
       console.error(error);
-      throw Error(
-        `Failed to send message. Received Error: ${JSON.stringify(error)}`,
-      );
+      throw Error(`Failed to send message. Received Error: ${JSON.stringify(error)}`);
     }
   };
   return {

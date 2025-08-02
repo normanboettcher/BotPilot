@@ -1,5 +1,5 @@
 export type ChatMessageType = {
-  sender: "user" | "bot";
+  sender: 'user' | 'bot';
   message: string;
   timestamp: string;
 };

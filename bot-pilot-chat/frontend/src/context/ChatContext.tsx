@@ -1,6 +1,6 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
-import React from "react";
-import type { ChatMessageType } from "../domain/ChatMessage.ts";
+import { createContext, useContext, useState, type ReactNode } from 'react';
+import React from 'react';
+import type { ChatMessageType } from '../domain/ChatMessage.ts';
 
 interface ChatContextType {
   messages: ChatMessageType[];
@@ -31,7 +31,7 @@ export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
 export const useChatverlauf = (): ChatContextType => {
   const context = useContext(ChatContext);
   if (!context) {
-    throw new Error("useChat must be used within a ChatProvider");
+    throw new Error('useChat must be used within a ChatProvider');
   }
   return context;
 };
