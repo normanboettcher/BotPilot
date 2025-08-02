@@ -1,3 +1,4 @@
+import textwrap
 from datetime import datetime
 
 
@@ -12,10 +13,12 @@ class BotResponse:
 
     @staticmethod
     def no_answer_found():
-        not_found_message = """
+        not_found_message = textwrap.dedent(
+            """
             Zu dieser Anfrage konnte ich leider keine passende Antwort finden.
             Bitte formulieren Sie Ihre Frage anders.
             """
+        ).strip()
         return BotResponse(not_found_message, success=False, sender="bot")
 
     @staticmethod

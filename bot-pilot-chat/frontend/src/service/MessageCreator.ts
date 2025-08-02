@@ -16,7 +16,7 @@ const useMessageCreator = () => {
     const chatMessage: ChatMessageType = {
       sender: sender,
       message: text,
-      timestamp: date,
+      timestamp: date.replace(',', ''),
     };
     return chatMessage;
   };
