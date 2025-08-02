@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ChatBotButton from './Buttons/ChatBotButton.tsx';
 import Chatbox from './Chatbox';
@@ -17,8 +17,10 @@ const BotContainer = (): React.ReactNode => {
     return () => window.removeEventListener('resize', setVH);
   }, []);
   return (
-    <Box
+    <Stack
       id="chatbot-container"
+      direction={visible ? 'column' : 'column-reverse'}
+      spacing={1}
       sx={{
         position: 'fixed',
         width: isMobile ? '90wv' : 400,
@@ -32,9 +34,16 @@ const BotContainer = (): React.ReactNode => {
         zIndex: 9999,
       }}
     >
-      <ChatBotButton onClick={() => setVisible(!visible)} />
-      <Chatbox visible={true} />
-    </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: visible ? 'flex-start' : 'flex-end',
+        }}
+      >
+        <ChatBotButton onClick={() => setVisible(!visible)} />
+      </Box>
+      {visible && <Chatbox visible={true} />}
+    </Stack>
   );
 };
 
