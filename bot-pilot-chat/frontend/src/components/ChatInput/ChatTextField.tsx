@@ -16,11 +16,11 @@ const ChatTextField: React.FC<TextFieldProps & BotTextFieldProps> = ({ ...props 
           xs: '1rem',
           sm: '1rem',
         },
+        borderRadius: 'inherit',
+        backgroundColor: 'inherit',
         '& .MuiInputBase-root': {
           padding: '0.5rem',
-          borderRadius: '8px',
           border: 'none',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
         },
       }}
       variant="standard"
