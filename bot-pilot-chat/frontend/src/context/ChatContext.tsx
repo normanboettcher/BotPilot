@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, type ReactNode, useEffect } from 'react';
 import React from 'react';
 import type { ChatMessageType } from '../domain/ChatMessage.ts';
+import useOpeningMessage from './useOpeningMessage.ts';
 
 interface ChatContextType {
   messages: ChatMessageType[];
@@ -13,17 +14,17 @@ const STORAGE_KEY = 'chatbot-messages';
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
 export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
-  const [messages, setMessages] = useState<ChatMessageType[]>(() => {
-    const storedMessages = localStorage.getItem(STORAGE_KEY);
-    if (storedMessages) {
-      return JSON.parse(storedMessages);
-    }
-    return [];
-  });
+  // @ts-ignore
+  const getMessagesFromCache = () => {
+    return localStorage.getItem(STORAGE_KEY);
+  };
+  const { opening } = useOpeningMessage();
+  const [messages, setMessages] = useState<ChatMessageType[]>([opening]);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
   }, [messages]);
+
   const resetMessages = () => {
     sessionStorage.removeItem(STORAGE_KEY);
     setMessages([]);
