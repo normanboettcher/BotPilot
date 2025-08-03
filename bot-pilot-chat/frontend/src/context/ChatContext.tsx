@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, useState, type ReactNode, useEffect } from 'react';
 import React from 'react';
 import type { ChatMessageType } from '../domain/ChatMessage.ts';
 
@@ -8,12 +8,24 @@ interface ChatContextType {
   resetMessages: () => void;
 }
 
+const STORAGE_KEY = 'chatbot-messages';
+
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
 export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
-  const [messages, setMessages] = useState<ChatMessageType[]>([]);
+  const [messages, setMessages] = useState<ChatMessageType[]>(() => {
+    const storedMessages = localStorage.getItem(STORAGE_KEY);
+    if (storedMessages) {
+      return JSON.parse(storedMessages);
+    }
+    return [];
+  });
 
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+  }, [messages]);
   const resetMessages = () => {
+    sessionStorage.removeItem(STORAGE_KEY);
     setMessages([]);
   };
 
