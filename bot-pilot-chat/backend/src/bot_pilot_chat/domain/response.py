@@ -11,6 +11,21 @@ class BotResponse:
         self._score = score
         self._sender = sender
 
+    def get_answer(self):
+        return self._answer
+
+    def get_success(self):
+        return self._success
+
+    def get_timestamp(self):
+        return self._timestamp
+
+    def get_score(self):
+        return self._score
+
+    def get_sender(self):
+        return self._sender
+
     @staticmethod
     def no_answer_found():
         not_found_message = textwrap.dedent(

@@ -36,6 +36,8 @@ test: unit integration
 
 build: format lint test
 
+release: format lint test integration
+
 dev:
 	@echo "Starting development server..."
 	$(MAKE) print_env
