@@ -12,16 +12,13 @@ type Props = {
 const ChatMessageContainer: React.FC<Props> = ({ chatMessage }) => {
   const { sender } = chatMessage;
   const { isMobile } = useBotResponsive();
+  const isUser = sender === 'user';
   return (
-    <Box
-      width={'100%'}
-      display={'flex'}
-      justifyContent={sender === 'user' ? 'flex-end' : 'flex-start'}
-    >
+    <Box width={'100%'} display={'flex'} justifyContent={isUser ? 'flex-end' : 'flex-start'}>
       <Stack
         alignItems={'flex-start'}
-        direction={sender === 'user' ? 'row-reverse' : 'row'}
-        spacing={1}
+        direction={isUser ? 'row-reverse' : 'row'}
+        spacing={isUser ? (isMobile ? -0.5 : -1) : 1}
         width={'100%'}
       >
         <Box sx={{ position: 'relative', top: '-15px' }}>

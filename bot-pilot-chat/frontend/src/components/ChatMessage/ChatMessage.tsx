@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, useTheme } from '@mui/material';
 import type { ChatMessageType } from '../../domain/ChatMessage.ts';
 import useBotResponsive from '../../hooks/useBotResponsive.ts';
 import AlarmClock from '../icons/AlarmClock.tsx';
@@ -11,9 +11,14 @@ type Props = {
 const ChatMessage: React.FC<Props> = ({ msg }) => {
   const { sender, message: text, timestamp } = msg;
   const isUser = sender === 'user';
+  const theme = useTheme();
   const { isDarkTheme } = useBotResponsive();
   // Farben & Styles je nach Absender
-  const backgroundColor = isUser ? 'primary.main' : isDarkTheme ? 'grey.500' : 'grey.800';
+  const backgroundColor = isUser
+    ? theme.palette.primary.main
+    : isDarkTheme
+      ? theme.palette.grey[500]
+      : theme.palette.grey[500];
   const textColor = 'white';
   const align = isUser ? 'flex-end' : 'flex-start';
   return (
@@ -37,23 +42,11 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
         overflowWrap: 'break-word',
         wordBreak: 'break-word',
         whiteSpace: 'pre-wrap',
-        '&::after': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          width: 0,
-          height: 0,
-          border: '10px solid transparent',
-          borderBottom: isUser ? '10px solid' : '10px solid',
-          borderBottomColor: isUser ? 'primary.main' : isDarkTheme ? 'grey.500' : 'grey.800',
-          right: isUser ? -10 : 'auto',
-          left: isUser ? 'auto' : -10,
-          transform: isUser ? 'translateY(-5%)  rotate(150deg)' : 'translateY(-5%)  rotate(200deg)',
-        },
       }}
     >
       <Typography
         variant={'body2'}
+        justifyContent={'flex-start'}
         pb={1}
         pt={0}
         sx={{

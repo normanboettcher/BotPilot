@@ -26,6 +26,7 @@ const BotAvatar = () => {
     <Avatar
       sx={{
         bgcolor: isDarkTheme ? 'grey.500' : 'grey.800',
+        fontSize: '27px',
       }}
     >
       {MessageChatbot({ color: isDarkTheme ? 'white' : 'grey.200' })}
