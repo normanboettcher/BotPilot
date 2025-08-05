@@ -5,3 +5,5 @@ sentence-transformers
 httpx
 pytest
 pytest-cov
+rasa==3.6.21
+spacy==3.7.4

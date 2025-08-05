@@ -7,7 +7,7 @@ where = ["src"]
 
 [tool.black]
 line-length = 80
-target-version = ["py313"]
+target-version = ["py310"]
 
 [tool.flake8]
 max-line-length = 80
@@ -26,7 +26,7 @@ commands = [
 
 [tool.tox.env.unit_tests]
 set_env = { file = 'conf{/}local.env' }
-description = "Run tests with Python 3.13"
+description = "Run tests with Python 3.10"
 deps = [
     "-rrequirements.txt",
     "pytest",
@@ -38,7 +38,7 @@ commands = [
 
 [tool.tox.env.integration_test]
 set_env = { file = 'conf{/}local.env' }
-description = "Run integration tests with Python 3.13"
+description = "Run integration tests with Python 3.10"
 #depends = ["base_deps"]
 deps = [
     "-rrequirements.txt",
