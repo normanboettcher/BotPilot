@@ -1,0 +1,17 @@
+version: "3.1"
+
+rules:
+  - rule: Begrüßung antworten
+    steps:
+      - intent: begruessung
+      - action: utter_begruessung
+  - rule: Verabschiedung antworten
+    steps:
+      - intent: verabschiedung
+      - action: utter_verabschiedung
+  - rule: default fallback
+    condition:
+      - active_loop: null
+    steps:
+      - intent: nlu_fallback
+      - action: utter_please_rephrase

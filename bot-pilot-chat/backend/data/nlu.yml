@@ -1,0 +1,41 @@
+version: "3.1"
+
+nlu:
+  - intent: begruessung
+    examples: |
+      - hallo
+      - hi
+      - hey
+      - guten tag
+      - guten morgen
+      - servus
+      - moin
+      - grüß dich
+      - na
+      - guten abend
+      - grüße
+      - hallöchen
+      - hallo zusammen
+      - moin moin
+      - ja moin
+      - was geht
+      - was geht ab
+      - hey, jo
+      - was geht ab, alter
+
+  - intent: verabschiedung
+    examples: |
+      - tschüss
+      - auf wiedersehen
+      - bis bald
+      - mach's gut
+      - bis später
+      - ciao
+      - servus
+      - schönen tag noch
+      - adieu
+      - wir sehen uns
+      - danke, tschüss
+      - ich bin dann mal weg
+      - schönen abend noch
+      - bye bye
