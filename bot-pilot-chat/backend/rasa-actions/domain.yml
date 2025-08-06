@@ -4,6 +4,7 @@ intents:
   - begruessung
   - verabschiedung
   - faq
+  - positive_feedback
 
 actions:
   - action_default_fallback
@@ -13,6 +14,8 @@ responses:
     - text: "Hallo! Wie kann ich dir helfen?"
   utter_verabschiedung:
     - text: "Tschüss! Bis zum nächsten Mal!"
+  utter_positive_feedback:
+    - text: "Danke für dein positives Feedback! Ich freue mich, dass ich helfen konnte."
 
 session_config:
   session_expiration_time: 60

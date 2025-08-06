@@ -11,3 +11,8 @@ class NlUInterpreter:
 
     async def predict_intent(self, message: str):
         return await self.model.parse_message(message)
+
+    async def handle_text(self, message: str):
+        result = await self.model.handle_text(message)
+        print(f'result from handle_text: {result}')
+        return result[0]['text']
