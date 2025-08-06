@@ -41,4 +41,4 @@ release: format lint test integration
 dev:
 	@echo "Starting development server..."
 	$(MAKE) print_env
-	LD_LIBRARY_PATH=/usr/local/cuda-12.5/lib64:/usr/local/cuda-12.5/lib:/home/norman/projects/bot-pilot/.venv/lib/python3.13/site-packages/cusparselt/lib:/usr/local/cuda-12.5/extras/CUPTI/lib64:/home/norman/projects/bot-pilot/.venv/lib/python3.13/site-packages/nvidia/nccl/lib python -m uvicorn bot_pilot_chat.main:app --reload --host 0.0.0.0
+	LD_LIBRARY_PATH=/usr/local/cuda-12.5/lib64:/usr/local/cuda-12.5/lib:/home/norman/projects/bot-pilot/bot-pilot-chat/backend/.venv/lib/python3.10/site-packages/cusparselt/lib:/usr/local/cuda-12.5/extras/CUPTI/lib64:/home/norman/projects/bot-pilot/bot-pilot-chat/backend/.venv/lib/python3.10/site-packages/nvidia/nccl/lib python -m uvicorn bot_pilot_chat.main:app --reload --host 0.0.0.0

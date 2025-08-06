@@ -2,6 +2,7 @@ fastapi
 uvicorn
 python-dotenv
 sentence-transformers
+tensorflow[and-cuda]==2.12.0
 httpx
 pytest
 pytest-cov

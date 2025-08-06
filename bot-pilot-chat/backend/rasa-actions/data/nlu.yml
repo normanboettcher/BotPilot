@@ -22,6 +22,9 @@ nlu:
       - was geht ab
       - hey, jo
       - was geht ab, alter
+      - tach
+      - tachjen
+      - juten tag
 
   - intent: verabschiedung
     examples: |
@@ -39,3 +42,27 @@ nlu:
       - ich bin dann mal weg
       - schönen abend noch
       - bye bye
+
+  - intent: faq
+    examples: |
+      - Was brauche ich für meine Steuererklärung?
+      - Bis wann muss ich die Steuererklärung abgeben?
+      - Welche Ausgaben kann ich steuerlich absetzen?
+      - Wie buche ich einen Termin?
+      - Wo finde ich Ihre Kanzlei?
+      - Kann ich die Kosten für die Kita absetzen?
+      - Wie versteuere ich Einkünfte aus Kryptowährungen?
+      - Was kann ich im Homeoffice absetzen?
+      - Welche Arbeitsmittel kann ich steuerlich absetzen?
+      - Wie lange dauert eine Steuererstattung?
+      - Welche Unterlagen brauche ich für meine Steuererklärung?
+      - Wie kann ich einen Termin vereinbaren?
+      - Ich habe ein Schreiben vom Finanzamt erhalten – was nun?
+      - Bieten Sie auch Unterstützung für Selbstständige an?
+      - Ich bin zum ersten Mal steuerpflichtig – was muss ich beachten?
+      - Kann ich bei Ihnen auch meine Buchhaltung abgeben?
+      - Wie hoch sind Ihre Kosten?
+      - Machen Sie auch Erbschafts- oder Schenkungssteuer?
+      - Ich bin unsicher, ob ich überhaupt eine Steuererklärung abgeben muss.
+      - Gibt es eine Möglichkeit, Belege digital zu übermitteln?
+

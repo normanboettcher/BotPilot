@@ -2,7 +2,7 @@ import textwrap
 
 import spacy
 
-nlp = spacy.load("de_core_news_sm")
+nlp = spacy.load("de_core_news_md")
 BEGRUESSUNGEN = [
     "hallo",
     "hi",

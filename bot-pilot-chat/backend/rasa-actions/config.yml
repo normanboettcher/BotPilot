@@ -18,7 +18,7 @@ pipeline:
 policies:
   - name: RulePolicy
     core_fallback_threshold: 0.6
-    core_fallback_action_name: "utter_please_rephrase"
+    core_fallback_action_name: "action_default_fallback"
     enable_fallback_prediction: True
 
 assistant_id: 20250805-174126-insulated-chief

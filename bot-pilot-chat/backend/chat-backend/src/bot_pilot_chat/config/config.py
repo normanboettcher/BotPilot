@@ -9,6 +9,7 @@ def app_config():
             "bot-pilot",
             "bot-pilot-chat",
             "backend",
+            "chat-backend",
             "src",
             "bot_pilot_chat",
             "data",

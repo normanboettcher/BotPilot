@@ -4,3 +4,5 @@ rasa-actions/data/nlu.yml
 .venv
 chat-backend/build
 chat-backend/conf
+**/*.tox
+chat-backend/models

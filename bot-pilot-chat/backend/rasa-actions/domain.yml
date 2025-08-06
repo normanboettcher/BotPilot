@@ -3,16 +3,16 @@ version: "3.1"
 intents:
   - begruessung
   - verabschiedung
-  - nlu_fallback
+  - faq
+
+actions:
+  - action_default_fallback
 
 responses:
   utter_begruessung:
     - text: "Hallo! Wie kann ich dir helfen?"
   utter_verabschiedung:
     - text: "Tschüss! Bis zum nächsten Mal!"
-  utter_please_rephrase:
-    - text: "Entschuldigung, ich habe das nicht ganz verstanden. Können Sie das bitte anders formulieren?"
-
 
 session_config:
   session_expiration_time: 60
