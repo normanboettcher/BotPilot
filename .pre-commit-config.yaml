@@ -2,14 +2,14 @@ repos:
   - repo: local
     hooks:
       - id: black
-        name: run black (bot-pilot-chat/backend)
+        name: run black (bot-pilot-chat/backend/chat-backend)
         language: system
         entry: ./run_black.sh
 
   - repo: local
     hooks:
       - id: flake8
-        name: flake8 (bot-pilot-chat/backend)
+        name: flake8 (bot-pilot-chat/backend/chat-backend)
         entry: ./run_flake8.sh
         language: system
 
@@ -30,7 +30,7 @@ repos:
     rev: 1.7.4
     hooks:
       - id: bandit
-        args: [ "-r", "bot-pilot-chat/backend/src" ]
+        args: [ "-r", "bot-pilot-chat/backend/chat-backend/src" ]
         exclude: 'tests/|test_.*\.py$'
 
   - repo: https://github.com/Yelp/detect-secrets
