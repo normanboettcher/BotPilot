@@ -19,7 +19,7 @@ async def get_answer(query: BotQuery) -> dict:
     res = await nlu_interpreter.predict_intent(query.question)
     intent, confidence = extract_intent(res)
     print(f"intent: {intent}, confidence: {confidence}")
-    if confidence < 0.5 or intent == "nlu_fallback":
+    if confidence < 0.6 or intent == "nlu_fallback":
         return BotResponse.no_answer_found().as_dict()
     elif intent == "faq":
         result = find_most_similar_faq(query.question)
