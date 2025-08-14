@@ -8,10 +8,10 @@ intents:
 
 actions:
   - action_default_fallback
+  - action_begruessung
+  - action_get_faq
 
 responses:
-  utter_begruessung:
-    - text: "Hallo! Wie kann ich dir helfen?"
   utter_verabschiedung:
     - text: "Tschüss! Bis zum nächsten Mal!"
   utter_positive_feedback:

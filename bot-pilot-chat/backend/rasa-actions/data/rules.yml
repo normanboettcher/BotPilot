@@ -4,7 +4,7 @@ rules:
   - rule: Begrüßung antworten
     steps:
       - intent: begruessung
-      - action: utter_begruessung
+      - action: action_begruessung
   - rule: Verabschiedung antworten
     steps:
       - intent: verabschiedung
@@ -19,3 +19,7 @@ rules:
     steps:
       - intent: positive_feedback
       - action: utter_positive_feedback
+  - rule: FAQ beantworten
+    steps:
+      - intent: faq
+      - action: action_get_faq

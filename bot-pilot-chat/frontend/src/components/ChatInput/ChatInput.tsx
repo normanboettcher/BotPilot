@@ -19,8 +19,8 @@ const ChatInput: React.FC = () => {
     addMessage(userMessage);
     setInput('');
     try {
-      const response = await sendMessageAndGetResponse(input);
-      response && addMessage(response);
+      await sendMessageAndGetResponse(input);
+      //response && addMessage(response);
     } catch (error) {
       console.error('Fehler beim Abrufen der Antwort:', error);
       const errorMessage = createChatMessage('Fehler bei der Verbindung zum Server:', 'bot');

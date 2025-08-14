@@ -18,8 +18,8 @@ class NlUInterpreter:
 
     async def handle_text(self, message: str) -> str:
         result = await self.model.handle_text(message)
-        print(f'result from handle_text: {result}')
-        if result[0] and 'text' in result[0]:
-            return result[0]['text']
+        print(f"result from handle_text: {result}")
+        if result[0] and "text" in result[0]:
+            return result[0]["text"]
         else:
             return ""
