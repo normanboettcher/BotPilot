@@ -38,5 +38,5 @@ jobs:
         working-directory: bot-pilot-chat/backend/chat-backend
 
       - name: Run all tox environments
-        run: make build
+        run: python -m tox -- --hypothesis-profile=ci
         working-directory: bot-pilot-chat/backend/chat-backend
