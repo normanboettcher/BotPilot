@@ -1,5 +1,7 @@
 import requests
+from bot_pilot_chat.domain.response import BotResponse
 from rasa_sdk import Action
+from ..utils.response_wrapper import send_response
 
 
 class ActionGetFaq(Action):
@@ -10,10 +12,9 @@ class ActionGetFaq(Action):
         try:
             faq = requests.post('http://localhost:8000/api/faqs',
                                 json={'question': tracker.latest_message.get('text', '')})
-            dispatcher.utter_message(json_message={'data': {'response': faq.json()}})
+            dispatcher.utter_message(json_message=send_response(faq.json()))
         except Exception as e:
-            print('Fehler:', e)
-            dispatcher.utter_message(
-                "Es tut mir leid, ich konnte die Antwort zu dieser Frage gerade nicht abrufen. Bitte versuchen Sie es später erneut.")
+            message = BotResponse.with_answer("Es tut mir leid, ich konnte die Antwort zu dieser Frage gerade nicht abrufen. Bitte versuchen Sie es später erneut.")
+            dispatcher.utter_message(json_message=send_response(message.as_dict()))
 
         return []
