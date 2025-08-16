@@ -45,5 +45,5 @@ jobs:
         working-directory: bot-pilot-chat/backend/chat-backend
 
       - name: Run all tox environments
-        run: python -m tox -- --hypothesis-profile=ci
+        run: python -m tox -e test lint format integration_test -- --hypothesis-profile=ci
         working-directory: bot-pilot-chat/backend/chat-backend
