@@ -8,7 +8,7 @@ rules:
   - rule: Verabschiedung antworten
     steps:
       - intent: verabschiedung
-      - action: utter_verabschiedung
+      - action: action_verabschiedung
   - rule: default fallback
     condition:
       - active_loop: null
@@ -18,8 +18,16 @@ rules:
   - rule: Positives Feedback
     steps:
       - intent: positive_feedback
-      - action: utter_positive_feedback
+      - action: action_positive_feedback
+  - rule: Negatives Feedback
+    steps:
+      - intent: negative_feedback
+      - action: action_negative_feedback
   - rule: FAQ beantworten
     steps:
       - intent: faq
       - action: action_get_faq
+  - rule: Allgemeine Bot-Frage
+    steps:
+      - intent: general_bot
+      - action: action_general_bot

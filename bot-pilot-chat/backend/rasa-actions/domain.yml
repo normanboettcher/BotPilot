@@ -5,17 +5,37 @@ intents:
   - verabschiedung
   - faq
   - positive_feedback
+  - negative_feedback
+  - general_bot
+  - parking
+  - termin
+  - kosten
+  - unterlagen
+  - steuererklaerung
+  - standort
+  - anreise
+  - bereiche
+  - zeiten
+  - steuerberatung
 
 actions:
   - action_default_fallback
   - action_begruessung
   - action_get_faq
-
-responses:
-  utter_verabschiedung:
-    - text: "Tschüss! Bis zum nächsten Mal!"
-  utter_positive_feedback:
-    - text: "Danke für dein positives Feedback! Ich freue mich, dass ich helfen konnte."
+  - action_positive_feedback
+  - action_negative_feedback
+  - action_verabschiedung
+  - action_general_bot
+  - action_parking
+  - action_termin
+  - action_kosten
+  - action_unterlagen
+  - action_steuererklaerung
+  - action_standort
+  - action_anreise
+  - action_bereiche
+  - action_zeiten
+  - action_steuerberatung
 
 session_config:
   session_expiration_time: 60
