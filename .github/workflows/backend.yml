@@ -5,7 +5,6 @@ on:
     paths:
       - 'bot-pilot-chat/backend/chat-backend/**'
       - '.github/workflows/backend.yml'
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
