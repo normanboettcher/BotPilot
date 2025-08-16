@@ -27,3 +27,7 @@ rules:
     steps:
       - intent: faq
       - action: action_get_faq
+  - rule: Allgemeine Bot-Frage
+    steps:
+      - intent: general_bot
+      - action: action_general_bot

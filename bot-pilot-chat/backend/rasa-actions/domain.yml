@@ -5,6 +5,8 @@ intents:
   - verabschiedung
   - faq
   - positive_feedback
+  - negative_feedback
+  - general_bot
 
 actions:
   - action_default_fallback
@@ -13,6 +15,7 @@ actions:
   - action_positive_feedback
   - action_negative_feedback
   - action_verabschiedung
+  - action_general_bot
 
 session_config:
   session_expiration_time: 60
