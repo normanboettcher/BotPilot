@@ -5,7 +5,6 @@ on:
     paths:
       - 'bot-pilot-chat/backend/chat-backend/**'
       - '.github/workflows/backend.yml'
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -27,16 +26,29 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/pyproject.toml.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
+      - name: Cache tox
+        uses: actions/cache@v4
+        with:
+          path: ~/.tox
+          key: ${{ runner.os }}-tox-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-tox-
+
 
       - name: Install tox
         run: |
           python -m pip install --upgrade pip
           pip install tox
         working-directory: bot-pilot-chat/backend/chat-backend
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+        working-directory: bot-pilot-chat/backend/chat-backend
+
 
       - name: Run all tox environments
-        run: make build
+        run: python -m tox  -- --hypothesis-profile=ci
         working-directory: bot-pilot-chat/backend/chat-backend
