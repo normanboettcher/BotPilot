@@ -32,5 +32,5 @@ jobs:
         working-directory: bot-pilot-chat/backend/chat-backend
 
       - name: Run all unit tests
-        run: tox  -e test_unit -- --hypothesis-profile=ci
+        run: tox  -e unit_tests -- --hypothesis-profile=ci
         working-directory: bot-pilot-chat/backend/chat-backend
