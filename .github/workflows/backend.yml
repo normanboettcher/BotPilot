@@ -9,46 +9,65 @@ on:
     branches: [ main ]
 
 jobs:
+  lint:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        python-version: [ '3.10' ]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: .tox cache
+        uses: actions/cache@v4
+        with:
+          path: bot-pilot-chat/backend/chat-backend/.tox
+          key: ${{ runner.os }}-tox-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-tox-
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox
+        working-directory: bot-pilot-chat/backend/chat-backend
+      - name: Run linting
+        run: make lint
+        working-directory: bot-pilot-chat/backend/chat-backend
+
   test:
-    name: Run tox tests
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        python-version: [ '3.10' ]
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.10
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: ${{ matrix.python-version }}
 
-      - name: Cache pip
+      - name: .tox cache
         uses: actions/cache@v4
         with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/pyproject.toml.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-      - name: Cache tox
-        uses: actions/cache@v4
-        with:
-          path: ~/.tox
+          path: bot-pilot-chat/backend/chat-backend/.tox
           key: ${{ runner.os }}-tox-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-tox-
-
-
       - name: Install tox
         run: |
           python -m pip install --upgrade pip
           pip install tox
         working-directory: bot-pilot-chat/backend/chat-backend
-      - name: Install dependencies
-        run: |
-          python -m pip install -r requirements.txt
-        working-directory: bot-pilot-chat/backend/chat-backend
 
-
-      - name: Run all tox environments
-        run: python -m tox  -- --hypothesis-profile=ci
+      - name: Run all unit tests
+        run: make unit
         working-directory: bot-pilot-chat/backend/chat-backend
