@@ -1,0 +1,8 @@
+rasa-actions/models/
+rasa-actions/data/nlu.yml
+.rasa
+.venv
+chat-backend/build
+chat-backend/conf
+**/*.tox
+chat-backend/models

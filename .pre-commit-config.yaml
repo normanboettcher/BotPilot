@@ -1,15 +1,18 @@
 repos:
-  - repo: https://github.com/psf/black
-    rev: 24.3.0
+  - repo: local
     hooks:
       - id: black
-        language_version: python3.13
+        name: run black (bot-pilot-chat/backend/chat-backend)
+        language: system
+        entry: ./run_black.sh
 
-  - repo: https://github.com/pycqa/flake8
-    rev: 6.1.0
+  - repo: local
     hooks:
       - id: flake8
-        additional_dependencies: [ flake8-bugbear ]
+        name: flake8 (bot-pilot-chat/backend/chat-backend)
+        entry: ./run_flake8.sh
+        language: system
+
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.4.1
     hooks:
@@ -27,7 +30,7 @@ repos:
     rev: 1.7.4
     hooks:
       - id: bandit
-        args: [ "-r", "bot-pilot-chat/backend/src" ]
+        args: [ "-r", "bot-pilot-chat/backend/chat-backend/src" ]
         exclude: 'tests/|test_.*\.py$'
 
   - repo: https://github.com/Yelp/detect-secrets

@@ -1,0 +1,5 @@
+pytest
+pytest-cov
+rasa==3.6.21
+rasa-sdk
+spacy==3.7.4

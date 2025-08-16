@@ -1,0 +1,113 @@
+version: "3.1"
+
+nlu:
+  - intent: begruessung
+    examples: |
+      - hallo
+      - hi
+      - hey
+      - guten tag
+      - guten morgen
+      - servus
+      - moin
+      - grüß dich
+      - na
+      - guten abend
+      - grüße
+      - hallöchen
+      - hallo zusammen
+      - moin moin
+      - ja moin
+      - was geht
+      - was geht ab
+      - hey, jo
+      - was geht ab, alter
+      - tach
+      - tachjen
+      - juten tag
+
+  - intent: verabschiedung
+    examples: |
+      - tschüss
+      - auf wiedersehen
+      - bis bald
+      - mach's gut
+      - bis später
+      - ciao
+      - servus
+      - schönen tag noch
+      - adieu
+      - wir sehen uns
+      - danke, tschüss
+      - ich bin dann mal weg
+      - schönen abend noch
+      - bye bye
+
+  - intent: faq
+    examples: |
+      - Was brauche ich für meine Steuererklärung?
+      - Bis wann muss ich die Steuererklärung abgeben?
+      - Welche Ausgaben kann ich steuerlich absetzen?
+      - Wie buche ich einen Termin?
+      - Wo finde ich Ihre Kanzlei?
+      - Kann ich die Kosten für die Kita absetzen?
+      - Wie versteuere ich Einkünfte aus Kryptowährungen?
+      - Was kann ich im Homeoffice absetzen?
+      - Welche Arbeitsmittel kann ich steuerlich absetzen?
+      - Wie lange dauert eine Steuererstattung?
+      - Welche Unterlagen brauche ich für meine Steuererklärung?
+      - Wie kann ich einen Termin vereinbaren?
+      - Ich habe ein Schreiben vom Finanzamt erhalten – was nun?
+      - Bieten Sie auch Unterstützung für Selbstständige an?
+      - Ich bin zum ersten Mal steuerpflichtig – was muss ich beachten?
+      - Kann ich bei Ihnen auch meine Buchhaltung abgeben?
+      - Wie hoch sind Ihre Kosten?
+      - Machen Sie auch Erbschafts- oder Schenkungssteuer?
+      - Ich bin unsicher, ob ich überhaupt eine Steuererklärung abgeben muss.
+      - Gibt es eine Möglichkeit, Belege digital zu übermitteln?
+      - Wann ist die Frist zur Abgabe meiner Steuererklärung?
+      - Welche Kosten gelten als absetzbar?
+      - Wie kann ich online einen Termin buchen?
+      - Wo genau befindet sich Ihre Praxis/Kanzlei?
+      - Kann ich Betreuungskosten für mein Kind steuerlich geltend machen?
+      - Muss ich Gewinne aus Kryptowährungen versteuern?
+      - Welche Homeoffice-Kosten kann ich anrechnen lassen?
+      - Was zählt als absetzbares Arbeitsmittel?
+      - Wie lange dauert es, bis ich meine Rückzahlung erhalte?
+      - Welche Dokumente werden für die Steuererklärung benötigt?
+      - Auf welchem Weg kann ich einen Beratungstermin bekommen?
+      - Was soll ich tun, wenn ich Post vom Finanzamt bekomme?
+      - Unterstützen Sie auch Freelancer und Freiberufler?
+      - Ich mache zum ersten Mal eine Steuererklärung – wie gehe ich vor?
+      - Kann ich meine laufende Buchführung an Sie übergeben?
+      - Was kostet eine Steuerberatung bei Ihnen?
+      - Beraten Sie auch zu Themen wie Erbschaftsteuer?
+      - Muss ich überhaupt eine Steuererklärung einreichen?
+      - Kann ich meine Belege digital hochladen?
+      - Wie läuft der typische Ablauf einer Steuerberatung bei Ihnen ab?
+      - Welche Vorteile habe ich, wenn ich einen Steuerberater beauftrage?
+      - Welche Unterlagen benötigen Sie von mir als Selbstständiger?
+      - Gibt es eine Möglichkeit, meine Steuererklärung komplett digital zu machen?
+      - Wie unterscheiden sich Ihre Leistungen für Privatpersonen und Unternehmen?
+      - Bieten Sie auch Unterstützung bei Betriebsprüfungen?
+      - Was passiert, wenn ich die Steuerfrist verpasse?
+      - Können Sie mir bei der Existenzgründung steuerlich helfen?
+      - Wie erkenne ich, ob ich zur Abgabe einer Steuererklärung verpflichtet bin?
+      - Welche Steuerklassen gibt es und wie wähle ich die richtige?
+      - Was ist bei einem Wechsel des Steuerberaters zu beachten?
+      - Können Sie mir bei der Umsatzsteuervoranmeldung helfen?
+      - Wie gehe ich vor, wenn ich eine Nachzahlung leisten muss?
+      - Wie kann ich meine Steuerlast als Selbstständiger senken?
+      - Was ist eine Einnahmen-Überschuss-Rechnung (EÜR)?
+      - Können Sie meine Steuererklärung auch rückwirkend erstellen?
+      - Was ist der Unterschied zwischen Steuerberatung und Lohnbuchhaltung?
+      - Gibt es Förderprogramme, über die ich steuerliche Vorteile bekomme?
+      - Wie lange sollte ich meine Steuerunterlagen aufbewahren?
+      - Können Sie auch internationale Steuerfragen klären?
+
+  - intent: positive_feedback
+    examples: |
+      - super, danke
+      - super
+      - super cool
+      - danke

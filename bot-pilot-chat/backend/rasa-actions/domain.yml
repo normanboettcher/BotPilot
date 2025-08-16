@@ -1,0 +1,22 @@
+version: "3.1"
+
+intents:
+  - begruessung
+  - verabschiedung
+  - faq
+  - positive_feedback
+
+actions:
+  - action_default_fallback
+  - action_begruessung
+  - action_get_faq
+
+responses:
+  utter_verabschiedung:
+    - text: "Tschüss! Bis zum nächsten Mal!"
+  utter_positive_feedback:
+    - text: "Danke für dein positives Feedback! Ich freue mich, dass ich helfen konnte."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
