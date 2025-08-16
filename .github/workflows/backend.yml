@@ -33,9 +33,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.tox
-          key: ${{ runner.os }}-pip-tox-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-tox-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
-            ${{ runner.os }}-pip-
+            ${{ runner.os }}-tox-
 
 
       - name: Install tox
