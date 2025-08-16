@@ -10,12 +10,9 @@ actions:
   - action_default_fallback
   - action_begruessung
   - action_get_faq
-
-responses:
-  utter_verabschiedung:
-    - text: "Tschüss! Bis zum nächsten Mal!"
-  utter_positive_feedback:
-    - text: "Danke für dein positives Feedback! Ich freue mich, dass ich helfen konnte."
+  - action_positive_feedback
+  - action_negative_feedback
+  - action_verabschiedung
 
 session_config:
   session_expiration_time: 60
