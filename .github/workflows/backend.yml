@@ -27,9 +27,17 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/pyproject.toml.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
+      - name: Cache tox
+        uses: actions/cache@v4
+        with:
+          path: ~/.tox
+          key: ${{ runner.os }}-pip-tox-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
 
       - name: Install tox
         run: |
