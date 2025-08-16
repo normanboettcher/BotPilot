@@ -1,7 +1,5 @@
 import os
 
-from dotenv import load_dotenv
-
 
 def app_test_config():
     base_dir = os.path.dirname(os.path.abspath(__file__))
