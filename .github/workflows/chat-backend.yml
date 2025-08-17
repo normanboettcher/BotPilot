@@ -1,10 +1,10 @@
-name: BotPilot CI
+name: BotPilot chat-backend CI
 
 on:
   push:
     paths:
       - 'bot-pilot-chat/backend/chat-backend/**'
-      - '.github/workflows/backend.yml'
+      - '.github/workflows/chat-backend.yml'
   pull_request:
     branches: [ main ]
 

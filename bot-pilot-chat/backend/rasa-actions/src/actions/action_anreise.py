@@ -5,7 +5,7 @@ from ..utils.response_wrapper import send_response
 
 class ActionAnreise(Action):
     def name(self):
-        return 'action_anreise'
+        return "action_anreise"
 
     def run(self, dispatcher, tracker, domain):
         return []

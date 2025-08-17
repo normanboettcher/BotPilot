@@ -10,11 +10,17 @@ class ActionGetFaq(Action):
 
     def run(self, dispatcher, tracker, domain):
         try:
-            faq = requests.post('http://localhost:8000/api/faqs',
-                                json={'question': tracker.latest_message.get('text', '')})
+            faq = requests.post(
+                "http://localhost:8000/api/faqs",
+                json={"question": tracker.latest_message.get("text", "")},
+            )
             dispatcher.utter_message(json_message=send_response(faq.json()))
         except Exception as e:
-            message = BotResponse.with_answer("Es tut mir leid, ich konnte die Antwort zu dieser Frage gerade nicht abrufen. Bitte versuchen Sie es später erneut.")
-            dispatcher.utter_message(json_message=send_response(message.as_dict()))
+            message = BotResponse.with_answer(
+                "Es tut mir leid, ich konnte die Antwort zu dieser Frage gerade nicht abrufen. Bitte versuchen Sie es später erneut."
+            )
+            dispatcher.utter_message(
+                json_message=send_response(message.as_dict())
+            )
 
         return []

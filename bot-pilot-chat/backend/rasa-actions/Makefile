@@ -7,3 +7,11 @@ dev:
 action_debug:
 	@echo "Starting Rasa action server..."
 	rasa run actions --actions src.actions --port 5055
+
+lint:
+	@echo "Running linters..."
+	python -m  tox -e lint
+
+format:
+	@echo "Running formatters..."
+	python -m tox -e format
