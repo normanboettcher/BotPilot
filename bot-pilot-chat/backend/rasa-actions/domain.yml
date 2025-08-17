@@ -8,7 +8,6 @@ intents:
   - negative_feedback
   - general_bot
   - parking
-  - termin
   - kosten
   - unterlagen
   - steuererklaerung
@@ -17,6 +16,53 @@ intents:
   - bereiche
   - zeiten
   - steuerberatung
+  - termin_vereinbaren
+  - termin_infos
+
+entities:
+  - termin_type
+  - termin_action
+  - termin_medium
+
+slots:
+  termin_type:
+    mappings:
+      - type: from_entity
+        entity: termin_type
+    type: categorical
+    values:
+      - erstberatung
+      - steuerberatung
+      - ersttermin
+      - termin
+
+  termin_medium:
+    mappings:
+      - type: from_entity
+        entity: termin_medium
+    type: categorical
+    values:
+      - mail
+      - telefon
+      - online
+      - persönlich
+      - anrufen
+      - ort
+  termin_action:
+    mappings:
+      - type: from_entity
+        entity: termin_action
+    type: categorical
+    values:
+      - anrufen
+      - buchen
+      - vereinbaren
+      - bekommen
+      - brauchen
+      - machen
+      - kommen
+      - herankommen
+
 
 actions:
   - action_default_fallback

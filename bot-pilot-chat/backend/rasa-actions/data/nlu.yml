@@ -31,7 +31,7 @@ nlu:
       - Huhu
       - Halli hallo
       - na, was geht
-      
+
 
   - intent: verabschiedung
     examples: |
@@ -41,7 +41,6 @@ nlu:
       - mach's gut
       - bis später
       - ciao
-      - servus
       - schönen tag noch
       - adieu
       - wir sehen uns
@@ -54,21 +53,6 @@ nlu:
     examples: |
       - Gibt es Parkplätze?
       - Wo kann ich parken?
-
-  - intent: termin
-    examples: |
-      - Wie buche ich einen Termin?
-      - Wie mache ich Termine?
-      - Wie kann ich einen Termin vereinbaren?
-      - Wie schnell bekomme ich einen Termin?
-      - Muss ich für einen Termin anrufen?
-      - Brauche ich einen Termin?
-      - Kann ich für einen Termin eine Mail schreiben?
-      - Kann ich einen Termin per Mail machen?
-      - Kann ich einen Termin per Mail vereinbaren?
-      - Wie lange dauert ein Termin?
-      - Auf welchem Weg kann ich einen Beratungstermin bekommen?
-      - Wie kann ich einen Termin vereinbaren?
 
   - intent: kosten
     examples: |
@@ -170,7 +154,6 @@ nlu:
       - Wann ist die Kanzlei geöffnet?
       - Wann hat die Kanzlei geöffnet?
       - Wann habt ihr geöffnet?
-      - Kann man außerhalb der Geschäftszeiten einen Termin vereinbaren?
       - Wie lange dauert es, bis ich meine Rückzahlung erhalte?
       - Wie lange dauert eine Steuererstattung?
       - Wie lange dauert die Erstberatung?
@@ -206,8 +189,8 @@ nlu:
 
   - intent: faq
     examples: |
-      - Welche Ausgaben kann ich steuerlich absetzen?
-      - Wie nehme ich Kontakt auf?
+      - Welche Ausgaben kann ich steuerlich absetzen ?
+      - Wie nehme ich Kontakt auf? 
       - Gibt es online-Beratungen?
       - Kann ich die Kosten für die Kita absetzen?
       - Wie versteuere ich Einkünfte aus Kryptowährungen?
@@ -238,7 +221,7 @@ nlu:
       - Wie hoch ist der Grundfreibetrag?
       - Gibt es eine Veschwiegenheitspflicht?
       - Passt Ihre Kanzlei zu mir?
-      
+
 
   - intent: positive_feedback
     examples: |
