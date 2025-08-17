@@ -3,3 +3,5 @@ pytest-cov
 rasa==3.6.21
 rasa-sdk
 spacy==3.7.4
+markdown-strings==3.4.0
+emoji==2.14.1
