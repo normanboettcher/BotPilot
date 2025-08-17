@@ -3,6 +3,8 @@ import { Box, Stack, Typography, useTheme } from '@mui/material';
 import type { ChatMessageType } from '../../domain/ChatMessage.ts';
 import useBotResponsive from '../../hooks/useBotResponsive.ts';
 import AlarmClock from '../icons/AlarmClock.tsx';
+import Markdown from 'react-markdown';
+import ChatMessageText from './ChatMessageText.tsx';
 
 type Props = {
   msg: ChatMessageType;
@@ -44,18 +46,25 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
         whiteSpace: 'pre-wrap',
       }}
     >
-      <Typography
-        variant={'body2'}
-        justifyContent={'flex-start'}
-        pb={1}
-        pt={0}
-        sx={{
-          wordBreak: 'word-break',
-          whiteSpace: 'pre-wrap',
+      <Markdown
+        components={{
+          p: ({ node, ...props }) => <ChatMessageText>{props.children}</ChatMessageText>,
+          ul: ({ node, ...props }) => (
+            <Box component={'ul'} sx={{ pl: 2, mt: 0, mb: 0, listStyleType: 'disc' }}>
+              {props.children}
+            </Box>
+          ),
+          li: ({ node, ...props }) => (
+            <Box component={'li'} sx={{ display: 'list-item', mb: 0 }}>
+              <ChatMessageText pb={0} pt={0} component={'span'}>
+                {props.children}
+              </ChatMessageText>
+            </Box>
+          ),
         }}
       >
         {text}
-      </Typography>
+      </Markdown>
       <Stack
         direction={'row'}
         sx={{
