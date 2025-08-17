@@ -1,0 +1,74 @@
+version: "3.1"
+nlu:
+  - synonym: termin
+    examples: |
+      - Termin
+      - Gespräch
+      - treffen
+      - Beratung
+      - Beratungstermin
+      - meeting
+      - Erstberatung
+      - zusammenkunft
+      - sitzung
+      - termine
+
+
+  - lookup: termin_action
+    examples: |
+      - buchen
+      - buche
+      - machen
+      - mache
+      - bekommen
+      - bekomme
+      - verinbaren
+      - vereinbare
+      - vereinbart
+      - brauchen
+      - brauche
+      - kommen
+      - herankommen
+      - komme
+      - herankomme
+
+  - lookup: termin_medium
+    examples: |
+      - anrufen
+      - durchrufen
+      - durchklingeln
+      - telefonieren
+      - telefon
+      - telefonisch
+      - anruf
+      - E-Mail
+
+  - intent: termin_vereinbaren
+    examples: |
+      - Wie [buche](termin_action) ich einen [Termin](termin_type)?
+      - Wie [buche](termin_action) ich eine [Erstberatung](termin_type)?
+      - Wie [buche](termin_action) ich einen [Ersttermin](termin_type)?
+      - Wie [mache] ich [Termine](termin_type)?
+      - Wann könnte ich ein [Meeting](termin_type) [vereinbaren](termin_action)?
+      - Wie kann ich einen [Termin](termin_type) [vereinbaren](termin_action)?
+      - Wie [mache](termin_action) ich einen [Termin](termin_type) für eine [Erstberatung](termin_type)??
+      - Wie schnell [bekomme](termin_action) ich einen [Termin](termin_type)?
+      - Wie ist es möglich an einen [Termin](termin_type) zu [kommen](termin_action)?
+      - Muss ich für einen [Termin](termin_type) [anrufen](termin_medium)?
+      - [Brauche](termin_action) ich einen [Termin](termin_type)?
+      - Muss ich vor einem ersten [Gespräch](termin_type) [anrufen](termin_medium)?
+      - Kann ich für einen [Termin](termin_type) eine [Mail](termin_medium) schreiben?
+      - Kann ich einen [Termin](termin_type) per [Mail](termin_medium) [machen](termin_action) ?
+      - Kann ich einen [Termin](termin_type) per [Mail](termin_medium) [vereinbaren](termin_action)?
+      - Auf welchem Weg kann ich einen [Beratungstermin](termin_type) [bekommen](termin_action)?
+      - Wie kann ich einen [Termin](termin_type) [vereinbaren](termin_action)?
+      - Kann man außerhalb der Geschäftszeiten einen [Termin](termin_type) [vereinbaren](termin_action)?
+
+  - intent: termin_infos
+    examples: |
+      - Wie lange dauert ein Termin?
+      - Welche Unterlagen muss ich zum Termin mitbringen
+      - Machen Sie auch Online-Termine?
+      - Sind Termine nur vor Ort möglich?
+      - Darf ich jemanden zum Termin mitbringen?
+
