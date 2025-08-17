@@ -11,7 +11,7 @@ class ActionBegruessung(Action):
     def run(self, dispatcher, tracker, domain):
         res = BotResponse.with_answer_and_score(
             "Hallo, wie kann ich Ihnen helfen?",
-            tracker.latest_message['intent']['confidence'],
+            tracker.latest_message["intent"]["confidence"],
         )
         dispatcher.utter_message(json_message=send_response(res.as_dict()))
         return []
