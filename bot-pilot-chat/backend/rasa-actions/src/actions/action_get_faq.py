@@ -15,9 +15,11 @@ class ActionGetFaq(Action):
                 json={"question": tracker.latest_message.get("text", "")},
             )
             dispatcher.utter_message(json_message=send_response(faq.json()))
-        except Exception as e:
+        except Exception:
             message = BotResponse.with_answer(
-                "Es tut mir leid, ich konnte die Antwort zu dieser Frage gerade nicht abrufen. Bitte versuchen Sie es später erneut."
+                "Es tut mir leid, ich konnte die Antwort zu dieser Frage "
+                "gerade nicht abrufen."
+                "Bitte versuchen Sie es später erneut."
             )
             dispatcher.utter_message(
                 json_message=send_response(message.as_dict())

@@ -8,4 +8,11 @@ class ActionParking(Action):
         return "action_parking"
 
     def run(self, dispatcher, tracker, domain):
+        general_message = (
+            "Ich habe das intent Parking erkannt. Implementierung folgt."
+        )
+        res = BotResponse.with_answer_and_score(
+            general_message, tracker.latest_message.intent.confidence
+        )
+        dispatcher.utter_message(json_message=send_response(res.as_dict()))
         return []
