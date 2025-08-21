@@ -20,14 +20,11 @@ class ActionTerminVereinbaren(Action):
         medium = None
         for entity in tracker.slots:
             if entity == "termin_medium":
-                medium = tracker.slots["termin_medium"]
+                medium = tracker.slots['termin_medium']
         if medium:
             medium = map_medium(medium)
-            message = (
-                "Sehr gut, Sie möchten also einen Termin per "
-                + bold(medium)
-                + " vereinbaren."
-            )
+            message = 'Sehr gut, Sie möchten also einen Termin per ' + bold(
+                medium) + ' vereinbaren.'
             logger.debug(f"termin_medium: {medium}")
             res = BotResponse.with_answer(message)
             dispatcher.utter_message(json_message=send_response(res.as_dict()))

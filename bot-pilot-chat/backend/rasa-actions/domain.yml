@@ -66,6 +66,10 @@ slots:
     values:
       - mail
       - telefon
+      - online
+      - persönlich
+      - anrufen
+      - ort
   termin_action:
     mappings:
       - type: from_entity
