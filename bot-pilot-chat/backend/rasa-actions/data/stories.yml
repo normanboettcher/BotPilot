@@ -1,0 +1,19 @@
+version: '3.1'
+stories:
+  - story: Vereinbare einen Termin per Mail auf Nachfrage des Mediums
+    steps:
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - intent: termin_medium_inform_mail
+      - active_loop: null
+      - action: action_termin_vereinbaren
+
+  - story: Vereinbare einen Termin per Telefon auf Nachfrage des Mediums
+    steps:
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - intent: termin_medium_inform_telefon
+      - active_loop: null
+      - action: action_termin_vereinbaren

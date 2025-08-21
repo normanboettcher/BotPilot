@@ -13,6 +13,43 @@ nlu:
       - sitzung
       - termine
 
+  - synonym: telefon
+    examples: |
+      - Telefon
+      - durchklingeln
+      - anrufen
+      - phone
+      - durchrufen
+      - anruf
+      - per Telefon
+      - über telefon
+      - telefonisch
+      - über anruf
+
+  - synonym: email
+    examples: |
+      - E-Mail
+      - Mail
+      - email
+      - mail
+      - per mail
+      - per e-mail
+      - per E-Mail
+      - per Mail
+
+  - synonym: online-termin
+    examples: |
+      - online
+      - online-termin
+      - online-beratung
+      - online-sitzung
+      - online-erstberatung
+      - online-zusammenkunft
+      - online-meeting
+      - online-termin
+      - online-sitzung
+      - online-erstberatung
+
 
   - lookup: termin_action
     examples: |
@@ -42,6 +79,51 @@ nlu:
       - telefonisch
       - anruf
       - E-Mail
+
+  - intent: termin_medium_inform_mail
+    examples: |
+      - Mail
+      - E-Mail
+      - per Mail
+      - per E-Mail
+      - email
+      - mail
+      - per web
+      - per email
+      - über mail
+      - über E-Mail
+      - über e-mail
+
+
+
+  - intent: termin_medium_inform_telefon
+    examples: |
+      - Telefon
+      - per Telefon
+      - telefonisch
+      - anrufen
+      - durchklingeln
+      - durchrufen
+      - anruf
+      - phone
+      - über Telefon
+      - mit telefon
+      - über anruf
+
+  - intent: stop_termin_form
+    examples: |
+      - stop
+      - abbruch
+      - abbrechen
+      - beenden
+      - schluss
+      - schließe ab
+      - ich möchte nicht mehr fortfahren
+      - ich möchte nicht fortfahren
+      - ich möchte abbrechen
+      - ich möchte den Termin nicht mehr vereinbaren
+      - ich möchte den Termin nicht fortsetzen
+      - ich möchte den Termin nicht mehr machen
 
   - intent: termin_vereinbaren
     examples: |
