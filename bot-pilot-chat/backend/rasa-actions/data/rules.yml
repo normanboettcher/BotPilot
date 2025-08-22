@@ -31,3 +31,43 @@ rules:
     steps:
       - intent: general_bot
       - action: action_general_bot
+  - rule: Anreise
+    steps:
+      - intent: anreise
+      - action: action_anreise
+  - rule: Bereiche
+    steps:
+      - intent: bereiche
+      - action: action_bereiche
+  - rules: Kosten
+    steps:
+        - intent: kosten
+        - action: action_kosten
+  - rules: Parking
+    steps:
+        - intent: parking
+        - action: action_parking
+  - rules: Standort
+    steps:
+        - intent: standort
+        - action: action_standort
+  - rules: Steuerberatung
+    steps:
+      - intent: steuerberatung
+      - action: action_steuerberatung
+  - rules: Steuererklärung
+    steps:
+      - intent: steuererklaerung
+      - action: action_steuererklaerung
+  - rules: Termin
+    steps:
+      - intent: termin
+      - action: action_termin
+  - rules: Unterlagen
+    steps:
+      - intent: unterlagen
+      - action: action_unterlagen
+  - rules: Zeiten
+    steps:
+      - intent: zeiten
+      - action: action_zeiten
