@@ -29,31 +29,6 @@ commands = [
     ["sh", "-c", "echo", "✔ requirements.txt geladen"]
 ]
 
-[tool.tox.env.unit_tests]
-set_env = { file = 'conf{/}local.env' }
-description = "Run tests with Python 3.10"
-deps = [
-    "-rrequirements.txt",
-    "pytest",
-    "pytest-cov"
-]
-commands = [
-    ["python", "-m", "pytest", "tests/"],
-]
-
-[tool.tox.env.integration_test]
-set_env = { file = 'conf{/}local.env' }
-description = "Run integration tests with Python 3.10"
-#depends = ["base_deps"]
-deps = [
-    "-rrequirements.txt",
-    "pytest",
-    "pytest-cov"
-]
-commands = [
-    ["python", "-m", "pytest", "integration_tests/"]
-]
-
 
 [tool.tox.env.lint]
 description = "Run flake8 linter"
