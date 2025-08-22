@@ -39,35 +39,31 @@ rules:
     steps:
       - intent: bereiche
       - action: action_bereiche
-  - rules: Kosten
+  - rule: Kosten
     steps:
-        - intent: kosten
-        - action: action_kosten
-  - rules: Parking
+      - intent: kosten
+      - action: action_kosten
+  - rule: Parking
     steps:
-        - intent: parking
-        - action: action_parking
-  - rules: Standort
+      - intent: parking
+      - action: action_parking
+  - rule: Standort
     steps:
-        - intent: standort
-        - action: action_standort
-  - rules: Steuerberatung
+      - intent: standort
+      - action: action_standort
+  - rule: Steuerberatung
     steps:
       - intent: steuerberatung
       - action: action_steuerberatung
-  - rules: Steuererklärung
+  - rule: Steuererklärung
     steps:
       - intent: steuererklaerung
       - action: action_steuererklaerung
-  - rules: Termin
-    steps:
-      - intent: termin
-      - action: action_termin
-  - rules: Unterlagen
+  - rule: Unterlagen
     steps:
       - intent: unterlagen
       - action: action_unterlagen
-  - rules: Zeiten
+  - rule: Zeiten
     steps:
       - intent: zeiten
       - action: action_zeiten
