@@ -18,8 +18,9 @@ intents:
   - steuerberatung
   - termin_vereinbaren
   - termin_infos
-  - termin_medium_inform
   - stop_termin_form
+  - termin_medium_inform_mail
+  - termin_medium_inform_telefon
 
 entities:
   - termin_type
