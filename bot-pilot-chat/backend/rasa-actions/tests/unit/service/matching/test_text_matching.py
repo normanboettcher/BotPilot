@@ -1,7 +1,7 @@
 from unittest.mock import patch
 
 from service.matching import find_most_similar_faq
-from tests.config import app_test_config
+from tests.unit.config import app_test_config
 
 
 @patch("service.matching.text_matching.app_config")

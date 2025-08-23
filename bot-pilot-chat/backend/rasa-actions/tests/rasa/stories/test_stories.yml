@@ -1,0 +1,15 @@
+version: "3.1"
+stories:
+  - story: Happy Path begrüßen
+    steps:
+      - user: |
+          Hallo
+        intent: begruessung
+      - action: action_begruessung
+
+  - story: Happy Path Verabschiedung
+    steps:
+      - user: |
+          Tschüss
+        intent: verabschiedung
+      - action: action_verabschiedung

@@ -17,3 +17,19 @@ stories:
       - intent: termin_medium_inform_telefon
       - active_loop: null
       - action: action_termin_vereinbaren
+
+  - story: Begrüßung
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+  - story: Verabschiedung
+    steps:
+      - intent: verabschiedung
+      - action: action_verabschiedung
+
+  - story: Begrüßung und Verabschiedung
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: verabschiedung
+      - action: action_verabschiedung
