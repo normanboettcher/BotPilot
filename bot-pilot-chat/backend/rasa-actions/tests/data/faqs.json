@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "question": "Welche Unterlagen brauche ich für die Steuererklärung?",
+    "answer": "Sie benötigen Einkommensnachweise, Belege zu Werbungskosten und Sonderausgaben.",
+    "categroy": "Steuern",
+    "tags": [
+      "Steuererklärung",
+      "Unterlagen",
+      "Belege"
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Wie buche ich einen Termin?",
+    "answer": "Bitte nutzen Sie unser Kontaktformular oder rufen Sie uns direkt an.",
+    "category": "Organisation",
+    "tags": [
+      "Kontakt"
+    ]
+  }
+]

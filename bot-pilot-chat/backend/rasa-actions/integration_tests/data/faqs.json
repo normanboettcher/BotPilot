@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "question": "Gibt es in der Nähe Parkplätze?",
+    "answer": "Es gibt in der Nähe eine Vielzahl an Parkmöglichkeiten",
+    "category": "Organisation",
+    "tags": [
+      "Adresse",
+      "Standort",
+      "Anfahrt"
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Wie buche ich einen Termin?",
+    "answer": "Bitte nutzen Sie unser Kontaktformular oder rufen Sie uns direkt an.",
+    "category": "Organisation",
+    "tags": [
+      "Kontakt"
+    ]
+  }
+]
