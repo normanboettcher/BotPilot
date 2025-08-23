@@ -1,8 +1,8 @@
 from sentence_transformers import SentenceTransformer, util, CrossEncoder
 import json
 
-from bot_pilot_chat.config.config import app_config
-from bot_pilot_chat.domain.response import BotResponse
+from config.config import app_config
+from domain.response import BotResponse
 
 model = SentenceTransformer("all-MiniLM-L6-v2")
 cross_encoder = CrossEncoder("cross-encoder/stsb-roberta-base")

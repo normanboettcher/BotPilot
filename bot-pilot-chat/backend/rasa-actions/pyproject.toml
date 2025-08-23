@@ -10,13 +10,45 @@ line-length = 80
 target-version = ['py310']
 
 [tool.tox]
-envlist = ['lint', 'format']
+envlist = ['lint', 'format', 'unit_tests', 'coverage']
+
+[tool.tox.env.unit_tests]
+set_env = { file = 'conf{/}local.env' }
+description = "Run unit tests"
+deps = [
+    "-rrequirements.txt",
+]
+commands = [
+    ["python", "-m", "pytest", "tests/"],
+]
+
+[tool.tox.env.integration_test]
+set_env = { file = 'conf{/}local.env' }
+description = "Run integration tests"
+deps = [
+    "-rrequirements.txt",
+]
+commands = [
+    ["python", "-m", "pytest", "integration_tests/"]
+]
 
 [tool.tox.env.lint]
 description = "Run flake8 linter"
 deps = ["flake8"]
 commands = [
-    ["flake8", "src/"]
+    ["flake8", "src/"],
+    ["flake8", "tests/"],
+    ["flake8", "integration_tests/"],
+]
+
+[tool.tox.env.coverage]
+set_env = { file = 'conf{/}local.env' }
+description = "Run tests and generate HTML coverage report"
+deps = [
+    "-rrequirements.txt",
+]
+commands = [
+    ["python", "-m", "pytest", "tests/"]
 ]
 
 [tool.tox.env.format]
@@ -24,8 +56,10 @@ description = "Run black formatter"
 deps = ["black"]
 commands = [
     ["black", "src/"],
+    ["black", "tests/"],
+    ["black", "integration_tests/"],
 ]
 
 [project]
-name = "rasa-actions"
-version = "1.0"
+version = "0.1.0"
+name = "bot_pilot_rasa"
