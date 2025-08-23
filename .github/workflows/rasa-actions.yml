@@ -64,8 +64,8 @@ jobs:
           pip install tox
         working-directory: bot-pilot-chat/backend/rasa-actions
       - name: Run unit tests
-        run: make unit_tests
+        run: make unit_test
         working-directory: bot-pilot-chat/backend/rasa-actions
       - name: run rasa tests
-        run: make rasa_tests
+        run: make rasa_test
         working-directory: bot-pilot-chat/backend/rasa-actions
