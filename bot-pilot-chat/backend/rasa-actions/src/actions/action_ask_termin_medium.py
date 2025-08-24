@@ -28,7 +28,7 @@ class ActionAskTerminMedium(Action):
             message = (
                 "Es tut mir leid, ich konnte leider nicht verstehen, "
                 "ob Sie über E-Mail oder Telefon einen Termin "
-                "anfragen wollen."
+                "anfragen wollen. Bitte versuchen Sie es noch einmal."
             )
             res = BotResponse.with_answer(message)
             dispatcher.utter_message(json_message=send_response(res.as_dict()))
@@ -37,7 +37,8 @@ class ActionAskTerminMedium(Action):
         else:
             fail_message = (
                 "Es tut mir leid, dass ich Ihre Anfrage gerade "
-                "nicht verarbeiten konnte."
+                "nicht verarbeiten konnte. Wollen Sie die Anfrage abbrechen "
+                "oder noch einmal versuchen?"
             )
             res = BotResponse.with_answer(fail_message)
             dispatcher.utter_message(json_message=send_response(res.as_dict()))

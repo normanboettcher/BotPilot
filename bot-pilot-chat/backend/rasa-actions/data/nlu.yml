@@ -31,11 +31,36 @@ nlu:
       - Huhu
       - Halli hallo
       - na, was geht
-
+      - hello
+      - hey du
+      - hey, du da 
+      - na du
+      - naaaa
+      - hi du 
+      - schönen guten tag
+      - schönen guten morgen
+      - schönen guten abend
+      - guten Abend
+      - hallo, guten tag
+      - hallo, guten morgen
+      - hallo, guten abend  
 
   - intent: verabschiedung
     examples: |
       - tschüss
+      - tschüss, bis dann
+      - tschüss, bis zum nächsten mal
+      - tschüssi
+      - tschüss und auf wiedersehen
+      - tschüüss
+      - tschüss bis dann
+      - tschüss und bis bald
+      - jo tschüss
+      - tschö
+      - Bis denn
+      - Tschau
+      - Auf bald
+      - bis denne
       - auf wiedersehen
       - bis bald
       - mach's gut
@@ -48,6 +73,11 @@ nlu:
       - ich bin dann mal weg
       - schönen abend noch
       - bye bye
+      - ciao bis dann
+      - bis dann
+      - bis zum nächsten mal
+      - bis zum nächsten mal, tschüss
+      - ciao ciao
 
   - intent: parking
     examples: |
@@ -63,7 +93,6 @@ nlu:
       - Was kostet mich das?
       - Was muss ich zahlen?
       - Wie viel muss ich zahlen?
-      - Wie kann ich online einen Termin buchen?
       - Was kostet eine Steuerberatung bei Ihnen?
       - Wie viel kostet ein Steuerberater für Gründer?
       - Was kostet ein Steuerberater für Privatpersonen?
@@ -90,6 +119,8 @@ nlu:
   - intent: steuererklaerung
     examples: |
       - Was brauche ich für meine Steuererklärung?
+      - welche Unterlagen brauche ich für die Steuererklärung?
+      - Welche Unterlagen braucht ein Steuerberater für die Steuererklärung?
       - Bis wann muss ich die Steuererklärung abgeben?
       - Können Sie meine Steuererklärung machen?
       - Machen Sie Steuererklätungen?
@@ -239,6 +270,34 @@ nlu:
   - intent: negative_feedback
     examples: |
       - oh nein
+      - oh nein, das war nicht das, was ich wollte
+      - oh nein, das war nicht hilfreich
+      - oh nein, das war nicht die Antwort, die ich wollte
+      - oh nein, das war nicht die Antwort, die ich gesucht habe
+      - oh nein, das war nicht die Antwort, die ich brauchte
+      - oh nein, das war nicht die Antwort, die ich erwartet habe
+      - oh nein, das war nicht die Antwort, die ich mir erhofft habe
+      - oh nein, das war nicht die Antwort, die ich mir gewünscht habe
+      - oh nein, das war nicht die Antwort, die ich mir vorgestellt habe
+      - oh nein, das war nicht die Antwort, die ich mir ausgemalt habe
+      - oh nein, das war nicht die Antwort, die ich mir gedacht habe
+      - oh nein, das war nicht die Antwort, die ich mir erträumt habe
+      - nein, das war nicht das, was ich wollte
+      - nein, das war nicht hilfreich
+      - nein, das war nicht die Antwort, die ich wollte
+      - nein, das war nicht die Antwort, die ich gesucht habe
+      - nein, das war nicht die Antwort, die ich brauchte
+      - nein, das war nicht die Antwort, die ich erwartet habe
+      - nein, das war nicht die Antwort, die ich mir erhofft habe
+      - nein, das war nicht die Antwort, die ich mir gewünscht habe
+      - nein, das war nicht die Antwort, die ich mir vorgestellt habe
+      - nein, das war nicht die Antwort, die ich mir ausgemalt habe
+      - nein, das war nicht die Antwort, die ich mir gedacht habe
+      - das war nicht das, was ich wollte
+      - das war nicht hilfreich
+      - das war nicht die Antwort, die ich wollte
+      - das war nicht die Antwort, die ich gesucht habe
+      - das war nicht die Antwort, die ich brauchte
       - oh man, du verstehst es nicht
       - Blöde Antwort
       - Hilft mir nicht

@@ -67,9 +67,6 @@ slots:
       - mail
       - telefon
       - online
-      - persönlich
-      - anrufen
-      - ort
   termin_action:
     mappings:
       - type: from_entity
@@ -110,6 +107,7 @@ actions:
   - action_steuerberatung
   - action_termin_vereinbaren
   - action_ask_termin_medium
+  - validate_termin_form
 
 session_config:
   session_expiration_time: 60

@@ -6,6 +6,8 @@ stories:
       - action: termin_form
       - active_loop: termin_form
       - intent: termin_medium_inform_mail
+      - slot_was_set:
+          - termin_medium: Mail
       - active_loop: null
       - action: action_termin_vereinbaren
 
@@ -15,6 +17,8 @@ stories:
       - action: termin_form
       - active_loop: termin_form
       - intent: termin_medium_inform_telefon
+      - slot_was_set:
+          - termin_medium: Telefon
       - active_loop: null
       - action: action_termin_vereinbaren
 
@@ -31,5 +35,99 @@ stories:
     steps:
       - intent: begruessung
       - action: action_begruessung
+      - intent: verabschiedung
+      - action: action_verabschiedung
+
+  - story: Begrüßung und Frage, was bot alles kann
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: general_bot
+      - action: action_general_bot
+
+  - story: Begrüßung, frage was bot alles kann und Verabschiedung
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: general_bot
+      - action: action_general_bot
+      - intent: verabschiedung
+      - action: action_verabschiedung
+
+  - story: Begrüßung und Vereinbarung Termin per Mail
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - intent: termin_medium_inform_mail
+      - active_loop: null
+      - action: action_termin_vereinbaren
+
+  - story: Begrüßung und Verinbarung Termin per Telefon
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - intent: termin_medium_inform_telefon
+      - active_loop: null
+      - action: action_termin_vereinbaren
+
+  - story: Verabschiedung nach Vereinbarung Termin per Mail mit Begrüßung
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - intent: termin_medium_inform_mail
+      - active_loop: null
+      - action: action_termin_vereinbaren
+      - intent: verabschiedung
+      - action: action_verabschiedung
+
+  - story: Verabschiedung nach Vereinbarung Termin per Telefon mit Begrüßung
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - intent: termin_medium_inform_telefon
+      - active_loop: null
+      - action: action_termin_vereinbaren
+      - intent: verabschiedung
+      - action: action_verabschiedung
+
+  - story: Begrüßung, Frage, was bot alles kann, mache Termin per Mail, Verabschiedung
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: general_bot
+      - action: action_general_bot
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - intent: termin_medium_inform_mail
+      - active_loop: null
+      - action: action_termin_vereinbaren
+      - intent: verabschiedung
+      - action: action_verabschiedung
+
+  - story: Begrüßung, Frage, was bot alles kann, mache Termin per Telefon, Verabschiedung
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: general_bot
+      - action: action_general_bot
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - intent: termin_medium_inform_telefon
+      - active_loop: null
+      - action: action_termin_vereinbaren
       - intent: verabschiedung
       - action: action_verabschiedung
