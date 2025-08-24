@@ -67,3 +67,20 @@ rules:
     steps:
       - intent: zeiten
       - action: action_zeiten
+
+  - rule: Aktivierung Termin-Form
+    condition:
+      - active_loop: null
+    steps:
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+
+  - rule: Termin vereinbaren
+    condition:
+      - active_loop: termin_form
+      - slot_was_set:
+          - requested_slot: termin_medium
+    steps:
+      - active_loop: null
+      - action: action_termin_vereinbaren

@@ -18,3 +18,16 @@ lint:
 format:
 	@echo "Running formatters..."
 	python -m tox -e format
+
+unit_test:
+	@echo "Running unit tests..."
+	python -m tox -e unit_tests
+integration_test:
+	@echo "Running integration tests..."
+	python -m tox -e integration_tests
+
+rasa_test:
+	@echo "Running Rasa tests..."
+	python -m tox -e rasa_tests
+
+build: format lint unit_test rasa_test

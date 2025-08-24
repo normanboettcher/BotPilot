@@ -1,0 +1,62 @@
+version: "3.1"
+stories:
+  - story: Happy Path begrüßen
+    steps:
+      - user: |
+          Hallo
+        intent: begruessung
+      - action: action_begruessung
+
+  - story: Happy Path Verabschiedung
+    steps:
+      - user: |
+          Tschüss
+        intent: verabschiedung
+      - action: action_verabschiedung
+
+  - story: Happy Path Begrüßung und Verabschiedung
+    steps:
+      - user: |
+          Hallo
+        intent: begruessung
+      - action: action_begruessung
+      - user: |
+          Tschüss
+        intent: verabschiedung
+      - action: action_verabschiedung
+
+  - story: Happy Path Termin Medium per Mail
+    steps:
+      - user: |
+          Ich möchte einen [Termin](termin_type) [vereinbaren](termin_action).
+        intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - user: |
+          Per Mail bitte.
+        intent: termin_medium_inform_mail
+      - active_loop: null
+      - action: action_termin_vereinbaren
+
+  - story: Happy Path Termin Medium per Telefon
+    steps:
+      - user: |
+          Ich möchte einen [Termin](termin_type) [vereinbaren](termin_action).
+        intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - user: |
+          Per [Telefon](termin_medium) bitte.
+      - active_loop: null
+      - action: action_termin_vereinbaren
+
+  - story: Happy Path Begruessung und Frage, was bot alles kann
+    steps:
+      - user: |
+          Hallo
+        intent: begruessung
+      - action: action_begruessung
+      - user: |
+          Was kannst du alles?
+        intent: general_bot
+      - action: action_general_bot
