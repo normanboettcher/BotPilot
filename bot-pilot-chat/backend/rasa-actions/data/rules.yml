@@ -79,8 +79,7 @@ rules:
   - rule: Termin vereinbaren
     condition:
       - active_loop: termin_form
-      - slot_was_set:
-          - requested_slot: termin_medium
     steps:
+      - action: termin_form
       - active_loop: null
       - action: action_termin_vereinbaren

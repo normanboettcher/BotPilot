@@ -35,6 +35,8 @@ stories:
       - user: |
           Per Mail bitte.
         intent: termin_medium_inform_mail
+      - slot_was_set:
+          - termin_medium: mail
       - active_loop: null
       - action: action_termin_vereinbaren
 
@@ -60,3 +62,26 @@ stories:
           Was kannst du alles?
         intent: general_bot
       - action: action_general_bot
+
+  - story: Happy Path Begrüßung, Termin per Mail und Verabschiedung
+    steps:
+      - user: |
+          Guten Tag
+        intent: begruessung
+      - action: action_begruessung
+      - user: |
+          Ich möchte gerne einen [Termin](termin_type) [vereinbaren](termin_action).
+        intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - user: |
+          Gerne per mail.
+        intent: termin_medium_inform_mail
+      - slot_was_set:
+          - termin_medium: mail
+      - active_loop: null
+      - action: action_termin_vereinbaren
+      - user: |
+          Tschüss
+        intent: verabschiedung
+      - action: action_verabschiedung

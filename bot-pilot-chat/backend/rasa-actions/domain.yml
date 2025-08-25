@@ -1,32 +1,28 @@
-version: "3.1"
-
+version: '3.1'
 intents:
-  - begruessung
-  - verabschiedung
-  - faq
-  - positive_feedback
-  - negative_feedback
-  - general_bot
-  - parking
-  - kosten
-  - unterlagen
-  - steuererklaerung
-  - standort
   - anreise
+  - begruessung
   - bereiche
-  - zeiten
+  - faq
+  - general_bot
+  - kosten
+  - negative_feedback
+  - parking
+  - positive_feedback
+  - standort
   - steuerberatung
-  - termin_vereinbaren
-  - termin_infos
+  - steuererklaerung
   - stop_termin_form
+  - termin_infos
   - termin_medium_inform_mail
   - termin_medium_inform_telefon
-
+  - termin_vereinbaren
+  - unterlagen
+  - verabschiedung
+  - zeiten
 entities:
   - termin_type
-  - termin_action
   - termin_medium
-
 slots:
   termin_type:
     mappings:
@@ -39,13 +35,11 @@ slots:
       - ersttermin
       - termin
       - online-termin
-
   termin_medium_attempts:
     type: float
     initial_value: 0
     mappings:
       - type: custom
-
   termin_medium:
     mappings:
       - type: from_entity
@@ -67,30 +61,14 @@ slots:
       - mail
       - telefon
       - online
-  termin_action:
-    mappings:
-      - type: from_entity
-        entity: termin_action
-    type: categorical
-    values:
-      - anrufen
-      - buchen
-      - vereinbaren
-      - bekommen
-      - brauchen
-      - machen
-      - kommen
-      - herankommen
-
 forms:
   termin_form:
     required_slots:
       - termin_medium
-
-
 actions:
-  - action_default_fallback
+  - action_termin_vereinbaren
   - action_begruessung
+  - action_default_fallback
   - action_get_faq
   - action_positive_feedback
   - action_negative_feedback
@@ -105,10 +83,8 @@ actions:
   - action_bereiche
   - action_zeiten
   - action_steuerberatung
-  - action_termin_vereinbaren
   - action_ask_termin_medium
   - validate_termin_form
-
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

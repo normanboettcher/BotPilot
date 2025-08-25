@@ -19,4 +19,5 @@ class ActionTerminVereinbaren(Action):
         message, medium = make_termin_from_medium(tracker)
         res = BotResponse.with_answer(message)
         dispatcher.utter_message(json_message=send_response(res.as_dict()))
-        return [SlotSet("termin_medium", None)]
+        return [SlotSet("termin_medium", None),
+                SlotSet('termin_medium_attempts', 0)]

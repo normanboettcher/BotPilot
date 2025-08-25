@@ -1,341 +1,338 @@
 version: "3.1"
-
 nlu:
-  - intent: begruessung
-    examples: |
-      - hallo
-      - hi
-      - hey
-      - guten tag
-      - guten morgen
-      - servus
-      - moin
-      - grüß dich
-      - na
-      - guten abend
-      - grüße
-      - hallöchen
-      - hallo zusammen
-      - moin moin
-      - ja moin
-      - was geht
-      - was geht ab
-      - hey, jo
-      - was geht ab, alter
-      - tach
-      - tachjen
-      - juten tag
-      - moinsen
-      - tag
-      - ist jemand da?
-      - Huhu
-      - Halli hallo
-      - na, was geht
-      - hello
-      - hey du
-      - hey, du da 
-      - na du
-      - naaaa
-      - hi du 
-      - schönen guten tag
-      - schönen guten morgen
-      - schönen guten abend
-      - guten Abend
-      - hallo, guten tag
-      - hallo, guten morgen
-      - hallo, guten abend  
-
-  - intent: verabschiedung
-    examples: |
-      - tschüss
-      - tschüss, bis dann
-      - tschüss, bis zum nächsten mal
-      - tschüssi
-      - tschüss und auf wiedersehen
-      - tschüüss
-      - tschüss bis dann
-      - tschüss und bis bald
-      - jo tschüss
-      - tschö
-      - Bis denn
-      - Tschau
-      - Auf bald
-      - bis denne
-      - auf wiedersehen
-      - bis bald
-      - mach's gut
-      - bis später
-      - ciao
-      - schönen tag noch
-      - adieu
-      - wir sehen uns
-      - danke, tschüss
-      - ich bin dann mal weg
-      - schönen abend noch
-      - bye bye
-      - ciao bis dann
-      - bis dann
-      - bis zum nächsten mal
-      - bis zum nächsten mal, tschüss
-      - ciao ciao
-
-  - intent: parking
-    examples: |
-      - Gibt es Parkplätze?
-      - Wo kann ich parken?
-
-  - intent: kosten
-    examples: |
-      - Wie hoch sind Ihre Kosten?
-      - Gibt es eine kostenlose Erstberatung?
-      - Ist das erste Gespräch kostenlos?
-      - Was kostet eine Beratung?
-      - Was kostet mich das?
-      - Was muss ich zahlen?
-      - Wie viel muss ich zahlen?
-      - Was kostet eine Steuerberatung bei Ihnen?
-      - Wie viel kostet ein Steuerberater für Gründer?
-      - Was kostet ein Steuerberater für Privatpersonen?
-      - Welche Kosten gelten als absetzbar?
-      - Können die Kosten für einen Steuerberater abgesetzt werden?
-      - Wie viel kostet ein Steuerberater für Unternehmen?
-
-  - intent: unterlagen
-    examples: |
-      - Wie kann ich Unterlagen einreichen?
-      - Kann ich Unterlagen per Mail einreichen?
-      - Kann ich Unterlagen digital einreichen?
-      - Kann ich Belege digital senden?
-      - Bekomme ich meine Unterlagen zurück?
-      - Kann ich meine Belege digital hochladen?
-      - Welche Unterlagen benötigen Sie von mir als Selbstständiger?
-      - Welche Unterlagen soll ich zum Erstgespräch mitnehmen?
-      - Gibt es eine Möglichkeit, Belege digital zu übermitteln?
-      - Wie lange sollte ich meine Steuerunterlagen aufbewahren?
-      - Welche Unterlagen braucht ein Steuerberater?
-      - Welche Dokumente werden für die Steuererklärung benötigt?
-      - Ich möchte meine Belege nicht rausgeben. Gibt es andere Möglichkeiten?
-
-  - intent: steuererklaerung
-    examples: |
-      - Was brauche ich für meine Steuererklärung?
-      - welche Unterlagen brauche ich für die Steuererklärung?
-      - Welche Unterlagen braucht ein Steuerberater für die Steuererklärung?
-      - Bis wann muss ich die Steuererklärung abgeben?
-      - Können Sie meine Steuererklärung machen?
-      - Machen Sie Steuererklätungen?
-      - Was kostet eine Steuererklärung bei Ihnen?
-      - Welche Unterlagen brauchen Sie für die Steuererklärung?
-      - Welche Unterlagen brauche ich für meine Steuererklärung?
-      - Wie lange dauert die Bearbeitung der Steuererklärung?
-      - Wie schnell habe ich meine Steuererklärung?
-      - Wie lange brauchen Sie für eine Steuererklärung?
-      - Wie viel Geld bekomme ich von der Steuererklärung zurück?
-      - Muss ich überhaupt eine Steuererklärung einreichen?
-      - Ich mache zum ersten Mal eine Steuererklärung – wie gehe ich vor?
-      - Bis wann muss man die Steuererklärung abgeben?
-      - Kann man eine Steuererklärung rückwirkend einreichen?
-      - Kann man eine Steuererklärung nachträglich einreichen?
-      - Muss jeder eine Steuererklärung machen?
-      - Wann ist die Frist zur Abgabe meiner Steuererklärung?
-      - Können Sie meine Steuererklärung auch rückwirkend erstellen?
-      - Ich bin unsicher, ob ich überhaupt eine Steuererklärung abgeben muss.
-      - Wie erkenne ich, ob ich zur Abgabe einer Steuererklärung verpflichtet bin?
-      - Bis wann muss ich mene Steuererklärung beim Finanzamt einreichen?
-      - Bin ich überhaupt verpflichtet, eine Steuererklärung abzugeben?
-      - Wie lange braucht das Finanzamt zur Bearbeitung meiner Steuererklärung?
-      - Gibt es eine Möglichkeit, meine Steuererklärung komplett digital zu machen?
-
-  - intent: standort
-    examples: |
-      - Wo finde ich Ihre Kanzlei?
-      - Wo befindet sich die Kanzlei?
-      - Wo ist der nächste Standort?
-      - Wo ist die nächste Kanzlei?
-      - Wo genau befindet sich Ihre Praxis/Kanzlei?
-
-  - intent: anreise
-    examples: |
-      - Anreise Kanzlei
-      - Wie kommt man zur Kanzlei?
-      - Wie ist der beste Weg zur Kanzlei?
-      - Welche Öffis fahren zur Kanzlei?
-
-  - intent: bereiche
-    examples: |
-      - Welche Leistungen bietet Ihre Kanzlei an?
-      - Was macht Ihre Kanzlei alles?
-      - Was bietet die Kanzlei alles an?
-      - Bieten Sie auch Unterstützung bei Betriebsprüfungen?
-      - Übernehmen Sie die Archivierung meiner Daten?
-      - Auf welchen Gebieten haben Sie Erfahrungen?
-      - Welche Gebiete bieten Sie alle an?
-      - Können Sie auch internationale Steuerfragen klären?
-      - Bei welchen Themen wird Unternehmen geholfen?
-      - Bei welchen Themen wird Privatpersonen geholfen?
-      - Machen Sie auch Erbschafts- oder Schenkungssteuer?
-      - Können Sie mir bei der Existenzgründung steuerlich helfen?
-      - Können Sie meine Buchhaltung übernehmen?
-      - Beraten Sie auch zu Themen wie Erbschaftsteuer?
-      - Können Sie mir bei der Umsatzsteuervoranmeldung helfen?
-
-  - intent: zeiten
-    examples: |
-      - Wie sind Ihre Öffnungszeiten?
-      - Wann ist die Kanzlei geöffnet?
-      - Wann hat die Kanzlei geöffnet?
-      - Wann habt ihr geöffnet?
-      - Wie lange dauert es, bis ich meine Rückzahlung erhalte?
-      - Wie lange dauert eine Steuererstattung?
-      - Wie lange dauert die Erstberatung?
-      - Wie lange dauert das Erstgespräch?
-      - Wie lange geht das Erstgespräch?
-      - Wie lange dauert die Bearbeitung bei Ihnen?
-      - Welche Aufbewahrungsfristen muss ich beachten?
-
-  - intent: steuerberatung
-    examples: |
-      - Wer sollte eine Steuerkanzlei in Anspruch nehmen?
-      - Wer braucht einen Steuerberater?
-      - Wer braucht eine Steuerkanzlei?
-      - Was ist bei einem Wechsel des Steuerberaters zu beachten?
-      - Ist der Steuerberater absetzbar?
-      - Wie rechnet ein Steuerberater ab?
-      - Ab wann ist ein Steuerberater Pflicht?
-      - Ab wann braucht man einen Steuerberater?
-      - Für wen lohnt sich ein Steuerberater?
-      - Wann muss man einen Steuerberater bezahlen?
-      - Was macht ein Steuerberater für Unternehmen?
-      - Lohnt sich ein Steuerberater für Startups?
-      - Lohnt sich ein Steuerberater für Privatpersonen?
-      - Inwieweit haftet ein Steuerberater?
-      - Was prüft ein Steuerberater?
-      - Welche Aufgaben hat ein Steuerberater?
-      - Welche Pflichten hat ein Steuerberater?
-      - Wann sollte man einen Steuerberater aufsuchen?
-      - Kann ich den Steuerberater einfach so wechseln?
-      - Was ist der Unterschied zwischen Steuerberatung und Lohnbuchhaltung?
-      - Wie läuft der typische Ablauf einer Steuerberatung bei Ihnen ab?
-      - Welche Vorteile habe ich, wenn ich einen Steuerberater beauftrage?
-
-  - intent: faq
-    examples: |
-      - Welche Ausgaben kann ich steuerlich absetzen ?
-      - Wie nehme ich Kontakt auf? 
-      - Gibt es online-Beratungen?
-      - Kann ich die Kosten für die Kita absetzen?
-      - Wie versteuere ich Einkünfte aus Kryptowährungen?
-      - Was kann ich im Homeoffice absetzen?
-      - Welche Arbeitsmittel kann ich steuerlich absetzen?
-      - Wen betreuen Sie alles?
-      - Ich habe ein Schreiben vom Finanzamt erhalten – was nun?
-      - Bieten Sie auch Unterstützung für Selbstständige an?
-      - Ich bin zum ersten Mal steuerpflichtig – was muss ich beachten?
-      - Kann ich bei Ihnen auch meine Buchhaltung abgeben?
-      - Kann ich Betreuungskosten für mein Kind steuerlich geltend machen?
-      - Muss ich Gewinne aus Kryptowährungen versteuern?
-      - Welche Homeoffice-Kosten kann ich anrechnen lassen?
-      - Was zählt als absetzbares Arbeitsmittel?
-      - Was soll ich tun, wenn ich Post vom Finanzamt bekomme?
-      - Unterstützen Sie auch Freelancer und Freiberufler?
-      - Kann ich meine laufende Buchführung an Sie übergeben?
-      - Wie unterscheiden sich Ihre Leistungen für Privatpersonen und Unternehmen?
-      - Was passiert, wenn ich die Steuerfrist verpasse?
-      - Welche Steuerklassen gibt es und wie wähle ich die richtige?
-      - Wie gehe ich vor, wenn ich eine Nachzahlung leisten muss?
-      - Wie kann ich meine Steuerlast als Selbstständiger senken?
-      - Was ist eine Einnahmen-Überschuss-Rechnung (EÜR)?
-      - Gibt es Förderprogramme, über die ich steuerliche Vorteile bekomme?
-      - Nehmen Sie neue Leute auf?
-      - Nehmen Sie neue Mandanten auf?
-      - Nehmen Sie noch neue Mandanten auf?
-      - Wie hoch ist der Grundfreibetrag?
-      - Gibt es eine Veschwiegenheitspflicht?
-      - Passt Ihre Kanzlei zu mir?
-
-
-  - intent: positive_feedback
-    examples: |
-      - super, danke
-      - super
-      - super cool
-      - danke
-      - dankeschön
-      - dankesehr
-      - thank you
-      - merci
-      - danke für die Hilfe!
-      - Das hat mir geholfen
-
-  - intent: negative_feedback
-    examples: |
-      - oh nein
-      - oh nein, das war nicht das, was ich wollte
-      - oh nein, das war nicht hilfreich
-      - oh nein, das war nicht die Antwort, die ich wollte
-      - oh nein, das war nicht die Antwort, die ich gesucht habe
-      - oh nein, das war nicht die Antwort, die ich brauchte
-      - oh nein, das war nicht die Antwort, die ich erwartet habe
-      - oh nein, das war nicht die Antwort, die ich mir erhofft habe
-      - oh nein, das war nicht die Antwort, die ich mir gewünscht habe
-      - oh nein, das war nicht die Antwort, die ich mir vorgestellt habe
-      - oh nein, das war nicht die Antwort, die ich mir ausgemalt habe
-      - oh nein, das war nicht die Antwort, die ich mir gedacht habe
-      - oh nein, das war nicht die Antwort, die ich mir erträumt habe
-      - nein, das war nicht das, was ich wollte
-      - nein, das war nicht hilfreich
-      - nein, das war nicht die Antwort, die ich wollte
-      - nein, das war nicht die Antwort, die ich gesucht habe
-      - nein, das war nicht die Antwort, die ich brauchte
-      - nein, das war nicht die Antwort, die ich erwartet habe
-      - nein, das war nicht die Antwort, die ich mir erhofft habe
-      - nein, das war nicht die Antwort, die ich mir gewünscht habe
-      - nein, das war nicht die Antwort, die ich mir vorgestellt habe
-      - nein, das war nicht die Antwort, die ich mir ausgemalt habe
-      - nein, das war nicht die Antwort, die ich mir gedacht habe
-      - das war nicht das, was ich wollte
-      - das war nicht hilfreich
-      - das war nicht die Antwort, die ich wollte
-      - das war nicht die Antwort, die ich gesucht habe
-      - das war nicht die Antwort, die ich brauchte
-      - oh man, du verstehst es nicht
-      - Blöde Antwort
-      - Hilft mir nicht
-      - Du verstehst es nicht
-      - Du verstehst gar nichts
-      - Du hast mich falsch verstanden
-      - Das war nicht gemeint
-      - Deine Antwort ist falsch
-      - Die Antwort ist falsch
-
-  - intent: general_bot
-    examples: |
-      - Wer bist du?
-      - Bist du ein Mensch?
-      - Wie heißt du?
-      - Wurdest du programmiert?
-      - Wie alt bist du?
-      - Hast du ein Gesicht?
-      - Wie siehst du aus?
-      - Was kannst du?
-      - Was kannst du alles?
-      - Wie funktioniert das hier?
-      - Wie funktionierst du?
-      - Wie kann ich dich benutzen?
-      - Wie benutze ich dich?
-      - Was sind deine Fähigkeiten?
-      - Was sind deine Funktionen?
-      - Kannst du sprechen?
-      - Kann ich mir dir sprechen?
-      - Kannst du mir helfen?
-      - Ich brauche Hilfe
-      - Was kannst du nicht?
-      - Was kann ich eingeben?
-      - Welche Funktionen hast du?
-      - Wie kannst du mir helfen?
-      - Was kann ich mit dir machen?
-      - Wofür bist du da?
-      - Wie spreche ich mit dir?
-      - Was kann ich dich fragen?
-      - Kannst du alles beantworten?
-      - Muss ich ganze Sätze schreiben?
+- intent: begruessung
+  examples: |
+    - hallo
+    - hi
+    - hey
+    - guten tag
+    - guten morgen
+    - servus
+    - moin
+    - grüß dich
+    - na
+    - guten abend
+    - grüße
+    - hallöchen
+    - hallo zusammen
+    - moin moin
+    - ja moin
+    - was geht
+    - was geht ab
+    - hey, jo
+    - was geht ab, alter
+    - tach
+    - tachjen
+    - juten tag
+    - moinsen
+    - tag
+    - ist jemand da?
+    - Huhu
+    - Halli hallo
+    - na, was geht
+    - hello
+    - hey du
+    - hey, du da
+    - na du
+    - naaaa
+    - hi du
+    - schönen guten tag
+    - schönen guten morgen
+    - schönen guten abend
+    - guten Abend
+    - hallo, guten tag
+    - hallo, guten morgen
+    - hallo, guten abend
+- intent: verabschiedung
+  examples: |
+    - tschüss
+    - tschüss, bis dann
+    - tschüss, bis zum nächsten mal
+    - tschüssi
+    - tschüss und auf wiedersehen
+    - tschüüss
+    - tschüss bis dann
+    - tschüss und bis bald
+    - jo tschüss
+    - tschö
+    - Bis denn
+    - Tschau
+    - Auf bald
+    - bis denne
+    - auf wiedersehen
+    - bis bald
+    - mach's gut
+    - bis später
+    - ciao
+    - schönen tag noch
+    - adieu
+    - wir sehen uns
+    - danke, tschüss
+    - ich bin dann mal weg
+    - schönen abend noch
+    - bye bye
+    - ciao bis dann
+    - bis dann
+    - bis zum nächsten mal
+    - bis zum nächsten mal, tschüss
+    - ciao ciao
+- intent: parking
+  examples: |
+    - Gibt es Parkplätze?
+    - Wo kann ich parken?
+- intent: kosten
+  examples: |
+    - Wie hoch sind Ihre Kosten?
+    - Gibt es eine kostenlose Erstberatung?
+    - Ist das erste Gespräch kostenlos?
+    - Was kostet eine Beratung?
+    - Was kostet mich das?
+    - Was muss ich zahlen?
+    - Wie viel muss ich zahlen?
+    - Was kostet eine Steuerberatung bei Ihnen?
+    - Wie viel kostet ein Steuerberater für Gründer?
+    - Was kostet ein Steuerberater für Privatpersonen?
+    - Welche Kosten gelten als absetzbar?
+    - Können die Kosten für einen Steuerberater abgesetzt werden?
+    - Wie viel kostet ein Steuerberater für Unternehmen?
+- intent: unterlagen
+  examples: |
+    - Wie kann ich Unterlagen einreichen?
+    - Kann ich Unterlagen per Mail einreichen?
+    - Kann ich Unterlagen digital einreichen?
+    - Kann ich Belege digital senden?
+    - Bekomme ich meine Unterlagen zurück?
+    - Kann ich meine Belege digital hochladen?
+    - Welche Unterlagen benötigen Sie von mir als Selbstständiger?
+    - Welche Unterlagen soll ich zum Erstgespräch mitnehmen?
+    - Gibt es eine Möglichkeit, Belege digital zu übermitteln?
+    - Wie lange sollte ich meine Steuerunterlagen aufbewahren?
+    - Welche Unterlagen braucht ein Steuerberater?
+    - Welche Dokumente werden für die Steuererklärung benötigt?
+    - Ich möchte meine Belege nicht rausgeben. Gibt es andere Möglichkeiten?
+- intent: steuererklaerung
+  examples: |
+    - Was brauche ich für meine Steuererklärung?
+    - welche Unterlagen brauche ich für die Steuererklärung?
+    - Welche Unterlagen braucht ein Steuerberater für die Steuererklärung?
+    - Bis wann muss ich die Steuererklärung abgeben?
+    - Können Sie meine Steuererklärung machen?
+    - Machen Sie Steuererklätungen?
+    - Was kostet eine Steuererklärung bei Ihnen?
+    - Welche Unterlagen brauchen Sie für die Steuererklärung?
+    - Welche Unterlagen brauche ich für meine Steuererklärung?
+    - Wie lange dauert die Bearbeitung der Steuererklärung?
+    - Wie schnell habe ich meine Steuererklärung?
+    - Wie lange brauchen Sie für eine Steuererklärung?
+    - Wie viel Geld bekomme ich von der Steuererklärung zurück?
+    - Muss ich überhaupt eine Steuererklärung einreichen?
+    - Ich mache zum ersten Mal eine Steuererklärung – wie gehe ich vor?
+    - Bis wann muss man die Steuererklärung abgeben?
+    - Kann man eine Steuererklärung rückwirkend einreichen?
+    - Kann man eine Steuererklärung nachträglich einreichen?
+    - Muss jeder eine Steuererklärung machen?
+    - Wann ist die Frist zur Abgabe meiner Steuererklärung?
+    - Können Sie meine Steuererklärung auch rückwirkend erstellen?
+    - Ich bin unsicher, ob ich überhaupt eine Steuererklärung abgeben muss.
+    - Wie erkenne ich, ob ich zur Abgabe einer Steuererklärung verpflichtet bin?
+    - Bis wann muss ich mene Steuererklärung beim Finanzamt einreichen?
+    - Bin ich überhaupt verpflichtet, eine Steuererklärung abzugeben?
+    - Wie lange braucht das Finanzamt zur Bearbeitung meiner Steuererklärung?
+    - Gibt es eine Möglichkeit, meine Steuererklärung komplett digital zu machen?
+- intent: standort
+  examples: |
+    - Wo finde ich Ihre Kanzlei?
+    - Wo befindet sich die Kanzlei?
+    - Wo ist der nächste Standort?
+    - Wo ist die nächste Kanzlei?
+    - Wo genau befindet sich Ihre Praxis/Kanzlei?
+- intent: anreise
+  examples: |
+    - Anreise Kanzlei
+    - Wie kommt man zur Kanzlei?
+    - Wie ist der beste Weg zur Kanzlei?
+    - Welche Öffis fahren zur Kanzlei?
+- intent: bereiche
+  examples: |
+    - Welche Leistungen bietet Ihre Kanzlei an?
+    - Was macht Ihre Kanzlei alles?
+    - Was bietet die Kanzlei alles an?
+    - Bieten Sie auch Unterstützung bei Betriebsprüfungen?
+    - Übernehmen Sie die Archivierung meiner Daten?
+    - Auf welchen Gebieten haben Sie Erfahrungen?
+    - Welche Gebiete bieten Sie alle an?
+    - Können Sie auch internationale Steuerfragen klären?
+    - Bei welchen Themen wird Unternehmen geholfen?
+    - Bei welchen Themen wird Privatpersonen geholfen?
+    - Machen Sie auch Erbschafts- oder Schenkungssteuer?
+    - Können Sie mir bei der Existenzgründung steuerlich helfen?
+    - Können Sie meine Buchhaltung übernehmen?
+    - Beraten Sie auch zu Themen wie Erbschaftsteuer?
+    - Können Sie mir bei der Umsatzsteuervoranmeldung helfen?
+- intent: zeiten
+  examples: |
+    - Wie sind Ihre Öffnungszeiten?
+    - Wann ist die Kanzlei geöffnet?
+    - Wann hat die Kanzlei geöffnet?
+    - Wann habt ihr geöffnet?
+    - Wie lange dauert es, bis ich meine Rückzahlung erhalte?
+    - Wie lange dauert eine Steuererstattung?
+    - Wie lange dauert die Erstberatung?
+    - Wie lange dauert das Erstgespräch?
+    - Wie lange geht das Erstgespräch?
+    - Wie lange dauert die Bearbeitung bei Ihnen?
+    - Welche Aufbewahrungsfristen muss ich beachten?
+- intent: steuerberatung
+  examples: |
+    - Wer sollte eine Steuerkanzlei in Anspruch nehmen?
+    - Wer braucht einen Steuerberater?
+    - Wer braucht eine Steuerkanzlei?
+    - Was ist bei einem Wechsel des Steuerberaters zu beachten?
+    - Ist der Steuerberater absetzbar?
+    - Wie rechnet ein Steuerberater ab?
+    - Ab wann ist ein Steuerberater Pflicht?
+    - Ab wann braucht man einen Steuerberater?
+    - Für wen lohnt sich ein Steuerberater?
+    - Wann muss man einen Steuerberater bezahlen?
+    - Was macht ein Steuerberater für Unternehmen?
+    - Lohnt sich ein Steuerberater für Startups?
+    - Lohnt sich ein Steuerberater für Privatpersonen?
+    - Inwieweit haftet ein Steuerberater?
+    - Was prüft ein Steuerberater?
+    - Welche Aufgaben hat ein Steuerberater?
+    - Welche Pflichten hat ein Steuerberater?
+    - Wann sollte man einen Steuerberater aufsuchen?
+    - Kann ich den Steuerberater einfach so wechseln?
+    - Was ist der Unterschied zwischen Steuerberatung und Lohnbuchhaltung?
+    - Wie läuft der typische Ablauf einer Steuerberatung bei Ihnen ab?
+    - Welche Vorteile habe ich, wenn ich einen Steuerberater beauftrage?
+- intent: faq
+  examples: |
+    - Welche Ausgaben kann ich steuerlich absetzen ?
+    - Wie nehme ich Kontakt auf?
+    - Gibt es online-Beratungen?
+    - Kann ich die Kosten für die Kita absetzen?
+    - Wie versteuere ich Einkünfte aus Kryptowährungen?
+    - Was kann ich im Homeoffice absetzen?
+    - Welche Arbeitsmittel kann ich steuerlich absetzen?
+    - Wen betreuen Sie alles?
+    - Ich habe ein Schreiben vom Finanzamt erhalten – was nun?
+    - Bieten Sie auch Unterstützung für Selbstständige an?
+    - Ich bin zum ersten Mal steuerpflichtig – was muss ich beachten?
+    - Kann ich bei Ihnen auch meine Buchhaltung abgeben?
+    - Kann ich Betreuungskosten für mein Kind steuerlich geltend machen?
+    - Muss ich Gewinne aus Kryptowährungen versteuern?
+    - Welche Homeoffice-Kosten kann ich anrechnen lassen?
+    - Was zählt als absetzbares Arbeitsmittel?
+    - Was soll ich tun, wenn ich Post vom Finanzamt bekomme?
+    - Unterstützen Sie auch Freelancer und Freiberufler?
+    - Kann ich meine laufende Buchführung an Sie übergeben?
+    - Wie unterscheiden sich Ihre Leistungen für Privatpersonen und Unternehmen?
+    - Was passiert, wenn ich die Steuerfrist verpasse?
+    - Welche Steuerklassen gibt es und wie wähle ich die richtige?
+    - Wie gehe ich vor, wenn ich eine Nachzahlung leisten muss?
+    - Wie kann ich meine Steuerlast als Selbstständiger senken?
+    - Was ist eine Einnahmen-Überschuss-Rechnung (EÜR)?
+    - Gibt es Förderprogramme, über die ich steuerliche Vorteile bekomme?
+    - Nehmen Sie neue Leute auf?
+    - Nehmen Sie neue Mandanten auf?
+    - Nehmen Sie noch neue Mandanten auf?
+    - Wie hoch ist der Grundfreibetrag?
+    - Gibt es eine Veschwiegenheitspflicht?
+    - Passt Ihre Kanzlei zu mir?
+- intent: positive_feedback
+  examples: |
+    - super, danke
+    - super
+    - super cool
+    - danke
+    - dankeschön
+    - dankesehr
+    - thank you
+    - merci
+    - danke für die Hilfe!
+    - Das hat mir geholfen
+- intent: negative_feedback
+  examples: |
+    - oh nein
+    - oh nein, das war nicht das, was ich wollte
+    - oh nein, das war nicht hilfreich
+    - oh nein, das war nicht die Antwort, die ich wollte
+    - oh nein, das war nicht die Antwort, die ich gesucht habe
+    - oh nein, das war nicht die Antwort, die ich brauchte
+    - oh nein, das war nicht die Antwort, die ich erwartet habe
+    - oh nein, das war nicht die Antwort, die ich mir erhofft habe
+    - oh nein, das war nicht die Antwort, die ich mir gewünscht habe
+    - oh nein, das war nicht die Antwort, die ich mir vorgestellt habe
+    - oh nein, das war nicht die Antwort, die ich mir ausgemalt habe
+    - oh nein, das war nicht die Antwort, die ich mir gedacht habe
+    - oh nein, das war nicht die Antwort, die ich mir erträumt habe
+    - nein, das war nicht das, was ich wollte
+    - nein, das war nicht hilfreich
+    - nein, das war nicht die Antwort, die ich wollte
+    - nein, das war nicht die Antwort, die ich gesucht habe
+    - nein, das war nicht die Antwort, die ich brauchte
+    - nein, das war nicht die Antwort, die ich erwartet habe
+    - nein, das war nicht die Antwort, die ich mir erhofft habe
+    - nein, das war nicht die Antwort, die ich mir gewünscht habe
+    - nein, das war nicht die Antwort, die ich mir vorgestellt habe
+    - nein, das war nicht die Antwort, die ich mir ausgemalt habe
+    - nein, das war nicht die Antwort, die ich mir gedacht habe
+    - das war nicht das, was ich wollte
+    - das war nicht hilfreich
+    - das war nicht die Antwort, die ich wollte
+    - das war nicht die Antwort, die ich gesucht habe
+    - das war nicht die Antwort, die ich brauchte
+    - oh man, du verstehst es nicht
+    - Blöde Antwort
+    - Hilft mir nicht
+    - Du verstehst es nicht
+    - Du verstehst gar nichts
+    - Du hast mich falsch verstanden
+    - Das war nicht gemeint
+    - Deine Antwort ist falsch
+    - Die Antwort ist falsch
+- intent: general_bot
+  examples: |
+    - Wer bist du?
+    - Bist du ein Mensch?
+    - Wie heißt du?
+    - Wurdest du programmiert?
+    - Wie alt bist du?
+    - Hast du ein Gesicht?
+    - Wie siehst du aus?
+    - Was kannst du?
+    - Was kannst du alles?
+    - Wie funktioniert das hier?
+    - Wie funktionierst du?
+    - Wie kann ich dich benutzen?
+    - Wie benutze ich dich?
+    - Was sind deine Fähigkeiten?
+    - Was sind deine Funktionen?
+    - Kannst du sprechen?
+    - Kann ich mir dir sprechen?
+    - Kannst du mir helfen?
+    - Ich brauche Hilfe
+    - Was kannst du nicht?
+    - Was kann ich eingeben?
+    - Welche Funktionen hast du?
+    - Wie kannst du mir helfen?
+    - Was kann ich mit dir machen?
+    - Wofür bist du da?
+    - Wie spreche ich mit dir?
+    - Was kann ich dich fragen?
+    - Kannst du alles beantworten?
+    - Muss ich ganze Sätze schreiben?
+- intent: termin_vereinbaren
+  examples: |
+    - ich möchte einen [Termin]{"entity": "termin_type", "value": "termin"} machen
+    - ich möchte gerne einen [termin](termin_type) vereinbaren
+    - ich möchte einen [termin](termin_type) machen
+    - ich will einen [termin](termin_type) haben
+- intent: termin_medium_inform_mail
+  examples: |
+    - mail
+    - per mail bitte
+- synonym: termin
+  examples: |
+    - Termin

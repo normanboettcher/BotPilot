@@ -51,24 +51,6 @@ nlu:
       - online-erstberatung
 
 
-  - lookup: termin_action
-    examples: |
-      - buchen
-      - buche
-      - machen
-      - mache
-      - bekommen
-      - bekomme
-      - verinbaren
-      - vereinbare
-      - vereinbart
-      - brauchen
-      - brauche
-      - kommen
-      - herankommen
-      - komme
-      - herankomme
-
   - intent: termin_medium_inform_mail
     examples: |
       - Mail
@@ -145,44 +127,44 @@ nlu:
 
   - intent: termin_vereinbaren
     examples: |
-      - Ich möchte einen [Termin](termin_type) bekommen(termin_action).
-      - Ich würde gernen einen [Termin](termin_type) [bekommen](termin_action).
-      - Ich möchte einen [Termin](termin_type) [vereinbaren](termin_action).
-      - Ich möchte einen [Termin](termin_type) [machen](termin_action).
-      - Ich möchte einen [Termin](termin_type) [buchen](termin_action).
-      - Ich möchte eine [Erstberatung](termin_type) [machen](termin_action).
-      - Ich möchte eine [Erstberatung](termin_type) [buchen](termin_action).
-      - Ich möchte einen [Ersttermin](termin_type) [machen](termin_action).
-      - Ich würde gerne ein [Meeting](termin_type) mit Ihnen [vereinbaren](termin_action).
-      - Ich würde gerne ein [Meeting](termin_type) mit Ihnen [machen](termin_action).
-      - Einen [Termin](termin_type) möchte ich [vereinbaren](termin_action).
-      - Einen [Termin](termin_type) wollte ich [machen](termin_action). 
-      - Einen [Termin](termin_type) möchte ich [buchen](termin_action).
-      - Einen [Ersttermin](termin_type) möchte ich [machen](termin_action).
-      - Kannst du mir helfen einen [Termin](termin_type) zu [machen](termin_action)?
-      - Kannst du mir helfen einen [Termin](termin_type) zu [vereinbaren](termin_action)?
-      - Kannst du mir helfen einen [Termin](termin_type) zu [buchen](termin_action)?
-      - Kannst du mir helfen eine [Erstberatung](termin_type) zu [machen](termin_action)?
-      - Kannst du mir helfen eine [Erstberatung](termin_type) zu [buchen](termin_action)?
-      - Wie kann ich [online](termin_medium) einen [Termin](termin_type) [buchen](termin_action)?
-      - Wie [buche](termin_action) ich einen [Termin](termin_type)?
-      - Wie [buche](termin_action) ich eine [Erstberatung](termin_type)?
-      - Wie [buche](termin_action) ich einen [Ersttermin](termin_type)?
+      - Ich möchte einen [Termin](termin_type) bekommen.
+      - Ich würde gernen einen [Termin](termin_type) bekommen.
+      - Ich möchte einen [Termin](termin_type) vereinbaren.
+      - Ich möchte einen [Termin](termin_type) machen.
+      - Ich möchte einen [Termin](termin_type) buchen.
+      - Ich möchte eine [Erstberatung](termin_type) machen.
+      - Ich möchte eine [Erstberatung](termin_type) buchen.
+      - Ich möchte einen [Ersttermin](termin_type) machen.
+      - Ich würde gerne ein [Meeting](termin_type) mit Ihnen vereinbaren.
+      - Ich würde gerne ein [Meeting](termin_type) mit Ihnen machen.
+      - Einen [Termin](termin_type) möchte ich vereinbaren.
+      - Einen [Termin](termin_type) wollte ich machen. 
+      - Einen [Termin](termin_type) möchte ich buchen.
+      - Einen [Ersttermin](termin_type) möchte ich machen.
+      - Kannst du mir helfen einen [Termin](termin_type) zu machen?
+      - Kannst du mir helfen einen [Termin](termin_type) zu vereinbaren?
+      - Kannst du mir helfen einen [Termin](termin_type) zu buchen?
+      - Kannst du mir helfen eine [Erstberatung](termin_type) zu machen?
+      - Kannst du mir helfen eine [Erstberatung](termin_type) zu buchen?
+      - Wie kann ich [online](termin_medium) einen [Termin](termin_type) buchen?
+      - Wie [buche] ich einen [Termin](termin_type)?
+      - Wie [buche] ich eine [Erstberatung](termin_type)?
+      - Wie [buche] ich einen [Ersttermin](termin_type)?
       - Wie [mache] ich [Termine](termin_type)?
-      - Wann könnte ich ein [Meeting](termin_type) [vereinbaren](termin_action)?
-      - Wie kann ich einen [Termin](termin_type) [vereinbaren](termin_action)?
-      - Wie [mache](termin_action) ich einen [Termin](termin_type) für eine [Erstberatung](termin_type)??
-      - Wie schnell [bekomme](termin_action) ich einen [Termin](termin_type)?
-      - Wie ist es möglich an einen [Termin](termin_type) zu [kommen](termin_action)?
+      - Wann könnte ich ein [Meeting](termin_type) vereinbaren?
+      - Wie kann ich einen [Termin](termin_type) vereinbaren?
+      - Wie [mache] ich einen [Termin](termin_type) für eine [Erstberatung](termin_type)??
+      - Wie schnell [bekomme] ich einen [Termin](termin_type)?
+      - Wie ist es möglich an einen [Termin](termin_type) zu kommen?
       - Muss ich für einen [Termin](termin_type) [anrufen](termin_medium)?
-      - [Brauche](termin_action) ich einen [Termin](termin_type)?
+      - [Brauche] ich einen [Termin](termin_type)?
       - Muss ich vor einem ersten [Gespräch](termin_type) [anrufen](termin_medium)?
       - Kann ich für einen [Termin](termin_type) eine [Mail](termin_medium) schreiben?
-      - Kann ich einen [Termin](termin_type) per [Mail](termin_medium) [machen](termin_action) ?
-      - Kann ich einen [Termin](termin_type) per [Mail](termin_medium) [vereinbaren](termin_action)?
-      - Auf welchem Weg kann ich einen [Beratungstermin](termin_type) [bekommen](termin_action)?
-      - Wie kann ich einen [Termin](termin_type) [vereinbaren](termin_action)?
-      - Kann man außerhalb der Geschäftszeiten einen [Termin](termin_type) [vereinbaren](termin_action)?
+      - Kann ich einen [Termin](termin_type) per [Mail](termin_medium) machen ?
+      - Kann ich einen [Termin](termin_type) per [Mail](termin_medium) vereinbaren?
+      - Auf welchem Weg kann ich einen [Beratungstermin](termin_type) bekommen?
+      - Wie kann ich einen [Termin](termin_type) vereinbaren?
+      - Kann man außerhalb der Geschäftszeiten einen [Termin](termin_type) vereinbaren?
 
   - intent: termin_infos
     examples: |
