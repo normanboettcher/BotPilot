@@ -2,10 +2,14 @@ version: "3.1"
 
 rules:
   - rule: Begrüßung antworten
+    condition:
+      - active_loop: null
     steps:
       - intent: begruessung
       - action: action_begruessung
   - rule: Verabschiedung antworten
+    condition:
+      - active_loop: null
     steps:
       - intent: verabschiedung
       - action: action_verabschiedung
@@ -28,6 +32,8 @@ rules:
       - intent: faq
       - action: action_get_faq
   - rule: Allgemeine Bot-Frage
+    condition:
+      - active_loop: null
     steps:
       - intent: general_bot
       - action: action_general_bot

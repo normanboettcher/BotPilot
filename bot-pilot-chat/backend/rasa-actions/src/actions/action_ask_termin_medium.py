@@ -15,32 +15,21 @@ class ActionAskTerminMedium(Action):
 
     def run(self, dispatcher, tracker, domain):
         attempts = tracker.slots.get("termin_medium_attempts")
-        logger.debug("attempts: %s", attempts)
-        if attempts == 0:
+        if attempts == 3:
+            logger.debug("Max attempts reached for termin_medium")
             message = (
-                "Welchen Medien wollen Sie benutzen, um Ihnen einen "
-                "Termin zu bestimmen? Email oder Telefon?"
+                "Leider konnte ich Sie nicht verstehen. "
+                "Möchten Sie es weiter versuchen oder wollen Sie den Vorgang "
+                "abbrechen ?"
             )
             res = BotResponse.with_answer(message)
             dispatcher.utter_message(json_message=send_response(res.as_dict()))
-            return [SlotSet("termin_medium_attempts", 1)]
-        if 3 > attempts > 0:
-            message = (
-                "Es tut mir leid, ich konnte leider nicht verstehen, "
-                "ob Sie über E-Mail oder Telefon einen Termin "
-                "anfragen wollen. Bitte versuchen Sie es noch einmal."
-            )
-            res = BotResponse.with_answer(message)
-            dispatcher.utter_message(json_message=send_response(res.as_dict()))
-            logger.debug("set attempt + 1")
-            return [SlotSet("termin_medium_attempts", attempts + 1)]
-        else:
-            fail_message = (
-                "Es tut mir leid, dass ich Ihre Anfrage gerade "
-                "nicht verarbeiten konnte. Wollen Sie die Anfrage abbrechen "
-                "oder noch einmal versuchen?"
-            )
-            res = BotResponse.with_answer(fail_message)
-            dispatcher.utter_message(json_message=send_response(res.as_dict()))
-            logger.debug("too many attempts. reset")
-            return [SlotSet("termin_medium_attempts", 0)]
+            return [SlotSet("termin_medium_attempts", 0),
+                    SlotSet("termin_medium", None)]
+        message = (
+            "Welchen Medien wollen Sie benutzen, um Ihnen einen "
+            "Termin zu bestimmen? Email oder Telefon?"
+        )
+        res = BotResponse.with_answer(message)
+        dispatcher.utter_message(json_message=send_response(res.as_dict()))
+        return []
