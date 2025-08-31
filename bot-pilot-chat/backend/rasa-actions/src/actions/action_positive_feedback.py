@@ -11,10 +11,10 @@ class ActionPositiveFeedback(Action):
         return "action_positive_feedback"
 
     def run(
-            self,
-            dispatcher,
-            tracker,
-            domain,
+        self,
+        dispatcher,
+        tracker,
+        domain,
     ):
         general_message = "Es freut mich, dass ich Ihnen weiterhelfen konnte."
         res = BotResponse.with_answer_and_score(

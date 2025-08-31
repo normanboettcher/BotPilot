@@ -16,9 +16,9 @@ def make_termin_from_medium(tracker: Tracker) -> tuple[str, str]:
     if medium:
         medium = map_medium(medium)
         message = (
-                "Sehr gut, Sie möchten also einen Termin per "
-                + bold(medium)
-                + " vereinbaren."
+            "Sehr gut, Sie möchten also einen Termin per "
+            + bold(medium)
+            + " vereinbaren."
         )
         logger.debug(f"termin_medium: {medium}")
         return message, medium

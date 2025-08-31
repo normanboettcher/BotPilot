@@ -28,7 +28,7 @@ stories:
   - story: happy path make termin with mail
     steps:
       - user: |-
-          Ich möchte einen Termin vereinbaren.
+          Ich möchte einen [Termin]{"entity": "termin_type", "value": "termin"} vereinbaren.
         intent: termin_vereinbaren
       - slot_was_set:
           - termin_type: termin
@@ -39,19 +39,19 @@ stories:
       - slot_was_set:
           - requested_slot: termin_medium
       - user: |-
-          Per Mail bitte.
-        intent: termin_medium_inform
+          Per [Mail]{"entity": "termin_medium", "value": "mail"} bitte.
+        intent: termin_medium_inform_mail
       - slot_was_set:
           - termin_medium: mail
+      - action: termin_form
       - slot_was_set:
+          - termin_medium: mail
           - termin_medium_attempts: 0
-      - slot_was_set:
           - requested_slot: null
       - active_loop: null
       - action: action_termin_vereinbaren
       - slot_was_set:
           - termin_medium: null
-      - slot_was_set:
           - termin_medium_attempts: 0
 
   - story: happy path greet and ask what you can do
@@ -72,7 +72,7 @@ stories:
         intent: begruessung
       - action: action_begruessung
       - user: |
-          Ich möchte gerne einen [Termin](termin_type) vereinbaren.
+          Ich möchte gerne einen [Termin]{"entity": "termin_type", "value": "termin"} vereinbaren.
         intent: termin_vereinbaren
       - slot_was_set:
           - termin_type: termin
@@ -83,14 +83,20 @@ stories:
       - slot_was_set:
           - requested_slot: termin_medium
       - user: |
-          Gerne per mail.
-        intent: termin_medium_inform
+          Gerne per [mail]{"entity": "termin_medium", "value": "mail"}.
+        intent: termin_medium_inform_mail
       - slot_was_set:
           - termin_medium: mail
+      - action: termin_form
       - slot_was_set:
+          - termin_medium_attempts: 0
+          - termin_medium: mail
           - requested_slot: null
       - active_loop: null
       - action: action_termin_vereinbaren
+      - slot_was_set:
+          - termin_medium: null
+          - termin_medium_attempts: 0
       - user: |
           Tschüss
         intent: verabschiedung

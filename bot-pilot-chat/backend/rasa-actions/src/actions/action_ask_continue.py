@@ -1,5 +1,3 @@
-from rasa.shared.core.events import ActiveLoop
-
 from ..domain.response import BotResponse
 from rasa_sdk import Action
 from markdown_strings import bold
@@ -17,7 +15,8 @@ class ActionAskContinue(Action):
 
     async def run(self, dispatcher, tracker, domain):
         logger.debug("Asking user to continue or abort")
-        res = BotResponse.with_answer(f'Möchten Sie den Prozess forsetzen? '
-                                      f'{bold("ja/nein")}')
+        res = BotResponse.with_answer(
+            f"Möchten Sie den Prozess forsetzen? " f'{bold("ja/nein")}'
+        )
         dispatcher.utter_message(json_message=send_response(res.as_dict()))
         return [ActiveLoop(None)]

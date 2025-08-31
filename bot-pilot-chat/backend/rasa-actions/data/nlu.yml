@@ -362,7 +362,6 @@ nlu:
       - ich möchte den Vorgang abbrechen bitte
       - ich möchte den Prozess stoppen
       - brich den Vorgang bitte ab
-
   - intent: affirm
     examples: |
       - ja
@@ -402,11 +401,10 @@ nlu:
       - ich würde den Prozess gerne fortsetzen
       - ich möchte den Vorgang nochmal versuchen
       - Ja
-  - intent: termin_vereinbaren
-    examples: |
-      - ich möchte einen [termin](termin_type)
+
   - intent: nlu_fallback
     examples: |
       - ALLES
       - ALLLES
       - alles
+

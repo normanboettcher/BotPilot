@@ -21,7 +21,7 @@ class ActionAskTerminMedium(Action):
             return [
                 SlotSet("termin_medium_attempts", 0),
                 SlotSet("termin_medium", None),
-                FollowupAction("action_ask_continue")
+                FollowupAction("action_ask_continue"),
             ]
         message = (
             "Möchten Sie einen Termin klassisch über Telefon oder E-Mail "

@@ -1,98 +1,98 @@
 version: '3.1'
 intents:
-  - affirm
-  - anreise
-  - begruessung
-  - bereiche
-  - deny
-  - faq
-  - general_bot
-  - kosten
-  - negative_feedback
-  - nlu_fallback
-  - parking
-  - positive_feedback
-  - standort
-  - steuerberatung
-  - steuererklaerung
-  - termin_infos
-  - termin_medium_inform_mail
-  - termin_medium_inform_telefon
-  - termin_vereinbaren
-  - unterlagen
-  - verabschiedung
-  - zeiten
+- affirm
+- anreise
+- begruessung
+- bereiche
+- deny
+- faq
+- general_bot
+- kosten
+- negative_feedback
+- nlu_fallback
+- parking
+- positive_feedback
+- standort
+- steuerberatung
+- steuererklaerung
+- termin_infos
+- termin_medium_inform_mail
+- termin_medium_inform_telefon
+- termin_vereinbaren
+- unterlagen
+- verabschiedung
+- zeiten
 entities:
-  - termin_type
-  - termin_medium
+- termin_medium
+- termin_type
 slots:
   termin_type:
     mappings:
-      - type: from_entity
-        entity: termin_type
+    - type: from_entity
+      entity: termin_type
     type: categorical
     values:
-      - erstberatung
-      - steuerberatung
-      - ersttermin
-      - termin
-      - online-termin
+    - erstberatung
+    - steuerberatung
+    - ersttermin
+    - termin
+    - online-termin
   termin_medium_attempts:
     type: float
     initial_value: 0
     mappings:
-      - type: custom
+    - type: custom
   termin_medium:
     mappings:
-      - type: from_entity
-        entity: termin_medium
-      - type: from_intent
-        intent: termin_medium_inform_mail
-        value: mail
-        conditions:
-          - active_loop: termin_form
-            requested_slot: termin_medium
-      - type: from_text
-        conditions:
-          - active_loop: termin_form
-            requested_slot: termin_medium
-      - type: from_intent
-        intent: termin_medium_inform_telefon
-        value: telefon
-        conditions:
-          - active_loop: termin_form
-            requested_slot: termin_medium
+    - type: from_entity
+      entity: termin_medium
+    - type: from_intent
+      intent: termin_medium_inform_mail
+      value: mail
+      conditions:
+      - active_loop: termin_form
+        requested_slot: termin_medium
+    - type: from_text
+      conditions:
+      - active_loop: termin_form
+        requested_slot: termin_medium
+    - type: from_intent
+      intent: termin_medium_inform_telefon
+      value: telefon
+      conditions:
+      - active_loop: termin_form
+        requested_slot: termin_medium
     type: categorical
     values:
-      - mail
-      - telefon
-      - online
+    - mail
+    - telefon
+    - online
 forms:
   termin_form:
     required_slots:
-      - termin_medium
+    - termin_medium
 actions:
-  - action_begruessung
-  - action_ask_continue
-  - action_deny
-  - action_termin_vereinbaren
-  - action_verabschiedung
-  - action_general_bot
-  - validate_termin_form
-  - action_default_fallback
-  - action_get_faq
-  - action_positive_feedback
-  - action_negative_feedback
-  - action_parking
-  - action_kosten
-  - action_unterlagen
-  - action_steuererklaerung
-  - action_standort
-  - action_anreise
-  - action_bereiche
-  - action_zeiten
-  - action_steuerberatung
-  - action_ask_termin_medium
+- action_termin_vereinbaren
+- action_begruessung
+- action_ask_continue
+- action_deny
+- action_verabschiedung
+- action_general_bot
+- validate_termin_form
+- action_default_fallback
+- action_get_faq
+- action_positive_feedback
+- action_negative_feedback
+- action_parking
+- action_kosten
+- action_unterlagen
+- action_steuererklaerung
+- action_standort
+- action_anreise
+- action_bereiche
+- action_zeiten
+- action_steuerberatung
+- action_ask_termin_medium
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
