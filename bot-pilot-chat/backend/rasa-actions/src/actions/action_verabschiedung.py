@@ -8,6 +8,6 @@ class ActionVerabschiedung(Action):
         return "action_verabschiedung"
 
     def run(self, dispatcher, tracker, domain):
-        res = BotResponse.with_answer('auf Wiedersehen! Bis zum nächstem Mal.')
+        res = BotResponse.with_answer("auf Wiedersehen! Bis zum nächstem Mal.")
         dispatcher.utter_message(json_message=send_response(res.as_dict()))
         return []

@@ -1,136 +1,48 @@
 version: '3.1'
 stories:
-  - story: Begrüßung
-    steps:
-      - intent: begruessung
-      - action: action_begruessung
-  - story: Verabschiedung
-    steps:
-      - intent: verabschiedung
-      - action: action_verabschiedung
-
-  - story: Begrüßung und Verabschiedung
-    steps:
-      - intent: begruessung
-      - action: action_begruessung
-      - intent: verabschiedung
-      - action: action_verabschiedung
-
-  - story: Begrüßung und Frage, was bot alles kann
-    steps:
-      - intent: begruessung
-      - action: action_begruessung
-      - intent: general_bot
-      - action: action_general_bot
-
-  - story: Begrüßung, frage was bot alles kann und Verabschiedung
-    steps:
-      - intent: begruessung
-      - action: action_begruessung
-      - intent: general_bot
-      - action: action_general_bot
-      - intent: verabschiedung
-      - action: action_verabschiedung
-
-  - story: Vereinbare einen Termin per Mail auf Nachfrage des Mediums und Verabschiede dich danach
-    steps:
-      - intent: begruessung
-      - action: action_begruessung
-      - intent: termin_vereinbaren
-        entities:
-          - termin_type: termin
-      - slot_was_set:
-          - termin_type: termin
-      - action: termin_form
-      - active_loop: termin_form
-      - slot_was_set:
-          - termin_type: termin
-      - slot_was_set:
-          - requested_slot: termin_medium
-      - slot_was_set:
-          - termin_medium_attempts: 1
-      - intent: termin_medium_inform_mail
-      - slot_was_set:
-          - termin_medium: mail
-      - action: termin_form
-      - slot_was_set:
-          - termin_medium: mail
-      - slot_was_set:
-          - requested_slot: null
-      - active_loop: null
-      - action: action_termin_vereinbaren
-      - intent: verabschiedung
-      - action: action_verabschiedung
-
-  - story: Ask for termin_medium twice, then inform per mail
+  - story: user makes three mistakes and denies
     steps:
       - intent: termin_vereinbaren
-        entities:
-          - termin_type: termin
-      - slot_was_set:
-          - termin_type: termin
       - action: termin_form
       - active_loop: termin_form
-      - slot_was_set:
-          - termin_type: termin
       - slot_was_set:
           - requested_slot: termin_medium
       - intent: nlu_fallback
       - action: termin_form
-      - slot_was_set:
-          - termin_medium: null
-      - slot_was_set:
-          - termin_medium_attempts: 1
+      - intent: nlu_fallback
+      - action: termin_form
+      - intent: nlu_fallback
+      - action: termin_form
+      - action: action_ask_continue
+      - intent: deny
+      - action: termin_form
+      - active_loop: null
+  - story: user makes three mistakes and affirms
+    steps:
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
       - slot_was_set:
           - requested_slot: termin_medium
       - intent: nlu_fallback
       - action: termin_form
-      - slot_was_set:
-          - termin_medium: null
-      - slot_was_set:
-          - termin_medium_attempts: 2
-      - slot_was_set:
-          - requested_slot: termin_medium
-      - intent: termin_medium_inform_mail
-      - slot_was_set:
-          - termin_medium: mail
+      - intent: nlu_fallback
       - action: termin_form
-      - slot_was_set:
-          - termin_medium: mail
-      - slot_was_set:
-          - requested_slot: null
-      - slot_was_set:
-          - termin_medium_attempts: 0
-      - active_loop: null
-      - action: action_termin_vereinbaren
+      - intent: nlu_fallback
+      - action: termin_form
+      - action: action_ask_continue
+      - intent: affirm
+      - action: termin_form
+      - active_loop: termin_form
 
-
-  - story: Ask for termin and termin_medium, inform per mail
+  - story: happy path make termin with mail
     steps:
       - intent: termin_vereinbaren
-        entities:
-          - termin_type: termin
-      - slot_was_set:
-          - termin_type: termin
       - action: termin_form
       - active_loop: termin_form
       - slot_was_set:
-          - termin_type: termin
-      - slot_was_set:
           - requested_slot: termin_medium
       - intent: termin_medium_inform_mail
-      - slot_was_set:
-          - termin_medium: mail
       - action: termin_form
-      - slot_was_set:
-          - termin_medium: mail
-      - slot_was_set:
-          - termin_medium_attempts: 0
-      - slot_was_set:
-          - requested_slot: null
       - active_loop: null
       - action: action_termin_vereinbaren
-      - slot_was_set:
-          - termin_medium: null
-      - slot_was_set:
-          - termin_medium_attempts: 0

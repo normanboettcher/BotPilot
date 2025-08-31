@@ -17,7 +17,7 @@ pipeline:
 
 policies:
   - name: RulePolicy
-    core_fallback_threshold: 0.4
+    core_fallback_threshold: 0.5
     core_fallback_action_name: "action_default_fallback"
     enable_fallback_prediction: True
   - name: TEDPolicy
@@ -25,5 +25,5 @@ policies:
     batch_size: 50
     max_training_samples: 300
   - name: AugmentedMemoizationPolicy
-    max_history: 5
+    max_history: 10
 assistant_id: 20250805-174126-insulated-chief

@@ -325,4 +325,77 @@ nlu:
       - Was kann ich dich fragen?
       - Kannst du alles beantworten?
       - Muss ich ganze Sätze schreiben?
+      - was kann du eigentlich alles
 
+
+  - intent: deny
+    examples: |
+      - nein
+      - nope
+      - nö
+      - ne
+      - nöpe
+      - nix
+      - auf keinen fall
+      - auf keinen Fall
+      - niemals
+      - auf gar keinen fall
+      - auf gar keinen Fall
+      - auf keinen Fall nicht
+      - auf keinen fall nicht
+      - keinesfalls
+      - keines Falles
+      - keines Falles nicht
+      - keinesfalls nicht
+      - niemals nicht
+      - ne, danke
+      - nein, danke
+      - nö, danke
+      - ne, danke schön
+      - nein, danke schön
+      - nö, danke schön
+      - ne, danke sehr
+      - nein, danke sehr
+      - nö, danke sehr
+      - prozess abbrechen
+      - abbruch
+      - ich möchte den Prozess abbrechen
+      - Bitte lass uns den Vorgang beenden
+  - intent: affirm
+    examples: |
+      - ja
+      - klar
+      - sicher
+      - selbstverständlich
+      - natürlich
+      - yep
+      - yup
+      - ja, gerne
+      - ja, sehr gerne
+      - ja, bitte
+      - ja, bitte sehr
+      - ja, bitte schön
+      - ja, auf jeden fall
+      - ja, auf jeden Fall
+      - ja, auf jeden Fall gerne
+      - ja, auf jeden fall gerne
+      - ja, natürlich gerne
+      - ja, natürlich sehr gerne
+      - ja, natürlich bitte
+      - ja, natürlich bitte sehr
+      - ja, natürlich bitte schön
+      - ja, klar gerne
+      - ja, klar sehr gerne
+      - ja, klar bitte
+      - ja, klar bitte sehr
+      - ja, klar bitte schön
+      - aber sicher doch
+      - aber sicher doch gerne
+      - aber sicher doch sehr gerne
+      - aber sicher doch bitte
+      - aber sicher doch bitte sehr
+      - aber sicher doch bitte schön
+      - ja, bitte fortsetzen
+      - ja, gerne fortsetzen
+      - ich würde den Prozess gerne fortsetzen
+      - ich möchte den Vorgang nochmal versuchen
