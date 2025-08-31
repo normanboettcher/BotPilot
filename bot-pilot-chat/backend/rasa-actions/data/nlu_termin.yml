@@ -127,6 +127,41 @@ nlu:
       - über Telefon
       - mit telefon
       - über anruf
+      - per Telefon
+      - per phone
+      - bitte per Anruf
+      - bitte per Telefon
+      - bitte als Anruf
+      - als Anruf
+      - per call
+      - als call
+      - ich bevorzuge per Telefon
+      - ich bevorzuge einen Anruf
+      - ich möchte einen Anruf
+      - lieber als Anruf
+      - lieber über Telefon
+      - würde ich gerne per Anruf machen
+      - würde ich gerne per Telefon machen
+      - würde ich gerne per telefon buchen
+      - ich will das per Telefon machen
+      - ich will das per Telefon machen
+      - ich will das per Telefon buchen
+      - per Telefon wäre gut
+      - per Telefon wäre gut
+      - per telefon wäre super
+      - per Telefon wäre super
+      - per Telefon wäre toll
+      - natürlich über Telefon
+      - natürlich per Telefon
+      - natürlich per Telefon
+      - natürlich über Telefon
+      - über telefon gerne
+      - gerne telefon
+      - gerne über telefon
+      - gerne per telefon
+      - gerne per telefon
+      - gerne über telefon
+      
 
   - intent: stop_termin_form
     examples: |

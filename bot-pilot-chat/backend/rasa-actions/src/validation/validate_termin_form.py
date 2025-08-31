@@ -18,17 +18,20 @@ class ValidateTerminForm(FormValidationAction):
         return "validate_termin_form"
 
     def validate_termin_medium(
-            self,
-            slot_value: Any,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: DomainDict,
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate termin_medium value."""
-        logger.debug(f'validate_termin_form called. slot_value: {slot_value},'
-                     f' slots: {tracker.slots} domain: {domain} tracker: {tracker}')
+        logger.debug(
+            f"validate_termin_form called. slot_value: {slot_value},"
+            f" slots: {tracker.slots} domain: {domain} tracker: {tracker}"
+        )
         if slot_value.lower() in self.termin_medium_db():
-            # validation succeeded, set the value of the "termin_medium" slot to value
+            # validation succeeded, set the value of the
+            # "termin_medium" slot to value
             return {"termin_medium": slot_value}
         else:
             # validation failed, set this slot to None so that the
