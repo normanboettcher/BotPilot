@@ -11,8 +11,8 @@ stories:
       - intent: nlu_fallback
       - slot_was_set:
           - termin_medium_attempts: 3
-      - active_loop: null
       - action: action_ask_continue
+      - active_loop: null
       - intent: deny
       - action: action_deny
 
@@ -26,8 +26,8 @@ stories:
       - intent: nlu_fallback
       - slot_was_set:
           - termin_medium_attempts: 3
-      - active_loop: null
       - action: action_ask_continue
+      - active_loop: null
       - intent: affirm
       - action: termin_form
       - active_loop: termin_form

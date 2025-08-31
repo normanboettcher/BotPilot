@@ -87,8 +87,8 @@ rules:
 
   - rule: ask termin_medium_form continue and affirm
     steps:
-      - active_loop: null
       - action: action_ask_continue
+      - active_loop: null
       - intent: affirm
       - action: termin_form
       - active_loop: termin_form
