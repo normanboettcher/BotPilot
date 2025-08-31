@@ -304,7 +304,6 @@ nlu:
       - Hast du ein Gesicht?
       - Wie siehst du aus?
       - Was kannst du?
-      - Was kannst du alles?
       - Wie funktioniert das hier?
       - Wie funktionierst du?
       - Wie kann ich dich benutzen?
@@ -323,11 +322,7 @@ nlu:
       - Wofür bist du da?
       - Wie spreche ich mit dir?
       - Was kann ich dich fragen?
-      - Kannst du alles beantworten?
       - Muss ich ganze Sätze schreiben?
-      - was kann du eigentlich alles
-
-
   - intent: deny
     examples: |
       - nein
@@ -361,6 +356,13 @@ nlu:
       - abbruch
       - ich möchte den Prozess abbrechen
       - Bitte lass uns den Vorgang beenden
+      - abbrechen
+      - ich möchte den Vorgang abbrechen
+      - abbrechen bitte
+      - ich möchte den Vorgang abbrechen bitte
+      - ich möchte den Prozess stoppen
+      - brich den Vorgang bitte ab
+
   - intent: affirm
     examples: |
       - ja
@@ -399,3 +401,12 @@ nlu:
       - ja, gerne fortsetzen
       - ich würde den Prozess gerne fortsetzen
       - ich möchte den Vorgang nochmal versuchen
+      - Ja
+  - intent: termin_vereinbaren
+    examples: |
+      - ich möchte einen [termin](termin_type)
+  - intent: nlu_fallback
+    examples: |
+      - ALLES
+      - ALLLES
+      - alles

@@ -1,6 +1,6 @@
-from domain.response import BotResponse
+from ..domain.response import BotResponse
 from rasa_sdk import Action
-from utils.response_wrapper import send_response
+from ..utils.response_wrapper import send_response
 
 
 class ActionVerabschiedung(Action):

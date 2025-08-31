@@ -1,9 +1,9 @@
 import logging
 
-from bot_pilot_chat.domain.response import BotResponse
 from rasa_sdk import Action
 from rasa_sdk.events import UserUtteranceReverted
 
+from ..domain.response import BotResponse
 from ..utils.response_wrapper import send_response
 
 logger = logging.getLogger(__name__)

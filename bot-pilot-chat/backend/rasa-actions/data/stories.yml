@@ -1,5 +1,6 @@
 version: '3.1'
 stories:
+
   - story: user makes three mistakes and denies
     steps:
       - intent: termin_vereinbaren
@@ -8,15 +9,13 @@ stories:
       - slot_was_set:
           - requested_slot: termin_medium
       - intent: nlu_fallback
-      - action: termin_form
-      - intent: nlu_fallback
-      - action: termin_form
-      - intent: nlu_fallback
-      - action: termin_form
+      - slot_was_set:
+          - termin_medium_attempts: 3
+      - active_loop: null
       - action: action_ask_continue
       - intent: deny
-      - action: termin_form
-      - active_loop: null
+      - action: action_deny
+
   - story: user makes three mistakes and affirms
     steps:
       - intent: termin_vereinbaren
@@ -25,11 +24,9 @@ stories:
       - slot_was_set:
           - requested_slot: termin_medium
       - intent: nlu_fallback
-      - action: termin_form
-      - intent: nlu_fallback
-      - action: termin_form
-      - intent: nlu_fallback
-      - action: termin_form
+      - slot_was_set:
+          - termin_medium_attempts: 3
+      - active_loop: null
       - action: action_ask_continue
       - intent: affirm
       - action: termin_form

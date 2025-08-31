@@ -77,7 +77,6 @@ rules:
       - intent: termin_vereinbaren
       - action: termin_form
       - active_loop: termin_form
-
   - rule: Termin vereinbaren
     condition:
       - active_loop: termin_form
@@ -86,26 +85,17 @@ rules:
       - active_loop: null
       - action: action_termin_vereinbaren
 
-  - rule: ask for continue after three failed medium attempts
-    condition:
-      - active_loop: termin_form
-      - slot_was_set:
-          - termin_medium_attempts: 3
-    steps:
-      - action: action_ask_termin_medium
-
-  - rule: stop from after deny
-    condition:
-      - slot_was_set:
-          - continue_form: deny
+  - rule: ask termin_medium_form continue and affirm
     steps:
       - active_loop: null
-      - action: action_deny
-
-  - rule: continue termin_form after affirm
-    condition:
-      - slot_was_set:
-          - continue_form: affirm
-    steps:
+      - action: action_ask_continue
+      - intent: affirm
       - action: termin_form
       - active_loop: termin_form
+
+  - rule: ask continue and deny
+    steps:
+      - action: action_ask_continue
+      - active_loop: null
+      - intent: deny
+      - action: action_deny

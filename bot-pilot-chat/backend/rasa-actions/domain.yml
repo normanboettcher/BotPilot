@@ -1,8 +1,10 @@
 version: '3.1'
 intents:
+  - affirm
   - anreise
   - begruessung
   - bereiche
+  - deny
   - faq
   - general_bot
   - kosten
@@ -20,25 +22,10 @@ intents:
   - unterlagen
   - verabschiedung
   - zeiten
-  - deny
-  - affirm
 entities:
-  - termin_medium
   - termin_type
+  - termin_medium
 slots:
-  continue_form:
-    type: categorical
-    mappings:
-      - type: from_intent
-        intent: deny
-        value: deny
-      - type: from_intent
-        intent: affirm
-        value: affirm
-    values:
-      - deny
-      - affirm
-
   termin_type:
     mappings:
       - type: from_entity
@@ -85,9 +72,11 @@ forms:
     required_slots:
       - termin_medium
 actions:
-  - action_verabschiedung
-  - action_termin_vereinbaren
   - action_begruessung
+  - action_ask_continue
+  - action_deny
+  - action_termin_vereinbaren
+  - action_verabschiedung
   - action_general_bot
   - validate_termin_form
   - action_default_fallback
@@ -104,7 +93,6 @@ actions:
   - action_zeiten
   - action_steuerberatung
   - action_ask_termin_medium
-  - action_ask_continue
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
