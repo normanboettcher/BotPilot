@@ -47,7 +47,7 @@ deps = [
 ]
 commands = [
     ["python", "-m", "spacy", "download", "de_core_news_md"],
-    ["rasa", "test", "--stories", "tests/rasa/stories"],
+    ["rasa", "test", "--fail-on-prediction-errors", "--stories", "tests/rasa/stories"],
 ]
 
 [tool.tox.env.coverage]

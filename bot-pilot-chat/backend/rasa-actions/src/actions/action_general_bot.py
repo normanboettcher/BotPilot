@@ -1,7 +1,7 @@
 import textwrap
 
 import emoji
-from bot_pilot_chat.domain.response import BotResponse
+from ..domain.response import BotResponse
 from markdown_strings import unordered_list, bold
 from rasa_sdk import Action
 from ..utils.response_wrapper import send_response

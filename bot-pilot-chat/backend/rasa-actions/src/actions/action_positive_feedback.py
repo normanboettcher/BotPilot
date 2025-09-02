@@ -1,7 +1,8 @@
 from typing import Text
 
-from bot_pilot_chat.domain.response import BotResponse
 from rasa_sdk import Action
+
+from ..domain.response import BotResponse
 from ..utils.response_wrapper import send_response
 
 

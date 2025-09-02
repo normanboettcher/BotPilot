@@ -1,5 +1,4 @@
 results/
-rasa-actions/data/nlu.yml
 .rasa
 .venv
 chat-backend/build

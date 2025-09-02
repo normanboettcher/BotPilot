@@ -1,20 +1,20 @@
 version: "3.1"
 stories:
-  - story: Happy Path begrüßen
+  - story: happy path greet
     steps:
       - user: |
           Hallo
         intent: begruessung
       - action: action_begruessung
 
-  - story: Happy Path Verabschiedung
+  - story: happy path goodbye
     steps:
       - user: |
           Tschüss
         intent: verabschiedung
       - action: action_verabschiedung
 
-  - story: Happy Path Begrüßung und Verabschiedung
+  - story: happy path greet and bye
     steps:
       - user: |
           Hallo
@@ -25,32 +25,36 @@ stories:
         intent: verabschiedung
       - action: action_verabschiedung
 
-  - story: Happy Path Termin Medium per Mail
+  - story: happy path make termin with mail
     steps:
-      - user: |
-          Ich möchte einen [Termin](termin_type) [vereinbaren](termin_action).
+      - user: |-
+          Ich möchte einen [Termin]{"entity": "termin_type", "value": "termin"} vereinbaren.
         intent: termin_vereinbaren
+      - slot_was_set:
+          - termin_type: termin
       - action: termin_form
       - active_loop: termin_form
-      - user: |
-          Per Mail bitte.
+      - slot_was_set:
+          - termin_type: termin
+      - slot_was_set:
+          - requested_slot: termin_medium
+      - user: |-
+          Per [Mail]{"entity": "termin_medium", "value": "mail"} bitte.
         intent: termin_medium_inform_mail
-      - active_loop: null
-      - action: action_termin_vereinbaren
-
-  - story: Happy Path Termin Medium per Telefon
-    steps:
-      - user: |
-          Ich möchte einen [Termin](termin_type) [vereinbaren](termin_action).
-        intent: termin_vereinbaren
+      - slot_was_set:
+          - termin_medium: mail
       - action: termin_form
-      - active_loop: termin_form
-      - user: |
-          Per [Telefon](termin_medium) bitte.
+      - slot_was_set:
+          - termin_medium: mail
+          - termin_medium_attempts: 0
+          - requested_slot: null
       - active_loop: null
       - action: action_termin_vereinbaren
+      - slot_was_set:
+          - termin_medium: null
+          - termin_medium_attempts: 0
 
-  - story: Happy Path Begruessung und Frage, was bot alles kann
+  - story: happy path greet and ask what you can do
     steps:
       - user: |
           Hallo
@@ -60,3 +64,40 @@ stories:
           Was kannst du alles?
         intent: general_bot
       - action: action_general_bot
+
+  - story: happy path, greet, make termin with mail and bye
+    steps:
+      - user: |
+          Guten Tag
+        intent: begruessung
+      - action: action_begruessung
+      - user: |
+          Ich möchte gerne einen [Termin]{"entity": "termin_type", "value": "termin"} vereinbaren.
+        intent: termin_vereinbaren
+      - slot_was_set:
+          - termin_type: termin
+      - action: termin_form
+      - active_loop: termin_form
+      - slot_was_set:
+          - termin_type: termin
+      - slot_was_set:
+          - requested_slot: termin_medium
+      - user: |
+          Gerne per [mail]{"entity": "termin_medium", "value": "mail"}.
+        intent: termin_medium_inform_mail
+      - slot_was_set:
+          - termin_medium: mail
+      - action: termin_form
+      - slot_was_set:
+          - termin_medium_attempts: 0
+          - termin_medium: mail
+          - requested_slot: null
+      - active_loop: null
+      - action: action_termin_vereinbaren
+      - slot_was_set:
+          - termin_medium: null
+          - termin_medium_attempts: 0
+      - user: |
+          Tschüss
+        intent: verabschiedung
+      - action: action_verabschiedung

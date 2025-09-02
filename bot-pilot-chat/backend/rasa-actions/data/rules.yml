@@ -28,6 +28,8 @@ rules:
       - intent: faq
       - action: action_get_faq
   - rule: Allgemeine Bot-Frage
+    condition:
+      - active_loop: null
     steps:
       - intent: general_bot
       - action: action_general_bot
@@ -75,12 +77,25 @@ rules:
       - intent: termin_vereinbaren
       - action: termin_form
       - active_loop: termin_form
-
   - rule: Termin vereinbaren
     condition:
       - active_loop: termin_form
-      - slot_was_set:
-          - requested_slot: termin_medium
     steps:
+      - action: termin_form
       - active_loop: null
       - action: action_termin_vereinbaren
+
+  - rule: ask termin_medium_form continue and affirm
+    steps:
+      - action: action_ask_continue
+      - active_loop: null
+      - intent: affirm
+      - action: termin_form
+      - active_loop: termin_form
+
+  - rule: ask continue and deny
+    steps:
+      - action: action_ask_continue
+      - active_loop: null
+      - intent: deny
+      - action: action_deny
