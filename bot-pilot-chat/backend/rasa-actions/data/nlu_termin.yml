@@ -51,7 +51,7 @@ nlu:
       - online-erstberatung
 
 
-  - intent: termin_medium_inform_mail
+  - intent: termin_medium_inform
     examples: |
       - [Mail]{"entity": "termin_medium", "value": "mail"}
       - [E-Mail]{"entity": "termin_medium", "value": "mail"}
@@ -96,10 +96,6 @@ nlu:
       - natürlich über [E-Mail]{"entity": "termin_medium", "value": "mail"}
       - Den Termin würde ich gerne per [mail]{"entity": "termin_medium", "value": "mail"} machen
       - lass uns das mal per [mail]{"entity": "termin_medium", "value": "mail"} machen
-
-
-  - intent: termin_medium_inform_telefon
-    examples: |
       - [Telefon]{"entity": "termin_medium", "value": "telefon"}
       - per [Telefon]{"entity": "termin_medium", "value": "telefon"}
       - [telefonisch]{"entity": "termin_medium", "value": "telefon"}
@@ -111,6 +107,21 @@ nlu:
       - über [Telefon]{"entity": "termin_medium", "value": "telefon"}
       - mit [telefon]{"entity": "termin_medium", "value": "telefon"}
       - über [anruf]{"entity": "termin_medium", "value": "telefon"}
+      - [Bot]{"entity": "termin_medium", "value": "bot"}
+      - per [Bot]{"entity": "termin_medium", "value": "bot"}
+      - über [Bot]{"entity": "termin_medium", "value": "bot"}
+      - mit [Bot]{"entity": "termin_medium", "value": "bot"}
+      - [Chatbot]{"entity": "termin_medium", "value": "bot"}
+      - per [Chatbot]{"entity": "termin_medium", "value": "bot"}
+      - über [Chatbot]{"entity": "termin_medium", "value": "bot"}
+      - mit [Chatbot]{"entity": "termin_medium", "value": "bot"}
+      - [chatbot]{"entity": "termin_medium", "value": "bot"}
+      - per [chatbot]{"entity": "termin_medium", "value": "bot"}
+      - über [chatbot]{"entity": "termin_medium", "value": "bot"}
+      - mit [chatbot]{"entity": "termin_medium", "value": "bot"}
+      - mach [du]{"entity": "termin_medium", "value": "bot"} das für mich
+      - ich möchte, dass [du]{"entity": "termin_medium", "value": "bot"} das für mich machst
+      - mach [du]{"entity": "termin_medium", "value": "bot"} bitte
 
 
   - intent: termin_vereinbaren

@@ -32,14 +32,14 @@ stories:
       - action: termin_form
       - active_loop: termin_form
 
-  - story: happy path make termin with mail
+  - story: happy path make termin
     steps:
       - intent: termin_vereinbaren
       - action: termin_form
       - active_loop: termin_form
       - slot_was_set:
           - requested_slot: termin_medium
-      - intent: termin_medium_inform_mail
+      - intent: termin_medium_inform
       - action: termin_form
       - active_loop: null
       - action: action_termin_vereinbaren

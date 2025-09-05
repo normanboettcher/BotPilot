@@ -1,10 +1,10 @@
 from unittest.mock import patch
 
-from service.matching import find_most_similar_faq
+from bot_pilot.service.matching import find_most_similar_faq
 from tests.unit.config import app_test_config
 
 
-@patch("service.matching.text_matching.app_config")
+@patch("bot_pilot.service.matching.text_matching.app_config")
 def test_find_most_similar_returns_answer(app_config_mock):
     app_config_mock.return_value = app_test_config()
     question = "Welche Dokumente brauche ich für die Steuererklärung?"
@@ -18,7 +18,7 @@ def test_find_most_similar_returns_answer(app_config_mock):
     print("response score:", response.get_score())
 
 
-@patch("service.matching.text_matching.app_config")
+@patch("bot_pilot.service.matching.text_matching.app_config")
 def test_find_most_similar_no_answer(app_config_mock):
     app_config_mock.return_value = app_test_config()
     question = "Unverständliche Frage ohne Antwort"

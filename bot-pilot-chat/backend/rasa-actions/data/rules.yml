@@ -99,3 +99,10 @@ rules:
       - active_loop: null
       - intent: deny
       - action: action_deny
+
+  - rule: ask continue after stop intent
+    steps:
+      - intent: stop
+      - action: action_stop
+      - action: action_ask_continue
+      - active_loop: null

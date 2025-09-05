@@ -40,7 +40,7 @@ stories:
           - requested_slot: termin_medium
       - user: |-
           Per [Mail]{"entity": "termin_medium", "value": "mail"} bitte.
-        intent: termin_medium_inform_mail
+        intent: termin_medium_inform
       - slot_was_set:
           - termin_medium: mail
       - action: termin_form
@@ -84,7 +84,7 @@ stories:
           - requested_slot: termin_medium
       - user: |
           Gerne per [mail]{"entity": "termin_medium", "value": "mail"}.
-        intent: termin_medium_inform_mail
+        intent: termin_medium_inform
       - slot_was_set:
           - termin_medium: mail
       - action: termin_form

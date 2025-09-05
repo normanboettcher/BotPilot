@@ -44,6 +44,7 @@ nlu:
       - hallo, guten morgen
       - hallo, guten abend
       - halloo
+
   - intent: verabschiedung
     examples: |
       - tschüss
@@ -78,6 +79,9 @@ nlu:
       - bis zum nächsten mal, tschüss
       - ciao ciao
       - danke, auf wiedersehen
+      - tschüß
+      - tschöß
+      - tschuss
   - intent: parking
     examples: |
       - Gibt es Parkplätze?
@@ -401,6 +405,32 @@ nlu:
       - ich würde den Prozess gerne fortsetzen
       - ich möchte den Vorgang nochmal versuchen
       - Ja
+
+  - intent: stop
+    examples: |
+      - Stopp
+      - Stop
+      - Halt
+      - Halt!
+      - Stop!
+      - Stopp!
+      - Abbrechen
+      - Abbruch
+      - Prozess stoppen
+      - Prozess abbrechen
+      - Vorgang abbrechen
+      - Vorgang stoppen
+      - Ich möchte den Prozess stoppen
+      - Ich möchte den Prozess abbrechen
+      - Ich möchte den Vorgang abbrechen
+      - Ich möchte den Vorgang stoppen
+      - Bitte den Prozess stoppen
+      - Bitte den Prozess abbrechen
+      - Bitte den Vorgang abbrechen
+      - Bitte den Vorgang stoppen
+      - Brich bitte ab
+      - Brica ab
+     
 
   - intent: nlu_fallback
     examples: |
