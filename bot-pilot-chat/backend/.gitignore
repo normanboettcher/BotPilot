@@ -4,3 +4,4 @@ results/
 chat-backend/build
 chat-backend/conf
 **/*.tox
+.idea
