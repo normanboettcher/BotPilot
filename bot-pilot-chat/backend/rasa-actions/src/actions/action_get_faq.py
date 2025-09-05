@@ -1,8 +1,8 @@
 import requests
 from rasa_sdk import Action
 
-from ..domain.response import BotResponse
-from ..utils.response_wrapper import send_response
+from bot_pilot.domain.response import BotResponse
+from bot_pilot.utils.response_wrapper import send_response
 
 
 class ActionGetFaq(Action):

@@ -12,7 +12,7 @@ class ValidateTerminForm(FormValidationAction):
 
     @staticmethod
     def termin_medium_db() -> List[Text]:
-        return ["mail", "telefon"]
+        return ["mail", "phone"]
 
     def name(self) -> Text:
         return "validate_termin_form"

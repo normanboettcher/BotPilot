@@ -44,6 +44,7 @@ nlu:
       - hallo, guten morgen
       - hallo, guten abend
       - halloo
+
   - intent: verabschiedung
     examples: |
       - tschüss
@@ -78,6 +79,9 @@ nlu:
       - bis zum nächsten mal, tschüss
       - ciao ciao
       - danke, auf wiedersehen
+      - tschüß
+      - tschöß
+      - tschuss
   - intent: parking
     examples: |
       - Gibt es Parkplätze?

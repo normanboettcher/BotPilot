@@ -11,11 +11,13 @@ target-version = ['py310']
 
 [tool.tox]
 envlist = ['format', 'lint', 'unit_tests', 'coverage', 'rasa_tests']
+requires = ["tox>=4.19"]
 
 [tool.tox.env.unit_tests]
 description = "Run unit tests"
 deps = [
     "-rrequirements.txt",
+    "-e ."
 ]
 commands = [
     ["python", "-m", "pytest", "tests/unit"],
@@ -25,6 +27,7 @@ commands = [
 description = "Run integration tests"
 deps = [
     "-rrequirements.txt",
+    "-e ."
 ]
 commands = [
     ["python", "-m", "pytest", "integration_tests/"]
@@ -54,6 +57,7 @@ commands = [
 description = "Run tests and generate HTML coverage report"
 deps = [
     "-rrequirements.txt",
+    "-e ."
 ]
 commands = [
     ["python", "-m", "pytest", "tests/unit"]
@@ -70,4 +74,4 @@ commands = [
 
 [project]
 version = "0.1.0"
-name = "bot_pilot_rasa"
+name = "bot_pilot"

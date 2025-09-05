@@ -3,9 +3,11 @@ import logging
 from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
 
-from ..domain.response import BotResponse
-from ..service.provider.termin_message_provider import make_termin_from_medium
-from ..utils.response_wrapper import send_response
+from bot_pilot.domain.response import BotResponse
+from bot_pilot.service.provider.termin_message_provider import (
+    make_termin_from_medium,
+)
+from bot_pilot.utils.response_wrapper import send_response
 
 logger = logging.getLogger(__name__)
 

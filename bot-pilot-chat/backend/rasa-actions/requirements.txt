@@ -1,19 +1,19 @@
 # Testing
 pytest==7.4.4
-pytest-cov==4.1.0
+pytest_cov==4.1.0
 
 # Rasa and SDK
 rasa==3.6.21
-rasa-sdk==3.6.2
+rasa_sdk==3.6.2
 
 # Tensorflow compatible with rasa 3.6.21
 tensorflow==2.12.0
 
 # NLP
 spacy==3.7.4
-sentence-transformers==2.3.0
+sentence_transformers==2.3.0
 
 # Additional libraries
-markdown-strings==3.4.0
+markdown_strings==3.4.0
 emoji==2.14.1
-python-dotenv==1.0.1
+python_dotenv==1.0.1
