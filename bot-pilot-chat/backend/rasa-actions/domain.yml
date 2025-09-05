@@ -1,5 +1,6 @@
 version: '3.1'
 intents:
+  - stop
   - affirm
   - anreise
   - begruessung
@@ -83,6 +84,7 @@ actions:
   - action_zeiten
   - action_steuerberatung
   - action_ask_termin_medium
+  - action_stop
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
