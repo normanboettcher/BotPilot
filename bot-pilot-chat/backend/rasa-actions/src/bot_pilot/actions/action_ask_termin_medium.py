@@ -4,7 +4,8 @@ from rasa_sdk import Action
 from rasa_sdk.events import SlotSet, FollowupAction
 
 from bot_pilot.domain.button_registry import TERMIN_MEDIUMS
-from bot_pilot.service.provider.button_factory import make_button
+from bot_pilot.service.provider.button_factory import \
+    make_buttons_termin_mediums
 from bot_pilot.domain.response import BotResponse
 from bot_pilot.utils.response_wrapper import send_response
 
@@ -24,10 +25,7 @@ class ActionAskTerminMedium(Action):
                 SlotSet("termin_medium", None),
                 FollowupAction("action_ask_continue"),
             ]
-        buttons = [
-            make_button("termin_medium_inform", "termin_medium", value)
-            for (key, value) in TERMIN_MEDIUMS
-        ]
+        buttons = make_buttons_termin_mediums()
         message = (
             "Möchten Sie einen Termin klassisch über Telefon oder E-Mail "
             "vereinbaren oder möchten Sie das direkt mit mir machen?"
