@@ -3,9 +3,9 @@ import logging
 from rasa_sdk import Action
 from rasa_sdk.events import SlotSet, FollowupAction
 
-from bot_pilot.domain.button_registry import TERMIN_MEDIUMS
-from bot_pilot.service.provider.button_factory import \
-    make_buttons_termin_mediums
+from bot_pilot.service.provider.button_factory import (
+    make_buttons_termin_mediums,
+)
 from bot_pilot.domain.response import BotResponse
 from bot_pilot.utils.response_wrapper import send_response
 

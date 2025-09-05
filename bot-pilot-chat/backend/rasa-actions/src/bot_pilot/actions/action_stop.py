@@ -10,7 +10,7 @@ class ActionStop(Action):
         return "action_stop"
 
     def run(self, dispatcher, tracker, domain):
-        message = 'Ich habe verstanden, dass Sie den Prozess beendet möchten.'
+        message = "Ich habe verstanden, dass Sie den Prozess beendet möchten."
         res = BotResponse.with_answer(message)
         dispatcher.utter_message(json_message=send_response(res.as_dict()))
-        return [FollowupAction('action_ask_continue')]
+        return [FollowupAction("action_ask_continue")]
