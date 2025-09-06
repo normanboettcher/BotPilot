@@ -14,20 +14,41 @@ class ValidateTerminForm(FormValidationAction):
     def termin_medium_db() -> List[Text]:
         return ["mail", "phone"]
 
+    @staticmethod
+    def termin_type_db() -> List[Text]:
+        return ['erstberatung', 'folgeberatung']
+
     def name(self) -> Text:
         return "validate_termin_form"
 
+    def validate_termin_type(self,
+                             slot_value: Any,
+                             dispatcher: CollectingDispatcher,
+                             tracker: Tracker,
+                             domain: DomainDict) -> Dict[Text, Any]:
+        """
+        Validate termin_type value.
+        Set termin_type value to None if the value is not in the database.
+        """
+        logger.debug(f'validate termin_type called. slot_value: {slot_value}')
+        if slot_value and slot_value.lower() in self.termin_type_db():
+            return {
+                "termin_type": slot_value.lower(),
+            }
+        return {
+            "termin_type": None,
+        }
+
     def validate_termin_medium(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate termin_medium value."""
         logger.debug(f"validate_termin_form called. slot_value: {slot_value}")
         attempts = tracker.slots.get("termin_medium_attempts")
-        logger.debug(f"slot value: {slot_value}")
         if slot_value and slot_value.lower() in self.termin_medium_db():
             # validation succeeded, set the value of the "termin_medium" slot
             # to value

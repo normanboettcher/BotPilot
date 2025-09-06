@@ -41,5 +41,10 @@ stories:
           - requested_slot: termin_medium
       - intent: termin_medium_inform
       - action: termin_form
+      - active_loop: termin_form
+      - slot_was_set:
+          - requested_slot: termin_type
+      - intent: termin_type_inform
+      - action: termin_form
       - active_loop: null
       - action: action_termin_vereinbaren
