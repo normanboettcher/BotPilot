@@ -164,6 +164,11 @@ nlu:
       - Auf welchem Weg kann ich einen [Beratungstermin](termin_type) bekommen?
       - Wie kann ich einen [Termin](termin_type) vereinbaren?
       - Kann man außerhalb der Geschäftszeiten einen [Termin](termin_type) vereinbaren?
+      - Ich habe mich [selbstständig]{"entity": "user_type", "value": "selbststaendiger"} gemacht und möchte einen [Termin](termin_type) vereinbaren.
+      - Ich bin [Freiberufler]{"entity": "user_type", "value": "freiberufler"} und möchte einen [Termin](termin_type) vereinbaren.
+      - Als [Unternehmer]{"entity": "user_type", "value": "unternehmer"} möchte ich einen [Termin](termin_type) vereinbaren.
+      - Ich bin [Angestellter]{"entity": "user_type", "value": "privatperson"} und benoetige einen [Termin](termin_type).
+      - Ich möchte eine Steuerberatung für [mein Unternehmen]{"entity": "user_type", "value": "unternehmer"}.
 
   - intent: termin_infos
     examples: |

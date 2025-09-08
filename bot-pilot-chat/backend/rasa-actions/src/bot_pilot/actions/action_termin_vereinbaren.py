@@ -25,4 +25,5 @@ class ActionTerminVereinbaren(Action):
         return [
             SlotSet("termin_medium", None),
             SlotSet("termin_medium_attempts", 0),
+            SlotSet('previous_form_name', 'termin_form')
         ]

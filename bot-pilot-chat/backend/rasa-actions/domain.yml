@@ -23,10 +23,30 @@ intents:
   - verabschiedung
   - zeiten
   - termin_type_inform
+  - user_type_inform
 entities:
   - termin_medium
   - termin_type
+  - user_type
 slots:
+  previous_form_name:
+    mappings:
+      - type: custom
+
+  user_type:
+    mappings:
+      - type: from_entity
+        entity: user_type
+        conditions:
+          - active_loop: user_type_form
+            requested_slot: user_type
+      - type: from_text
+    type: categorical
+    values:
+      - privatperson
+      - unternehmer
+      - freiberufler
+      - selbststaendiger
   termin_type:
     mappings:
       - type: from_entity
@@ -69,6 +89,11 @@ forms:
     required_slots:
       - termin_type
       - termin_medium
+
+  user_type_form:
+    required_slots:
+      - user_type
+
 actions:
   - action_termin_vereinbaren
   - action_begruessung
@@ -92,6 +117,7 @@ actions:
   - action_steuerberatung
   - action_ask_termin_medium
   - action_ask_termin_type
+  - action_ask_user_type
   - action_stop
 session_config:
   session_expiration_time: 60
