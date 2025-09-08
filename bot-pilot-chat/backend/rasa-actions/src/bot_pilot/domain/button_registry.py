@@ -26,9 +26,9 @@ TERMIN_TYPES: dict[str, ButtonOption] = {
         '/termin_type_inform{"termin_type": "erstberatung"}',
         f'{emoji.emojize(":new:")}',
     ),
-    'folgeberatung': ButtonOption(
+    "folgeberatung": ButtonOption(
         "Folgeberatung",
         '/termin_type_inform{"termin_type": "folgeberatung"}',
         f'{emoji.emojize(":right_arrow:")}',
-    )
+    ),
 }

@@ -1,5 +1,6 @@
 from bot_pilot.service.provider.button_factory import (
-    make_buttons_termin_mediums, make_buttons_termin_types,
+    make_buttons_termin_mediums,
+    make_buttons_termin_types,
 )
 
 
@@ -31,5 +32,5 @@ def test_make_buttons_termin_type():
         {
             "title": "➡️ Folgeberatung",
             "payload": '/termin_type_inform{"termin_type": "folgeberatung"}',
-        }
+        },
     ]
