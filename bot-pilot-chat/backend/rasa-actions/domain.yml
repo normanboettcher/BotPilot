@@ -22,6 +22,7 @@ intents:
   - unterlagen
   - verabschiedung
   - zeiten
+  - termin_type_inform
 entities:
   - termin_medium
   - termin_type
@@ -30,13 +31,18 @@ slots:
     mappings:
       - type: from_entity
         entity: termin_type
+        conditions:
+          - active_loop: termin_form
+            requested_slot: termin_type
+      - type: from_text
+        conditions:
+          - active_loop: termin_form
+            requested_slot: termin_type
     type: categorical
     values:
       - erstberatung
-      - steuerberatung
-      - ersttermin
+      - folgeberatung
       - termin
-      - online-termin
   termin_medium_attempts:
     type: float
     initial_value: 0
@@ -61,6 +67,7 @@ slots:
 forms:
   termin_form:
     required_slots:
+      - termin_type
       - termin_medium
 actions:
   - action_termin_vereinbaren
@@ -84,6 +91,7 @@ actions:
   - action_zeiten
   - action_steuerberatung
   - action_ask_termin_medium
+  - action_ask_termin_type
   - action_stop
 session_config:
   session_expiration_time: 60

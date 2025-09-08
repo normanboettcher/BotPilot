@@ -19,3 +19,16 @@ TERMIN_MEDIUMS: dict[str, ButtonOption] = {
         f'{emoji.emojize(":smiling_face_with_smiling_eyes:")}',
     ),
 }
+
+TERMIN_TYPES: dict[str, ButtonOption] = {
+    "erstberatung": ButtonOption(
+        "Erstberatung",
+        '/termin_type_inform{"termin_type": "erstberatung"}',
+        f'{emoji.emojize(":new:")}',
+    ),
+    "folgeberatung": ButtonOption(
+        "Folgeberatung",
+        '/termin_type_inform{"termin_type": "folgeberatung"}',
+        f'{emoji.emojize(":right_arrow:")}',
+    ),
+}
