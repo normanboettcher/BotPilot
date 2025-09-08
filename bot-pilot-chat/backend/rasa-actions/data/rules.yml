@@ -106,3 +106,12 @@ rules:
       - action: action_stop
       - action: action_ask_continue
       - active_loop: null
+
+  - rule: Activate user_type_form
+    condition:
+      - active_loop: null
+      - slot_was_set:
+          - previous_form_name: termin_form
+    steps:
+      - action: user_type_form
+      - active_loop: user_type_form

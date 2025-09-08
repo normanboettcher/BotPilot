@@ -22,11 +22,8 @@ class ValidateTerminForm(FormValidationAction):
         return "validate_termin_form"
 
     def validate_termin_type(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
+            self,
+            slot_value: Any,
     ) -> Dict[Text, Any]:
         """
         Validate termin_type value.
@@ -42,11 +39,11 @@ class ValidateTerminForm(FormValidationAction):
         }
 
     def validate_termin_medium(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate termin_medium value."""
         logger.debug(f"validate_termin_form called. slot_value: {slot_value}")
