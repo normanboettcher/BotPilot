@@ -146,29 +146,21 @@ nlu:
       - Kannst du mir helfen eine [Erstberatung](termin_type) zu machen?
       - Kannst du mir helfen eine [Erstberatung](termin_type) zu buchen?
       - Wie kann ich [online](termin_medium) einen [Termin](termin_type) buchen?
-      - Wie [buche] ich einen [Termin](termin_type)?
-      - Wie [buche] ich eine [Erstberatung](termin_type)?
-      - Wie [buche] ich einen [Ersttermin](termin_type)?
-      - Wie [mache] ich [Termine](termin_type)?
+      - Wie buche ich einen [Termin](termin_type)?
+      - Wie buche ich eine [Erstberatung](termin_type)?
+      - Wie buche ich einen [Ersttermin](termin_type)?
+      - Wie mache ich [Termine](termin_type)?
       - Wann könnte ich ein [Meeting](termin_type) vereinbaren?
       - Wie kann ich einen [Termin](termin_type) vereinbaren?
-      - Wie [mache] ich einen [Termin](termin_type) für eine [Erstberatung](termin_type)??
-      - Wie schnell [bekomme] ich einen [Termin](termin_type)?
+      - Wie mache ich einen [Termin](termin_type) für eine [Erstberatung](termin_type)??
+      - Wie schnell bekomme ich einen [Termin](termin_type)?
       - Wie ist es möglich an einen [Termin](termin_type) zu kommen?
       - Muss ich für einen [Termin](termin_type) [anrufen](termin_medium)?
-      - [Brauche] ich einen [Termin](termin_type)?
-      - Muss ich vor einem ersten [Gespräch](termin_type) [anrufen](termin_medium)?
-      - Kann ich für einen [Termin](termin_type) eine [Mail](termin_medium) schreiben?
       - Kann ich einen [Termin](termin_type) per [Mail](termin_medium) machen ?
       - Kann ich einen [Termin](termin_type) per [Mail](termin_medium) vereinbaren?
       - Auf welchem Weg kann ich einen [Beratungstermin](termin_type) bekommen?
       - Wie kann ich einen [Termin](termin_type) vereinbaren?
       - Kann man außerhalb der Geschäftszeiten einen [Termin](termin_type) vereinbaren?
-      - Ich habe mich [selbstständig]{"entity": "user_type", "value": "selbststaendiger"} gemacht und möchte einen [Termin](termin_type) vereinbaren.
-      - Ich bin [Freiberufler]{"entity": "user_type", "value": "freiberufler"} und möchte einen [Termin](termin_type) vereinbaren.
-      - Als [Unternehmer]{"entity": "user_type", "value": "unternehmer"} möchte ich einen [Termin](termin_type) vereinbaren.
-      - Ich bin [Angestellter]{"entity": "user_type", "value": "privatperson"} und benoetige einen [Termin](termin_type).
-      - Ich möchte eine Steuerberatung für [mein Unternehmen]{"entity": "user_type", "value": "unternehmer"}.
 
   - intent: termin_infos
     examples: |

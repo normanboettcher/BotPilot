@@ -77,15 +77,21 @@ rules:
       - intent: termin_vereinbaren
       - action: termin_form
       - active_loop: termin_form
-  - rule: Termin vereinbaren
+  - rule: Switch to user_type_form
     condition:
       - active_loop: termin_form
+      - slot_was_set:
+          - requested_slot: null
     steps:
       - action: termin_form
       - active_loop: null
-      - action: action_termin_vereinbaren
+      - action: action_switch_user_type_form
+      - slot_was_set:
+          - next_form_name: user_type_form
+      - action: user_type_form
+      - active_loop: user_type_form
 
-  - rule: ask termin_medium_form continue and affirm
+  - rule: ask termin_form continue and affirm
     steps:
       - action: action_ask_continue
       - active_loop: null
@@ -106,12 +112,3 @@ rules:
       - action: action_stop
       - action: action_ask_continue
       - active_loop: null
-
-  - rule: Activate user_type_form
-    condition:
-      - active_loop: null
-      - slot_was_set:
-          - previous_form_name: termin_form
-    steps:
-      - action: user_type_form
-      - active_loop: user_type_form
