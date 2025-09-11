@@ -28,10 +28,12 @@ entities:
   - termin_medium
   - termin_type
   - user_type
+
 slots:
-  previous_form_name:
+  next_form_name:
     mappings:
       - type: custom
+    type: text
 
   user_type:
     mappings:
@@ -41,6 +43,9 @@ slots:
           - active_loop: user_type_form
             requested_slot: user_type
       - type: from_text
+        conditions:
+          - active_loop: user_type_form
+            requested_slot: user_type
     type: categorical
     values:
       - privatperson
@@ -95,7 +100,7 @@ forms:
       - user_type
 
 actions:
-  - action_termin_vereinbaren
+  - action_switch_user_type_form
   - action_begruessung
   - action_ask_continue
   - action_deny
@@ -119,6 +124,7 @@ actions:
   - action_ask_termin_type
   - action_ask_user_type
   - action_stop
+  - action_submit_termin
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

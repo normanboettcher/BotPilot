@@ -1,6 +1,7 @@
 import logging
 from typing import Text, List, Any, Dict
 
+from rasa.shared.core.events import SlotSet
 from rasa_sdk import Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
@@ -24,6 +25,9 @@ class ValidateTerminForm(FormValidationAction):
     def validate_termin_type(
             self,
             slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: DomainDict,
     ) -> Dict[Text, Any]:
         """
         Validate termin_type value.
@@ -31,12 +35,8 @@ class ValidateTerminForm(FormValidationAction):
         """
         logger.debug(f"validate termin_type called. slot_value: {slot_value}")
         if slot_value and slot_value.lower() in self.termin_type_db():
-            return {
-                "termin_type": slot_value.lower(),
-            }
-        return {
-            "termin_type": None,
-        }
+            return [SlotSet('termin_type', slot_value.lower())]
+        return [SlotSet('termin_type', None)]
 
     def validate_termin_medium(
             self,

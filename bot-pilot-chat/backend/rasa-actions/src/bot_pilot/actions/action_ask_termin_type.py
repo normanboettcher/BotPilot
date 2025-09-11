@@ -1,3 +1,4 @@
+from rasa.shared.core.events import SlotSet
 from rasa_sdk import Action
 
 from bot_pilot.domain.response import BotResponse
@@ -11,7 +12,7 @@ class ActionAskTerminType(Action):
 
     def run(self, dispatcher, tracker, domain):
         message = (
-            "Sind Sie bereits Kunde oder ist es Ihr erster Termin " "bei uns?"
+            "Sind Sie bereits Kunde oder ist es Ihr erster Termin bei uns?"
         )
         response = BotResponse.with_answer(message)
         buttons = make_buttons_termin_types()
