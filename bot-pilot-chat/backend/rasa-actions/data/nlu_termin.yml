@@ -161,12 +161,12 @@ nlu:
       - Auf welchem Weg kann ich einen [Beratungstermin](termin_type) bekommen?
       - Wie kann ich einen [Termin](termin_type) vereinbaren?
       - Kann man außerhalb der Geschäftszeiten einen [Termin](termin_type) vereinbaren?
-
-  - intent: termin_infos
-    examples: |
-      - Wie lange dauert ein Termin?
-      - Welche Unterlagen muss ich zum Termin mitbringen
-      - Machen Sie auch Online-Termine?
-      - Sind Termine nur vor Ort möglich?
-      - Darf ich jemanden zum Termin mitbringen?
+      - ich will eien [termin](termin_type) machen
+      - ich will einen [termin](termin_type) machen
+      - ich will eien [termin](termin_type)  machen
+      - ich will einen [termin](termin_type) machen
+      - ich will einen [termin](termin_type) zo
+      - ich will einen [termin](termin_type) [macheen](termin_type)
+      - ichj will [termin](termin_type)
+      - ich will [termin](termin_type)
 

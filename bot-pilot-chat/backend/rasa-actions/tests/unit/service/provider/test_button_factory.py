@@ -1,3 +1,5 @@
+import emoji
+
 from bot_pilot.service.provider.button_factory import (
     make_buttons_termin_mediums,
     make_buttons_termin_types,
@@ -8,15 +10,18 @@ def test_make_buttons_termin_mediums():
     buttons = make_buttons_termin_mediums()
     assert buttons == [
         {
-            "title": ":email: E-Mail",
+            "title": f"{emoji.emojize(':e-mail:')} E-Mail",
             "payload": '/termin_medium_inform{"termin_medium": "mail"}',
         },
         {
-            "title": "📞 Telefon",
+            "title": f"{emoji.emojize(':telephone_receiver:')} Telefon",
             "payload": '/termin_medium_inform{"termin_medium": "phone"}',
         },
         {
-            "title": "😊 Erledige du das",
+            "title": (
+                f"{emoji.emojize(':smiling_face_with_smiling_eyes:')} "
+                f"Erledige du das"
+            ),
             "payload": '/termin_medium_inform{"termin_medium": "bot"}',
         },
     ]
@@ -26,11 +31,11 @@ def test_make_buttons_termin_type():
     buttons = make_buttons_termin_types()
     assert buttons == [
         {
-            "title": ":new: Erstberatung",
+            "title": f"{emoji.emojize(':NEW_button:')} Erstberatung",
             "payload": '/termin_type_inform{"termin_type": "erstberatung"}',
         },
         {
-            "title": "➡️ Folgeberatung",
+            "title": f"{emoji.emojize(':right_arrow:')} Folgeberatung",
             "payload": '/termin_type_inform{"termin_type": "folgeberatung"}',
         },
     ]

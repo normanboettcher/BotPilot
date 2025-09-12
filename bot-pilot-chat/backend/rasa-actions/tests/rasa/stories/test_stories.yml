@@ -25,34 +25,86 @@ stories:
         intent: verabschiedung
       - action: action_verabschiedung
 
-  - story: happy path make termin with mail
+  - story: happy path collect termin_medium and termin_type
     steps:
       - user: |-
           Ich möchte einen [Termin]{"entity": "termin_type", "value": "termin"} vereinbaren.
         intent: termin_vereinbaren
       - slot_was_set:
-          - termin_type: termin
+          - requested_slot: termin_type
       - action: termin_form
       - active_loop: termin_form
+      - user: |-
+          /termin_type_inform{"termin_type": "erstberatung"}
+        intent: termin_type_inform
       - slot_was_set:
-          - termin_type: termin
-      - slot_was_set:
+          - termin_type: erstberatung
           - requested_slot: termin_medium
+      - action: termin_form
+      - active_loop: termin_form
       - user: |-
           Per [Mail]{"entity": "termin_medium", "value": "mail"} bitte.
         intent: termin_medium_inform
       - slot_was_set:
           - termin_medium: mail
+          - termin_type: erstberatung
+          - requested_slot: null
       - action: termin_form
+      - active_loop: null
+      - action: action_switch_user_type_form
+      - slot_was_set:
+          - next_form_name: user_type_form
+          - termin_medium: mail
+          - termin_type: erstberatung
+      - action: user_type_form
+      - active_loop: user_type_form
+
+  - story: happy path make termin with mail and erstberatung and user type privatperson
+    steps:
+      - user: |-
+          Ich möchte einen [Termin]{"entity": "termin_type", "value": "termin"} vereinbaren.
+        intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - slot_was_set:
+          - requested_slot: termin_type
+      - user: |-
+          /termin_type_inform{"termin_type": "erstberatung"}
+        intent: termin_type_inform
+      - slot_was_set:
+          - requested_slot: termin_medium
+          - termin_type: erstberatung
+      - action: termin_form
+      - active_loop: termin_form
+      - user: |-
+          Per [Mail]{"entity": "termin_medium", "value": "mail"} bitte.
+        intent: termin_medium_inform
       - slot_was_set:
           - termin_medium: mail
+          - termin_type: erstberatung
           - termin_medium_attempts: 0
           - requested_slot: null
+      - action: termin_form
       - active_loop: null
-      - action: action_termin_vereinbaren
+      - action: action_switch_user_type_form
       - slot_was_set:
-          - termin_medium: null
           - termin_medium_attempts: 0
+          - termin_medium: mail
+          - termin_type: erstberatung
+          - next_form_name: user_type_form
+      - action: user_type_form
+      - active_loop: user_type_form
+      - slot_was_set:
+          - requested_slot: user_type
+      - user: |-
+          /user_type_inform{"user_type": "privatperson"}
+        intent: user_type_inform
+      - slot_was_set:
+          - requested_slot: null
+          - user_type: privatperson
+      - action: user_type_form
+      - active_loop: null
+      - action: action_submit_termin
 
   - story: happy path greet and ask what you can do
     steps:
@@ -64,40 +116,3 @@ stories:
           Was kannst du alles?
         intent: general_bot
       - action: action_general_bot
-
-  - story: happy path, greet, make termin with mail and bye
-    steps:
-      - user: |
-          Guten Tag
-        intent: begruessung
-      - action: action_begruessung
-      - user: |
-          Ich möchte gerne einen [Termin]{"entity": "termin_type", "value": "termin"} vereinbaren.
-        intent: termin_vereinbaren
-      - slot_was_set:
-          - termin_type: termin
-      - action: termin_form
-      - active_loop: termin_form
-      - slot_was_set:
-          - termin_type: termin
-      - slot_was_set:
-          - requested_slot: termin_medium
-      - user: |
-          Gerne per [mail]{"entity": "termin_medium", "value": "mail"}.
-        intent: termin_medium_inform
-      - slot_was_set:
-          - termin_medium: mail
-      - action: termin_form
-      - slot_was_set:
-          - termin_medium_attempts: 0
-          - termin_medium: mail
-          - requested_slot: null
-      - active_loop: null
-      - action: action_termin_vereinbaren
-      - slot_was_set:
-          - termin_medium: null
-          - termin_medium_attempts: 0
-      - user: |
-          Tschüss
-        intent: verabschiedung
-      - action: action_verabschiedung
