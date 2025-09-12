@@ -91,6 +91,16 @@ rules:
       - action: user_type_form
       - active_loop: user_type_form
 
+  - rule: Submit user_type_form
+    condition:
+      - active_loop: user_type_form
+      - slot_was_set:
+          - requested_slot: null
+    steps:
+      - action: user_type_form
+      - active_loop: null
+      - action: action_submit_termin
+
   - rule: ask termin_form continue and affirm
     steps:
       - action: action_ask_continue
