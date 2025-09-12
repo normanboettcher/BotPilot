@@ -44,7 +44,6 @@ nlu:
       - hallo, guten morgen
       - hallo, guten abend
       - halloo
-
   - intent: verabschiedung
     examples: |
       - tschüss
@@ -405,7 +404,6 @@ nlu:
       - ich würde den Prozess gerne fortsetzen
       - ich möchte den Vorgang nochmal versuchen
       - Ja
-
   - intent: stop
     examples: |
       - Stopp
@@ -430,11 +428,10 @@ nlu:
       - Bitte den Vorgang stoppen
       - Brich bitte ab
       - Brica ab
-     
-
   - intent: nlu_fallback
     examples: |
       - ALLES
       - ALLLES
       - alles
 
+   

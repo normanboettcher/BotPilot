@@ -45,9 +45,24 @@ stories:
       - slot_was_set:
           - requested_slot: termin_type
       - intent: termin_type_inform
+      - slot_was_set:
+          - requested_slot: null
       - action: termin_form
       - active_loop: null
       - action: action_switch_user_type_form
+
+  - story: happy path switch to user_type_form
+    steps:
+      - active_loop: termin_form
+      - slot_was_set:
+          - requested_slot: null
+      - action: termin_form
+      - active_loop: null
+      - action: action_switch_user_type_form
+      - slot_was_set:
+          - next_form_name: user_type_form
+      - action: user_type_form
+      - active_loop: user_type_form
 
   - story: happy path collect user_type and submit
     steps:
@@ -58,6 +73,8 @@ stories:
       - slot_was_set:
           - requested_slot: user_type
       - intent: user_type_inform
+      - slot_was_set:
+          - requested_slot: null
       - action: user_type_form
       - active_loop: null
       - action: action_submit_termin

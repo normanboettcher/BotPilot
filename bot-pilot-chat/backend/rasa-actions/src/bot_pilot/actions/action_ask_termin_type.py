@@ -1,4 +1,3 @@
-from rasa.shared.core.events import SlotSet
 from rasa_sdk import Action
 
 from bot_pilot.domain.response import BotResponse

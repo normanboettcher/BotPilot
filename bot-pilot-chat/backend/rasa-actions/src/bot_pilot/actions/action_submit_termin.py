@@ -10,11 +10,16 @@ class ActionSubmitTermin(Action):
         return "action_submit_termin"
 
     def run(self, dispatcher, tracker, domain):
-        slots = ['termin_medium', 'user_type', 'termin_type']
+        slots = ["termin_medium", "user_type", "termin_type"]
 
-        collected_items = [item for item in slots if
-                           tracker.get_slot(item) is not None]
+        collected_items = [
+            tracker.get_slot(item)
+            for item in slots
+            if tracker.slots[item] is not None
+        ]
 
         logger.debug(
-            f'Collected items for termin submission: {collected_items}')
+            "Collected items for termin submission: "
+            f"{[print(item) for item in collected_items]}"
+        )
         return []
