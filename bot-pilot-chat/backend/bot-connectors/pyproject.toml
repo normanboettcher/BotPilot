@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bot_connectors"
+version = "0.1.0"
+description = "Prototype for calendar connector service"
+authors = [{ name = "Norman-Ian Boettcher", email = "norman.boettcher@web.de" }]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "google-api-python-client",
+    "google-auth",
+    "google-auth-oauthlib",
+    "google-auth-httplib2",
+    "requests",
+    "httpx",
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+
+[tool.black]
+line-length = 80
+target-version = ["py312"]
+
+[tox]
+requires = ["tox>=4.0"]
+env_list = ["test", "lint", "format"]
+
+[tool.tox.testenv.test]
+description = "Run tests with pytest"
+deps = ["pytest"]
+commands = ["pytest"]
+
+[tool.tox.testenv.lint]
+description = "Lint code with flake8"
+deps = ["flake8"]
+commands = [
+    ["flake8", "src/", "tests/"]
+]
+
+[tool.tox.testenv.format]
+description = "Check code formatting with black"
+deps = ["black"]
+commands = [
+    ["black", "src/", "tests/"]
+]
