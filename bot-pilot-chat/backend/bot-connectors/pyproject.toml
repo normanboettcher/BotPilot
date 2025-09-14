@@ -24,30 +24,32 @@ dependencies = [
 minversion = "8.0"
 addopts = "-ra -q"
 testpaths = [
-    "tests",
+    "tests"
 ]
 
 [tool.black]
 line-length = 80
 target-version = ["py312"]
 
-[tox]
-requires = ["tox>=4.0"]
+[tool.tox]
+requires = ["tox>=4.20"]
 env_list = ["test", "lint", "format"]
 
-[tool.tox.testenv.test]
+[tool.tox.env.test]
 description = "Run tests with pytest"
 deps = ["pytest"]
-commands = ["pytest"]
+commands = [
+    ["pytest"]
+]
 
-[tool.tox.testenv.lint]
+[tool.tox.env.lint]
 description = "Lint code with flake8"
 deps = ["flake8"]
 commands = [
     ["flake8", "src/", "tests/"]
 ]
 
-[tool.tox.testenv.format]
+[tool.tox.env.format]
 description = "Check code formatting with black"
 deps = ["black"]
 commands = [

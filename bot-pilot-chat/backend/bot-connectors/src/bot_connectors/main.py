@@ -20,12 +20,14 @@ CLIENT_SECRETS_FILE = os.path.join(os.path.dirname(__file__), "config.json")
 # in a real project, save tokens in (DB/Redis/etc.)
 user_tokens = {}
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
 
 logger = logging.getLogger(__name__)
 
-logger.debug('Starting prototype bot-connector for Google Calendar OAuth2')
+logger.debug("Starting prototype bot-connector for Google Calendar OAuth2")
 
 
 @app.get("/oauth2/start")
@@ -40,7 +42,7 @@ def auth_start():
         access_type="offline", include_granted_scopes="true", prompt="consent"
     )
     user_tokens["state"] = state
-    logger.debug(f'user_tokens: {user_tokens}')
+    logger.debug(f"user_tokens: {user_tokens}")
     return RedirectResponse(auth_url)
 
 
@@ -48,7 +50,7 @@ def auth_start():
 def auth_callback(request: Request):
     """Callback after successful OAuth with Google"""
     state = request.query_params.get("state")
-    logger.debug(f'requested state: {state}')
+    logger.debug(f"requested state: {state}")
     if state != user_tokens.get("state"):
         return JSONResponse({"error": "Invalid state"}, status_code=400)
 
@@ -57,15 +59,14 @@ def auth_callback(request: Request):
         scopes=SCOPES,
         redirect_uri=REDIRECT_URI,
     )
-    logger.debug(f'request: {request}')
-    logger.debug(f'call back flow: {str(request.url)}')
+    logger.debug(f"request: {request}")
+    logger.debug(f"call back flow: {str(request.url)}")
     # only for testing, allows http (not https)
-    os.environ[
-        'OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
     flow.fetch_token(authorization_response=str(request.url))
     creds = flow.credentials
 
-    logger.debug(f'creds: {creds}')
+    logger.debug(f"creds: {creds}")
     # Hier einfach in Memory speichern (für MVP).
     # Später: in DB speichern (verschlüsselt!)
     user_tokens["creds"] = creds
@@ -81,11 +82,15 @@ def list_events():
         return JSONResponse({"error": "Not authenticated"}, status_code=401)
 
     service = build("calendar", "v3", credentials=creds)
-    logger.debug(f'service: {service}')
+    logger.debug(f"service: {service}")
     events_result = (
         service.events()
-        .list(calendarId="primary", maxResults=5, singleEvents=True,
-              orderBy="startTime")
+        .list(
+            calendarId="primary",
+            maxResults=5,
+            singleEvents=True,
+            orderBy="startTime",
+        )
         .execute()
     )
     events = events_result.get("items", [])
