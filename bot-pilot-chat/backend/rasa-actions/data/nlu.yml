@@ -434,4 +434,30 @@ nlu:
       - ALLLES
       - alles
 
+  - intent: user_name_inform
+    examples: |
+      - [Milo Meyer](user_name)
+      - [Foxy Müller](user_name)
+      - Ich bin [Ulrich Sigfried](user_name)
+      - Mein Name ist [Klaus Becker](user_name)
+      - Ich heiße [Peter van Dach](user_name)
+      - Ich heiße [Freiherr von Luxembourg](user_name)
+      - Ich bin [Dr. Marie Göing](user_name)
+      - Ich bin [Manuel Peter-Becker](user_name)
+      - [Marie-Sophie Müller-Meyer](user_name)
+      - [Mustafa Ali](user_name)
+      - Ich heiße [Abdullah Ali Mustafa](user_name)
+      - Ich bin der [Klaus Peter Müller](user_name)
+
+  - intent: user_mail_inform
+    examples: |
+      - [Foxy.Müller@web.de](user_mail)
+      - [Milo.Meyer123@t-online.de](user_mail)
+      - Meine Mail ist [mustafa.ali94@gmx.de](user_mail)
+      - Die Mail ist [klauspeter.mueller@web.de](user_mail)
+      - Das ist meine Mail [abdullah.alimustafa123@t-online.de](user_name)
+      - Meine Mail [klaus.mueller@gmail.com](user_mail)
+      - Ich habe die Mail [mariesphie.mueller888@gmail.com](user_mail)
+    
+      
    
