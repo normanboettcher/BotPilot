@@ -17,9 +17,6 @@ SCOPES = ["https://www.googleapis.com/auth/calendar"]
 # path to downloaded OAuth 2.0 Client IDs json file
 CLIENT_SECRETS_FILE = os.path.join(os.path.dirname(__file__), "config.json")
 
-# in a real project, save tokens in (DB/Redis/etc.)
-user_tokens = {}
-
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -28,6 +25,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 logger.debug("Starting prototype bot-connector for Google Calendar OAuth2")
+
+# in a real project, save tokens in (DB/Redis/etc.)
+user_tokens = {}
 
 
 @app.get("/oauth2/start")
@@ -77,12 +77,13 @@ def auth_callback(request: Request):
 @app.get("/calendar/events")
 def list_events():
     """Example: list next 5 events from primary calendar"""
+
     creds = user_tokens.get("creds")
     if not creds:
+        logger.debug(f'no creds found in user_tokens: {creds}')
         return JSONResponse({"error": "Not authenticated"}, status_code=401)
 
     service = build("calendar", "v3", credentials=creds)
-    logger.debug(f"service: {service}")
     events_result = (
         service.events()
         .list(
