@@ -7,7 +7,8 @@ Base = declarative_base()
 class GoogleCalendarCredentials(Base):
     __tablename__ = 'google_credentials'
 
-    customer_context = Column(Integer, primary_key=True, index=True)
+    calendar_id = Column(String, nullable=False, primary_key=True)
+    customer_context = Column(String, nullable=False)
     client_id = Column(String, nullable=False)
     client_secret = Column(String, nullable=False)
     access_token = Column(String, nullable=False)
