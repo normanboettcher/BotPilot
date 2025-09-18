@@ -15,7 +15,6 @@ def get_db_engine():
     return engine
 
 
-@contextmanager
 def get_db_session():
     SessionLocal = sessionmaker(
         bind=get_db_engine(), autoflush=False, autocommit=False

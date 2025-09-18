@@ -14,6 +14,8 @@ from bot_connectors.persistence.google_calendar_das import (
     GoogleCalendarDas,
     get_google_calendar_das,
 )
+from bot_connectors.service.google_calendar_provider import \
+    GoogleCalendarProvider, get_google_calendar_provider
 
 
 def create_tables_at_startup():
@@ -68,7 +70,8 @@ def auth_start():
 
 @app.get("/oauth2/callback")
 def auth_callback(
-    request: Request, das: GoogleCalendarDas = Depends(get_google_calendar_das)
+        request: Request,
+        das: GoogleCalendarDas = Depends(get_google_calendar_das)
 ):
     """Callback after successful OAuth with Google"""
     state = request.query_params.get("state")
@@ -99,21 +102,18 @@ def auth_callback(
 
 
 @app.get("/calendar/events")
-def list_events(das: GoogleCalendarDas = Depends(get_google_calendar_das)):
+def list_events(service: GoogleCalendarProvider = Depends(
+    get_google_calendar_provider)):
     """Example: list next 5 events from primary calendar"""
 
-    creds = das.get_credentials_for_context("default")
-    if creds is None or not creds:
-        logger.debug(f"no creds found in user_tokens: {creds}")
-        return JSONResponse({"error": "Not authenticated"}, status_code=401)
-
-    logger.debug(
-        f"received creds: refresh_token: [{creds.refresh_token}]"
-        f"token: [{creds.token}]"
-    )
-    service = build("calendar", "v3", credentials=creds)
+    calendar_service = service.get_google_calendar_as_service('default')
+    if calendar_service is None:
+        return JSONResponse({
+            'status': 'failed', 'message': 'Not authenticated.',
+            'status_code': '401'
+        })
     events_result = (
-        service.events()
+        calendar_service.events()
         .list(
             calendarId="primary",
             maxResults=5,

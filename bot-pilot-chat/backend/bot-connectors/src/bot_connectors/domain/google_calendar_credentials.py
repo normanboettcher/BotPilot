@@ -6,14 +6,15 @@ from bot_connectors.domain.persistence_model_base import Base
 class GoogleCalendarCredentials(Base):
     __tablename__ = "google_credentials"
 
-    calendar_id = Column(String, nullable=False, primary_key=True)
-    customer_context = Column(String, nullable=False)
-    client_id = Column(String, nullable=False)
-    client_secret = Column(String, nullable=False)
-    access_token = Column(String, nullable=False)
-    refresh_token = Column(String, nullable=False)
+    calendar_id = Column(String(500), nullable=False, primary_key=True, )
+    customer_context = Column(String(500), nullable=False)
+    client_id = Column(String(500), nullable=False)
+    client_secret = Column(String(500), nullable=False)
+    access_token = Column(String(2500), nullable=False)
+    refresh_token = Column(String(2500), nullable=False)
     token_uri = Column(
-        String, nullable=False, default="https://oauth2.googleapis.com/token"
+        String(1000), nullable=False,
+        default="https://oauth2.googleapis.com/token"
     )
     expiry = Column(DateTime, nullable=True)
 
