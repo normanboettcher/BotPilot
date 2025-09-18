@@ -1,28 +1,33 @@
 import logging
 
+from fastapi.params import Depends
 from sqlalchemy.orm import Session
-from googleapiclient.discovery import build
+from googleapiclient.discovery import build, Resource
 
-from bot_connectors.persistence.google_calendar_das import GoogleCalendarDas
+from bot_connectors.persistence.google_calendar_das import GoogleCalendarDas, \
+    get_google_calendar_das
 
 logger = logging.Logger(__name__)
 
 
 class GoogleCalendarProvider:
-    def __init__(self, db_session: Session, customer_context: str):
-        self._db_session = db_session
-        self._customer_context = customer_context
+    def __init__(self, das: GoogleCalendarDas):
+        self._das = das
 
-    def get_google_calendar_service(self):
-        das = GoogleCalendarDas(self._db_session)
+    def get_google_calendar_as_service(self, customer_context: str) -> Resource:
         try:
-            calendar_creds = das.get_credentials_for_context(
-                self._customer_context)
+            calendar_creds = self._das.get_credentials_for_context(
+                customer_context)
             logger.debug(f'Received credentials for google-calendar for '
-                         f'[{self._customer_context}] successfully')
+                         f'[{customer_context}] successfully')
             return build("calendar", "v3",
                          credentials=calendar_creds)
         except Exception as e:
             logger.error(f'Failed to get credentials for '
-                         f'google-calendar for [{self._customer_context}]: {e}')
+                         f'google-calendar for [{customer_context}]: {e}')
             raise
+
+
+def get_google_calendar_provider(
+        das: GoogleCalendarDas = Depends(get_google_calendar_das)):
+    return GoogleCalendarProvider(das)
