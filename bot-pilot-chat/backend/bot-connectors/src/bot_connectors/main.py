@@ -5,7 +5,6 @@ from fastapi import FastAPI, Request
 from fastapi.params import Depends
 from fastapi.responses import RedirectResponse, JSONResponse
 from google_auth_oauthlib.flow import Flow
-from googleapiclient.discovery import build
 import os
 
 from bot_connectors.domain.persistence_model_base import Base
@@ -14,8 +13,10 @@ from bot_connectors.persistence.google_calendar_das import (
     GoogleCalendarDas,
     get_google_calendar_das,
 )
-from bot_connectors.service.google_calendar_provider import \
-    GoogleCalendarProvider, get_google_calendar_provider
+from bot_connectors.service.google_calendar_provider import (
+    GoogleCalendarProvider,
+    get_google_calendar_provider,
+)
 
 
 def create_tables_at_startup():
@@ -70,8 +71,7 @@ def auth_start():
 
 @app.get("/oauth2/callback")
 def auth_callback(
-        request: Request,
-        das: GoogleCalendarDas = Depends(get_google_calendar_das)
+    request: Request, das: GoogleCalendarDas = Depends(get_google_calendar_das)
 ):
     """Callback after successful OAuth with Google"""
     state = request.query_params.get("state")
@@ -102,16 +102,20 @@ def auth_callback(
 
 
 @app.get("/calendar/events")
-def list_events(service: GoogleCalendarProvider = Depends(
-    get_google_calendar_provider)):
+def list_events(
+    service: GoogleCalendarProvider = Depends(get_google_calendar_provider),
+):
     """Example: list next 5 events from primary calendar"""
 
-    calendar_service = service.get_google_calendar_as_service('default')
+    calendar_service = service.get_google_calendar_as_service("default")
     if calendar_service is None:
-        return JSONResponse({
-            'status': 'failed', 'message': 'Not authenticated.',
-            'status_code': '401'
-        })
+        return JSONResponse(
+            {
+                "status": "failed",
+                "message": "Not authenticated.",
+                "status_code": "401",
+            }
+        )
     events_result = (
         calendar_service.events()
         .list(

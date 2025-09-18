@@ -15,9 +15,9 @@ class GoogleCalendarProvider:
     def __init__(self, das: GoogleCalendarDas):
         self._das = das
 
-    def get_google_calendar_as_service(self,
-                                       customer_context: str
-                                       ) -> Resource | None:
+    def get_google_calendar_as_service(
+        self, customer_context: str
+    ) -> Resource | None:
         try:
             calendar_creds = self._das.get_credentials_for_context(
                 customer_context
@@ -33,8 +33,7 @@ class GoogleCalendarProvider:
                 f"received creds: refresh_token: [{calendar_creds.refresh_token}]"
                 f"token: [{calendar_creds.token}]"
             )
-            return build("calendar", "v3",
-                         credentials=calendar_creds)
+            return build("calendar", "v3", credentials=calendar_creds)
         except Exception as e:
             logger.error(
                 f"Failed to get credentials for "
@@ -44,6 +43,6 @@ class GoogleCalendarProvider:
 
 
 def get_google_calendar_provider(
-        das: GoogleCalendarDas = Depends(get_google_calendar_das),
+    das: GoogleCalendarDas = Depends(get_google_calendar_das),
 ):
     return GoogleCalendarProvider(das)
