@@ -1,12 +1,32 @@
 import logging
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
+from fastapi.params import Depends
 from fastapi.responses import RedirectResponse, JSONResponse
 from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build
 import os
 
-app = FastAPI()
+from bot_connectors.domain.persistence_model_base import Base
+from bot_connectors.persistence.db_session_factory import get_db_engine
+from bot_connectors.persistence.google_calendar_das import (
+    GoogleCalendarDas,
+    get_google_calendar_das,
+)
+
+
+def create_tables_at_startup():
+    Base.metadata.create_all(bind=get_db_engine())
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_tables_at_startup()
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 
 # set redirect url. should be the same as in Google Cloud Console
 REDIRECT_URI = "http://localhost:8000/oauth2/callback"
@@ -47,7 +67,9 @@ def auth_start():
 
 
 @app.get("/oauth2/callback")
-def auth_callback(request: Request):
+def auth_callback(
+    request: Request, das: GoogleCalendarDas = Depends(get_google_calendar_das)
+):
     """Callback after successful OAuth with Google"""
     state = request.query_params.get("state")
     logger.debug(f"requested state: {state}")
@@ -70,19 +92,25 @@ def auth_callback(request: Request):
     # Hier einfach in Memory speichern (für MVP).
     # Später: in DB speichern (verschlüsselt!)
     user_tokens["creds"] = creds
+    # save for the first time.
+    das.save_credentials(creds, "default")
 
     return JSONResponse({"status": "ok", "message": "OAuth erfolgreich"})
 
 
 @app.get("/calendar/events")
-def list_events():
+def list_events(das: GoogleCalendarDas = Depends(get_google_calendar_das)):
     """Example: list next 5 events from primary calendar"""
 
-    creds = user_tokens.get("creds")
-    if not creds:
-        logger.debug(f'no creds found in user_tokens: {creds}')
+    creds = das.get_credentials_for_context("default")
+    if creds is None or not creds:
+        logger.debug(f"no creds found in user_tokens: {creds}")
         return JSONResponse({"error": "Not authenticated"}, status_code=401)
 
+    logger.debug(
+        f"received creds: refresh_token: [{creds.refresh_token}]"
+        f"token: [{creds.token}]"
+    )
     service = build("calendar", "v3", credentials=creds)
     events_result = (
         service.events()

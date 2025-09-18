@@ -37,7 +37,7 @@ env_list = ["test", "lint", "format"]
 
 [tool.tox.env.test]
 description = "Run tests with pytest"
-deps = ["pytest"]
+deps = ["-rrequirements.txt"]
 commands = [
     ["pytest"]
 ]
