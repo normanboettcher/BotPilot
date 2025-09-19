@@ -3,7 +3,7 @@ import logging
 from fastapi.params import Depends
 from googleapiclient.discovery import build, Resource
 
-from bot_connectors.persistence.google_calendar_das import (
+from bot_connectors.persistence.google_calendar_credentials_das import (
     GoogleCalendarCredentialsDas,
     get_google_calendar_credentials_das,
 )

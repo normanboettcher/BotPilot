@@ -9,7 +9,7 @@ import os
 
 from bot_connectors.domain.persistence_model_base import Base
 from bot_connectors.persistence.db_session_factory import get_db_engine
-from bot_connectors.persistence.google_calendar_das import (
+from bot_connectors.persistence.google_calendar_credentials_das import (
     GoogleCalendarCredentialsDas,
     get_google_calendar_credentials_das,
 )
@@ -35,7 +35,8 @@ app = FastAPI(lifespan=lifespan)
 REDIRECT_URI = "http://localhost:8000/oauth2/callback"
 
 # Scopes: read and write access to Google Calendar
-SCOPES = ["https://www.googleapis.com/auth/calendar"]
+SCOPES = ["https://www.googleapis.com/auth/calendar.events",
+          "https://www.googleapis.com/auth/calendar.freebusy"]
 
 # path to downloaded OAuth 2.0 Client IDs json file
 CLIENT_SECRETS_FILE = os.path.join(os.path.dirname(__file__), "config.json")
@@ -71,7 +72,8 @@ def auth_start():
 
 @app.get("/oauth2/callback")
 def auth_callback(
-    request: Request, das: GoogleCalendarCredentialsDas = Depends(get_google_calendar_credentials_das)
+        request: Request, das: GoogleCalendarCredentialsDas = Depends(
+            get_google_calendar_credentials_das)
 ):
     """Callback after successful OAuth with Google"""
     state = request.query_params.get("state")
@@ -103,7 +105,7 @@ def auth_callback(
 
 @app.get("/calendar/events")
 def list_events(
-    service: GoogleCalendarProvider = Depends(get_google_calendar_provider),
+        service: GoogleCalendarProvider = Depends(get_google_calendar_provider),
 ):
     """Example: list next 5 events from primary calendar"""
 
