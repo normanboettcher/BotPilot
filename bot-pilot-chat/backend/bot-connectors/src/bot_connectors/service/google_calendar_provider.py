@@ -4,15 +4,15 @@ from fastapi.params import Depends
 from googleapiclient.discovery import build, Resource
 
 from bot_connectors.persistence.google_calendar_das import (
-    GoogleCalendarDas,
-    get_google_calendar_das,
+    GoogleCalendarCredentialsDas,
+    get_google_calendar_credentials_das,
 )
 
 logger = logging.Logger(__name__)
 
 
 class GoogleCalendarProvider:
-    def __init__(self, das: GoogleCalendarDas):
+    def __init__(self, das: GoogleCalendarCredentialsDas):
         self._das = das
 
     def get_google_calendar_as_service(
@@ -43,6 +43,6 @@ class GoogleCalendarProvider:
 
 
 def get_google_calendar_provider(
-    das: GoogleCalendarDas = Depends(get_google_calendar_das),
+    das: GoogleCalendarCredentialsDas = Depends(get_google_calendar_credentials_das),
 ):
     return GoogleCalendarProvider(das)
