@@ -14,7 +14,7 @@ from bot_connectors.persistence.db_session_factory import get_db_session
 logger = logging.Logger(__name__)
 
 
-class GoogleCalendarDas:
+class GoogleCalendarCredentialsDas:
     def __init__(self, db_session: Session):
         self.db_session = db_session
         pass
@@ -104,5 +104,5 @@ class GoogleCalendarDas:
         )
 
 
-def get_google_calendar_das(db: Session = Depends(get_db_session)):
-    return GoogleCalendarDas(db_session=db)
+def get_google_calendar_credentials_das(db: Session = Depends(get_db_session)):
+    return GoogleCalendarCredentialsDas(db_session=db)

@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, StaticPool
 from sqlalchemy.orm import sessionmaker
 
 from bot_connectors.domain.google_calendar_credentials import Base
-from bot_connectors.persistence.google_calendar_das import GoogleCalendarDas
+from bot_connectors.persistence.google_calendar_das import GoogleCalendarCredentialsDas
 
 TEST_DATABASE_URL = "sqlite:///:memory:"
 engine = create_engine(
@@ -31,7 +31,7 @@ def test_db():
 def test_save_and_get_credentials(test_db):
     # given
     db = test_db()
-    das = GoogleCalendarDas(db)
+    das = GoogleCalendarCredentialsDas(db)
 
     creds = Credentials(
         client_id="id",

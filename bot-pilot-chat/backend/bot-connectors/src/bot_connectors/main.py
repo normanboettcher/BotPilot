@@ -10,8 +10,8 @@ import os
 from bot_connectors.domain.persistence_model_base import Base
 from bot_connectors.persistence.db_session_factory import get_db_engine
 from bot_connectors.persistence.google_calendar_das import (
-    GoogleCalendarDas,
-    get_google_calendar_das,
+    GoogleCalendarCredentialsDas,
+    get_google_calendar_credentials_das,
 )
 from bot_connectors.service.google_calendar_provider import (
     GoogleCalendarProvider,
@@ -71,7 +71,7 @@ def auth_start():
 
 @app.get("/oauth2/callback")
 def auth_callback(
-    request: Request, das: GoogleCalendarDas = Depends(get_google_calendar_das)
+    request: Request, das: GoogleCalendarCredentialsDas = Depends(get_google_calendar_credentials_das)
 ):
     """Callback after successful OAuth with Google"""
     state = request.query_params.get("state")
