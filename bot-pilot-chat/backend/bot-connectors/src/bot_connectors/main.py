@@ -1,4 +1,3 @@
-import datetime
 import logging
 from contextlib import asynccontextmanager
 
@@ -8,6 +7,7 @@ from fastapi.responses import RedirectResponse, JSONResponse
 from google_auth_oauthlib.flow import Flow
 import os
 
+from bot_connectors.domain.google_calendar_event import GoogleCalendarEvent
 from bot_connectors.domain.persistence_model_base import Base
 from bot_connectors.persistence.db_session_factory import get_db_engine
 from bot_connectors.persistence.google_calendar_credentials_das import (
@@ -15,12 +15,9 @@ from bot_connectors.persistence.google_calendar_credentials_das import (
     get_google_calendar_credentials_das,
 )
 from bot_connectors.service.calendar_event_reader import CalendarEventsReader
-from bot_connectors.service.google_calendar_client import (
-    GoogleCalendarClient,
-    get_google_calendar_client,
+from bot_connectors.service.google_calendar_events_provider import (
+    get_google_calendar_events_provider,
 )
-from bot_connectors.service.google_calendar_events_provider import \
-    get_google_calendar_events_provider
 
 
 def create_tables_at_startup():
@@ -49,7 +46,7 @@ SCOPES = [
 CLIENT_SECRETS_FILE = os.path.join(os.path.dirname(__file__), "config.json")
 
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 
@@ -65,9 +62,7 @@ user_tokens = {}
 def auth_start():
     """starts OAuth flow with Google"""
     flow = Flow.from_client_secrets_file(
-        CLIENT_SECRETS_FILE,
-        scopes=SCOPES,
-        redirect_uri=REDIRECT_URI
+        CLIENT_SECRETS_FILE, scopes=SCOPES, redirect_uri=REDIRECT_URI
     )
     auth_url, state = flow.authorization_url(
         access_type="offline", include_granted_scopes="true", prompt="consent"
@@ -79,8 +74,10 @@ def auth_start():
 
 @app.get("/oauth2/callback")
 def auth_callback(
-        request: Request, das: GoogleCalendarCredentialsDas = Depends(
-            get_google_calendar_credentials_das)
+    request: Request,
+    das: GoogleCalendarCredentialsDas = Depends(
+        get_google_calendar_credentials_das
+    ),
 ):
     """Callback after successful OAuth with Google"""
     state = request.query_params.get("state")
@@ -111,26 +108,32 @@ def auth_callback(
 
 
 @app.get("/calendar/google/events/busy")
-def list_events(request: Request,
-                busy_events_provider: CalendarEventsReader
-                = Depends(get_google_calendar_events_provider)):
+def list_events(
+    request: Request,
+    busy_events_provider: CalendarEventsReader = Depends(
+        get_google_calendar_events_provider
+    ),
+):
     """Example: list next 5 events from primary calendar"""
-    next_days = request.query_params.get('next_days', None)
+    next_days = request.query_params.get("next_days", None)
     try:
         if next_days is not None:
             busy_events = busy_events_provider.read_busy_events_next(
-                "default", next_days=int(next_days))
-        else:
-            busy_events = busy_events_provider.read_busy_events_next(
-                'default'
+                "default", next_days=int(next_days)
             )
+        else:
+            busy_events = busy_events_provider.read_busy_events_next("default")
     except Exception as e:
-        return JSONResponse({
-            'status': 'failed',
-            'message': (f'Beim Abruf der naechsten {next_days} Tage ist ein '
-                        f'unerwarteter Fehler aufgetreten: {e}'),
-            'status_code': '500'
-        })
+        return JSONResponse(
+            {
+                "status": "failed",
+                "message": (
+                    f"Beim Abruf der naechsten {next_days} Tage ist ein "
+                    f"unerwarteter Fehler aufgetreten: {e}"
+                ),
+                "status_code": "500",
+            }
+        )
     if busy_events is None:
         return JSONResponse(
             {
@@ -139,6 +142,11 @@ def list_events(request: Request,
                 "status_code": "401",
             }
         )
-    return JSONResponse({
-        'busy_events': busy_events
-    })
+    return JSONResponse({"busy_events": busy_events})
+
+
+@app.post("/calendar/google/events/create")
+def create_event_google_calendar(body: GoogleCalendarEvent):
+    logger.debug(f"body: {body}")
+
+    return

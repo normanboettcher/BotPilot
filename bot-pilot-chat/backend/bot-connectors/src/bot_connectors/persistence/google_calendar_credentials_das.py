@@ -42,8 +42,7 @@ class GoogleCalendarCredentialsDas:
             raise
 
     def update_credentials_after_refresh(
-            self, creds: Credentials,
-            entry: type[GoogleCalendarCredentials] | None
+        self, creds: Credentials, entry: type[GoogleCalendarCredentials] | None
     ):
         try:
             entry.access_token = creds.token
@@ -63,7 +62,7 @@ class GoogleCalendarCredentialsDas:
             raise
 
     def get_credentials_for_context(
-            self, customer_context: str
+        self, customer_context: str
     ) -> Credentials | None:
         entry = (
             self.db_session.query(GoogleCalendarCredentials)
@@ -80,7 +79,7 @@ class GoogleCalendarCredentialsDas:
             client_id=entry.client_id,
             client_secret=entry.client_secret,
             expiry=entry.expiry,
-            scopes=entry.scopes.split(',')
+            scopes=entry.scopes.split(","),
         )
 
         if not creds.valid and creds.expired and creds.refresh_token:
@@ -102,7 +101,7 @@ class GoogleCalendarCredentialsDas:
             refresh_token=cred.refresh_token,
             token_uri=cred.token_uri,
             expiry=cred.expiry,
-            scopes=','.join(cred.scopes) if cred.scopes is not None else ''
+            scopes=",".join(cred.scopes) if cred.scopes is not None else "",
         )
 
 

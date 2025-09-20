@@ -4,7 +4,9 @@ from sqlalchemy import create_engine, StaticPool
 from sqlalchemy.orm import sessionmaker
 
 from bot_connectors.domain.google_calendar_credentials import Base
-from bot_connectors.persistence.google_calendar_credentials_das import GoogleCalendarCredentialsDas
+from bot_connectors.persistence.google_calendar_credentials_das import (
+    GoogleCalendarCredentialsDas,
+)
 
 TEST_DATABASE_URL = "sqlite:///:memory:"
 engine = create_engine(
@@ -39,7 +41,7 @@ def test_save_and_get_credentials(test_db):
         token="access",
         refresh_token="refresh",
         token_uri="https://oauth2.googleapis.com/token",
-        scopes=['scope1', 'scope2']
+        scopes=["scope1", "scope2"],
     )
 
     customer_context = "musterkanzlei"
@@ -53,9 +55,11 @@ def test_save_and_get_credentials(test_db):
     assert retrieved_creds.refresh_token == "refresh"
     assert retrieved_creds.client_id == "id"
     assert retrieved_creds.client_secret == "test_secret"
-    assert retrieved_creds.scopes == ['scope1', 'scope2']
+    assert retrieved_creds.scopes == ["scope1", "scope2"]
 
     db.close()
+
+
 def test_save_and_get_credentials_scopes_none(test_db):
     # given
     db = test_db()
@@ -67,7 +71,7 @@ def test_save_and_get_credentials_scopes_none(test_db):
         token="access",
         refresh_token="refresh",
         token_uri="https://oauth2.googleapis.com/token",
-        scopes=None
+        scopes=None,
     )
 
     customer_context = "musterkanzlei"
@@ -77,6 +81,6 @@ def test_save_and_get_credentials_scopes_none(test_db):
     retrieved_creds = das.get_credentials_for_context(customer_context)
 
     # then
-    assert retrieved_creds.scopes == [''] # should be empty
+    assert retrieved_creds.scopes == [""]  # should be empty
 
     db.close()
