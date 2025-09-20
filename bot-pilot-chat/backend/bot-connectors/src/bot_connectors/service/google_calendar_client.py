@@ -43,6 +43,8 @@ class GoogleCalendarClient:
 
 
 def get_google_calendar_client(
-    das: GoogleCalendarCredentialsDas = Depends(get_google_calendar_credentials_das),
+    das: GoogleCalendarCredentialsDas = Depends(
+        get_google_calendar_credentials_das
+    ),
 ):
     return GoogleCalendarClient(das)

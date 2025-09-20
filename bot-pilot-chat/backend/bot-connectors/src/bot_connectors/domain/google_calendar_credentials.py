@@ -22,7 +22,7 @@ class GoogleCalendarCredentials(Base):
         default="https://oauth2.googleapis.com/token",
     )
     expiry = Column(DateTime, nullable=True)
-    scopes=Column(String(1000), nullable=True)
+    scopes = Column(String(1000), nullable=True)
 
     def __repr__(self):
         return (
