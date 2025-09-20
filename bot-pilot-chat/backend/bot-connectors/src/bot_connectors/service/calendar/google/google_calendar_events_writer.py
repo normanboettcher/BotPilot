@@ -8,8 +8,8 @@ from bot_connectors.domain.calendar.google.google_calendar_event import (
 from bot_connectors.service.calendar.api.calendar_event_writer import (
     CalendarEventWriter,
 )
-from bot_connectors.service.calendar.calender_creation_result import (
-    CalendarCreationResult,
+from bot_connectors.domain.calendar.events.calender_event_creation_result import (
+    CalendarEventCreationResult,
 )
 from bot_connectors.service.calendar.google.google_calendar_client import (
     GoogleCalendarClient,
@@ -26,7 +26,7 @@ class GoogleCalendarEventsWriter(CalendarEventWriter):
 
     def create_event(
         self, event: GoogleCalendarEvent, customer_context: str
-    ) -> CalendarCreationResult:
+    ) -> CalendarEventCreationResult:
         try:
             service = self._client.get_google_calendar_as_service(customer_context)
             if service is None:
@@ -34,7 +34,7 @@ class GoogleCalendarEventsWriter(CalendarEventWriter):
                     f"Es konnte kein Verbindung zum GoogleClient "
                     f"hergestellt werden für context: [{customer_context}]."
                 )
-                return CalendarCreationResult.failure(
+                return CalendarEventCreationResult.failure(
                     "Es konnte keine Verbindung "
                     "zum GoogleClient hergestellt "
                     "werden."
@@ -46,10 +46,10 @@ class GoogleCalendarEventsWriter(CalendarEventWriter):
             )
             logger.debug(f"event created: [{event_created}]")
             if event_created is None:
-                return CalendarCreationResult.failure(
+                return CalendarEventCreationResult.failure(
                     f"Das Event: [{event.as_dict()}]" f" konnte nicht erstellt werden."
                 )
-            return CalendarCreationResult.success()
+            return CalendarEventCreationResult.success()
         except Exception as e:
             logger.error(
                 f"Beim Versuch das event: [{event.as_dict()}] zu erzeugen kam "
