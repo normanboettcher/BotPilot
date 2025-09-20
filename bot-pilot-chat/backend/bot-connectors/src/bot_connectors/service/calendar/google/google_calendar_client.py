@@ -15,13 +15,9 @@ class GoogleCalendarClient:
     def __init__(self, das: GoogleCalendarCredentialsDas):
         self._das = das
 
-    def get_google_calendar_as_service(
-        self, customer_context: str
-    ) -> Resource | None:
+    def get_google_calendar_as_service(self, customer_context: str) -> Resource | None:
         try:
-            calendar_creds = self._das.get_credentials_for_context(
-                customer_context
-            )
+            calendar_creds = self._das.get_credentials_for_context(customer_context)
             if calendar_creds is None or not calendar_creds:
                 logger.debug(f"no creds found in user_tokens: {calendar_creds}")
                 return None
@@ -30,7 +26,8 @@ class GoogleCalendarClient:
                 f"[{customer_context}] successfully"
             )
             logger.debug(
-                f"received creds: refresh_token: [{calendar_creds.refresh_token}]"
+                f"received creds: refresh_token: "
+                f"[{calendar_creds.refresh_token}]"
                 f"token: [{calendar_creds.token}]"
             )
             return build("calendar", "v3", credentials=calendar_creds)
@@ -43,8 +40,6 @@ class GoogleCalendarClient:
 
 
 def get_google_calendar_client(
-    das: GoogleCalendarCredentialsDas = Depends(
-        get_google_calendar_credentials_das
-    ),
+    das: GoogleCalendarCredentialsDas = Depends(get_google_calendar_credentials_das),
 ):
     return GoogleCalendarClient(das)
