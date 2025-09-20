@@ -1,3 +1,4 @@
+import datetime
 import logging
 from contextlib import asynccontextmanager
 
@@ -13,10 +14,13 @@ from bot_connectors.persistence.google_calendar_credentials_das import (
     GoogleCalendarCredentialsDas,
     get_google_calendar_credentials_das,
 )
-from bot_connectors.service.google_calendar_provider import (
-    GoogleCalendarProvider,
-    get_google_calendar_provider,
+from bot_connectors.service.calendar_event_reader import CalendarEventsReader
+from bot_connectors.service.google_calendar_client import (
+    GoogleCalendarClient,
+    get_google_calendar_client,
 )
+from bot_connectors.service.google_calendar_events_provider import \
+    get_google_calendar_events_provider
 
 
 def create_tables_at_startup():
@@ -35,8 +39,11 @@ app = FastAPI(lifespan=lifespan)
 REDIRECT_URI = "http://localhost:8000/oauth2/callback"
 
 # Scopes: read and write access to Google Calendar
-SCOPES = ["https://www.googleapis.com/auth/calendar.events",
-          "https://www.googleapis.com/auth/calendar.freebusy"]
+SCOPES = [
+    "https://www.googleapis.com/auth/calendar.readonly",
+    "https://www.googleapis.com/auth/calendar.events",
+    "https://www.googleapis.com/auth/calendar.events.freebusy",
+]
 
 # path to downloaded OAuth 2.0 Client IDs json file
 CLIENT_SECRETS_FILE = os.path.join(os.path.dirname(__file__), "config.json")
@@ -60,7 +67,7 @@ def auth_start():
     flow = Flow.from_client_secrets_file(
         CLIENT_SECRETS_FILE,
         scopes=SCOPES,
-        redirect_uri=REDIRECT_URI,
+        redirect_uri=REDIRECT_URI
     )
     auth_url, state = flow.authorization_url(
         access_type="offline", include_granted_scopes="true", prompt="consent"
@@ -103,14 +110,28 @@ def auth_callback(
     return JSONResponse({"status": "ok", "message": "OAuth erfolgreich"})
 
 
-@app.get("/calendar/events")
-def list_events(
-        service: GoogleCalendarProvider = Depends(get_google_calendar_provider),
-):
+@app.get("/calendar/google/events/busy")
+def list_events(request: Request,
+                busy_events_provider: CalendarEventsReader
+                = Depends(get_google_calendar_events_provider)):
     """Example: list next 5 events from primary calendar"""
-
-    calendar_service = service.get_google_calendar_as_service("default")
-    if calendar_service is None:
+    next_days = request.query_params.get('next_days', None)
+    try:
+        if next_days is not None:
+            busy_events = busy_events_provider.read_busy_events_next(
+                "default", next_days=int(next_days))
+        else:
+            busy_events = busy_events_provider.read_busy_events_next(
+                'default'
+            )
+    except Exception as e:
+        return JSONResponse({
+            'status': 'failed',
+            'message': (f'Beim Abruf der naechsten {next_days} Tage ist ein '
+                        f'unerwarteter Fehler aufgetreten: {e}'),
+            'status_code': '500'
+        })
+    if busy_events is None:
         return JSONResponse(
             {
                 "status": "failed",
@@ -118,15 +139,6 @@ def list_events(
                 "status_code": "401",
             }
         )
-    events_result = (
-        calendar_service.events()
-        .list(
-            calendarId="primary",
-            maxResults=5,
-            singleEvents=True,
-            orderBy="startTime",
-        )
-        .execute()
-    )
-    events = events_result.get("items", [])
-    return events
+    return JSONResponse({
+        'busy_events': busy_events
+    })
