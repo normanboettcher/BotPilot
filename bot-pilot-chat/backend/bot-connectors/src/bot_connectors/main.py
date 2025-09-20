@@ -1,5 +1,6 @@
 import logging
 from contextlib import asynccontextmanager
+from logging import DEBUG
 
 from fastapi import FastAPI, Request
 from fastapi.params import Depends
@@ -7,8 +8,8 @@ from fastapi.responses import RedirectResponse, JSONResponse
 from google_auth_oauthlib.flow import Flow
 import os
 
-from bot_connectors.domain.calendar.google.google_calendar_event import (
-    GoogleCalendarEvent,
+from bot_connectors.domain.calendar.events.create_event_request import (
+    CreateGoogleCalendarEventRequest,
 )
 from bot_connectors.domain.persistence_model_base import Base
 from bot_connectors.persistence.db_session_factory import get_db_engine
@@ -19,8 +20,14 @@ from bot_connectors.persistence.google_calendar_credentials_das import (
 from bot_connectors.service.calendar.api.calendar_event_reader import (
     CalendarEventsReader,
 )
+from bot_connectors.service.calendar.api.calendar_event_writer import (
+    CalendarEventWriter,
+)
 from bot_connectors.service.calendar.google.google_calendar_events_provider import (
     get_google_calendar_events_provider,
+)
+from bot_connectors.service.calendar.google.google_calendar_events_writer import (
+    get_google_calendar_events_writer,
 )
 
 
@@ -50,7 +57,7 @@ SCOPES = [
 CLIENT_SECRETS_FILE = os.path.join(os.path.dirname(__file__), "config.json")
 
 logging.basicConfig(
-    level=logging.INFO,
+    level=DEBUG,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 
@@ -116,7 +123,6 @@ def list_events(
         get_google_calendar_events_provider
     ),
 ):
-    """Example: list next 5 events from primary calendar"""
     next_days = request.query_params.get("next_days", None)
     try:
         if next_days is not None:
@@ -148,7 +154,37 @@ def list_events(
 
 
 @app.post("/calendar/google/events/create")
-def create_event_google_calendar(body: GoogleCalendarEvent):
-    logger.debug(f"body: {body}")
-
-    return
+def create_event_google_calendar(
+    request: CreateGoogleCalendarEventRequest,
+    events_writer: CalendarEventWriter = Depends(get_google_calendar_events_writer),
+):
+    logger.debug(f"request: {request.to_dict()}")
+    try:
+        event_created = events_writer.create_event(
+            request.event, request.customer_context
+        )
+        if not event_created.is_success():
+            return JSONResponse(
+                {
+                    "status": "failure",
+                    "message": event_created.error_message,
+                    "status_code": "500",
+                    "success": False,
+                }
+            )
+        return JSONResponse(
+            {
+                "status": "ok",
+                "message": "event successfully created",
+                "status_code": "200",
+                "success": True,
+            }
+        )
+    except Exception as e:
+        logger.error(
+            f"An error occurred trying to create event: [{request.event.as_dict()}]. "
+            f"Error: [{e}]"
+        )
+        return JSONResponse(
+            {"status": "failure", "message": e, "status_code": "500", "success": False}
+        )
