@@ -3,7 +3,9 @@ from google.oauth2.credentials import Credentials
 from sqlalchemy import create_engine, StaticPool
 from sqlalchemy.orm import sessionmaker
 
-from bot_connectors.domain.google_calendar_credentials import Base
+from bot_connectors.domain.calendar.google.google_calendar_credentials import (
+    Base,
+)
 from bot_connectors.persistence.google_calendar_credentials_das import (
     GoogleCalendarCredentialsDas,
 )

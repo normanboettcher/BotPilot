@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from google.auth.transport.requests import Request
 
-from bot_connectors.domain.google_calendar_credentials import (
+from bot_connectors.domain.calendar.google.google_calendar_credentials import (
     GoogleCalendarCredentials,
 )
 from bot_connectors.persistence.db_session_factory import get_db_session

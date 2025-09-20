@@ -1,8 +1,10 @@
 import pytest
 
-from bot_connectors.domain.event_attendee import EventAttendee
-from bot_connectors.domain.event_time import EventTime
-from bot_connectors.domain.google_calendar_event import GoogleCalendarEvent
+from bot_connectors.domain.calendar.events.event_attendee import EventAttendee
+from bot_connectors.domain.calendar.events.event_time import EventTime
+from bot_connectors.domain.calendar.google.google_calendar_event import (
+    GoogleCalendarEvent,
+)
 from datetime import datetime, timedelta, UTC
 
 now = datetime.now(UTC).isoformat() + "Z"
