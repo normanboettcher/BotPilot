@@ -7,7 +7,9 @@ from fastapi.responses import RedirectResponse, JSONResponse
 from google_auth_oauthlib.flow import Flow
 import os
 
-from bot_connectors.domain.google_calendar_event import GoogleCalendarEvent
+from bot_connectors.domain.calendar.google.google_calendar_event import (
+    GoogleCalendarEvent,
+)
 from bot_connectors.domain.persistence_model_base import Base
 from bot_connectors.persistence.db_session_factory import get_db_engine
 from bot_connectors.persistence.google_calendar_credentials_das import (

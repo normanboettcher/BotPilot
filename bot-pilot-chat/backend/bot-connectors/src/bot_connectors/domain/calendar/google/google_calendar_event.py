@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
 from typing import Optional, List
 
-from bot_connectors.domain.event_attendee import EventAttendee
-from bot_connectors.domain.event_time import EventTime
+from bot_connectors.domain.calendar.events.event_attendee import EventAttendee
+from bot_connectors.domain.calendar.events.event_time import EventTime
 
 
 @dataclass
