@@ -20,9 +20,7 @@ engine = create_engine(
 
 @pytest.fixture
 def test_db():
-    TestingSessionLocal = sessionmaker(
-        bind=engine, autoflush=False, autocommit=False
-    )
+    TestingSessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
     # create tables for testing
     Base.metadata.create_all(bind=engine)
 

@@ -28,7 +28,7 @@ testpaths = [
 ]
 
 [tool.black]
-line-length = 80
+line-length = 88
 target-version = ["py312"]
 
 [tool.tox]

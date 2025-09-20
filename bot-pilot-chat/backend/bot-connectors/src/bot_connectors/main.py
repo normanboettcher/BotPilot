@@ -16,8 +16,10 @@ from bot_connectors.persistence.google_calendar_credentials_das import (
     GoogleCalendarCredentialsDas,
     get_google_calendar_credentials_das,
 )
-from bot_connectors.service.calendar_event_reader import CalendarEventsReader
-from bot_connectors.service.google_calendar_events_provider import (
+from bot_connectors.service.calendar.api.calendar_event_reader import (
+    CalendarEventsReader,
+)
+from bot_connectors.service.calendar.google.google_calendar_events_provider import (
     get_google_calendar_events_provider,
 )
 
@@ -77,9 +79,7 @@ def auth_start():
 @app.get("/oauth2/callback")
 def auth_callback(
     request: Request,
-    das: GoogleCalendarCredentialsDas = Depends(
-        get_google_calendar_credentials_das
-    ),
+    das: GoogleCalendarCredentialsDas = Depends(get_google_calendar_credentials_das),
 ):
     """Callback after successful OAuth with Google"""
     state = request.query_params.get("state")

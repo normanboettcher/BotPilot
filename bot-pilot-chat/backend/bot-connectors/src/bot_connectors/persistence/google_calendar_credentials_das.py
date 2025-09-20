@@ -24,8 +24,7 @@ class GoogleCalendarCredentialsDas:
         try:
             if not creds.valid and creds.expired and creds.refresh_token:
                 logger.info(
-                    f"Refreshing access token for {customer_context} "
-                    f"before saving"
+                    f"Refreshing access token for {customer_context} " f"before saving"
                 )
                 creds.refresh(Request())
             entry = self.build_from_credentials(creds, customer_context)
@@ -36,8 +35,7 @@ class GoogleCalendarCredentialsDas:
         except Exception as e:
             self.db_session.rollback()
             logger.error(
-                f"Failed to save credentials for calendar_id"
-                f": [{calendar_id}]: {e}"
+                f"Failed to save credentials for calendar_id" f": [{calendar_id}]: {e}"
             )
             raise
 
@@ -50,9 +48,7 @@ class GoogleCalendarCredentialsDas:
             if creds.refresh_token:
                 entry.refresh_token = creds.refresh_token
             self.db_session.commit()
-            logger.info(
-                f"Updated credentials for {entry.calendar_id}" f"successfully"
-            )
+            logger.info(f"Updated credentials for {entry.calendar_id}" f"successfully")
         except Exception as e:
             self.db_session.rollback()
             logger.error(
@@ -61,9 +57,7 @@ class GoogleCalendarCredentialsDas:
             )
             raise
 
-    def get_credentials_for_context(
-        self, customer_context: str
-    ) -> Credentials | None:
+    def get_credentials_for_context(self, customer_context: str) -> Credentials | None:
         entry = (
             self.db_session.query(GoogleCalendarCredentials)
             .filter_by(customer_context=customer_context)

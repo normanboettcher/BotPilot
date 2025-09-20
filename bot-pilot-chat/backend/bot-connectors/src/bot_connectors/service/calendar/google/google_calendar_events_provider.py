@@ -3,8 +3,10 @@ import logging
 from fastapi.params import Depends
 from datetime import datetime, timedelta, UTC
 
-from bot_connectors.service.calendar_event_reader import CalendarEventsReader
-from bot_connectors.service.google_calendar_client import (
+from bot_connectors.service.calendar.api.calendar_event_reader import (
+    CalendarEventsReader,
+)
+from bot_connectors.service.calendar.google.google_calendar_client import (
     GoogleCalendarClient,
     get_google_calendar_client,
 )
@@ -21,26 +23,20 @@ class GoogleCalendarEventsProvider(CalendarEventsReader):
         self, customer_context: str, next_days: int = 90
     ) -> list | None:
         try:
-            calendar_service = (
-                self._calendar_client.get_google_calendar_as_service(
-                    customer_context
-                )
+            calendar_service = self._calendar_client.get_google_calendar_as_service(
+                customer_context
             )
             if calendar_service is None:
                 return None
             now = datetime.now(UTC).isoformat() + "Z"
-            time_max = (
-                datetime.now(UTC) + timedelta(days=next_days)
-            ).isoformat() + "Z"
+            time_max = (datetime.now(UTC) + timedelta(days=next_days)).isoformat() + "Z"
             body = {
                 "timeMin": now,
                 "timeMax": time_max,
                 "timeZone": "UTC",
                 "items": [{"id": "primary"}],
             }
-            events_result = (
-                calendar_service.freebusy().query(body=body).execute()
-            )
+            events_result = calendar_service.freebusy().query(body=body).execute()
             logger.debug(f"calendar_events_result: {events_result}")
             return events_result["calendars"]["primary"]
 

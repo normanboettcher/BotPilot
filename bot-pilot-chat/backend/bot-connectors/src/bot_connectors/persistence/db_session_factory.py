@@ -14,9 +14,7 @@ def get_db_engine():
 
 
 def get_db_session():
-    SessionLocal = sessionmaker(
-        bind=get_db_engine(), autoflush=False, autocommit=False
-    )
+    SessionLocal = sessionmaker(bind=get_db_engine(), autoflush=False, autocommit=False)
     db = SessionLocal()
     try:
         yield db
