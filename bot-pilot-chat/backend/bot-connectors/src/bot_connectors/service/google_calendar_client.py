@@ -11,7 +11,7 @@ from bot_connectors.persistence.google_calendar_credentials_das import (
 logger = logging.Logger(__name__)
 
 
-class GoogleCalendarProvider:
+class GoogleCalendarClient:
     def __init__(self, das: GoogleCalendarCredentialsDas):
         self._das = das
 
@@ -42,7 +42,7 @@ class GoogleCalendarProvider:
             raise
 
 
-def get_google_calendar_provider(
+def get_google_calendar_client(
     das: GoogleCalendarCredentialsDas = Depends(get_google_calendar_credentials_das),
 ):
-    return GoogleCalendarProvider(das)
+    return GoogleCalendarClient(das)
