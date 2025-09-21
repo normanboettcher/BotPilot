@@ -88,9 +88,8 @@ def auth_start():
 
 @app.get("/oauth2/callback")
 def auth_callback(
-        request: Request,
-        das: GoogleCalendarCredentialsDas = Depends(
-            get_google_calendar_credentials_das),
+    request: Request,
+    das: GoogleCalendarCredentialsDas = Depends(get_google_calendar_credentials_das),
 ):
     """Callback after successful OAuth with Google"""
     state = request.query_params.get("state")
@@ -122,10 +121,10 @@ def auth_callback(
 
 @app.get("/calendar/google/events/busy")
 def list_events(
-        request: Request,
-        busy_events_provider: CalendarEventsReader = Depends(
-            get_google_calendar_events_provider
-        ),
+    request: Request,
+    busy_events_provider: CalendarEventsReader = Depends(
+        get_google_calendar_events_provider
+    ),
 ):
     next_days = request.query_params.get("next_days", None)
     try:
@@ -156,14 +155,15 @@ def list_events(
         )
     return JSONResponse(
         BusyEventsResponse(
-            int(next_days) if next_days is not None else 90, busy_events).to_dict()
+            int(next_days) if next_days is not None else 90, busy_events
+        ).to_dict()
     )
 
 
 @app.post("/calendar/google/events/create")
 def create_event_google_calendar(
-        request: CreateGoogleCalendarEventRequest,
-        events_writer: CalendarEventWriter = Depends(get_google_calendar_events_writer),
+    request: CreateGoogleCalendarEventRequest,
+    events_writer: CalendarEventWriter = Depends(get_google_calendar_events_writer),
 ):
     logger.debug(f"request: {request.to_dict()}")
     try:
