@@ -5,13 +5,13 @@ from typing import Optional
 @dataclass
 class CalendarEventCreationResult:
     success: bool
-    error_message: Optional[str] = None
+    message: Optional[str] = None
 
     def is_success(self):
         return self.success
 
     def get_error_messages(self):
-        return self.error_message
+        return self.message
 
     def to_dict(self):
         return asdict(self)
@@ -22,4 +22,4 @@ class CalendarEventCreationResult:
 
     @staticmethod
     def success():
-        return CalendarEventCreationResult(True)
+        return CalendarEventCreationResult(True, "event created successfully")
