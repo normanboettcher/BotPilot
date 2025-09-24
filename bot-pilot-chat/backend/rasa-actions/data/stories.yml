@@ -83,3 +83,15 @@ stories:
       - action: user_info_form
       - active_loop: user_info_form
 
+  - story: happy path collect user_name and user_mail
+    steps:
+      - intent: user_name_inform
+      - action: action_ask_user_name
+      - active_loop: user_info_form
+      - slot_was_set:
+          - requested_slot: user_name
+      - intent: user_mail_inform
+      - slot_was_set:
+          - requested_slot: user_mail
+      - action: action_ask_user_mail
+      - active_loop: user_info_form
