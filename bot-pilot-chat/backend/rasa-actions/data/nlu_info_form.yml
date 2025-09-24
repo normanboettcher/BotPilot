@@ -1,0 +1,25 @@
+nlu:
+  - intent: user_name_inform
+    examples: |
+      - Tobias Meyer
+      - Marcel Weber
+      - Ann-Kathrin Müller
+      - Sophie Müller-Meyer
+      - Clara von Bayern
+      - Clara-Luisa von Hinüber
+      - Peter Becker
+      - Peter-Siegfried Müller-Meyer
+      - Andreas Nagel
+      - Fritz Hesse
+      - Robin Sauer
+
+  - intent: user_mail_inform
+    examples: |
+      - Tobias.Meyer@web.de
+      - Marcel.Weber123@t-online.de
+      - AnnKatrhin.Mueller@web.de
+      - sophie1.muellermeyer@gmx.de
+      - clara.vanBayern44@t-online.de
+      - claraluise.vonhinueber1@web.de
+      - peterbecker@gmx.de
+      - Klaus123.meyer1@tt.de

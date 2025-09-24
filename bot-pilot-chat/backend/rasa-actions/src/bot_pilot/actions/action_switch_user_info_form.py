@@ -31,5 +31,5 @@ class ActionSwitchUserInfoForm(Action):
             SlotSet("next_form_name", "user_info_form"),
             SlotSet("user_type", user_type),
             SlotSet("user_name", None),
-            SlotSet("user_mail", None)
+            SlotSet("user_mail", None),
         ]
