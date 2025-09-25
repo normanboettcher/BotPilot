@@ -1,6 +1,11 @@
+export interface EventTime {
+  dateTime: string;
+  timeZone: string;
+}
+
 export interface BusyEvent {
-  start: string;
-  end: string;
+  start: EventTime;
+  end: EventTime;
 }
 
 export interface BusyEventResponse {
