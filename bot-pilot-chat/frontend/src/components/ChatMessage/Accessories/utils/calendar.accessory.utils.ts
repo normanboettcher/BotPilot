@@ -7,9 +7,9 @@ const shouldDisableTime = (value: Dayjs, view: TimeView, busyEvents: BusyEvent[]
   if (view !== 'hours' && view !== 'minutes') {
     return false;
   }
-  const busyStart = dayjs(value).startOf('hour');
+  const busyStart = dayjs(value).startOf('minutes');
 
-  const busyEnd = busyStart.add(1, 'hour');
+  const busyEnd = busyStart.add(1, 'minutes');
   return busyEvents.some(
     (event) =>
       dayjs(event.start.dateTime).isBefore(busyEnd) && dayjs(event.end.dateTime).isAfter(busyStart)
