@@ -24,10 +24,14 @@ intents:
 - user_type_inform
 - verabschiedung
 - zeiten
+- consultant_form
+- consultant_inform
+
 entities:
 - termin_medium
 - user_type
 - termin_type
+
 slots:
   next_form_name:
     mappings:
@@ -87,6 +91,23 @@ slots:
     - mail
     - phone
     - bot
+  consultant:
+    type: categorical
+    values:
+      - Herr Bernd Müller
+      - Frau Stephanie Meyer
+      - Herr Klaus Becker
+    mappings:
+      - type: from_intent
+        intent: consultant_inform
+        conditions:
+          - active_loop: consultant_form
+            requested_slot: consultant
+      - type: from_text
+        conditions:
+          - active_loop: termin_form
+            requested_slot: consultant
+
 forms:
   termin_form:
     required_slots:
@@ -95,6 +116,9 @@ forms:
   user_type_form:
     required_slots:
     - user_type
+  consultant_form:
+    required_slots:
+      - consultant
 actions:
 - action_submit_termin
 - action_switch_user_type_form
@@ -121,6 +145,9 @@ actions:
 - action_ask_termin_type
 - action_ask_user_type
 - action_stop
+- action_switch_consultant_form
+- action_ask_consultant
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
