@@ -9,6 +9,8 @@ import { busyEventsMock } from '../../mocks/MockBusyEvents.ts';
 const useCalendarDetails = (): CalendarDetails => {
   // TODO: fetch real opening hours and busyEvents from backend
   return {
+    // Sunday, Saturday
+    disabledWeekdays: [0, 6],
     openingHours: [
       {
         start: {
