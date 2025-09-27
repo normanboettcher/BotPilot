@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import dayjs from 'dayjs';
-import shouldDisableTime from '../calendar.accessory.utils.ts';
+import { shouldDisableTime } from '../calendar.accessory.utils.ts';
 import type { BusyEvent } from '../../../../../domain/BusyEvent.ts';
 
 const givenBusyEvent = (start: string, end: string): BusyEvent => ({
