@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import type { BusyEvent } from '../../../domain/BusyEvent.ts';
+import React from 'react';
 import { Box } from '@mui/material';
 import {
   type DateOrTimeView,
@@ -7,20 +6,17 @@ import {
   LocalizationProvider,
 } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs, { type Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import 'dayjs/locale/de';
-import shouldDisableTime from './utils/calendar.accessory.utils.ts';
+import { shouldDisableTime } from './utils/calendar.accessory.utils.ts';
 
 const useEventIntervall = (): { eventIntervallViews: DateOrTimeView[] } => {
   return { eventIntervallViews: ['year', 'month', 'day', 'hours', 'minutes'] };
 };
 
-type Props = {
-  busyHours: BusyEvent[];
-};
-export const CalendarAccessory: React.FC<Props> = ({ busyHours }) => {
+export const CalendarAccessory: React.FC = () => {
   const now = dayjs();
-  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(now);
+  // const [selectedDate, setSelectedDate] = useState<Dayjs | null>(now);
   const { eventIntervallViews } = useEventIntervall();
 
   return (
@@ -33,7 +29,7 @@ export const CalendarAccessory: React.FC<Props> = ({ busyHours }) => {
           disablePast
           minutesStep={15}
           skipDisabled
-          shouldDisableTime={(value, view) => shouldDisableTime(value, view, busyHours)}
+          shouldDisableTime={shouldDisableTime}
         ></DesktopDateTimePicker>
       </LocalizationProvider>
     </Box>
