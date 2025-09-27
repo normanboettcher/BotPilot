@@ -1,6 +1,6 @@
 /** @type {import("prettier").Config} */
 export default {
-  printWidth: 100, // maximale Zeilenlänge
+  printWidth: 88, // maximale Zeilenlänge
   tabWidth: 2, // Größe von Tabs
   useTabs: false, // statt Tabs -> Leerzeichen
   semi: true, // Semikolons am Zeilenende
