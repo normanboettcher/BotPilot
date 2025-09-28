@@ -1,35 +1,13 @@
 import { Box } from '@mui/material';
 import React, { useState, type ChangeEventHandler } from 'react';
-import { useChatverlauf } from '../../context/ChatContext.tsx';
-import useMessageService from '../../service/MessageService.ts';
-import useMessageCreator from '../../service/MessageCreator.ts';
 import ChatTextField from './ChatTextField.tsx';
 import SendIconButton from '../Buttons/SendIconButton.tsx';
 import useBotResponsive from '../../hooks/useBotResponsive.ts';
+import useHandleSend from './useHandleSend.ts';
 
 const ChatInput: React.FC = () => {
-  const { addMessage } = useChatverlauf();
   const [input, setInput] = useState<string>('');
-  const { sendMessageAndGetResponse } = useMessageService();
-  const { createChatMessage } = useMessageCreator();
-
-  const handleSend = async () => {
-    if (!input.trim()) return;
-    const userMessage = createChatMessage(input, 'user');
-    addMessage(userMessage);
-    setInput('');
-    try {
-      await sendMessageAndGetResponse(input);
-      //response && addMessage(response);
-    } catch (error) {
-      console.error('Fehler beim Abrufen der Antwort:', error);
-      const errorMessage = createChatMessage(
-        'Fehler bei der Verbindung zum Server:',
-        'bot'
-      );
-      addMessage(errorMessage);
-    }
-  };
+  const { handleSend } = useHandleSend();
 
   const onChange: ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement | undefined
@@ -51,12 +29,19 @@ const ChatInput: React.FC = () => {
     >
       <ChatTextField
         onChange={onChange}
-        sendButton={<SendIconButton onClick={handleSend} />}
+        sendButton={
+          <SendIconButton
+            onClick={async () => {
+              await handleSend(input);
+              setInput('');
+            }}
+          />
+        }
         value={input}
         onKeyDown={async (e) => {
           if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            await handleSend();
+            await handleSend(input);
             setInput('');
           }
         }}
