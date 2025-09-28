@@ -5,6 +5,7 @@ import useBotResponsive from '../../hooks/useBotResponsive.ts';
 import AlarmClock from '../icons/AlarmClock.tsx';
 import Markdown from 'react-markdown';
 import ChatMessageText from './ChatMessageText.tsx';
+import CalendarAccessory from './Accessories/CalendarAccessory.tsx';
 
 type Props = {
   msg: ChatMessageType;
@@ -67,6 +68,7 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
       >
         {text}
       </Markdown>
+      {msg.accessory === 'calendar' && <CalendarAccessory />}
       <Stack
         direction={'row'}
         sx={{
