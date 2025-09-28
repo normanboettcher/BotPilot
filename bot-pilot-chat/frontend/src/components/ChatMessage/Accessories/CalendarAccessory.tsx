@@ -24,6 +24,11 @@ export const CalendarAccessory: React.FC = () => {
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'de'}>
         <DateTimePicker
           slotProps={{
+            dialog: {
+              sx: {
+                zIndex: 10000,
+              },
+            },
             popper: {
               placement: 'top-start',
               modifiers: [
