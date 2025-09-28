@@ -46,7 +46,6 @@ const Chatverlauf: React.FC = () => {
             timestamp: new Date().toISOString(),
           }}
         />
-        /
         <div ref={endRef} />
       </List>
     </Box>
