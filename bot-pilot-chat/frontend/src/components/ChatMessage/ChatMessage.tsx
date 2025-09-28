@@ -48,7 +48,9 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
     >
       <Markdown
         components={{
-          p: ({ node, ...props }) => <ChatMessageText>{props.children}</ChatMessageText>,
+          p: ({ node, ...props }) => (
+            <ChatMessageText>{props.children}</ChatMessageText>
+          ),
           ul: ({ node, ...props }) => (
             <Box component={'ul'} sx={{ pl: 2, mt: 0, mb: 0, listStyleType: 'disc' }}>
               {props.children}

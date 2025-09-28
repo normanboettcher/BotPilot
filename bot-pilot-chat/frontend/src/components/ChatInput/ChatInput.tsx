@@ -23,12 +23,17 @@ const ChatInput: React.FC = () => {
       //response && addMessage(response);
     } catch (error) {
       console.error('Fehler beim Abrufen der Antwort:', error);
-      const errorMessage = createChatMessage('Fehler bei der Verbindung zum Server:', 'bot');
+      const errorMessage = createChatMessage(
+        'Fehler bei der Verbindung zum Server:',
+        'bot'
+      );
       addMessage(errorMessage);
     }
   };
 
-  const onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement | undefined> = (e) => {
+  const onChange: ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement | undefined
+  > = (e) => {
     setInput(e.target.value);
   };
   const { isDarkTheme } = useBotResponsive();

@@ -14,7 +14,11 @@ const ChatMessageContainer: React.FC<Props> = ({ chatMessage }) => {
   const { isMobile } = useBotResponsive();
   const isUser = sender === 'user';
   return (
-    <Box width={'100%'} display={'flex'} justifyContent={isUser ? 'flex-end' : 'flex-start'}>
+    <Box
+      width={'100%'}
+      display={'flex'}
+      justifyContent={isUser ? 'flex-end' : 'flex-start'}
+    >
       <Stack
         alignItems={'flex-start'}
         direction={isUser ? 'row-reverse' : 'row'}
