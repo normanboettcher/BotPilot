@@ -32,6 +32,7 @@ export const CalendarAccessory: React.FC = () => {
           minutesStep={15}
           skipDisabled
           shouldDisableTime={shouldDisableTime}
+          timezone={'UTC'}
         ></DateTimePicker>
       </LocalizationProvider>
     </Box>
