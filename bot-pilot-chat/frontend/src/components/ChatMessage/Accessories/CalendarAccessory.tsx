@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import {
   type DateOrTimeView,
-  DesktopDateTimePicker,
+  DateTimePicker,
   LocalizationProvider,
 } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs from 'dayjs';
+import dayjs, { type Dayjs } from 'dayjs';
 import 'dayjs/locale/de';
 import { shouldDisableTime } from './utils/calendar.accessory.utils.ts';
 
@@ -16,21 +16,23 @@ const useEventIntervall = (): { eventIntervallViews: DateOrTimeView[] } => {
 
 export const CalendarAccessory: React.FC = () => {
   const now = dayjs();
-  // const [selectedDate, setSelectedDate] = useState<Dayjs | null>(now);
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(now);
   const { eventIntervallViews } = useEventIntervall();
 
   return (
     <Box>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'de'}>
-        <DesktopDateTimePicker
+        <DateTimePicker
           defaultValue={now}
           format="DD.MM.YYYY HH:mm"
           views={eventIntervallViews}
           disablePast
+          onChange={setSelectedDate}
+          value={selectedDate}
           minutesStep={15}
           skipDisabled
           shouldDisableTime={shouldDisableTime}
-        ></DesktopDateTimePicker>
+        ></DateTimePicker>
       </LocalizationProvider>
     </Box>
   );

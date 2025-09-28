@@ -1,5 +1,6 @@
 import type { CalendarDetails } from '../../../domain/CalendarDetails.ts';
 import { busyEventsMock } from '../../mocks/MockBusyEvents.ts';
+import { mockOpeningHours } from '../../mocks/MockOpeningHours.ts';
 
 /**
  * Fetches the opening hours and busy events from backend corresponding to the current customer.
@@ -11,18 +12,7 @@ const useCalendarDetails = (): CalendarDetails => {
   return {
     // Sunday, Saturday
     disabledWeekdays: [0, 6],
-    openingHours: [
-      {
-        start: {
-          dateTime: '2025-10-02T08:00:00+02:00',
-          timeZone: 'Europe/Berlin',
-        },
-        end: {
-          dateTime: '2025-10-02T18:00:00+02:00',
-          timeZone: 'Europe/Berlin',
-        },
-      },
-    ],
+    openingHours: mockOpeningHours,
     busyEvents: busyEventsMock,
   };
 };
