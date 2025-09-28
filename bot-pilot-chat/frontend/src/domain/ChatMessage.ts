@@ -3,4 +3,5 @@ export interface ChatMessageType {
   message: string;
   timestamp: string;
   type?: 'opening' | 'closing';
+  accessory?: 'calendar';
 }

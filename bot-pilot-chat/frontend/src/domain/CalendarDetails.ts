@@ -1,7 +1,8 @@
 import type { BusyEventResponse } from './BusyEvent.ts';
-import type { OpeningHour } from './OpeningHour.ts';
+import type { OpeningHour, OpeningHours } from './OpeningHour.ts';
 import type { DisabledDays } from './DisabledDays.ts';
 
+export type Weekday = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 /**
  * CalendarDetails will be fetched from backend.
  * Contains the opening hours {@link OpeningHour}s as an Array in case of multiple open intervals
@@ -9,6 +10,6 @@ import type { DisabledDays } from './DisabledDays.ts';
  */
 export interface CalendarDetails {
   disabledWeekdays: DisabledDays;
-  openingHours: OpeningHour[];
+  openingHours: OpeningHours;
   busyEvents: BusyEventResponse;
 }

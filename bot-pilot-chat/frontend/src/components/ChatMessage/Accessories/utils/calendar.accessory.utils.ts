@@ -1,8 +1,15 @@
 import dayjs, { type Dayjs } from 'dayjs';
 import type { TimeView } from '@mui/x-date-pickers';
 import useCalendarDetails from '../useCalendarDetails.ts';
-import type { OpeningHour } from '../../../../domain/OpeningHour.ts';
+import type { OpeningHours } from '../../../../domain/OpeningHour.ts';
 import type { DisabledDays } from '../../../../domain/DisabledDays.ts';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+import isBetween from 'dayjs/plugin/isBetween';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(isBetween);
 
 export const shouldDisableTime = (value: Dayjs, view: TimeView) => {
   // only hours and minutes are considered
@@ -10,20 +17,20 @@ export const shouldDisableTime = (value: Dayjs, view: TimeView) => {
     return false;
   }
   const { busyEvents, openingHours, disabledWeekdays } = useCalendarDetails();
+
   if (
     outsideOpeningHours(value, openingHours) ||
     isWeekDayDisabled(value, disabledWeekdays)
   ) {
     return true;
   }
-  const busyStart = dayjs(value).startOf('minutes');
+  const valueStart = dayjs.tz(value, 'Europe/Berlin').startOf('minutes');
 
-  const busyEnd = busyStart.add(1, 'minutes');
-  return busyEvents.busyEvents.some(
-    (event) =>
-      dayjs(event.start.dateTime).isBefore(busyEnd) &&
-      dayjs(event.end.dateTime).isAfter(busyStart)
-  );
+  return busyEvents.busyEvents.some((event) => {
+    const start = dayjs(event.start.dateTime);
+    const end = dayjs(event.end.dateTime);
+    return valueStart.isBetween(start, end) || valueStart.isSame(start);
+  });
 };
 
 export const isWeekDayDisabled = (value: Dayjs, disabled: DisabledDays) => {
@@ -33,12 +40,25 @@ export const isWeekDayDisabled = (value: Dayjs, disabled: DisabledDays) => {
   return disabled.some((disabled) => value.day() === disabled);
 };
 
-export const outsideOpeningHours = (value: Dayjs, openingHours: OpeningHour[]) => {
-  return openingHours.some(
-    (open) =>
-      value.isAfter(open.end.dateTime) ||
-      value.isBefore(open.start.dateTime) ||
-      // do not allow an event at the same time as the end of opening hours
-      value.isSame(open.end.dateTime)
-  );
+export const outsideOpeningHours = (value: Dayjs, openingHours: OpeningHours) => {
+  const day = value.day();
+  const openHoursOnDay = openingHours.get(day);
+  // no opening hours for this day specified
+  if (!openHoursOnDay) {
+    return false;
+  }
+  for (const open of openHoursOnDay) {
+    const valueUtc = value.utc();
+    const localValue = valueUtc.tz(open.start.timeZone);
+    const date = localValue.format('YYYY-MM-DD');
+    const start = dayjs.utc(`${date} ${open.start.dateTime}`);
+    const end = dayjs.utc(`${date} ${open.end.dateTime}`);
+    // looking for an interval that the value is between and is not at the end
+    const isBetween = localValue.isBetween(start, end, 'minutes', '[]');
+    if (isBetween && !localValue.isSame(end)) {
+      return false;
+    }
+  }
+  // if no valid interval was found return false
+  return true;
 };
