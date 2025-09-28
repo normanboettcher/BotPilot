@@ -23,6 +23,20 @@ export const CalendarAccessory: React.FC = () => {
     <Box>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'de'}>
         <DateTimePicker
+          slotProps={{
+            popper: {
+              placement: 'top-start',
+              modifiers: [
+                {
+                  name: 'flip',
+                  enabled: false,
+                },
+              ],
+              sx: {
+                zIndex: 12000,
+              },
+            },
+          }}
           defaultValue={now}
           format="DD.MM.YYYY HH:mm"
           views={eventIntervallViews}
@@ -33,6 +47,7 @@ export const CalendarAccessory: React.FC = () => {
           skipDisabled
           shouldDisableTime={shouldDisableTime}
           timezone={'UTC'}
+          onOpen={() => console.log('onOpen')}
         ></DateTimePicker>
       </LocalizationProvider>
     </Box>
