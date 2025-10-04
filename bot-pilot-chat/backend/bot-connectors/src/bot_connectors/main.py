@@ -8,6 +8,8 @@ from fastapi.responses import RedirectResponse, JSONResponse
 from google_auth_oauthlib.flow import Flow
 import os
 
+from starlette.middleware.cors import CORSMiddleware
+
 from bot_connectors.domain.calendar.events.busy_events_response import (
     BusyEventsResponse,
 )
@@ -45,7 +47,13 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # set redirect url. should be the same as in Google Cloud Console
 REDIRECT_URI = "http://localhost:8000/oauth2/callback"
 
@@ -87,8 +95,9 @@ def auth_start():
 
 @app.get("/oauth2/callback")
 def auth_callback(
-    request: Request,
-    das: GoogleCalendarCredentialsDas = Depends(get_google_calendar_credentials_das),
+        request: Request,
+        das: GoogleCalendarCredentialsDas = Depends(
+            get_google_calendar_credentials_das),
 ):
     """Callback after successful OAuth with Google"""
     state = request.query_params.get("state")
@@ -120,10 +129,10 @@ def auth_callback(
 
 @app.get("/calendar/google/events/busy")
 def list_events(
-    request: Request,
-    busy_events_provider: CalendarEventsReader = Depends(
-        get_google_calendar_events_provider
-    ),
+        request: Request,
+        busy_events_provider: CalendarEventsReader = Depends(
+            get_google_calendar_events_provider
+        ),
 ):
     next_days = request.query_params.get("next_days", None)
     try:
@@ -161,8 +170,8 @@ def list_events(
 
 @app.post("/calendar/google/events/create")
 def create_event_google_calendar(
-    request: CreateGoogleCalendarEventRequest,
-    events_writer: CalendarEventWriter = Depends(get_google_calendar_events_writer),
+        request: CreateGoogleCalendarEventRequest,
+        events_writer: CalendarEventWriter = Depends(get_google_calendar_events_writer),
 ):
     logger.debug(f"request: {request.to_dict()}")
     try:

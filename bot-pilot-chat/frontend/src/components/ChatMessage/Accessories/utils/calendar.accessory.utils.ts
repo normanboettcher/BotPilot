@@ -5,22 +5,29 @@ import type { DisabledDays } from '../../../../domain/DisabledDays.ts';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import isBetween from 'dayjs/plugin/isBetween';
-import type { CalendarDetails } from '../../../../domain/CalendarDetails.ts';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+import type { DateTimePickerContainer } from '../CalendarAccessory.tsx';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(isBetween);
+dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrBefore);
 
 export const shouldDisableTime = (
   value: Dayjs,
   view: TimeView,
-  calendarDetails: CalendarDetails
+  dateTimePickerContainer: DateTimePickerContainer
 ) => {
+  if (!dateTimePickerContainer || !dateTimePickerContainer.busyEvents) {
+    return true;
+  }
   // only hours and minutes are considered
   if (view !== 'hours' && view !== 'minutes') {
     return false;
   }
-  const { busyEvents, openingHours, disabledWeekdays } = calendarDetails;
+  const { busyEvents, openingHours, disabledWeekdays } = dateTimePickerContainer;
 
   if (
     outsideOpeningHours(value, openingHours) ||
@@ -28,7 +35,17 @@ export const shouldDisableTime = (
   ) {
     return true;
   }
-  const valueStart = dayjs.tz(value, 'Europe/Berlin').startOf('minutes');
+  if (view === 'hours') {
+    const startOfHour = value.startOf('hours');
+    const endOfHour = value.endOf('hours');
+    return busyEvents.busyEvents.some((event) => {
+      const start = dayjs(event.start.dateTime);
+      const end = dayjs(event.end.dateTime);
+      return start.isSameOrBefore(startOfHour) && end.isSameOrAfter(endOfHour);
+    });
+  }
+
+  const valueStart = dayjs(value).startOf('minutes');
 
   return busyEvents.busyEvents.some((event) => {
     const start = dayjs(event.start.dateTime);
@@ -55,8 +72,8 @@ export const outsideOpeningHours = (value: Dayjs, openingHours: OpeningHours) =>
     const valueUtc = value.utc();
     const localValue = valueUtc.tz(open.start.timeZone);
     const date = localValue.format('YYYY-MM-DD');
-    const start = dayjs.utc(`${date} ${open.start.dateTime}`);
-    const end = dayjs.utc(`${date} ${open.end.dateTime}`);
+    const start = dayjs.tz(`${date} ${open.start.dateTime}`, open.start.timeZone);
+    const end = dayjs.tz(`${date} ${open.end.dateTime}`, open.end.timeZone);
     // looking for an interval that the value is between and is not at the end
     const isBetween = localValue.isBetween(start, end, 'minutes', '[]');
     if (isBetween && !localValue.isSame(end)) {

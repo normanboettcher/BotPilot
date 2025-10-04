@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import {
   type DateOrTimeView,
@@ -11,19 +11,54 @@ import 'dayjs/locale/de';
 import { shouldDisableTime } from './utils/calendar.accessory.utils.ts';
 import useHandleSend from '../../ChatInput/useHandleSend.ts';
 import useCalendarDetails from './useCalendarDetails.ts';
+import type { BusyEventResponse } from '../../../domain/BusyEvent.ts';
+import getBusyEvents from './getBusyEvents.ts';
+import type { CalendarDetails } from '../../../domain/CalendarDetails.ts';
 
 const useEventIntervall = (): { eventIntervallViews: DateOrTimeView[] } => {
   return { eventIntervallViews: ['year', 'month', 'day', 'hours', 'minutes'] };
 };
 
+export type DateTimePickerContainer = CalendarDetails & {
+  busyEvents: BusyEventResponse | undefined;
+};
+
 export const CalendarAccessory: React.FC = () => {
+  const [busyEvents, setBusyEvents] = useState<BusyEventResponse | undefined>();
+  const [fetchBusyEvents, setFetchBusyEvents] = useState<boolean>(false);
+  const [calendarDetails, setCalendarDetails] = useState<CalendarDetails | undefined>();
+
+  useEffect(() => {
+    async function fetchCalendarDetails() {
+      const calendarDetails = await useCalendarDetails();
+      setCalendarDetails(calendarDetails);
+    }
+
+    fetchCalendarDetails();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (fetchBusyEvents) {
+        const events = await getBusyEvents();
+        if (events) {
+          setBusyEvents(events);
+        }
+      }
+    }
+    fetchData();
+  }, [fetchBusyEvents]);
+
+  const onOpen = () => {
+    setFetchBusyEvents(true);
+  };
+
   const now = dayjs();
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(now);
   const { eventIntervallViews } = useEventIntervall();
   const { handleSend } = useHandleSend();
-  const calendarDetails = useCalendarDetails();
   return (
-    <Box>
+    <Box data-testid={'calendar-accessory'}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'de'}>
         <DateTimePicker
           slotProps={{
@@ -50,7 +85,13 @@ export const CalendarAccessory: React.FC = () => {
           views={eventIntervallViews}
           disablePast
           onChange={(value) => {
-            setSelectedDate(value);
+            const selected = dayjs.utc(value).tz('Europe/Berlin');
+            const rounded = selected
+              .minute(Math.ceil(now.minute() / 15) * 15)
+              .second(0)
+              .millisecond(0);
+            setSelectedDate(rounded);
+            console.log(`value: [${selectedDate}]`);
           }}
           onAccept={async () => {
             if (selectedDate) {
@@ -61,13 +102,16 @@ export const CalendarAccessory: React.FC = () => {
           minutesStep={15}
           skipDisabled
           shouldDisableTime={(day, view) =>
-            shouldDisableTime(day, view, calendarDetails)
+            shouldDisableTime(day, view, {
+              disabledWeekdays: calendarDetails?.disabledWeekdays,
+              openingHours: calendarDetails?.openingHours ?? new Map(),
+              busyEvents: busyEvents,
+            })
           }
-          onOpen={() => console.log('onOpen')}
+          onOpen={onOpen}
         ></DateTimePicker>
       </LocalizationProvider>
     </Box>
   );
 };
-
 export default CalendarAccessory;

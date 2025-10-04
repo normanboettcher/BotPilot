@@ -10,8 +10,8 @@ import type {
   CalendarDetails,
   Weekday,
 } from '../../../../../domain/CalendarDetails.ts';
-import { busyEventsMock } from '../../../../mocks/MockBusyEvents.ts';
 import type { OpeningHour, OpeningHours } from '../../../../../domain/OpeningHour.ts';
+import type { DateTimePickerContainer } from '../../CalendarAccessory.tsx';
 
 const givenBusyEvent = (start: string, end: string): BusyEvent => ({
   start: {
@@ -45,7 +45,6 @@ const baseCalendarDetails: CalendarDetails = {
   disabledWeekdays: undefined,
   // all day long
   openingHours: openingHours,
-  busyEvents: busyEventsMock,
 };
 
 describe('shouldDisableTime', () => {
@@ -78,10 +77,10 @@ describe('shouldDisableTime', () => {
         end = `2025-10-02T${hourEnd}:00:00Z`;
       }
       const busyEvent = givenBusyEvent(start, end);
-      const calendarDetails: CalendarDetails = {
+      const calendarDetails: DateTimePickerContainer = {
         ...baseCalendarDetails,
         busyEvents: {
-          ...baseCalendarDetails.busyEvents,
+          timespanDays: 90,
           busyEvents: [busyEvent],
         },
       };
@@ -118,10 +117,10 @@ describe('shouldDisableTime', () => {
       const start = `2025-10-02T10:${busyStart}:00Z`;
       const end = `2025-10-02T10:${busyEnd}:00Z`;
       const busyEvent = givenBusyEvent(start, end);
-      const calendarDetails: CalendarDetails = {
+      const calendarDetails: DateTimePickerContainer = {
         ...baseCalendarDetails,
         busyEvents: {
-          ...baseCalendarDetails.busyEvents,
+          timespanDays: 90,
           busyEvents: [busyEvent],
         },
       };
@@ -151,10 +150,10 @@ describe('shouldDisableTime', () => {
       const start = `2025-10-02T10:${busyStart}:00Z`;
       const end = `2025-10-02T10:${busyEnd}:00Z`;
       const busyEvent = givenBusyEvent(start, end);
-      const calendarDetails: CalendarDetails = {
+      const calendarDetails: DateTimePickerContainer = {
         ...baseCalendarDetails,
         busyEvents: {
-          ...baseCalendarDetails.busyEvents,
+          timespanDays: 90,
           busyEvents: [busyEvent],
         },
       };
@@ -169,19 +168,19 @@ describe('shouldDisableTime', () => {
     }
   );
   it.each([
-    ['2025-10-06T13:00:00Z'],
-    ['2025-10-06T13:30:00Z'],
-    ['2025-10-06T14:00:00Z'],
-    ['2025-10-06T14:15:00Z'],
-    ['2025-10-06T14:30:00Z'],
-    ['2025-10-06T17:15:00Z'],
-    ['2025-10-06T17:30:00Z'],
-    ['2025-10-06T18:30:00Z'],
-    ['2025-10-06T18:00:00Z'],
+    ['2025-10-06T11:00:00Z'], // 13:00 europe/berlin
+    ['2025-10-06T11:30:00Z'], // 13:30 europe/berlin
+    ['2025-10-06T12:00:00Z'], // 14:00 europe/berlin
+    ['2025-10-06T12:15:00Z'], // 14:15 europe/berlin
+    ['2025-10-06T12:30:00Z'], // 14:30 europe/berlin
+    ['2025-10-06T15:15:00Z'], // 17:15 europe/berlin
+    ['2025-10-06T15:30:00Z'], // 17:30 europe/berlin
+    ['2025-10-06T16:30:00Z'], // 18:30 europe/berlin
+    ['2025-10-06T16:00:00Z'], // 18:00 europe/berlin
   ])('should return true if time %s is not in opening hours', (time) => {
     // given
     const selectedDate = dayjs(time);
-    const calendarDetails: CalendarDetails = {
+    const calendarDetails: DateTimePickerContainer = {
       ...baseCalendarDetails,
       openingHours: new Map([
         // Monday
@@ -229,14 +228,14 @@ describe('shouldDisableTime', () => {
     expect(result).toEqual(true);
   });
   it.each([
-    ['2025-10-06T08:00:00Z'],
-    ['2025-10-06T08:30:00Z'],
-    ['2025-10-06T11:00:00Z'],
-    ['2025-10-06T15:30:00Z'],
+    ['2025-10-06T06:00:00Z'], // 08:00 europe/berlin
+    ['2025-10-06T06:30:00Z'], // 08:30 europe/berlin
+    ['2025-10-06T09:00:00Z'], // 11:00 europe/berlin
+    ['2025-10-06T13:30:00Z'], // 15:30 europe/berlin
   ])('should return false if time %s is in opening hours', (time) => {
     // given
     const selectedDate = dayjs(time);
-    const calendarDetails: CalendarDetails = {
+    const calendarDetails: DateTimePickerContainer = {
       ...baseCalendarDetails,
       openingHours: new Map([
         // Monday
@@ -281,8 +280,8 @@ describe('shouldDisableTime', () => {
   it('should not allow 18:00 if opening hours are only until 18:00', () => {
     // given
     // Monday
-    const selectedDate = dayjs('2025-10-06T18:00:00Z');
-    const calendarDetails: CalendarDetails = {
+    const selectedDate = dayjs.utc('2025-10-06T16:00:00Z');
+    const calendarDetails: DateTimePickerContainer = {
       ...baseCalendarDetails,
       openingHours: new Map([
         [
@@ -315,16 +314,16 @@ describe('shouldDisableTime', () => {
   });
   it('should not allow 11:00 if busy event is from 10:15-11:15', () => {
     // given
-    const selectedDate = dayjs('2025-10-02T11:00:00Z');
+    const selectedDate = dayjs.utc('2025-10-02T09:00:00Z');
 
-    const calendarDetails: CalendarDetails = {
+    const calendarDetails: DateTimePickerContainer = {
       ...baseCalendarDetails,
       busyEvents: {
         timespanDays: 90,
         busyEvents: [
           {
-            start: { dateTime: '2025-10-02T10:15:00Z', timeZone: 'Europe/Berlin' },
-            end: { dateTime: '2025-10-02T11:15:00Z', timeZone: 'Europe/Berlin' },
+            start: { dateTime: '2025-10-02T08:15:00Z', timeZone: 'UTC' },
+            end: { dateTime: '2025-10-02T09:15:00Z', timeZone: 'UTC' },
           },
         ],
       },
@@ -335,6 +334,52 @@ describe('shouldDisableTime', () => {
 
     // then
     expect(result).toEqual(true);
+  });
+  it('should allow 10:00 if busy event is only from 10:15-11:15', () => {
+    // given
+    const selectedDate = dayjs.utc('2025-10-02T08:00:00Z');
+
+    const calendarDetails: DateTimePickerContainer = {
+      ...baseCalendarDetails,
+      busyEvents: {
+        timespanDays: 90,
+        busyEvents: [
+          {
+            start: { dateTime: '2025-10-02T08:15:00Z', timeZone: 'UTC' },
+            end: { dateTime: '2025-10-02T09:15:00Z', timeZone: 'UTC' },
+          },
+        ],
+      },
+    };
+
+    // when
+    const result = shouldDisableTime(selectedDate, 'minutes', calendarDetails);
+
+    // then
+    expect(result).toEqual(false);
+  });
+  it('should allow 11:15 if busy event is only from 10:15-11:15', () => {
+    // given
+    const selectedDate = dayjs.utc('2025-10-02T09:15:00Z');
+
+    const calendarDetails: DateTimePickerContainer = {
+      ...baseCalendarDetails,
+      busyEvents: {
+        timespanDays: 90,
+        busyEvents: [
+          {
+            start: { dateTime: '2025-10-02T08:15:00Z', timeZone: 'UTC' },
+            end: { dateTime: '2025-10-02T09:15:00Z', timeZone: 'UTC' },
+          },
+        ],
+      },
+    };
+
+    // when
+    const result = shouldDisableTime(selectedDate, 'minutes', calendarDetails);
+
+    // then
+    expect(result).toEqual(false);
   });
 });
 
