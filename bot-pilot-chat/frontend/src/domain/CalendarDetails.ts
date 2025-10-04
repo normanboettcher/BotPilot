@@ -1,4 +1,3 @@
-import type { BusyEventResponse } from './BusyEvent.ts';
 import type { OpeningHour, OpeningHours } from './OpeningHour.ts';
 import type { DisabledDays } from './DisabledDays.ts';
 
@@ -11,5 +10,4 @@ export type Weekday = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export interface CalendarDetails {
   disabledWeekdays: DisabledDays;
   openingHours: OpeningHours;
-  busyEvents: BusyEventResponse;
 }

@@ -10,8 +10,8 @@ import type {
   CalendarDetails,
   Weekday,
 } from '../../../../../domain/CalendarDetails.ts';
-import { busyEventsMock } from '../../../../mocks/MockBusyEvents.ts';
 import type { OpeningHour, OpeningHours } from '../../../../../domain/OpeningHour.ts';
+import type { DateTimePickerContainer } from '../../CalendarAccessory.tsx';
 
 const givenBusyEvent = (start: string, end: string): BusyEvent => ({
   start: {
@@ -45,7 +45,6 @@ const baseCalendarDetails: CalendarDetails = {
   disabledWeekdays: undefined,
   // all day long
   openingHours: openingHours,
-  busyEvents: busyEventsMock,
 };
 
 describe('shouldDisableTime', () => {
@@ -78,10 +77,10 @@ describe('shouldDisableTime', () => {
         end = `2025-10-02T${hourEnd}:00:00Z`;
       }
       const busyEvent = givenBusyEvent(start, end);
-      const calendarDetails: CalendarDetails = {
+      const calendarDetails: DateTimePickerContainer = {
         ...baseCalendarDetails,
         busyEvents: {
-          ...baseCalendarDetails.busyEvents,
+          timespanDays: 90,
           busyEvents: [busyEvent],
         },
       };
@@ -118,10 +117,10 @@ describe('shouldDisableTime', () => {
       const start = `2025-10-02T10:${busyStart}:00Z`;
       const end = `2025-10-02T10:${busyEnd}:00Z`;
       const busyEvent = givenBusyEvent(start, end);
-      const calendarDetails: CalendarDetails = {
+      const calendarDetails: DateTimePickerContainer = {
         ...baseCalendarDetails,
         busyEvents: {
-          ...baseCalendarDetails.busyEvents,
+          timespanDays: 90,
           busyEvents: [busyEvent],
         },
       };
@@ -151,10 +150,10 @@ describe('shouldDisableTime', () => {
       const start = `2025-10-02T10:${busyStart}:00Z`;
       const end = `2025-10-02T10:${busyEnd}:00Z`;
       const busyEvent = givenBusyEvent(start, end);
-      const calendarDetails: CalendarDetails = {
+      const calendarDetails: DateTimePickerContainer = {
         ...baseCalendarDetails,
         busyEvents: {
-          ...baseCalendarDetails.busyEvents,
+          timespanDays: 90,
           busyEvents: [busyEvent],
         },
       };
@@ -181,7 +180,7 @@ describe('shouldDisableTime', () => {
   ])('should return true if time %s is not in opening hours', (time) => {
     // given
     const selectedDate = dayjs(time);
-    const calendarDetails: CalendarDetails = {
+    const calendarDetails: DateTimePickerContainer = {
       ...baseCalendarDetails,
       openingHours: new Map([
         // Monday
@@ -236,7 +235,7 @@ describe('shouldDisableTime', () => {
   ])('should return false if time %s is in opening hours', (time) => {
     // given
     const selectedDate = dayjs(time);
-    const calendarDetails: CalendarDetails = {
+    const calendarDetails: DateTimePickerContainer = {
       ...baseCalendarDetails,
       openingHours: new Map([
         // Monday
@@ -282,7 +281,7 @@ describe('shouldDisableTime', () => {
     // given
     // Monday
     const selectedDate = dayjs.utc('2025-10-06T16:00:00Z');
-    const calendarDetails: CalendarDetails = {
+    const calendarDetails: DateTimePickerContainer = {
       ...baseCalendarDetails,
       openingHours: new Map([
         [
@@ -317,7 +316,7 @@ describe('shouldDisableTime', () => {
     // given
     const selectedDate = dayjs.utc('2025-10-02T09:00:00Z');
 
-    const calendarDetails: CalendarDetails = {
+    const calendarDetails: DateTimePickerContainer = {
       ...baseCalendarDetails,
       busyEvents: {
         timespanDays: 90,
@@ -340,7 +339,7 @@ describe('shouldDisableTime', () => {
     // given
     const selectedDate = dayjs.utc('2025-10-02T08:00:00Z');
 
-    const calendarDetails: CalendarDetails = {
+    const calendarDetails: DateTimePickerContainer = {
       ...baseCalendarDetails,
       busyEvents: {
         timespanDays: 90,
@@ -363,7 +362,7 @@ describe('shouldDisableTime', () => {
     // given
     const selectedDate = dayjs.utc('2025-10-02T09:15:00Z');
 
-    const calendarDetails: CalendarDetails = {
+    const calendarDetails: DateTimePickerContainer = {
       ...baseCalendarDetails,
       busyEvents: {
         timespanDays: 90,
