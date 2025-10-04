@@ -1,22 +1,26 @@
 import dayjs, { type Dayjs } from 'dayjs';
 import type { TimeView } from '@mui/x-date-pickers';
-import useCalendarDetails from '../useCalendarDetails.ts';
 import type { OpeningHours } from '../../../../domain/OpeningHour.ts';
 import type { DisabledDays } from '../../../../domain/DisabledDays.ts';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import isBetween from 'dayjs/plugin/isBetween';
+import type { CalendarDetails } from '../../../../domain/CalendarDetails.ts';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(isBetween);
 
-export const shouldDisableTime = (value: Dayjs, view: TimeView) => {
+export const shouldDisableTime = (
+  value: Dayjs,
+  view: TimeView,
+  calendarDetails: CalendarDetails
+) => {
   // only hours and minutes are considered
   if (view !== 'hours' && view !== 'minutes') {
     return false;
   }
-  const { busyEvents, openingHours, disabledWeekdays } = useCalendarDetails();
+  const { busyEvents, openingHours, disabledWeekdays } = calendarDetails;
 
   if (
     outsideOpeningHours(value, openingHours) ||
