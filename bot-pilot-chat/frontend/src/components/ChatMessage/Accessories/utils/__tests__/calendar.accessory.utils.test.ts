@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import dayjs from 'dayjs';
 import {
   isWeekDayDisabled,
@@ -6,7 +6,6 @@ import {
   shouldDisableTime,
 } from '../calendar.accessory.utils.ts';
 import type { BusyEvent } from '../../../../../domain/BusyEvent.ts';
-import * as calendar_details from '../../useCalendarDetails.ts';
 import type {
   CalendarDetails,
   Weekday,
@@ -49,8 +48,6 @@ const baseCalendarDetails: CalendarDetails = {
   busyEvents: busyEventsMock,
 };
 
-const useCalendarDetailsSpy = vi.spyOn(calendar_details, 'default');
-
 describe('shouldDisableTime', () => {
   const hours = [];
   for (let i = 0; i < 24; i++) {
@@ -81,20 +78,20 @@ describe('shouldDisableTime', () => {
         end = `2025-10-02T${hourEnd}:00:00Z`;
       }
       const busyEvent = givenBusyEvent(start, end);
-      useCalendarDetailsSpy.mockReturnValue({
+      const calendarDetails: CalendarDetails = {
         ...baseCalendarDetails,
         busyEvents: {
           ...baseCalendarDetails.busyEvents,
           busyEvents: [busyEvent],
         },
-      });
+      };
       const selectedDate = dayjs(`2025-10-02T${hourStart}:30:00Z`);
       console.log(
         `Testing with hour start: [${dayjs(start)}] and end: [${dayjs(end)}]`
       );
 
       // when
-      const result = shouldDisableTime(selectedDate, 'minutes');
+      const result = shouldDisableTime(selectedDate, 'minutes', calendarDetails);
 
       // then
       expect(result).toEqual(true);
@@ -121,18 +118,18 @@ describe('shouldDisableTime', () => {
       const start = `2025-10-02T10:${busyStart}:00Z`;
       const end = `2025-10-02T10:${busyEnd}:00Z`;
       const busyEvent = givenBusyEvent(start, end);
-      useCalendarDetailsSpy.mockReturnValue({
+      const calendarDetails: CalendarDetails = {
         ...baseCalendarDetails,
         busyEvents: {
           ...baseCalendarDetails.busyEvents,
           busyEvents: [busyEvent],
         },
-      });
+      };
 
       const selectedDate = dayjs(`2025-10-02T10:${selectStart}:00Z`);
 
       // when
-      const result = shouldDisableTime(selectedDate, 'minutes');
+      const result = shouldDisableTime(selectedDate, 'minutes', calendarDetails);
 
       // then
       expect(result).toEqual(false);
@@ -154,18 +151,18 @@ describe('shouldDisableTime', () => {
       const start = `2025-10-02T10:${busyStart}:00Z`;
       const end = `2025-10-02T10:${busyEnd}:00Z`;
       const busyEvent = givenBusyEvent(start, end);
-      useCalendarDetailsSpy.mockReturnValue({
+      const calendarDetails: CalendarDetails = {
         ...baseCalendarDetails,
         busyEvents: {
           ...baseCalendarDetails.busyEvents,
           busyEvents: [busyEvent],
         },
-      });
+      };
 
       const selectedDate = dayjs(`2025-10-02T10:${selectStart}:00Z`);
 
       // when
-      const result = shouldDisableTime(selectedDate, 'minutes');
+      const result = shouldDisableTime(selectedDate, 'minutes', calendarDetails);
 
       // then
       expect(result).toEqual(true);
@@ -184,7 +181,7 @@ describe('shouldDisableTime', () => {
   ])('should return true if time %s is not in opening hours', (time) => {
     // given
     const selectedDate = dayjs(time);
-    useCalendarDetailsSpy.mockReturnValue({
+    const calendarDetails: CalendarDetails = {
       ...baseCalendarDetails,
       openingHours: new Map([
         // Monday
@@ -223,10 +220,10 @@ describe('shouldDisableTime', () => {
         timespanDays: 90,
         busyEvents: [],
       },
-    });
+    };
 
     // when
-    const result = shouldDisableTime(selectedDate, 'minutes');
+    const result = shouldDisableTime(selectedDate, 'minutes', calendarDetails);
 
     // then
     expect(result).toEqual(true);
@@ -239,7 +236,7 @@ describe('shouldDisableTime', () => {
   ])('should return false if time %s is in opening hours', (time) => {
     // given
     const selectedDate = dayjs(time);
-    useCalendarDetailsSpy.mockReturnValue({
+    const calendarDetails: CalendarDetails = {
       ...baseCalendarDetails,
       openingHours: new Map([
         // Monday
@@ -273,10 +270,10 @@ describe('shouldDisableTime', () => {
         timespanDays: 90,
         busyEvents: [],
       },
-    });
+    };
 
     // when
-    const result = shouldDisableTime(selectedDate, 'minutes');
+    const result = shouldDisableTime(selectedDate, 'minutes', calendarDetails);
 
     // then
     expect(result).toEqual(false);
@@ -285,7 +282,7 @@ describe('shouldDisableTime', () => {
     // given
     // Monday
     const selectedDate = dayjs('2025-10-06T18:00:00Z');
-    useCalendarDetailsSpy.mockReturnValue({
+    const calendarDetails: CalendarDetails = {
       ...baseCalendarDetails,
       openingHours: new Map([
         [
@@ -308,10 +305,10 @@ describe('shouldDisableTime', () => {
         timespanDays: 90,
         busyEvents: [],
       },
-    });
+    };
 
     // when
-    const result = shouldDisableTime(selectedDate, 'minutes');
+    const result = shouldDisableTime(selectedDate, 'minutes', calendarDetails);
 
     // then
     expect(result).toEqual(true);
@@ -320,7 +317,7 @@ describe('shouldDisableTime', () => {
     // given
     const selectedDate = dayjs('2025-10-02T11:00:00Z');
 
-    useCalendarDetailsSpy.mockReturnValue({
+    const calendarDetails: CalendarDetails = {
       ...baseCalendarDetails,
       busyEvents: {
         timespanDays: 90,
@@ -331,10 +328,10 @@ describe('shouldDisableTime', () => {
           },
         ],
       },
-    });
+    };
 
     // when
-    const result = shouldDisableTime(selectedDate, 'minutes');
+    const result = shouldDisableTime(selectedDate, 'minutes', calendarDetails);
 
     // then
     expect(result).toEqual(true);
