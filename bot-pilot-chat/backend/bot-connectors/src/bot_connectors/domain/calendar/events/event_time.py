@@ -13,4 +13,4 @@ class EventTime:
     @staticmethod
     def from_datetime_str(date: str):
         as_date = parser.isoparse(date)
-        return EventTime(as_date.isoformat(), "Europe/Berlin")
+        return EventTime(as_date.isoformat(), "UTC")

@@ -65,7 +65,6 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
-
 logger.debug("Starting prototype bot-connector for Google Calendar OAuth2")
 
 # in a real project, save tokens in (DB/Redis/etc.)

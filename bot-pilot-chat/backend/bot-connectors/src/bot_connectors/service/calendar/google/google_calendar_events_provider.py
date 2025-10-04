@@ -32,11 +32,10 @@ class GoogleCalendarEventsProvider(CalendarEventsReader):
                 return None
             now = datetime.now(UTC).isoformat()
             time_max = (datetime.now(UTC) + timedelta(days=next_days)).isoformat()
-            # TODO: use UTC here instead of Europe/Berlin
             body = {
                 "timeMin": now,
                 "timeMax": time_max,
-                "timeZone": "Europe/Berlin",
+                "timeZone": "UTC",
                 "items": [{"id": "primary"}],
             }
             events_result = calendar_service.freebusy().query(body=body).execute()
@@ -50,6 +49,7 @@ class GoogleCalendarEventsProvider(CalendarEventsReader):
             logger.error(f"Failed to get busy events for [{customer_context}]: [{e}]")
             raise
 
+    # TODO: move to seperate mapper class
     def build_events_result_from_response(self, events: list) -> List[BusyEvent]:
         busy_events: List[BusyEvent] = list()
         for event in events:
