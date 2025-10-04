@@ -1,6 +1,6 @@
 connector_debug:
 	@echo "Running connector_debug app in debug mode..."
-	python -m uvicorn bot_connectors.main:app --reload --host 0.0.0.0 --port 8000 --log-level debug
+	python -m uvicorn bot_connectors.main:app --reload --host 0.0.0.0 --port 8000 --log-level debug --log-config logging.yaml
 
 lint:
 	@echo "Running linting checks..."

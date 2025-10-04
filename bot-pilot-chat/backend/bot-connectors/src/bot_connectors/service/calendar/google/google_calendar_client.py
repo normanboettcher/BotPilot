@@ -8,7 +8,7 @@ from bot_connectors.persistence.google_calendar_credentials_das import (
     get_google_calendar_credentials_das,
 )
 
-logger = logging.Logger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class GoogleCalendarClient:

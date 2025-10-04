@@ -10,7 +10,7 @@ from bot_connectors.domain.calendar.google.google_calendar_credentials import (
 )
 from bot_connectors.persistence.db_session_factory import get_db_session
 
-logger = logging.Logger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class GoogleCalendarCredentialsDas:
@@ -66,6 +66,8 @@ class GoogleCalendarCredentialsDas:
         if entry is None:
             return None
 
+        scopes = entry.scopes.split(",") if entry.scopes is not None else []
+        logger.debug(f"Getting credentials for scopes:  [{scopes}]")
         creds = Credentials(
             token=entry.access_token,
             refresh_token=entry.refresh_token,
@@ -73,12 +75,13 @@ class GoogleCalendarCredentialsDas:
             client_id=entry.client_id,
             client_secret=entry.client_secret,
             expiry=entry.expiry,
-            scopes=entry.scopes.split(","),
+            scopes=scopes,
         )
 
         if not creds.valid and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
+            logger.debug(f"Refreshing access token for [{customer_context}]")
             try:
+                creds.refresh(Request())
                 self.update_credentials_after_refresh(creds, entry)
             except Exception as e:
                 logger.error(f"Error updating credentials after refresh: {e}")
