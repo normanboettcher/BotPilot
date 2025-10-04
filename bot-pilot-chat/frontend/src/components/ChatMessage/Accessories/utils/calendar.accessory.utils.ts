@@ -14,8 +14,12 @@ dayjs.extend(isBetween);
 export const shouldDisableTime = (
   value: Dayjs,
   view: TimeView,
-  calendarDetails: CalendarDetails
+  calendarDetails: CalendarDetails | undefined
 ) => {
+  if (!calendarDetails) {
+    return true;
+  }
+  console.log(`value: [${value}]`);
   // only hours and minutes are considered
   if (view !== 'hours' && view !== 'minutes') {
     return false;
@@ -28,7 +32,7 @@ export const shouldDisableTime = (
   ) {
     return true;
   }
-  const valueStart = dayjs.tz(value, 'Europe/Berlin').startOf('minutes');
+  const valueStart = dayjs.tz(value).startOf('minutes');
 
   return busyEvents.busyEvents.some((event) => {
     const start = dayjs(event.start.dateTime);
@@ -55,8 +59,8 @@ export const outsideOpeningHours = (value: Dayjs, openingHours: OpeningHours) =>
     const valueUtc = value.utc();
     const localValue = valueUtc.tz(open.start.timeZone);
     const date = localValue.format('YYYY-MM-DD');
-    const start = dayjs.utc(`${date} ${open.start.dateTime}`);
-    const end = dayjs.utc(`${date} ${open.end.dateTime}`);
+    const start = dayjs.tz(`${date} ${open.start.dateTime}`, open.start.timeZone);
+    const end = dayjs.tz(`${date} ${open.end.dateTime}`, open.end.timeZone);
     // looking for an interval that the value is between and is not at the end
     const isBetween = localValue.isBetween(start, end, 'minutes', '[]');
     if (isBetween && !localValue.isSame(end)) {
