@@ -35,6 +35,7 @@ const allDayOpen: OpeningHours = new Map([
 const handleSendMock = vi.fn();
 (useHandleSend as MockedFunction<typeof useHandleSend>).mockResolvedValue({
   handleSend: handleSendMock,
+  handleSendButtonAnswer: vi.fn(),
 });
 describe('CalendarAccessory', () => {
   it('should render all time of openingHours from 08:00 - 18:00 Europe/Berlin', async () => {

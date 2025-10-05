@@ -6,6 +6,7 @@ import AlarmClock from '../icons/AlarmClock.tsx';
 import Markdown from 'react-markdown';
 import ChatMessageTextComponent from './ChatMessageTextComponent.tsx';
 import CalendarAccessory from './Accessories/CalendarAccessory.tsx';
+import ButtonOptionList from './Accessories/ButtonOptionList.tsx';
 
 type Props = {
   msg: ChatMessageText;
@@ -69,6 +70,9 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
         {text}
       </Markdown>
       {msg.accessory === 'calendar' && <CalendarAccessory />}
+      {msg.accessory === 'buttons' && msg.buttons && msg.sender == 'bot' && (
+        <ButtonOptionList buttons={msg.buttons} />
+      )}
       <Stack
         direction={'row'}
         sx={{

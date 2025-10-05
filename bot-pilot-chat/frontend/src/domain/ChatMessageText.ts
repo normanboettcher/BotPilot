@@ -5,7 +5,8 @@ export interface ChatMessageText {
   sender: 'user' | 'bot';
   message: string;
   timestamp: string;
-  accessory?: 'calendar';
+  accessory?: 'calendar' | 'buttons';
+  buttons?: ButtonOption[];
 }
 
 export interface ChatMessageButton {

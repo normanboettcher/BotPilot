@@ -1,3 +1,3 @@
 export interface GeneralButtonProps {
-  onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }

@@ -1,11 +1,11 @@
 import { createContext, useContext, useState, type ReactNode, useEffect } from 'react';
 import React from 'react';
-import type { ChatMessageButton, ChatMessageText } from '../domain/ChatMessageText.ts';
+import type { ChatMessageText } from '../domain/ChatMessageText.ts';
 import useOpeningMessage from './useOpeningMessage.ts';
 
 interface ChatContextType {
-  messages: (ChatMessageText | ChatMessageButton)[];
-  addMessage: (msg: ChatMessageText | ChatMessageButton) => void;
+  messages: ChatMessageText[];
+  addMessage: (msg: ChatMessageText) => void;
   resetMessages: () => void;
 }
 
@@ -19,9 +19,7 @@ export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
     return localStorage.getItem(STORAGE_KEY);
   };
   const { opening } = useOpeningMessage();
-  const [messages, setMessages] = useState<(ChatMessageText | ChatMessageButton)[]>([
-    opening,
-  ]);
+  const [messages, setMessages] = useState<ChatMessageText[]>([opening]);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
@@ -32,7 +30,7 @@ export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
     setMessages([]);
   };
 
-  const addMessage = (msg: ChatMessageText | ChatMessageButton) => {
+  const addMessage = (msg: ChatMessageText) => {
     setMessages((prev) => [...prev, msg]);
   };
 

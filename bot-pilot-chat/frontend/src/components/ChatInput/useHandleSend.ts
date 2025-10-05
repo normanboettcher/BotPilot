@@ -29,8 +29,17 @@ export const useHandleSend = () => {
     const buttonMessage = createButtonMessage(button, 'user');
     try {
       await sendMessageAndGetResponse(payload);
-    } catch (error) {}
-    addMessage(buttonMessage);
+    } catch (error) {
+      console.error('Fehler beim Abrufen der Antwort:', error);
+    }
+    addMessage({
+      timestamp: buttonMessage.timestamp,
+      type: 'text',
+      message: '',
+      sender: 'user',
+      accessory: 'buttons',
+      buttons: [buttonMessage.button],
+    });
   };
   return { handleSend, handleSendButtonAnswer };
 };

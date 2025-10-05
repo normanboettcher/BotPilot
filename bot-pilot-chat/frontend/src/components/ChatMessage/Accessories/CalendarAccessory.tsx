@@ -46,6 +46,7 @@ export const CalendarAccessory: React.FC = () => {
         }
       }
     }
+
     fetchData();
   }, [fetchBusyEvents]);
 
@@ -91,7 +92,6 @@ export const CalendarAccessory: React.FC = () => {
               .second(0)
               .millisecond(0);
             setSelectedDate(rounded);
-            console.log(`value: [${selectedDate}]`);
           }}
           onAccept={async () => {
             if (selectedDate) {

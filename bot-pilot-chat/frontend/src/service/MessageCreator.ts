@@ -31,6 +31,8 @@ const useMessageCreator = () => {
       button: {
         payload: button.payload,
         title: button.title,
+        isFilled: true,
+        disabled: true,
       },
       type: 'button',
     };
