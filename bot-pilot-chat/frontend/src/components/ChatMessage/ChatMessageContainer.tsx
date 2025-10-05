@@ -1,12 +1,15 @@
 import React from 'react';
 import SenderAvatar from '../Avatar/SenderAvatar.tsx';
-import type { ChatMessageType } from '../../domain/ChatMessage.ts';
+import type {
+  ChatMessageButton,
+  ChatMessageText,
+} from '../../domain/ChatMessageText.ts';
 import { Box, Stack } from '@mui/material';
 import ChatMessage from './ChatMessage.tsx';
 import useBotResponsive from '../../hooks/useBotResponsive.ts';
 
 type Props = {
-  chatMessage: ChatMessageType;
+  chatMessage: ChatMessageText | ChatMessageButton;
 };
 
 const ChatMessageContainer: React.FC<Props> = ({ chatMessage }) => {
@@ -34,7 +37,7 @@ const ChatMessageContainer: React.FC<Props> = ({ chatMessage }) => {
             maxWidth: isMobile ? '70%' : '60%',
           }}
         >
-          <ChatMessage msg={chatMessage} />
+          {chatMessage.type === 'text' && <ChatMessage msg={chatMessage} />}
         </Box>
       </Stack>
     </Box>

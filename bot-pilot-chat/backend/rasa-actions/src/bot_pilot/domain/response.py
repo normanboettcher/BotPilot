@@ -1,15 +1,20 @@
 import textwrap
 from datetime import datetime
+from typing import List
+
+from bot_pilot.domain.button_option import ButtonOption
 
 
 class BotResponse:
 
-    def __init__(self, answer: str, success: bool, score=None, sender=None):
+    def __init__(self, answer: str, success: bool, score=None, sender=None,
+                 buttons: List[dict] | None = None):
         self._success = success
         self._timestamp = datetime.now().strftime("%d.%m.%Y %H:%M")
         self._answer = answer
         self._score = score
         self._sender = sender
+        self._buttons = buttons
 
     def get_answer(self):
         return self._answer
@@ -51,4 +56,5 @@ class BotResponse:
             "timestamp": self._timestamp,
             "score": self._score,
             "sender": self._sender,
+            "buttons": self._buttons,
         }

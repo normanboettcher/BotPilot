@@ -1,7 +1,7 @@
-import type { ChatMessageType } from '../domain/ChatMessage.ts';
+import type { ChatMessageText } from '../domain/ChatMessageText.ts';
 import useMessageCreator from '../service/MessageCreator.ts';
 
-const useOpeningMessage = (): { opening: ChatMessageType } => {
+const useOpeningMessage = (): { opening: ChatMessageText } => {
   const { createChatMessage } = useMessageCreator();
   const message =
     'Hallo, ich bin BotPilot. Ich stehe Ihnen zu Fragen rundum die Kanzlei XY zur Vefügung sowie zu ' +

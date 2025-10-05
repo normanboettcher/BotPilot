@@ -13,9 +13,8 @@ class ActionAskTerminType(Action):
         message = (
             "Sind Sie bereits Kunde oder ist es Ihr erster Termin bei uns?"
         )
-        response = BotResponse.with_answer(message)
         buttons = make_buttons_termin_types()
-        dispatcher.utter_message(
-            json_message=send_response(response.as_dict()), buttons=buttons
-        )
+        response = BotResponse(message, True, None, 'bot',
+                               buttons)
+        dispatcher.utter_message(json_message=send_response(response.as_dict()))
         return []
