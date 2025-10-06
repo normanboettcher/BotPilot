@@ -11,6 +11,7 @@ type Props = {
 const ButtonOptionList: React.FC<Props> = ({ buttons }) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const { handleSendButtonAnswer } = useHandleSend();
+  const [selectedButtonName, setSelectedButtonName] = useState<string | null>(null);
 
   const handleClick = (index: number) => {
     setSelectedIndex(index);
@@ -23,9 +24,14 @@ const ButtonOptionList: React.FC<Props> = ({ buttons }) => {
             <Grid key={index} size={{ xs: 2, sm: 4, md: 4 }}>
               {
                 <ButtonOptionComponent
+                  data-testid={'list-button-option-component'}
+                  filled={
+                    selectedButtonName !== null && selectedButtonName === option.title
+                  }
                   onClick={() => {
                     handleClick(selectedIndex !== null ? selectedIndex : index);
                     handleSendButtonAnswer(option);
+                    setSelectedButtonName(option.title);
                   }}
                   button={option}
                 />
