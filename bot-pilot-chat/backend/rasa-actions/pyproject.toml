@@ -45,12 +45,11 @@ commands = [
 [tool.tox.env.rasa_tests]
 description = "Run Rasa tests"
 deps = [
-    "rasa==3.6.21",
-    "spacy==3.7.4"
+    "-rrequirements.txt"
 ]
 commands = [
     ["python", "-m", "spacy", "download", "de_core_news_md"],
-    ["rasa", "test", "--fail-on-prediction-errors", "--stories", "tests/rasa/stories"],
+    ["rasa test",  "--fail-on-prediction-errors", "--stories", "tests/rasa/stories"]
 ]
 
 [tool.tox.env.coverage]

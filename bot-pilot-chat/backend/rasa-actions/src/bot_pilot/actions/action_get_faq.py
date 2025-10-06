@@ -22,8 +22,6 @@ class ActionGetFaq(Action):
                 "gerade nicht abrufen."
                 "Bitte versuchen Sie es später erneut."
             )
-            dispatcher.utter_message(
-                json_message=send_response(message.as_dict())
-            )
+            dispatcher.utter_message(json_message=send_response(message.as_dict()))
 
         return []

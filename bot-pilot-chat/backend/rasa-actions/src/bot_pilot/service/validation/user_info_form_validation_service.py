@@ -12,9 +12,11 @@ def validate_input_user_mail(user_mail: str | None) -> bool:
 def validate_input_user_name(user_name: str | None) -> bool:
     if user_name is None:
         return False
-    regex = (r"^([A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*|[a-zäöüß]+)( ([A-ZÄÖÜ]"
-             r"[a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*"
-             r"|[a-zäöüß]+))+$")
+    regex = (
+        r"^([A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*|[a-zäöüß]+)( ([A-ZÄÖÜ]"
+        r"[a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*"
+        r"|[a-zäöüß]+))+$"
+    )
 
     user_name = user_name.strip()
     return re.fullmatch(regex, user_name) is not None

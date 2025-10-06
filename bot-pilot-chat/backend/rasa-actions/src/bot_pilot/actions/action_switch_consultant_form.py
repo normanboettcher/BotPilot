@@ -19,14 +19,17 @@ class ActionSwitchConsultantForm(Action):
     def run(self, dispatcher, tracker, domain):
         logger.debug(f"observed entities: {tracker.slots}")
         message, medium = make_termin_from_medium(tracker)
-        consultant = tracker.get_slot("consultant")
+        user_name = tracker.get_slot("user_name")
+        user_mail = tracker.get_slot("user_mail")
+        user_type = tracker.get_slot("user_type")
         logger.debug("active_form: %s", tracker.active_loop)
         res = BotResponse.with_answer(message)
         dispatcher.utter_message(json_message=send_response(res.as_dict()))
         return [
             SlotSet("termin_medium", medium),
-            SlotSet("consultant", consultant),
-            SlotSet("termin_medium_attempts", 0),
+            SlotSet("user_name", user_name),
+            SlotSet("user_mail", user_mail),
+            SlotSet("consultant", None),
             SlotSet("next_form_name", "consultant_form"),
-            SlotSet("user_type", None),
+            SlotSet("user_type", user_type),
         ]

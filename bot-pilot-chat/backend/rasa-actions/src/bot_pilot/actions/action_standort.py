@@ -9,9 +9,7 @@ class ActionStandort(Action):
         return "action_standort"
 
     def run(self, dispatcher, tracker, domain):
-        general_message = (
-            "Ich habe das intent Standort erkannt. Implementierung folgt."
-        )
+        general_message = "Ich habe das intent Standort erkannt. Implementierung folgt."
         res = BotResponse.with_answer_and_score(
             general_message, tracker.latest_message["intent"]["confidence"]
         )

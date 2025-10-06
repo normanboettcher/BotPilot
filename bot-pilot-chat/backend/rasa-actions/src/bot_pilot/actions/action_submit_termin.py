@@ -19,9 +19,7 @@ class ActionSubmitTermin(Action):
         ]
 
         collected_items = [
-            tracker.get_slot(item)
-            for item in slots
-            if tracker.slots[item] is not None
+            tracker.get_slot(item) for item in slots if tracker.slots[item] is not None
         ]
 
         logger.debug(

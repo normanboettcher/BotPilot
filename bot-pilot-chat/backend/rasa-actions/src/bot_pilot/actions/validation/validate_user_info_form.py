@@ -46,9 +46,7 @@ class ValidateUserInfoForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate user_mail value."""
-        logger.debug(
-            f"validate_user_info_form called. slot_value: {slot_value}"
-        )
+        logger.debug(f"validate_user_info_form called. slot_value: {slot_value}")
 
         if slot_value and validate_input_user_mail(slot_value):
             # validation succeeded, set the value of the "user_mail" slot

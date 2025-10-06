@@ -95,3 +95,11 @@ stories:
           - requested_slot: user_mail
       - action: action_ask_user_mail
       - active_loop: user_info_form
+
+  - story: happy path collect consultant_name
+    steps:
+      - intent: consultant_inform
+      - action: action_ask_consultant
+      - active_loop: consultant_form
+      - slot_was_set:
+          - requested_slot: consultant

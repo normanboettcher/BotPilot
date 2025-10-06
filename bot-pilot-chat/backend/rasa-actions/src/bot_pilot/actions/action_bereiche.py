@@ -9,9 +9,7 @@ class ActionBereiche(Action):
         return "action_bereiche"
 
     def run(self, dispatcher, tracker, domain):
-        general_message = (
-            "Ich habe das Intent Bereiche erkannt. Implementierung folgt."
-        )
+        general_message = "Ich habe das Intent Bereiche erkannt. Implementierung folgt."
         res = BotResponse.with_answer_and_score(
             general_message, tracker.latest_message["intent"]["confidence"]
         )
