@@ -7,5 +7,6 @@ export interface BotResponse {
   success: boolean;
   score?: number;
   timestamp: string;
+  accessory?: 'buttons' | 'calendar';
   buttons?: ButtonOption[];
 }

@@ -11,9 +11,7 @@ class ActionAskUserType(Action):
 
     def run(self, dispatcher, tracker, domain):
         message = "Welcher Kategorie würden Sie sich am ehesten zuordnen?"
-        res = BotResponse.with_answer(message)
         buttons = make_buttons_user_types()
-        dispatcher.utter_message(
-            json_message=send_response(res.as_dict()), buttons=buttons
-        )
+        res = BotResponse.with_answer_and_buttons(message, buttons)
+        dispatcher.utter_message(json_message=send_response(res.as_dict()))
         return []

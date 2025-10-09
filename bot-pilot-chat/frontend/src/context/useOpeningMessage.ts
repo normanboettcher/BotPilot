@@ -8,7 +8,7 @@ const useOpeningMessage = (): { opening: ChatMessageText } => {
     'allen organisatorischen und auch steuerlichen Fragen. Wie kann ich Ihnen heute helfen?';
   const opening = createChatMessage(message, 'bot');
   return {
-    opening: { ...opening, type: 'opening' },
+    opening: { ...opening },
   };
 };
 export default useOpeningMessage;

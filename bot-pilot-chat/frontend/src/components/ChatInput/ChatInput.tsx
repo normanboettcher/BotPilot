@@ -3,11 +3,11 @@ import React, { useState, type ChangeEventHandler } from 'react';
 import ChatTextField from './ChatTextField.tsx';
 import SendIconButton from '../Buttons/SendIconButton.tsx';
 import useBotResponsive from '../../hooks/useBotResponsive.ts';
-import useHandleSend from './useHandleSend.ts';
+import useMessageService from '../../service/MessageService.ts';
 
 const ChatInput: React.FC = () => {
   const [input, setInput] = useState<string>('');
-  const { handleSend } = useHandleSend();
+  const { sendMessageAndGetResponse } = useMessageService();
 
   const onChange: ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement | undefined
@@ -32,7 +32,7 @@ const ChatInput: React.FC = () => {
         sendButton={
           <SendIconButton
             onClick={async () => {
-              await handleSend(input);
+              await sendMessageAndGetResponse(input);
               setInput('');
             }}
           />
@@ -41,7 +41,7 @@ const ChatInput: React.FC = () => {
         onKeyDown={async (e) => {
           if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            await handleSend(input);
+            await sendMessageAndGetResponse(input);
             setInput('');
           }
         }}

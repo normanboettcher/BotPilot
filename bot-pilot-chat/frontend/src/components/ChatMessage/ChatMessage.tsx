@@ -70,11 +70,12 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
         {text}
       </Markdown>
       {msg.accessory === 'calendar' && <CalendarAccessory />}
-      {msg.accessory === 'buttons' && msg.buttons && msg.sender == 'bot' && (
+      {msg.accessory === 'buttons' && msg.buttons && (
         <ButtonOptionList buttons={msg.buttons} />
       )}
       <Stack
         direction={'row'}
+        pt={1}
         sx={{
           display: 'flex',
           justifyContent: 'flex-end',

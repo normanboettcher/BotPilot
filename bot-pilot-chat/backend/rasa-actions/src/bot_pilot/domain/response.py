@@ -8,13 +8,14 @@ from bot_pilot.domain.button_option import ButtonOption
 class BotResponse:
 
     def __init__(self, answer: str, success: bool, score=None, sender=None,
-                 buttons: List[dict] | None = None):
+                 buttons: List[dict] | None = None, accessory=None):
         self._success = success
         self._timestamp = datetime.now().strftime("%d.%m.%Y %H:%M")
         self._answer = answer
         self._score = score
         self._sender = sender
         self._buttons = buttons
+        self._accessory = accessory
 
     def get_answer(self):
         return self._answer
@@ -42,6 +43,11 @@ class BotResponse:
         return BotResponse(not_found_message, success=False, sender="bot")
 
     @staticmethod
+    def with_answer_and_buttons(answer: str, buttons: List[dict]):
+        return BotResponse(answer, success=True, sender="bot", buttons=buttons,
+                           accessory='buttons')
+
+    @staticmethod
     def with_answer(answer: str):
         return BotResponse(answer, success=True, sender="bot")
 
@@ -57,4 +63,5 @@ class BotResponse:
             "score": self._score,
             "sender": self._sender,
             "buttons": self._buttons,
+            "accessory": self._accessory,
         }

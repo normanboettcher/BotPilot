@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Box, Grid } from '@mui/material';
 import ButtonOptionComponent from './ButtonOptionComponent.tsx';
-import useHandleSend from '../../ChatInput/useHandleSend.ts';
 import type { ButtonOption } from '../../../domain/ButtonOption.ts';
+import useMessageService from '../../../service/MessageService.ts';
 
 type Props = {
   buttons: ButtonOption[];
@@ -10,7 +10,7 @@ type Props = {
 
 const ButtonOptionList: React.FC<Props> = ({ buttons }) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const { handleSendButtonAnswer } = useHandleSend();
+  const { sendMessageAndGetResponse } = useMessageService();
   const [selectedButtonName, setSelectedButtonName] = useState<string | null>(null);
 
   const handleClick = (index: number) => {
@@ -26,12 +26,13 @@ const ButtonOptionList: React.FC<Props> = ({ buttons }) => {
                 <ButtonOptionComponent
                   data-testid={'list-button-option-component'}
                   filled={
-                    selectedButtonName !== null && selectedButtonName === option.title
+                    option.filled ??
+                    (selectedButtonName !== null && selectedButtonName === option.title)
                   }
-                  onClick={() => {
+                  onClick={async () => {
                     handleClick(selectedIndex !== null ? selectedIndex : index);
-                    handleSendButtonAnswer(option);
                     setSelectedButtonName(option.title);
+                    await sendMessageAndGetResponse(option.payload, option);
                   }}
                   button={option}
                 />

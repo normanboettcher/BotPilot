@@ -9,11 +9,11 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { type Dayjs } from 'dayjs';
 import 'dayjs/locale/de';
 import { shouldDisableTime } from './utils/calendar.accessory.utils.ts';
-import useHandleSend from '../../ChatInput/useHandleSend.ts';
 import useCalendarDetails from './useCalendarDetails.ts';
 import type { BusyEventResponse } from '../../../domain/BusyEvent.ts';
 import getBusyEvents from './getBusyEvents.ts';
 import type { CalendarDetails } from '../../../domain/CalendarDetails.ts';
+import useMessageService from '../../../service/MessageService.ts';
 
 const useEventIntervall = (): { eventIntervallViews: DateOrTimeView[] } => {
   return { eventIntervallViews: ['year', 'month', 'day', 'hours', 'minutes'] };
@@ -57,7 +57,7 @@ export const CalendarAccessory: React.FC = () => {
   const now = dayjs();
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(now);
   const { eventIntervallViews } = useEventIntervall();
-  const { handleSend } = useHandleSend();
+  const { sendMessageAndGetResponse } = useMessageService();
   return (
     <Box data-testid={'calendar-accessory'}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'de'}>
@@ -95,7 +95,7 @@ export const CalendarAccessory: React.FC = () => {
           }}
           onAccept={async () => {
             if (selectedDate) {
-              await handleSend(selectedDate.format('DD.MM.YYYY HH:mm'));
+              await sendMessageAndGetResponse(selectedDate.format('DD.MM.YYYY HH:mm'));
             }
           }}
           value={selectedDate}

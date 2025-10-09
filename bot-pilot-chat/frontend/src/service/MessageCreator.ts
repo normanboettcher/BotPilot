@@ -12,13 +12,20 @@ const useMessageCreator = () => {
     minute: 'numeric',
   };
 
-  const createChatMessage = (text: string, sender: Sender) => {
+  const createChatMessage = (
+    message: string,
+    sender: Sender,
+    accessory?: 'calendar' | 'buttons',
+    buttons?: ButtonOption[]
+  ) => {
     const date = new Date().toLocaleDateString('de-DE', dateOptions);
     const chatMessage: ChatMessageText = {
       type: 'text',
       sender: sender,
-      message: text,
+      message: message,
       timestamp: date.replace(',', ''),
+      accessory: accessory,
+      buttons: buttons,
     };
     return chatMessage;
   };
@@ -31,8 +38,7 @@ const useMessageCreator = () => {
       button: {
         payload: button.payload,
         title: button.title,
-        isFilled: true,
-        disabled: true,
+        filled: true,
       },
       type: 'button',
     };

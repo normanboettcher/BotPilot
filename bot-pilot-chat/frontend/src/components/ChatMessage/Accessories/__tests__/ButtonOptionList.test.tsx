@@ -1,21 +1,21 @@
-import { describe, expect, it, type MockedFunction, vi } from 'vitest';
+import { describe, expect, it, vi, beforeEach } from 'vitest';
 import type { ButtonOption } from '../../../../domain/ButtonOption.ts';
 import ButtonOptionList from '../ButtonOptionList.tsx';
-import { render, waitFor, screen } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import React from 'react';
-import useHandleSend from '../../../ChatInput/useHandleSend.ts';
 import { userEvent } from '@testing-library/user-event';
+import * as message_service from '../../../../service/MessageService.ts';
 
-vi.mock('../../../ChatInput/useHandleSend.ts');
+const useMessageServiceSpy = vi.spyOn(message_service, 'default');
+const sendMessageAndGetResponseMock = vi.fn();
 
-const useHandleSendMock = useHandleSend as MockedFunction<typeof useHandleSend>;
-const handleSendButtonAnswerMock = vi.fn();
-useHandleSendMock.mockReturnValue({
-  handleSendButtonAnswer: handleSendButtonAnswerMock,
-  handleSend: vi.fn(),
+useMessageServiceSpy.mockReturnValue({
+  sendMessageAndGetResponse: sendMessageAndGetResponseMock,
 });
-
 describe('ButtonOptionList', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
   it('renders correctly two buttons', () => {
     // given
     const button1: ButtonOption = {
@@ -112,7 +112,7 @@ describe('ButtonOptionList', () => {
     await user.click(button!);
     // then
     await waitFor(() => {
-      expect(handleSendButtonAnswerMock).toHaveBeenCalledOnce();
+      expect(sendMessageAndGetResponseMock).toHaveBeenCalledOnce();
     });
   });
   it('should call handleSendButtonAnswer with button 1', async () => {
@@ -133,7 +133,10 @@ describe('ButtonOptionList', () => {
 
     // then
     await waitFor(() => {
-      expect(handleSendButtonAnswerMock).toHaveBeenCalledWith(button1);
+      expect(sendMessageAndGetResponseMock).toHaveBeenCalledWith(
+        button1.payload,
+        button1
+      );
     });
   });
 });

@@ -13,7 +13,6 @@ export const ButtonOptionComponent: React.FC<GeneralButtonProps & Props> = ({
   button,
   filled,
 }) => {
-  console.log(`filled: [${filled}]`);
   return (
     <Button
       sx={{
