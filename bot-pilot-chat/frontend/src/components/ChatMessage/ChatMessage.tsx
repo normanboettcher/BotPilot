@@ -1,14 +1,15 @@
 import React from 'react';
 import { Box, Stack, Typography, useTheme } from '@mui/material';
-import type { ChatMessageType } from '../../domain/ChatMessage.ts';
+import type { ChatMessageText } from '../../domain/ChatMessageText.ts';
 import useBotResponsive from '../../hooks/useBotResponsive.ts';
 import AlarmClock from '../icons/AlarmClock.tsx';
 import Markdown from 'react-markdown';
-import ChatMessageText from './ChatMessageText.tsx';
+import ChatMessageTextComponent from './ChatMessageTextComponent.tsx';
 import CalendarAccessory from './Accessories/CalendarAccessory.tsx';
+import ButtonOptionList from './Accessories/ButtonOptionList.tsx';
 
 type Props = {
-  msg: ChatMessageType;
+  msg: ChatMessageText;
 };
 
 const ChatMessage: React.FC<Props> = ({ msg }) => {
@@ -50,7 +51,7 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
       <Markdown
         components={{
           p: ({ node, ...props }) => (
-            <ChatMessageText>{props.children}</ChatMessageText>
+            <ChatMessageTextComponent>{props.children}</ChatMessageTextComponent>
           ),
           ul: ({ node, ...props }) => (
             <Box component={'ul'} sx={{ pl: 2, mt: 0, mb: 0, listStyleType: 'disc' }}>
@@ -59,9 +60,9 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
           ),
           li: ({ node, ...props }) => (
             <Box component={'li'} sx={{ display: 'list-item', mb: 0 }}>
-              <ChatMessageText pb={0} pt={0} component={'span'}>
+              <ChatMessageTextComponent pb={0} pt={0} component={'span'}>
                 {props.children}
-              </ChatMessageText>
+              </ChatMessageTextComponent>
             </Box>
           ),
         }}
@@ -69,8 +70,12 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
         {text}
       </Markdown>
       {msg.accessory === 'calendar' && <CalendarAccessory />}
+      {msg.accessory === 'buttons' && msg.buttons && (
+        <ButtonOptionList buttons={msg.buttons} />
+      )}
       <Stack
         direction={'row'}
+        pt={1}
         sx={{
           display: 'flex',
           justifyContent: 'flex-end',

@@ -1,4 +1,5 @@
 import type { Sender } from './Sender.ts';
+import type { ButtonOption } from './ButtonOption.ts';
 
 export interface BotResponse {
   answer: string;
@@ -6,4 +7,6 @@ export interface BotResponse {
   success: boolean;
   score?: number;
   timestamp: string;
+  accessory?: 'buttons' | 'calendar';
+  buttons?: ButtonOption[];
 }

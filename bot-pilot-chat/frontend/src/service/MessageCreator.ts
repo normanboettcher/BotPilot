@@ -1,5 +1,6 @@
-import type { ChatMessageType } from '../domain/ChatMessage.ts';
+import type { ChatMessageButton, ChatMessageText } from '../domain/ChatMessageText.ts';
 import type { Sender } from '../domain/Sender.ts';
+import type { ButtonOption } from '../domain/ButtonOption.ts';
 
 const useMessageCreator = () => {
   //@ts-ignore
@@ -11,18 +12,42 @@ const useMessageCreator = () => {
     minute: 'numeric',
   };
 
-  const createChatMessage = (text: string, sender: Sender) => {
+  const createChatMessage = (
+    message: string,
+    sender: Sender,
+    accessory?: 'calendar' | 'buttons',
+    buttons?: ButtonOption[]
+  ) => {
     const date = new Date().toLocaleDateString('de-DE', dateOptions);
-    const chatMessage: ChatMessageType = {
+    const chatMessage: ChatMessageText = {
+      type: 'text',
       sender: sender,
-      message: text,
+      message: message,
       timestamp: date.replace(',', ''),
+      accessory: accessory,
+      buttons: buttons,
+    };
+    return chatMessage;
+  };
+
+  const createButtonMessage = (button: ButtonOption, sender: Sender) => {
+    const date = new Date().toLocaleDateString('de-DE', dateOptions);
+    const chatMessage: ChatMessageButton = {
+      timestamp: date.replace(',', ''),
+      sender: sender,
+      button: {
+        payload: button.payload,
+        title: button.title,
+        filled: true,
+      },
+      type: 'button',
     };
     return chatMessage;
   };
 
   return {
     createChatMessage,
+    createButtonMessage,
   };
 };
 

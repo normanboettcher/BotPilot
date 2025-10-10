@@ -19,7 +19,7 @@ class ActionAskTerminMedium(Action):
     def run(self, dispatcher, tracker, domain):
         attempts = tracker.slots.get("termin_medium_attempts")
         if attempts == 3:
-            logger.debug("Max attempts reached for termin_medium")
+            logger.debug("max attempts reached for termin_medium")
             return [
                 SlotSet("termin_medium_attempts", 0),
                 SlotSet("termin_medium", None),
@@ -30,8 +30,6 @@ class ActionAskTerminMedium(Action):
             "Möchten Sie einen Termin klassisch über Telefon oder E-Mail "
             "vereinbaren oder möchten Sie das direkt mit mir machen?"
         )
-        res = BotResponse.with_answer(message)
-        dispatcher.utter_message(
-            json_message=send_response(res.as_dict()), buttons=buttons
-        )
+        res = BotResponse.with_answer_and_buttons(message, buttons)
+        dispatcher.utter_message(json_message=send_response(res.as_dict()))
         return []

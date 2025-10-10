@@ -11,7 +11,12 @@ describe('MessageCreator testcases', () => {
       success: true,
       timestamp: new Date().toISOString(),
     };
-    const result = createChatMessage(botResponse.answer, botResponse.sender);
+    const result = createChatMessage(
+      botResponse.answer,
+      botResponse.sender,
+      botResponse.accessory,
+      botResponse.buttons
+    );
     expect(result.sender).toEqual('bot');
     expect(result.message).toEqual('Hello World!');
     expect(result.timestamp).toBeDefined();

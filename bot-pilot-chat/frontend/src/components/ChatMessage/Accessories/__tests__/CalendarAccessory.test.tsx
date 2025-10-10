@@ -1,15 +1,30 @@
-import { describe, it, expect, vi, type MockedFunction } from 'vitest';
+import {
+  describe,
+  it,
+  expect,
+  vi,
+  type MockedFunction,
+  beforeEach,
+  beforeAll,
+  afterAll,
+} from 'vitest';
 import useCalendarDetails from '../useCalendarDetails.ts';
 import type { OpeningHour, OpeningHours } from '../../../../domain/OpeningHour.ts';
 import type { CalendarDetails } from '../../../../domain/CalendarDetails.ts';
 import { render, waitFor } from '@testing-library/react';
 import CalendarAccessory from '../CalendarAccessory.tsx';
 import React from 'react';
-import useHandleSend from '../../../ChatInput/useHandleSend.ts';
 import { userEvent } from '@testing-library/user-event';
 import getBusyEvents from '../getBusyEvents.ts';
 import type { BusyEventResponse } from '../../../../domain/BusyEvent.ts';
+import * as message_service from '../../../../service/MessageService.ts';
 
+const useMessageServiceSpy = vi.spyOn(message_service, 'default');
+const sendMessageAndGetResponseMock = vi.fn();
+
+useMessageServiceSpy.mockReturnValue({
+  sendMessageAndGetResponse: sendMessageAndGetResponseMock,
+});
 vi.mock('../../../ChatInput/useHandleSend.ts');
 vi.mock('../useCalendarDetails.ts');
 vi.mock('../getBusyEvents.ts');
@@ -32,9 +47,15 @@ const allDayOpen: OpeningHours = new Map([
   [5, [allDay]],
   [6, [allDay]],
 ]);
-const handleSendMock = vi.fn();
-(useHandleSend as MockedFunction<typeof useHandleSend>).mockResolvedValue({
-  handleSend: handleSendMock,
+beforeEach(() => {
+  vi.clearAllMocks();
+});
+beforeAll(() => {
+  vi.setSystemTime(new Date('2025-10-07T12:00:00Z'));
+});
+
+afterAll(() => {
+  vi.useRealTimers();
 });
 describe('CalendarAccessory', () => {
   it('should render all time of openingHours from 08:00 - 18:00 Europe/Berlin', async () => {

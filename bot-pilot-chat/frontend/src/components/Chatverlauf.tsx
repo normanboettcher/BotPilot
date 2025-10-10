@@ -38,14 +38,6 @@ const Chatverlauf: React.FC = () => {
               <ChatMessageContainer chatMessage={msg} />
             </ListItem>
           ))}
-        <ChatMessageContainer
-          chatMessage={{
-            message: 'Bitte wählen Sie einen freien Termin Ihrer Wahl.',
-            accessory: 'calendar',
-            sender: 'bot',
-            timestamp: new Date().toISOString(),
-          }}
-        />
         <div ref={endRef} />
       </List>
     </Box>

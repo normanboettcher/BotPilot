@@ -1,12 +1,12 @@
 import React from 'react';
 import SenderAvatar from '../Avatar/SenderAvatar.tsx';
-import type { ChatMessageType } from '../../domain/ChatMessage.ts';
+import type { ChatMessageText } from '../../domain/ChatMessageText.ts';
 import { Box, Stack } from '@mui/material';
 import ChatMessage from './ChatMessage.tsx';
 import useBotResponsive from '../../hooks/useBotResponsive.ts';
 
 type Props = {
-  chatMessage: ChatMessageType;
+  chatMessage: ChatMessageText;
 };
 
 const ChatMessageContainer: React.FC<Props> = ({ chatMessage }) => {
