@@ -8,6 +8,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class ActionAskTerminType(Action):
     def name(self) -> str:
         return "action_ask_termin_type"
@@ -18,7 +19,8 @@ class ActionAskTerminType(Action):
         )
 
         buttons = make_buttons_termin_types()
-        response = BotResponse(message, True, None, 'bot',
-                               buttons, accessory='buttons')
+        response = BotResponse(
+            message, True, None, "bot", buttons, accessory="buttons"
+        )
         dispatcher.utter_message(json_message=send_response(response.as_dict()))
         return []

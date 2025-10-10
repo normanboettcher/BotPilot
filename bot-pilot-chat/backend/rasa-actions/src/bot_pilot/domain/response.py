@@ -2,13 +2,18 @@ import textwrap
 from datetime import datetime
 from typing import List
 
-from bot_pilot.domain.button_option import ButtonOption
-
 
 class BotResponse:
 
-    def __init__(self, answer: str, success: bool, score=None, sender=None,
-                 buttons: List[dict] | None = None, accessory=None):
+    def __init__(
+        self,
+        answer: str,
+        success: bool,
+        score=None,
+        sender=None,
+        buttons: List[dict] | None = None,
+        accessory=None,
+    ):
         self._success = success
         self._timestamp = datetime.now().strftime("%d.%m.%Y %H:%M")
         self._answer = answer
@@ -44,8 +49,13 @@ class BotResponse:
 
     @staticmethod
     def with_answer_and_buttons(answer: str, buttons: List[dict]):
-        return BotResponse(answer, success=True, sender="bot", buttons=buttons,
-                           accessory='buttons')
+        return BotResponse(
+            answer,
+            success=True,
+            sender="bot",
+            buttons=buttons,
+            accessory="buttons",
+        )
 
     @staticmethod
     def with_answer(answer: str):
