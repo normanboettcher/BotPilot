@@ -62,11 +62,20 @@ slots:
         conditions:
           - active_loop: user_info_form
             requested_slot: user_name
+      - type: from_entity
+        entity: user_name
+        conditions:
+          - active_loop: user_info_form
+            requested_slot: user_name
     type: text
-
   user_mail:
     mappings:
       - type: from_text
+        conditions:
+          - active_loop: user_info_form
+            requested_slot: user_mail
+      - type: from_entity
+        entity: user_mail
         conditions:
           - active_loop: user_info_form
             requested_slot: user_mail
@@ -115,12 +124,12 @@ slots:
       - type: from_text
         conditions:
           - active_loop: consultant_form
-            requested_slot: consultant
+            requested_slot: consultant_name
       - type: from_entity
         entity: consultant_name
         conditions:
           - active_loop: consultant_form
-            requested_slot: consultant
+            requested_slot: consultant_name
 
 forms:
   termin_form:

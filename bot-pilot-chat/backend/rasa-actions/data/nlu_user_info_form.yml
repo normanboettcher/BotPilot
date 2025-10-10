@@ -1,0 +1,49 @@
+version: '3.1'
+nlu:
+  - regex: user_name
+    examples: |
+      - ^([A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*|[a-zäöüß]+)( ([A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*|[a-zäöüß]+))+$
+
+  - regex: user_mail
+    examples: |
+      - ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+
+  - intent: user_name_inform
+    examples: |
+      - Mein Name ist [Tobias Meyer](user_name)
+      - Ich bin [Marcel Weber](user_name)
+      - Ich heiße [Ann-Kathrin Müller](user_name)
+      - Mein Name lautet [Sophie Müller-Meyer](user_name)
+      - Ich bin [Clara von Bayern](user_name)
+      - Ich heiße [Clara-Luisa von Hinüber](user_name)
+      - Ich bin [Peter Becker](user_name)
+      - Mein Name ist [Peter-Siegfried Müller-Meyer](user_name)
+      - Ich heiße [Andreas Nagel](user_name)
+      - Ich bin [Fritz Hesse](user_name)
+      - Mein Name lautet [Robin Sauer](user_name)
+      - [Tobias Meyer](user_name)
+      - [Tobias Meyer](user_name) mein Name.
+      - [Sophie Müller-Meyer](user_name)
+      - [Clara-Luisa von Hinüber](user_name)
+      - [Peter-Siegfried Müller-Meyer](user_name)
+      - Sie finden mich unter [Marcel Weber](user_name)
+
+
+  - intent: user_mail_inform
+    examples: |
+      - Meine E-Mail-Adresse ist [Tobias.Meyer@web.de](user_mail)
+      - Sie können mich unter [Marcel.Weber123@t-online.de](user_mail) erreichen
+      - Meine Mail lautet [AnnKatrhin.Mueller@web.de](user_mail)
+      - Meine Adresse ist [sophie1.muellermeyer@gmx.de](user_mail)
+      - Schreiben Sie bitte an [clara.vanBayern44@t-online.de](user_mail)
+      - Sie können mir eine Mail an [claraluise.vonhinueber1@web.de](user_mail) schicken
+      - Kontaktieren Sie mich über [peterbecker@gmx.de](user_mail)
+      - Meine Mailadresse lautet [Klaus123.meyer1@tt.de](user_mail)
+      - [Tobias.Meyer@web.de](user_mail)
+      - [Marcel.Weber123@t-online.de](user_mail)
+      - [AnnKatrhin.Mueller@web.de](user_mail)
+      - [sophie1.muellermeyer@gmx.de](user_mail)
+      - [clara.vanBayern44@t-online.de](user_mail)
+      - [claraluise.vonhinueber1@web.de](user_mail)
+      - [peterbecker@gmx.de](user_mail)
+      - [Klaus123.meyer1@tt.de](user_mail)

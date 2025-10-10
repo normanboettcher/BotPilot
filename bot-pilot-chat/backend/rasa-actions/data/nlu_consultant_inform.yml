@@ -1,0 +1,33 @@
+version: '3.1'
+nlu:
+  - regex: consultant_name
+    examples: |
+      - ^([A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*|[a-zäöüß]+)( ([A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*|[a-zäöüß]+))+$
+
+  - intent: consultant_inform
+    examples: |
+      - Mein Berater heißt [Tobias Meyer](consultant_name)
+      - Mein Steuerberater ist [Tobias Meyer](consultant_name)
+      - Ich arbeite mit [Tobias Meyer](consultant_name) zusammen
+      - Mein Ansprechpartner war [Marcel Weber](consultant_name)
+      - Ich wurde zuletzt von Herrn [Marcel Weber](consultant_name) betreut
+      - Frau [Ann-Kathrin Müller](consultant_name) ist meine Steuerberaterin
+      - [Sophie Müller-Meyer](consultant_name) ist meine Beraterin
+      - Ich bin bei [Clara von Bayern](consultant_name) in Betreuung
+      - [Clara-Luisa von Hinüber](consultant_name) hat mir geholfen
+      - Mein Berater ist [Peter Becker](consultant_name)
+      - [Peter-Siegfried Müller-Meyer](consultant_name) ist mein Ansprechpartner
+      - Ich hatte ein Gespräch mit [Andreas Nagel](consultant_name)
+      - [Fritz Hesse](consultant_name) hat mich beraten
+      - Mein Steuerberater heißt [Robin Sauer](consultant_name)
+      - [Tobias Meyer](consultant_name)
+      - [Marcel Weber](consultant_name)
+      - [Ann-Kathrin Müller](consultant_name)
+      - [Sophie Müller-Meyer](consultant_name)
+      - [Clara von Bayern](consultant_name)
+      - [Clara-Luisa von Hinüber](consultant_name)
+      - [Peter Becker](consultant_name)
+      - [Peter-Siegfried Müller-Meyer](consultant_name)
+      - [Andreas Nagel](consultant_name)
+      - [Fritz Hesse](consultant_name)
+      - [Robin Sauer](consultant_name)
