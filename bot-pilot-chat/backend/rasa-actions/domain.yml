@@ -1,152 +1,175 @@
 version: '3.1'
 intents:
-- affirm
-- anreise
-- begruessung
-- bereiche
-- deny
-- faq
-- general_bot
-- kosten
-- negative_feedback
-- nlu_fallback
-- parking
-- positive_feedback
-- standort
-- steuerberatung
-- steuererklaerung
-- stop
-- termin_infos
-- termin_medium_inform
-- termin_type_inform
-- termin_vereinbaren
-- unterlagen
-- user_type_inform
-- verabschiedung
-- zeiten
-- consultant_form
-- consultant_inform
-
+  - affirm
+  - anreise
+  - begruessung
+  - bereiche
+  - deny
+  - faq
+  - general_bot
+  - kosten
+  - negative_feedback
+  - nlu_fallback
+  - parking
+  - positive_feedback
+  - standort
+  - steuerberatung
+  - steuererklaerung
+  - stop
+  - termin_infos
+  - termin_medium_inform
+  - termin_type_inform
+  - termin_vereinbaren
+  - unterlagen
+  - user_type_inform
+  - verabschiedung
+  - zeiten
+  - consultant_inform
+  - user_name_inform
+  - user_mail_inform
 entities:
-- termin_medium
-- user_type
-- termin_type
-
+  - termin_medium
+  - user_type
+  - termin_type
+  - user_name
+  - user_mail
+  - consultant_name
 slots:
   next_form_name:
     mappings:
-    - type: custom
+      - type: custom
     type: text
   user_type:
     mappings:
-    - type: from_entity
-      entity: user_type
-      conditions:
-      - active_loop: user_type_form
-        requested_slot: user_type
-    - type: from_text
-      conditions:
-      - active_loop: user_type_form
-        requested_slot: user_type
+      - type: from_entity
+        entity: user_type
+        conditions:
+          - active_loop: user_type_form
+            requested_slot: user_type
+      - type: from_text
+        conditions:
+          - active_loop: user_type_form
+            requested_slot: user_type
     type: categorical
     values:
-    - privatperson
-    - unternehmer
-    - freiberufler
-    - selbststaendiger
+      - privatperson
+      - unternehmer
+      - freiberufler
+      - selbststaendiger
+  user_name:
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: user_info_form
+            requested_slot: user_name
+    type: text
+
+  user_mail:
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: user_info_form
+            requested_slot: user_mail
+    type: text
+
   termin_type:
     mappings:
-    - type: from_entity
-      entity: termin_type
-      conditions:
-      - active_loop: termin_form
-        requested_slot: termin_type
-    - type: from_text
-      conditions:
-      - active_loop: termin_form
-        requested_slot: termin_type
+      - type: from_entity
+        entity: termin_type
+        conditions:
+          - active_loop: termin_form
+            requested_slot: termin_type
+      - type: from_text
+        conditions:
+          - active_loop: termin_form
+            requested_slot: termin_type
     type: categorical
     values:
-    - erstberatung
-    - folgeberatung
-    - termin
+      - erstberatung
+      - folgeberatung
+      - termin
   termin_medium_attempts:
     type: float
     initial_value: 0
     mappings:
-    - type: custom
+      - type: custom
   termin_medium:
     mappings:
-    - type: from_entity
-      entity: termin_medium
-      conditions:
-      - active_loop: termin_form
-        requested_slot: termin_medium
-    - type: from_text
-      conditions:
-      - active_loop: termin_form
-        requested_slot: termin_medium
-    type: categorical
-    values:
-    - mail
-    - phone
-    - bot
-  consultant:
-    type: categorical
-    values:
-      - Herr Bernd Müller
-      - Frau Stephanie Meyer
-      - Herr Klaus Becker
-    mappings:
-      - type: from_intent
-        intent: consultant_inform
+      - type: from_entity
+        entity: termin_medium
         conditions:
-          - active_loop: consultant_form
-            requested_slot: consultant
+          - active_loop: termin_form
+            requested_slot: termin_medium
       - type: from_text
         conditions:
           - active_loop: termin_form
+            requested_slot: termin_medium
+    type: categorical
+    values:
+      - mail
+      - phone
+      - bot
+  consultant_name:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: consultant_form
+            requested_slot: consultant
+      - type: from_entity
+        entity: consultant_name
+        conditions:
+          - active_loop: consultant_form
             requested_slot: consultant
 
 forms:
   termin_form:
     required_slots:
-    - termin_type
-    - termin_medium
+      - termin_type
+      - termin_medium
   user_type_form:
     required_slots:
-    - user_type
+      - user_type
+  user_info_form:
+    required_slots:
+      - user_name
+      - user_mail
+      - user_type
   consultant_form:
     required_slots:
-      - consultant
+      - consultant_name
 actions:
-- action_submit_termin
-- action_switch_user_type_form
-- action_begruessung
-- action_ask_continue
-- action_deny
-- action_verabschiedung
-- action_general_bot
-- validate_termin_form
-- action_default_fallback
-- action_get_faq
-- action_positive_feedback
-- action_negative_feedback
-- action_parking
-- action_kosten
-- action_unterlagen
-- action_steuererklaerung
-- action_standort
-- action_anreise
-- action_bereiche
-- action_zeiten
-- action_steuerberatung
-- action_ask_termin_medium
-- action_ask_termin_type
-- action_ask_user_type
-- action_stop
-- action_switch_consultant_form
-- action_ask_consultant
+  - action_submit_termin
+  - action_switch_user_type_form
+  - action_begruessung
+  - action_ask_continue
+  - action_deny
+  - action_verabschiedung
+  - action_general_bot
+  - validate_termin_form
+  - action_default_fallback
+  - action_get_faq
+  - action_positive_feedback
+  - action_negative_feedback
+  - action_parking
+  - action_kosten
+  - action_unterlagen
+  - action_steuererklaerung
+  - action_standort
+  - action_anreise
+  - action_bereiche
+  - action_zeiten
+  - action_steuerberatung
+  - action_ask_termin_medium
+  - action_ask_termin_type
+  - action_ask_user_type
+  - action_stop
+  - validate_user_info_form
+  - action_switch_user_info_form
+  - action_ask_user_name
+  - action_ask_user_mail
+  - action_switch_consultant_form
+  - action_ask_consultant
 
 session_config:
   session_expiration_time: 60
