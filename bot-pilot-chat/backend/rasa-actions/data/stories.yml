@@ -98,8 +98,15 @@ stories:
 
   - story: happy path collect consultant_name
     steps:
-      - intent: consultant_inform
-      - action: action_ask_consultant
+      - slot_was_set:
+          - next_form_name: consultant_form
       - active_loop: consultant_form
       - slot_was_set:
-          - requested_slot: consultant
+          - requested_slot: consultant_name
+      - action: action_ask_consultant
+      - intent: consultant_inform
+      - slot_was_set:
+          - requested_slot: null
+      - action: consultant_form
+      - active_loop: null
+
