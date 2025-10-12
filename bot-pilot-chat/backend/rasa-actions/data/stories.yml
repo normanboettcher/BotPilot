@@ -101,7 +101,6 @@ stories:
       - active_loop: null
       - action: action_switch_form
 
-
   - story: happy path collect consultant_name
     steps:
       - slot_was_set:
@@ -118,10 +117,6 @@ stories:
 
   - story: happy path switch to consultant_form
     steps:
-      - action: user_info_form
-      - slot_was_set:
-          - requested_slot: null
-      - active_loop: null
       - action: action_switch_form
       - slot_was_set:
           - next_form_name: consultant_form

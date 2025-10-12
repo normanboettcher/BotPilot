@@ -7,7 +7,7 @@ stories:
       - slot_was_set:
           - requested_slot: consultant_name
       - user: |-
-          /consultant_inform{"consultant_name": "Herbert Graumueller"}
+          /consultant_inform{"person_name": "Herbert Graumueller"}
         intent: consultant_inform
       - slot_was_set:
           - consultant_name: Herbert Graumueller
@@ -21,7 +21,7 @@ stories:
       - slot_was_set:
           - requested_slot: user_name
       - user: |-
-          Mein Name ist [Jane Doe](user_name).
+          Mein Name ist [Jane Doe](person_name).
         intent: user_name_inform
       - slot_was_set:
           - user_name: Jane Doe
@@ -43,7 +43,7 @@ stories:
       - slot_was_set:
           - requested_slot: consultant_name
       - user: |-
-          /consultant_inform{"consultant_name": "Herbert Graumueller"}
+          /consultant_inform{"person_name": "Herbert Graumueller"}
         intent: consultant_inform
       - slot_was_set:
           - consultant_name: Herbert Graumueller
