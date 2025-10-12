@@ -10,6 +10,7 @@ pipeline:
   - name: CountVectorsFeaturizer
   - name: DIETClassifier
     epochs: 100
+    constrain_similarities: True
   - name: EntitySynonymMapper
   - name: ResponseSelector
   - name: FallbackClassifier

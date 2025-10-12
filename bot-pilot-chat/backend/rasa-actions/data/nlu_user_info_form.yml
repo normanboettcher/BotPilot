@@ -1,8 +1,5 @@
 version: '3.1'
 nlu:
-  - regex: user_name
-    examples: |
-      - ^([A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*|[a-zäöüß]+)( ([A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*|[a-zäöüß]+))+$
 
   - regex: user_mail
     examples: |
@@ -10,24 +7,86 @@ nlu:
 
   - intent: user_name_inform
     examples: |
-      - Mein Name ist [Tobias Meyer](user_name)
+      - Mein Name ist [Marie Diesacheistdie](user_name)
       - Ich bin [Marcel Weber](user_name)
       - Ich heiße [Ann-Kathrin Müller](user_name)
-      - Mein Name lautet [Sophie Müller-Meyer](user_name)
+      - Mein Name lautet [Sophie Apfel-Horn](user_name)
       - Ich bin [Clara von Bayern](user_name)
-      - Ich heiße [Clara-Luisa von Hinüber](user_name)
+      - Ich heiße [Abdullah von Hindenburg](user_name)
       - Ich bin [Peter Becker](user_name)
-      - Mein Name ist [Peter-Siegfried Müller-Meyer](user_name)
+      - Mein Name ist [Franz-Josef Effenberg](user_name)
       - Ich heiße [Andreas Nagel](user_name)
       - Ich bin [Fritz Hesse](user_name)
       - Mein Name lautet [Robin Sauer](user_name)
-      - [Tobias Meyer](user_name)
-      - [Tobias Meyer](user_name) mein Name.
-      - [Sophie Müller-Meyer](user_name)
-      - [Clara-Luisa von Hinüber](user_name)
-      - [Peter-Siegfried Müller-Meyer](user_name)
-      - Sie finden mich unter [Marcel Weber](user_name)
-
+      - [Philipp Blattgold](user_name)
+      - [Roxy Beyer](user_name), mein Name.
+      - [Sophie Maxton](user_name)
+      - [Carminia Brado](user_name)
+      - [Mohammed Abel](user_name)
+      - Sie finden mich unter [Janine Thomsen](user_name)
+      - Mein vollständiger Name ist [Luisa Marie von Heiden](user_name)
+      - Hallo, ich bin [Sascha Klein](user_name)
+      - Ich stelle mich kurz vor: [Karl-Heinz Bergmann](user_name)
+      - [Nora Linde](user_name), freut mich
+      - ich heiße [Paul Heller](user_name)
+      - [lena meier](user_name)
+      - mein name [Rudi Rammel](user_name)
+      - ich sag dir gleich meinen namen
+      - darf ich mich kurz vorstellen?
+      - [John Smith](user_name)
+      - meine namen ist vollstaendig: [Jason Carpenter](user_name)
+      - name ist [Michael O'Connor](user_name)
+      - ihc heissen [Jason Salakis](user_name)
+      - Ich heiße [Lukas Schmidt](user_name)
+      - Mein Name ist [Sofia Müller](user_name)
+      - Ich bin [Anna-Lena Becker](user_name)
+      - Mein Name lautet [Emilia Wagner](user_name)
+      - Ich heiße [Maximilian Schulz](user_name)
+      - Mein Name ist [Noah Fischer](user_name)
+      - Ich bin [Marie Lehmann](user_name)
+      - Mein Name lautet [Jakob Hoffmann](user_name)
+      - Ich heiße [Lena Richter](user_name)
+      - Ich bin [Felix Weber](user_name)
+      - Mein Name ist [Oliver Maier](user_name)
+      - Ich heiße [Leonie Wolf](user_name)
+      - Mein Name lautet [Sophia Neumann](user_name)
+      - Ich bin [David Braun](user_name)
+      - Ich heiße [Mia Krüger](user_name)
+      - Ich bin [Jonas Zimmermann](user_name)
+      - Mein Name ist [Emma Lange](user_name)
+      - Ich heiße [Elias Schmitt](user_name)
+      - Ich bin [Nina Hartmann](user_name)
+      - Mein Name lautet [Paul Köhler](user_name)
+      - Ich heiße [Yuki Tanaka](user_name)      
+      - Mein Name ist [Hiroshi Yamamoto](user_name)
+      - Ich heiße [Sakura Aoki](user_name)
+      - Ich bin [Lian Chen](user_name)       
+      - Mein Name lautet [Wei Zhang](user_name)
+      - Ich heiße [Mei Ling](user_name)
+      - Ich bin [Carlos García](user_name)    
+      - Mein Name lautet [Ana López](user_name)
+      - Ich heiße [José Martínez](user_name)
+      - Ich bin [Lucia Rossi](user_name)      
+      - Mein Name lautet [Giovanni Bianchi](user_name)
+      - Ich heiße [Elena Ferrara](user_name)
+      - Ich bin [Olga Ivanova](user_name)     
+      - Mein Name lautet [Dmitri Petrov](user_name)
+      - Ich heiße [Svetlana Kuznetsova](user_name)
+      - Ich bin [Fatima Hassan](user_name)    
+      - Mein Name lautet [Ali Khalid](user_name)
+      - Ich heiße [Layla Mahmoud](user_name)
+      - Ich bin [John Smith](user_name)       
+      - Mein Name lautet [Emily Johnson](user_name)
+      - Ich heiße [Michael Brown](user_name)
+      - Ich bin [Isabella Silva](user_name)   
+      - Mein Name lautet [Lucas Pereira](user_name)
+      - Ich heiße [Sofia Costa](user_name)
+      - Ich bin [Hans Müller](user_name)       
+      - Mein Name lautet [Katrin Schneider](user_name)
+      - Ich heiße [Tobias Richter](user_name)
+      - Ich bin [Emma Dubois](user_name)     
+      - Mein Name lautet [Julien Lefevre](user_name)
+      - Ich heiße [Chloé Bernard](user_name)
 
   - intent: user_mail_inform
     examples: |

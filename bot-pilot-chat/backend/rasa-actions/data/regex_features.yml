@@ -1,0 +1,3 @@
+- regex: user_name
+  examples: |
+    - [A-ZÄÖÜ][a-zäöüß]+(?:\s(von|van|de)\s[A-ZÄÖÜ][a-zäöüß]+)?(\s[A-ZÄÖÜ][a-zäöüß]+)?

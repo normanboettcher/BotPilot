@@ -143,13 +143,11 @@ forms:
     required_slots:
       - user_name
       - user_mail
-      - user_type
   consultant_form:
     required_slots:
       - consultant_name
 actions:
   - action_submit_termin
-  - action_switch_user_type_form
   - action_begruessung
   - action_ask_continue
   - action_deny
@@ -174,10 +172,9 @@ actions:
   - action_ask_user_type
   - action_stop
   - validate_user_info_form
-  - action_switch_user_info_form
   - action_ask_user_name
   - action_ask_user_mail
-  - action_switch_consultant_form
+  - action_switch_form
   - action_ask_consultant
 
 session_config:
