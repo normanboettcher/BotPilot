@@ -37,6 +37,8 @@ stories:
       - active_loop: null
       - action: action_switch_form
       - slot_was_set:
+          - user_name: Jane Doe
+          - user_mail: jane.doe@email.de
           - next_form_name: consultant_form
       - action: consultant_form
       - active_loop: consultant_form

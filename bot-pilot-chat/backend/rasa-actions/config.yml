@@ -11,10 +11,11 @@ pipeline:
   - name: DIETClassifier
     epochs: 100
     constrain_similarities: True
+    use_regex_entities: True
   - name: EntitySynonymMapper
   - name: ResponseSelector
   - name: FallbackClassifier
-    threshold: 0.7
+    threshold: 0.6
 
 policies:
   - name: RulePolicy

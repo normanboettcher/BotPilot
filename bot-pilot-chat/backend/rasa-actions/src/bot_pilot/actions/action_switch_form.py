@@ -18,7 +18,7 @@ class ActionSwitchForm(Action):
 
     def run(self, dispatcher, tracker, domain):
         next_form_name = None
-        last_action_name = tracker.get_slot('latest_action_name')
+        last_action_name = tracker.latest_action_name
         logger.debug(f'observed last action: [{last_action_name}]')
         if last_action_name == 'termin_form':
             next_form_name = 'user_type_form'

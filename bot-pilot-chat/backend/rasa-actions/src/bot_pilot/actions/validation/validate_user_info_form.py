@@ -19,31 +19,37 @@ class ValidateUserInfoForm(FormValidationAction):
         return "validate_user_info_form"
 
     def validate_user_name(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: DomainDict,
     ) -> Dict[Text, Any]:
         """
         Validate user_name value.
         Set user_name value to None if the value is not in the database.
         """
         logger.debug(f"validate user_name called. slot_value: {slot_value}")
-        if slot_value and validate_input_user_name(slot_value):
+        logger.debug(
+            f"slot value: {[item for item in tracker.get_latest_entity_values('person_name')]}")
+        value = None
+        for item in tracker.get_latest_entity_values('person_name'):
+            value = item
+            break
+        if value and validate_input_user_name(slot_value):
             return {
-                "user_name": slot_value.lower(),
+                "user_name": value.lower(),
             }
         return {
             "user_name": None,
         }
 
     def validate_user_mail(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate user_mail value."""
         logger.debug(f"validate_user_info_form called. slot_value: {slot_value}")
