@@ -78,6 +78,15 @@ rules:
       - action: termin_form
       - active_loop: termin_form
 
+  - rule: End consultant form
+    condition:
+      - active_loop: consultant_form
+      - slot_was_set:
+          - requested_slot: null
+    steps:
+      - action: consultant_form
+      - active_loop: null
+
   - rule: Switch to user_type_form
     condition:
       - active_loop: termin_form

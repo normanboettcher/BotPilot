@@ -1,0 +1,704 @@
+version: "3.1"
+nlu:
+- intent: parking
+  examples: |
+    - Gibt es Parkplätze?
+- intent: nlu_fallback
+  examples: |
+    - alles
+    - ALLES
+- intent: anreise
+  examples: |
+    - Welche Öffis fahren zur Kanzlei?
+    - Anreise Kanzlei
+    - Wie ist der beste Weg zur Kanzlei?
+- intent: standort
+  examples: |
+    - Wo finde ich Ihre Kanzlei?
+    - Wo genau befindet sich Ihre Praxis/Kanzlei?
+    - Wo ist die nächste Kanzlei?
+    - Wo ist der nächste Standort?
+- intent: positive_feedback
+  examples: |
+    - Das hat mir geholfen
+    - super, danke
+    - merci
+    - dankeschön
+    - danke
+    - super cool
+    - thank you
+    - danke für die Hilfe!
+    - dankesehr
+- intent: zeiten
+  examples: |
+    - Wie lange dauert die Bearbeitung bei Ihnen?
+    - Wann hat die Kanzlei geöffnet?
+    - Wie lange dauert eine Steuererstattung?
+    - Welche Aufbewahrungsfristen muss ich beachten?
+    - Wie lange geht das Erstgespräch?
+    - Wie sind Ihre Öffnungszeiten?
+    - Wann ist die Kanzlei geöffnet?
+    - Wie lange dauert das Erstgespräch?
+    - Wie lange dauert es, bis ich meine Rückzahlung erhalte?
+- intent: kosten
+  examples: |
+    - Wie viel kostet ein Steuerberater für Gründer?
+    - Was kostet eine Steuerberatung bei Ihnen?
+    - Was kostet eine Beratung?
+    - Ist das erste Gespräch kostenlos?
+    - Was kostet ein Steuerberater für Privatpersonen?
+    - Wie viel kostet ein Steuerberater für Unternehmen?
+    - Gibt es eine kostenlose Erstberatung?
+    - Wie hoch sind Ihre Kosten?
+    - Was muss ich zahlen?
+    - Was kostet mich das?
+- intent: unterlagen
+  examples: |
+    - Wie kann ich Unterlagen einreichen?
+    - Welche Dokumente werden für die Steuererklärung benötigt?
+    - Welche Unterlagen benötigen Sie von mir als Selbstständiger?
+    - Wie lange sollte ich meine Steuerunterlagen aufbewahren?
+    - Kann ich Belege digital senden?
+    - Welche Unterlagen braucht ein Steuerberater?
+    - Kann ich meine Belege digital hochladen?
+    - Kann ich Unterlagen digital einreichen?
+    - Ich möchte meine Belege nicht rausgeben. Gibt es andere Möglichkeiten?
+    - Kann ich Unterlagen per Mail einreichen?
+- intent: bereiche
+  examples: |
+    - Können Sie mir bei der Umsatzsteuervoranmeldung helfen?
+    - Auf welchen Gebieten haben Sie Erfahrungen?
+    - Was bietet die Kanzlei alles an?
+    - Bei welchen Themen wird Privatpersonen geholfen?
+    - Machen Sie auch Erbschafts- oder Schenkungssteuer?
+    - Was macht Ihre Kanzlei alles?
+    - Können Sie auch internationale Steuerfragen klären?
+    - Beraten Sie auch zu Themen wie Erbschaftsteuer?
+    - Welche Leistungen bietet Ihre Kanzlei an?
+    - Bieten Sie auch Unterstützung bei Betriebsprüfungen?
+    - Welche Gebiete bieten Sie alle an?
+    - Können Sie mir bei der Existenzgründung steuerlich helfen?
+- intent: user_mail_inform
+  examples: |
+    - Sie können mir eine Mail an [claraluise.vonhinueber1@web.de](user_mail) schicken
+    - [peterbecker@gmx.de](user_mail)
+    - [Klaus123.meyer1@tt.de](user_mail)
+    - Schreiben Sie bitte an [clara.vanBayern44@t-online.de](user_mail)
+    - [claraluise.vonhinueber1@web.de](user_mail)
+    - [clara.vanBayern44@t-online.de](user_mail)
+    - Meine Mail lautet [AnnKatrhin.Mueller@web.de](user_mail)
+    - Meine Mailadresse lautet [Klaus123.meyer1@tt.de](user_mail)
+    - [AnnKatrhin.Mueller@web.de](user_mail)
+    - Meine E-Mail-Adresse ist [Tobias.Meyer@web.de](user_mail)
+    - Kontaktieren Sie mich über [peterbecker@gmx.de](user_mail)
+    - [sophie1.muellermeyer@gmx.de](user_mail)
+    - Sie können mich unter [Marcel.Weber123@t-online.de](user_mail) erreichen
+- intent: steuerberatung
+  examples: |
+    - Was ist bei einem Wechsel des Steuerberaters zu beachten?
+    - Wer braucht einen Steuerberater?
+    - Wann sollte man einen Steuerberater aufsuchen?
+    - Was macht ein Steuerberater für Unternehmen?
+    - Wie läuft der typische Ablauf einer Steuerberatung bei Ihnen ab?
+    - Lohnt sich ein Steuerberater für Privatpersonen?
+    - Für wen lohnt sich ein Steuerberater?
+    - Was ist der Unterschied zwischen Steuerberatung und Lohnbuchhaltung?
+    - Welche Vorteile habe ich, wenn ich einen Steuerberater beauftrage?
+    - Wie rechnet ein Steuerberater ab?
+    - Inwieweit haftet ein Steuerberater?
+    - Ab wann ist ein Steuerberater Pflicht?
+    - Ab wann braucht man einen Steuerberater?
+    - Welche Aufgaben hat ein Steuerberater?
+    - Kann ich den Steuerberater einfach so wechseln?
+    - Lohnt sich ein Steuerberater für Startups?
+    - Wer sollte eine Steuerkanzlei in Anspruch nehmen?
+    - Ist der Steuerberater absetzbar?
+- intent: stop
+  examples: |
+    - Stop
+    - Abbruch
+    - Prozess stoppen
+    - Bitte den Prozess stoppen
+    - Stopp!
+    - Vorgang stoppen
+    - Halt!
+    - Ich möchte den Prozess stoppen
+    - Stopp
+    - Stop!
+    - Bitte den Vorgang abbrechen
+    - Vorgang abbrechen
+    - Bitte den Prozess abbrechen
+    - Ich möchte den Prozess abbrechen
+    - Ich möchte den Vorgang abbrechen
+    - Brich bitte ab
+    - Prozess abbrechen
+- intent: consultant_inform
+  examples: |
+    - Ich arbeite mit [Tobias Meyer](person_name) zusammen
+    - [Clara-Luisa von Hinüber](person_name)
+    - [Andreas Nagel](person_name)
+    - Ich hatte ein Gespräch mit [Andreas Nagel](person_name)
+    - Ich wurde zuletzt von Herrn [Marcel Weber](person_name) betreut
+    - [Clara-Luisa von Hinüber](person_name) hat mir geholfen
+    - Frau [Ann-Kathrin Müller](person_name) ist meine Steuerberaterin
+    - [Peter-Siegfried Müller-Meyer](person_name)
+    - [Clara von Bayern](person_name)
+    - [Sophie Müller-Meyer](person_name)
+    - [Peter Becker](person_name)
+    - Mein Steuerberater heißt [Robin Sauer](person_name)
+    - [Marcel Weber](person_name)
+    - Ich bin bei [Clara von Bayern](person_name) in Betreuung
+    - [Tobias Meyer](person_name)
+    - Mein Steuerberater ist [Tobias Meyer](person_name)
+    - [Fritz Hesse](person_name) hat mich beraten
+    - [Ann-Kathrin Müller](person_name)
+    - Mein Ansprechpartner war [Marcel Weber](person_name)
+    - [Peter-Siegfried Müller-Meyer](person_name) ist mein Ansprechpartner
+- intent: steuererklaerung
+  examples: |
+    - Machen Sie Steuererklätungen?
+    - Bin ich überhaupt verpflichtet, eine Steuererklärung abzugeben?
+    - Welche Unterlagen braucht ein Steuerberater für die Steuererklärung?
+    - Wie lange dauert die Bearbeitung der Steuererklärung?
+    - Ich mache zum ersten Mal eine Steuererklärung – wie gehe ich vor?
+    - Können Sie meine Steuererklärung machen?
+    - Können Sie meine Steuererklärung auch rückwirkend erstellen?
+    - Welche Unterlagen brauche ich für meine Steuererklärung?
+    - Welche Unterlagen brauchen Sie für die Steuererklärung?
+    - Was kostet eine Steuererklärung bei Ihnen?
+    - Kann man eine Steuererklärung nachträglich einreichen?
+    - Wie lange braucht das Finanzamt zur Bearbeitung meiner Steuererklärung?
+    - Bis wann muss ich mene Steuererklärung beim Finanzamt einreichen?
+    - Wie schnell habe ich meine Steuererklärung?
+    - Wie lange brauchen Sie für eine Steuererklärung?
+    - Gibt es eine Möglichkeit, meine Steuererklärung komplett digital zu machen?
+    - Kann man eine Steuererklärung rückwirkend einreichen?
+    - Ich bin unsicher, ob ich überhaupt eine Steuererklärung abgeben muss.
+    - Bis wann muss man die Steuererklärung abgeben?
+    - Bis wann muss ich die Steuererklärung abgeben?
+    - Was brauche ich für meine Steuererklärung?
+    - Wie viel Geld bekomme ich von der Steuererklärung zurück?
+- intent: general_bot
+  examples: |
+    - Wurdest du programmiert?
+    - Wie siehst du aus?
+    - Wie funktioniert das hier?
+    - Was sind deine Fähigkeiten?
+    - Kannst du sprechen?
+    - Welche Funktionen hast du?
+    - Was kannst du nicht?
+    - Wie benutze ich dich?
+    - Kannst du mir helfen?
+    - Was kann ich mit dir machen?
+    - Muss ich ganze Sätze schreiben?
+    - Wie alt bist du?
+    - Wie kannst du mir helfen?
+    - Kann ich mir dir sprechen?
+    - Was sind deine Funktionen?
+    - Was kann ich dich fragen?
+    - Ich brauche Hilfe
+    - Was kann ich eingeben?
+    - Wie funktionierst du?
+    - Wofür bist du da?
+    - Bist du ein Mensch?
+    - Wie spreche ich mit dir?
+- intent: faq
+  examples: |
+    - Nehmen Sie neue Mandanten auf?
+    - Was ist eine Einnahmen-Überschuss-Rechnung (EÜR)?
+    - Was passiert, wenn ich die Steuerfrist verpasse?
+    - Wie hoch ist der Grundfreibetrag?
+    - Bieten Sie auch Unterstützung für Selbstständige an?
+    - Welche Homeoffice-Kosten kann ich anrechnen lassen?
+    - Welche Ausgaben kann ich steuerlich absetzen ?
+    - Nehmen Sie neue Leute auf?
+    - Wen betreuen Sie alles?
+    - Nehmen Sie noch neue Mandanten auf?
+    - Wie kann ich meine Steuerlast als Selbstständiger senken?
+    - Gibt es online-Beratungen?
+    - Ich bin zum ersten Mal steuerpflichtig – was muss ich beachten?
+    - Was kann ich im Homeoffice absetzen?
+    - Gibt es Förderprogramme, über die ich steuerliche Vorteile bekomme?
+    - Welche Steuerklassen gibt es und wie wähle ich die richtige?
+    - Passt Ihre Kanzlei zu mir?
+    - Kann ich die Kosten für die Kita absetzen?
+    - Gibt es eine Veschwiegenheitspflicht?
+    - Ich habe ein Schreiben vom Finanzamt erhalten – was nun?
+    - Welche Arbeitsmittel kann ich steuerlich absetzen?
+    - Muss ich Gewinne aus Kryptowährungen versteuern?
+    - Kann ich bei Ihnen auch meine Buchhaltung abgeben?
+    - Kann ich Betreuungskosten für mein Kind steuerlich geltend machen?
+    - Wie gehe ich vor, wenn ich eine Nachzahlung leisten muss?
+- intent: verabschiedung
+  examples: |
+    - tschüüss
+    - tschüß
+    - tschuss
+    - adieu
+    - schönen tag noch
+    - wir sehen uns
+    - danke, auf wiedersehen
+    - tschüss, bis dann
+    - tschüss, bis zum nächsten mal
+    - Bis denn
+    - bis denne
+    - Tschau
+    - tschüssi
+    - bis dann
+    - tschüss
+    - tschüss bis dann
+    - bis zum nächsten mal
+    - ciao bis dann
+    - tschüss und auf wiedersehen
+    - tschuess
+    - bis bald
+    - schönen abend noch
+    - Auf bald
+    - bis zum nächsten mal, tschüss
+    - tschüss und bis bald
+    - tsuess
+    - ciao
+    - auf wiedersehen
+    - mach's gut
+    - tschö
+- intent: deny
+  examples: |
+    - niemals nicht
+    - nö
+    - abbrechen bitte
+    - ich möchte den Vorgang abbrechen bitte
+    - abbrechen
+    - auf gar keinen fall
+    - Bitte lass uns den Vorgang beenden
+    - nein
+    - abbruch
+    - nein, danke
+    - auf keinen Fall nicht
+    - ne, danke
+    - nö, danke
+    - brich den Vorgang bitte ab
+    - nope
+    - nöpe
+    - nö, danke sehr
+    - prozess abbrechen
+    - nein, danke sehr
+    - keines Falles
+    - ne, danke schön
+    - keines Falles nicht
+    - keinesfalls
+    - ich möchte den Prozess abbrechen
+    - auf keinen Fall
+    - ne, danke sehr
+    - auf gar keinen Fall
+    - ne
+    - keinesfalls nicht
+- intent: affirm
+  examples: |
+    - ja
+    - aber sicher doch gerne
+    - ich möchte den Vorgang nochmal versuchen
+    - ja, bitte
+    - aber sicher doch bitte
+    - ja, auf jeden fall
+    - ja, klar gerne
+    - klar
+    - ja, gerne
+    - ich würde den Prozess gerne fortsetzen
+    - ja, klar sehr gerne
+    - ja, natürlich bitte
+    - aber sicher doch sehr gerne
+    - aber sicher doch
+    - aber sicher doch bitte sehr
+    - ja, natürlich bitte sehr
+    - ja, klar bitte schön
+    - ja, natürlich sehr gerne
+    - ja, klar bitte
+    - ja, auf jeden Fall
+    - ja, klar bitte sehr
+    - ja, sehr gerne
+    - Ja
+    - yup
+    - ja, bitte fortsetzen
+    - yep
+    - ja, auf jeden fall gerne
+    - ja, gerne fortsetzen
+    - ja, auf jeden Fall gerne
+    - ja, natürlich gerne
+- intent: negative_feedback
+  examples: |
+    - Du hast mich falsch verstanden
+    - das war nicht die Antwort, die ich gesucht habe
+    - Blöde Antwort
+    - oh nein, das war nicht die Antwort, die ich mir ausgemalt habe
+    - das war nicht die Antwort, die ich brauchte
+    - oh nein, das war nicht die Antwort, die ich mir gewünscht habe
+    - nein, das war nicht die Antwort, die ich mir gedacht habe
+    - oh nein, das war nicht die Antwort, die ich mir erhofft habe
+    - das war nicht die Antwort, die ich wollte
+    - Deine Antwort ist falsch
+    - Hilft mir nicht
+    - oh nein, das war nicht die Antwort, die ich wollte
+    - oh nein, das war nicht die Antwort, die ich brauchte
+    - nein, das war nicht die Antwort, die ich erwartet habe
+    - oh nein, das war nicht die Antwort, die ich mir gedacht habe
+    - oh nein
+    - nein, das war nicht die Antwort, die ich wollte
+    - das war nicht das, was ich wollte
+    - oh nein, das war nicht die Antwort, die ich mir vorgestellt habe
+    - oh nein, das war nicht das, was ich wollte
+    - oh man, du verstehst es nicht
+    - nein, das war nicht die Antwort, die ich mir gewünscht habe
+    - nein, das war nicht die Antwort, die ich mir vorgestellt habe
+    - oh nein, das war nicht die Antwort, die ich erwartet habe
+    - Du verstehst gar nichts
+    - nein, das war nicht die Antwort, die ich mir ausgemalt habe
+    - das war nicht hilfreich
+    - nein, das war nicht hilfreich
+    - Du verstehst es nicht
+    - oh nein, das war nicht die Antwort, die ich mir erträumt habe
+- intent: termin_vereinbaren
+  examples: |
+    - Kann man außerhalb der Geschäftszeiten einen [Termin](termin_type) vereinbaren?
+    - Ich möchte eine [Erstberatung](termin_type) machen.
+    - Einen [Termin](termin_type) wollte ich machen.
+    - ichj will [termin](termin_type)
+    - ich will einen [termin](termin_type) zo
+    - Muss ich für einen [Termin](termin_type) [anrufen](termin_medium)?
+    - Kannst du mir helfen einen [Termin](termin_type) zu vereinbaren?
+    - Auf welchem Weg kann ich einen [Beratungstermin](termin_type) bekommen?
+    - Ich möchte einen [Ersttermin](termin_type) machen.
+    - Wie mache ich einen [Termin](termin_type) für eine [Erstberatung](termin_type)??
+    - Kann ich einen [Termin](termin_type) per [Mail](termin_medium) vereinbaren?
+    - Kannst du mir helfen eine [Erstberatung](termin_type) zu machen?
+    - Ich möchte einen [Termin](termin_type) buchen.
+    - ich will einen [termin](termin_type) machen
+    - Einen [Ersttermin](termin_type) möchte ich machen.
+    - Wie buche ich eine [Erstberatung](termin_type)?
+    - ich will [termin](termin_type)
+    - Wie kann ich [online](termin_medium) einen [Termin](termin_type) buchen?
+    - Einen [Termin](termin_type) möchte ich vereinbaren.
+    - Wie buche ich einen [Ersttermin](termin_type)?
+    - Wie buche ich einen [Termin](termin_type)?
+    - Ich würde gerne ein [Meeting](termin_type) mit Ihnen vereinbaren.
+    - Einen [Termin](termin_type) möchte ich buchen.
+    - ich will eien [termin](termin_type)  machen
+    - Ich würde gernen einen [Termin](termin_type) bekommen.
+    - Kann ich einen [Termin](termin_type) per [Mail](termin_medium) machen ?
+    - Ich möchte einen [Termin](termin_type) vereinbaren.
+    - Ich würde gerne ein [Meeting](termin_type) mit Ihnen machen.
+    - Kannst du mir helfen einen [Termin](termin_type) zu buchen?
+    - Ich möchte eine [Erstberatung](termin_type) buchen.
+    - Wie mache ich [Termine](termin_type)?
+    - Ich möchte einen [Termin](termin_type) machen.
+    - ich will einen [termin](termin_type) [macheen](termin_type)
+- intent: begruessung
+  examples: |
+    - ja moin
+    - moin
+    - guten tag
+    - tag
+    - grüß dich
+    - ist jemand da?
+    - juten tag
+    - tach
+    - hallo, guten abend
+    - hey du
+    - schönen guten abend
+    - tachjen
+    - schönen guten morgen
+    - guten abend
+    - guten Abend
+    - grüße
+    - Huhu
+    - na
+    - hey, du da
+    - halloo
+    - Halli hallo
+    - was geht
+    - moinsen
+    - hi du
+    - hey
+    - naaaa
+    - na du
+    - na, was geht
+    - was geht ab
+    - hallo
+    - hey, jo
+    - hallöchen
+    - moin moin
+    - hello
+- intent: termin_medium_inform
+  examples: |
+    - [durchklingeln]{"entity": "termin_medium", "value": "telefon"}
+    - mit [Bot]{"entity": "termin_medium", "value": "bot"}
+    - lass uns das mal per [mail](termin_medium) machen
+    - Den Termin würde ich gerne per [mail](termin_medium) machen
+    - natürlich per [E-Mail]{"entity": "termin_medium", "value": "mail"}
+    - gerne per [E-Mail]{"entity": "termin_medium", "value": "mail"}
+    - per [E-Mail]{"entity": "termin_medium", "value": "mail"} wäre gut
+    - per [Chatbot]{"entity": "termin_medium", "value": "bot"}
+    - mit [telefon](termin_medium)
+    - ich will das per [mail](termin_medium) buchen
+    - mach [du]{"entity": "termin_medium", "value": "bot"} bitte
+    - über [e-mail]{"entity": "termin_medium", "value": "mail"}
+    - [phone]{"entity": "termin_medium", "value": "telefon"}
+    - [durchrufen]{"entity": "termin_medium", "value": "telefon"}
+    - würde ich gerne per [E-Mail]{"entity": "termin_medium", "value": "mail"} machen
+    - mit [mail](termin_medium)
+    - per [email]{"entity": "termin_medium", "value": "mail"}
+    - über [E-Mail]{"entity": "termin_medium", "value": "mail"}
+    - über [Telefon]{"entity": "termin_medium", "value": "telefon"}
+    - [mail](termin_medium)
+    - natürlich über [mail](termin_medium)
+    - ich bevorzuge [E-Mail]{"entity": "termin_medium", "value": "mail"}
+    - mit [chatbot]{"entity": "termin_medium", "value": "bot"}
+    - per [mail](termin_medium) wäre super
+    - [E-Mail]{"entity": "termin_medium", "value": "mail"}
+    - gerne [mail](termin_medium)
+    - über [Bot]{"entity": "termin_medium", "value": "bot"}
+    - per [chatbot]{"entity": "termin_medium", "value": "bot"}
+    - über [chatbot]{"entity": "termin_medium", "value": "bot"}
+    - ich will das per [Mail]{"entity": "termin_medium", "value": "mail"} machen
+    - lieber über [mail](termin_medium)
+    - per [Mail]{"entity": "termin_medium", "value": "mail"} bitte
+    - [Mail]{"entity": "termin_medium", "value": "mail"}
+    - lieber per [E-Mail]{"entity": "termin_medium", "value": "mail"}
+    - würde ich gerne per [mail](termin_medium) buchen
+    - ich will das per [E-Mail]{"entity": "termin_medium", "value": "mail"} machen
+    - per [mail](termin_medium) wäre gut
+    - [anruf]{"entity": "termin_medium", "value": "telefon"}
+    - [Chatbot]{"entity": "termin_medium", "value": "bot"}
+    - [Bot]{"entity": "termin_medium", "value": "bot"}
+    - per [Bot]{"entity": "termin_medium", "value": "bot"}
+    - [telefonisch]{"entity": "termin_medium", "value": "telefon"}
+    - lieber per [mail](termin_medium)
+    - mit [Chatbot]{"entity": "termin_medium", "value": "bot"}
+    - per [E-Mail]{"entity": "termin_medium", "value": "mail"}
+    - ich bevorzuge [mail](termin_medium)
+    - über [email]{"entity": "termin_medium", "value": "mail"} gerne
+    - per [mail](termin_medium) wäre toll
+    - würde ich gerne per [mail](termin_medium) machen
+    - per [Telefon]{"entity": "termin_medium", "value": "telefon"}
+    - natürlich per [mail](termin_medium)
+    - gerne über [E-Mail]{"entity": "termin_medium", "value": "mail"}
+    - natürlich über [E-Mail]{"entity": "termin_medium", "value": "mail"}
+    - über [Chatbot]{"entity": "termin_medium", "value": "bot"}
+    - bitte per [mail](termin_medium)
+- intent: user_name_inform
+  examples: |
+    - Ich bin [Isabella Silva](person_name)
+    - Ich bin [Marcel Weber](person_name)
+    - [René König](person_name)
+    - [Jürgen Hoffmann](person_name)
+    - [Álvaro Silva](person_name)
+    - [Mohammed Abel](person_name)
+    - [Frédéric Moreau](person_name)
+    - ich heiße [Paul Heller](person_name)
+    - ich sag dir gleich meinen namen
+    - [Andréa Léon](person_name)
+    - [Marta Fernández](person_name)
+    - [Franck-Olivier Noël](person_name)
+    - [Michał Kowalski](person_name)
+    - [Renée Dubois](person_name)
+    - [Mário Fernandes](person_name)
+    - [José Ángel Martínez](person_name)
+    - Mein Name lautet [Ali Khalid](person_name)
+    - [Chloé Bernard](person_name)
+    - [Élodie Martin](person_name)
+    - Ich bin [Felix Weber](person_name)
+    - Mein Name ist [Noah Fischer](person_name)
+    - [Clémentine Dubois](person_name)
+    - [Sophie Maxton](person_name)
+    - meine namen ist vollstaendig: [Jason Carpenter](person_name)
+    - Ich heiße [Svetlana Kuznetsova](person_name)
+    - Ich bin [Lian Chen](person_name)
+    - Ich heiße [Mia Krüger](person_name)
+    - [Łukasz Nowak](person_name)
+    - Mein Name ist [Hiroshi Yamamoto](person_name)
+    - [Géraldine Morel](person_name)
+    - ihc heissen [Jason Salakis](person_name)
+    - Ich bin [Peter Becker](person_name)
+    - Ich heiße [Chloé Bernard](person_name)
+    - [Cláudia Pereira](person_name)
+    - [André Hoffmann](person_name)
+    - Ich bin [Carlos García](person_name)
+    - [Andrés Jiménez](person_name)
+    - Ich bin [Lucia Rossi](person_name)
+    - [Sébastien Lemoine](person_name)
+    - Ich bin [Emma Dubois](person_name)
+    - Mein Name lautet [Katrin Schneider](person_name)
+    - Ich heiße [Michael Brown](person_name)
+    - Ich bin [David Braun](person_name)
+    - Mein Name ist [Oliver Maier](person_name)
+    - Ich bin [Clara von Bayern](person_name)
+    - [Léa Dupont](person_name)
+    - mein name [Rudi Rammel](person_name)
+    - Ich heiße [Ann-Kathrin Müller](person_name)
+    - Ich bin [John Smith](person_name)
+    - name ist [Michael O'Connor](person_name)
+    - Ich bin [Nina Hartmann](person_name)
+    - Mein Name ist [Sofia Müller](person_name)
+    - [Björn Löwe](person_name)
+    - Ich heiße [Sakura Aoki](person_name)
+    - [Olivier Dubois](person_name)
+    - [Ana-María López](person_name)
+    - Ich heiße [José Martínez](person_name)
+    - Ich heiße [Lena Richter](person_name)
+    - [Lúcia Almeida](person_name)
+    - [Søren Larsen](person_name)
+    - [Bjarke Jensen](person_name)
+    - Ich bin [Olga Ivanova](person_name)
+    - [Clara-Luisa von Hinüber](person_name)
+    - Ich heiße [Abdullah von Hindenburg](person_name)
+    - [Łucja Nowak](person_name)
+    - Mein Name lautet [Lucas Pereira](person_name)
+    - [Júlia Szabó](person_name)
+    - Mein Name lautet [Emilia Wagner](person_name)
+    - Ich heiße [Yuki Tanaka](person_name)
+    - [Tobias-Siegfried Müller](person_name)
+    - [Jean-Luc Picard](person_name)
+    - [Åsa Nilsson](person_name)
+    - [Roxy Beyer](person_name), mein Name.
+    - Mein Name lautet [Dmitri Petrov](person_name)
+    - Mein Name ist [Franz-Josef Effenberg](person_name)
+    - [Nina Schütz](person_name)
+    - Sie finden mich unter [Janine Thomsen](person_name)
+    - [Marie-Anne Leclerc](person_name)
+    - [Nora Linde](person_name), freut mich
+    - [Lucía Rodríguez](person_name)
+    - [John Smith](person_name)
+    - Ich heiße [Layla Mahmoud](person_name)
+    - Ich heiße [Mei Ling](person_name)
+    - Ich heiße [Maximilian Schulz](person_name)
+    - darf ich mich kurz vorstellen?
+    - [Anne-Marie Müller](person_name)
+    - [Renata Kowalczyk](person_name)
+    - Ich bin [Fritz Hesse](person_name)
+    - [François Dupuis](person_name)
+    - [Zoë Krüger](person_name)
+    - Mein Name lautet [Ana López](person_name)
+    - [Éric Lévesque](person_name)
+    - Ich heiße [Lukas Schmidt](person_name)
+    - Mein Name lautet [Sophie Apfel-Horn](person_name)
+    - Mein Name lautet [Giovanni Bianchi](person_name)
+    - [João Pedro Silva](person_name)
+    - [Paweł Zieliński](person_name)
+    - [Philipp Blattgold](person_name)
+    - Ich bin [Hans Müller](person_name)
+    - Ich heiße [Elias Schmitt](person_name)
+    - [Håkon Østberg](person_name)
+    - [Jörg Schäfer](person_name)
+    - Mein Name lautet [Paul Köhler](person_name)
+    - Mein Name lautet [Julien Lefevre](person_name)
+    - Mein Name lautet [Wei Zhang](person_name)
+    - Ich heiße [Elena Ferrara](person_name)
+- synonym: termin
+  examples: |
+    - Termin
+    - Gespräch
+    - treffen
+    - Beratung
+    - Beratungstermin
+    - meeting
+    - Erstberatung
+    - zusammenkunft
+    - sitzung
+    - termine
+- synonym: telefon
+  examples: |
+    - Telefon
+    - durchklingeln
+    - anrufen
+    - phone
+    - durchrufen
+    - anruf
+    - per Telefon
+    - über telefon
+    - telefonisch
+    - über anruf
+- synonym: mail
+  examples: |
+    - E-Mail
+    - Mail
+    - email
+    - mail
+    - per mail
+    - per e-mail
+    - per E-Mail
+    - per Mail
+    - e-mail
+- synonym: online-termin
+  examples: |
+    - online
+    - online-termin
+    - online-beratung
+    - online-sitzung
+    - online-erstberatung
+    - online-zusammenkunft
+    - online-meeting
+- synonym: bot
+  examples: |
+    - Bot
+    - Chatbot
+    - chatbot
+    - du
+- regex: person_name
+  examples: |
+    - ([A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*|[a-zäöüß]+)( ([A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*|[a-zäöüß]+))?
+- regex: user_mail
+  examples: |
+    - ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+- lookup: person_name
+  examples: |
+    - Anne-Marie Müller
+    - Léa Dupont
+    - Jörg Schäfer
+    - Sofia González
+    - Jean-Luc Picard
+    - Émilie Durand
+    - Hans-Peter Becker
+    - Clara-Luisa von Hinüber
+    - René König
+    - José Ángel Martínez
+    - Marta Fernández
+    - Frédéric Moreau
+    - Olivier Dubois
+    - Chloé Bernard
+    - Nina Schütz
+    - Björn Löwe
+    - André Hoffmann
+    - Tobias-Siegfried Müller
+    - Éric Lévesque
+    - Cláudia Pereira
+    - Ana-María López
+    - Søren Larsen
+    - Håkon Østberg
+    - Zoë Krüger
+    - Lucía Rodríguez
+    - Michał Kowalski
+    - Łukasz Nowak
+    - Álvaro Silva
+    - François Dupuis
+    - Géraldine Morel
+    - Marie-Anne Leclerc
+    - Élodie Martin
+    - Paweł Zieliński
+    - Andrés Jiménez
+    - Júlia Szabó
+    - Sébastien Lemoine
+    - Renata Kowalczyk
+    - Mário Fernandes
+    - Clémentine Dubois
+    - João Pedro Silva
+    - Franck-Olivier Noël
+    - Lúcia Almeida
+    - Jürgen Hoffmann
+    - Åsa Nilsson
+    - Bjarke Jensen
+    - Éric Dupont
+    - Tímea Nagy
+    - Márton Kovács
+    - Sofia-Maria García
+    - Renée Dubois
+    - Łucja Nowak
+    - Andréa Léon

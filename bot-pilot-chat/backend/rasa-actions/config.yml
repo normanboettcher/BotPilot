@@ -6,6 +6,8 @@ pipeline:
   - name: SpacyTokenizer
   - name: SpacyFeaturizer
   - name: RegexFeaturizer
+  - name: SpacyEntityExtractor
+    dimensions: [ "person_name" ]
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
   - name: DIETClassifier
@@ -15,7 +17,7 @@ pipeline:
   - name: EntitySynonymMapper
   - name: ResponseSelector
   - name: FallbackClassifier
-    threshold: 0.6
+    threshold: 0.5
 
 policies:
   - name: RulePolicy

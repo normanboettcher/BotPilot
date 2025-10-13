@@ -32,17 +32,15 @@ class ValidateUserInfoForm(FormValidationAction):
         logger.debug(f"validate user_name called. slot_value: {slot_value}")
         logger.debug(
             f"slot value: {[item for item in tracker.get_latest_entity_values('person_name')]}")
-        value = None
-        for item in tracker.get_latest_entity_values('person_name'):
-            value = item
-            break
-        if value and validate_input_user_name(slot_value):
-            return {
-                "user_name": value.lower(),
-            }
-        return {
-            "user_name": None,
-        }
+        values = tracker.get_latest_entity_values('person_name')
+        if values is not None:
+            value = None
+            for item in values:
+                value = item
+                break
+            if value is not None and validate_input_user_name(slot_value):
+                return {"user_name": value.lower()}
+        return {"user_name": None}
 
     def validate_user_mail(
             self,
