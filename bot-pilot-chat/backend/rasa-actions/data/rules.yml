@@ -138,3 +138,13 @@ rules:
       - action: action_ask_continue
       - intent: deny
       - active_loop: null
+
+  - rule: ask to confirm name after user_name_inform
+    condition:
+      - active_loop: user_info_form
+      - slot_was_set:
+          - requested_slot: user_name
+    steps:
+      - action: user_info_form
+      - intent: user_name_inform
+      - action: action_ask_confirm_name

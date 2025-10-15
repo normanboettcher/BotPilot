@@ -174,6 +174,7 @@ actions:
   - action_ask_user_mail
   - action_switch_form
   - action_ask_consultant
+  - action_ask_confirm_name
 
 session_config:
   session_expiration_time: 60
