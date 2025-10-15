@@ -129,24 +129,12 @@ rules:
       - action: consultant_form
       - active_loop: consultant_form
 
-  - rule: ask termin_form continue and affirm
-    steps:
-      - action: action_ask_continue
-      - active_loop: null
-      - intent: affirm
-      - action: termin_form
+  - rule: end termin_form after ask_continue_and_deny
+    condition:
       - active_loop: termin_form
-
-  - rule: ask continue and deny
+      - slot_was_set:
+          - termin_medium_attempts: 3
     steps:
       - action: action_ask_continue
-      - active_loop: null
       - intent: deny
-      - action: action_deny
-
-  - rule: ask continue after stop intent
-    steps:
-      - intent: stop
-      - action: action_stop
-      - action: action_ask_continue
       - active_loop: null

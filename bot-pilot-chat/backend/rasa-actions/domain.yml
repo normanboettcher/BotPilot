@@ -149,7 +149,6 @@ actions:
   - action_submit_termin
   - action_begruessung
   - action_ask_continue
-  - action_deny
   - action_verabschiedung
   - action_general_bot
   - validate_termin_form

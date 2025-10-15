@@ -33,3 +33,9 @@ def make_buttons_tax_consultant(customer_id: str) -> list[dict]:
         make_consultant_button(value).render()
         for (key, value) in tax_consultants.items()
     ]
+
+
+def make_affirm_deny_buttons() -> list[dict]:
+    from bot_pilot.domain.button_registry import AFFIRM_DENY
+
+    return [button.render() for (key, button) in AFFIRM_DENY.items()]

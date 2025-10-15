@@ -12,9 +12,8 @@ stories:
       - slot_was_set:
           - termin_medium_attempts: 3
       - action: action_ask_continue
-      - active_loop: null
       - intent: deny
-      - action: action_deny
+      - active_loop: null
 
   - story: user makes three mistakes and affirms
     steps:
@@ -27,7 +26,6 @@ stories:
       - slot_was_set:
           - termin_medium_attempts: 3
       - action: action_ask_continue
-      - active_loop: null
       - intent: affirm
       - action: termin_form
       - active_loop: termin_form
