@@ -10,7 +10,7 @@ line-length = 88
 target-version = ['py310']
 
 [tool.tox]
-envlist = ['format', 'lint', 'unit_tests', 'coverage', 'rasa_tests']
+envlist = ['format', 'lint', 'unit_tests', 'coverage', 'rasa_tests', 'rasa_story_tests']
 requires = ["tox>=4.30"]
 
 [tool.tox.env.unit_tests]
@@ -50,7 +50,18 @@ deps = [
 ]
 commands = [
     ["python", "-m", "spacy", "download", "de_core_news_md"],
-    ["rasa",  "test",  "--fail-on-prediction-errors", "--stories", "tests/rasa/stories"]
+    ["rasa", "test", "--stories", "tests/rasa/stories"]
+]
+
+[tool.tox.env.rasa_story_tests]
+description = "Run Rasa story tests"
+deps = [
+    "rasa==3.6.21",
+    "spacy==3.7.4"
+]
+commands = [
+    ["python", "-m", "spacy", "download", "de_core_news_md"],
+    ["rasa", "test", "core", "--fail-on-prediction-errors", "--stories", "tests/rasa/stories"]
 ]
 
 [tool.tox.env.coverage]

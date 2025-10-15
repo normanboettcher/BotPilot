@@ -22,11 +22,11 @@ stories:
       - slot_was_set:
           - requested_slot: user_name
       - user: |-
-          Mein Name ist [Thomas Reif](person_name).
+          Mein Name ist [Jane Doe](person_name).
         intent: user_name_inform
       - action: user_info_form
       - slot_was_set:
-          - user_name: Thomas Reif
+          - user_name: Jane Doe
           - requested_slot: user_mail
       - user: |-
           Sie erreichen mich unter der Adresse: [jane.doe@email.de](user_mail)
@@ -50,7 +50,6 @@ stories:
         intent: consultant_inform
       - slot_was_set:
           - consultant_name: Herbert Graumueller
-      - action: consultant_form
-      - slot_was_set:
           - requested_slot: null
+      - action: consultant_form
       - active_loop: null
