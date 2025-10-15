@@ -19,11 +19,11 @@ class ValidateUserInfoForm(FormValidationAction):
         return "validate_user_info_form"
 
     def validate_user_name(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: DomainDict,
     ) -> Dict[Text, Any]:
         """
         Validate user_name value.
@@ -41,15 +41,15 @@ class ValidateUserInfoForm(FormValidationAction):
                 value = item
                 break
             if value is not None and validate_input_user_name(slot_value):
-                return {"user_name": value.lower()}
+                return {"user_name": None}
         return {"user_name": None}
 
     def validate_user_mail(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate user_mail value."""
         logger.debug(f"validate_user_info_form called. slot_value: {slot_value}")
