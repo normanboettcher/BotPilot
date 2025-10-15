@@ -36,9 +36,7 @@ def find_most_similar_faq(user_question, top_k=1, threshold=0.7):
     top_candidates = similarities.topk(k=num_candidates, sorted=True).indices
     candidate_faqs = [faqs[i] for i in top_candidates]
     # step 4 CrossEncoder Re-Ranking
-    pairs = [
-        (user_question, candidate["question"]) for candidate in candidate_faqs
-    ]
+    pairs = [(user_question, candidate["question"]) for candidate in candidate_faqs]
     cross_scores = cross_encoder.predict(pairs)
 
     # step 5 find the best match

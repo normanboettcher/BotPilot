@@ -1,0 +1,541 @@
+version: '3.1'
+nlu:
+  - lookup: person_name
+    examples: |
+      - Anne-Marie Müller
+      - Léa Dupont
+      - Jörg Schäfer
+      - Sofia González
+      - Jean-Luc Picard
+      - Émilie Durand
+      - Hans-Peter Becker
+      - Clara-Luisa von Hinüber
+      - René König
+      - José Ángel Martínez
+      - Marta Fernández
+      - Frédéric Moreau
+      - Olivier Dubois
+      - Chloé Bernard
+      - Nina Schütz
+      - Björn Löwe
+      - André Hoffmann
+      - Tobias-Siegfried Müller
+      - Éric Lévesque
+      - Cláudia Pereira
+      - Ana-María López
+      - Søren Larsen
+      - Håkon Østberg
+      - Zoë Krüger
+      - Lucía Rodríguez
+      - Michał Kowalski
+      - Łukasz Nowak
+      - Álvaro Silva
+      - François Dupuis
+      - Géraldine Morel
+      - Marie-Anne Leclerc
+      - Élodie Martin
+      - Paweł Zieliński
+      - Andrés Jiménez
+      - Júlia Szabó
+      - Sébastien Lemoine
+      - Renata Kowalczyk
+      - Mário Fernandes
+      - Clémentine Dubois
+      - João Pedro Silva
+      - Franck-Olivier Noël
+      - Lúcia Almeida
+      - Jürgen Hoffmann
+      - Åsa Nilsson
+      - Bjarke Jensen
+      - Éric Dupont
+      - Tímea Nagy
+      - Márton Kovács
+      - Sofia-Maria García
+      - Renée Dubois
+      - Łucja Nowak
+      - Andréa Léon
+      - Aaron Müller
+      - Aaliyah Becker
+      - Abdallah Nasser
+      - Abdurrahman Kaya
+      - Ada Lovelace
+      - Adèle Laurent
+      - Ahmed Hassan
+      - Aiko Tanaka
+      - Aisha Al-Mansoori
+      - Akira Kobayashi
+      - Alan Smith
+      - Alba Fernández
+      - Aleksandr Petrov
+      - Alessia Romano
+      - Alex Dupont
+      - Alexander Meier
+      - Alicia Schmidt
+      - Alina Weber
+      - Aliyah Khan
+      - Amadou Diallo
+      - Amanda Johnson
+      - Amir Hosseini
+      - Ana-Maria Popescu
+      - Anastasija Novak
+      - Anders Johansson
+      - Andrea Bianchi
+      - André Dupuis
+      - Andreas König
+      - Andrei Ivanov
+      - Angela Rossi
+      - Anika Meier
+      - Anita Kowalska
+      - Ann-Kathrin Müller
+      - Anna-Lena Schneider
+      - Anna Müller
+      - Anne Dupont
+      - Anne-Sophie Lefèvre
+      - Ansgar Klein
+      - Antonio García
+      - Aria Novak
+      - Arjun Patel
+      - Aroha Thompson
+      - Arthur König
+      - Aslı Demir
+      - Astrid Bergström
+      - Ayaka Sato
+      - Aylin Yılmaz
+      - Aziz Benali
+      - Barbara Richter
+      - Basma El-Sayed
+      - Benjamin Schuster
+      - Bernhard Hoffmann
+      - Bilal Rahman
+      - Blanca Rodríguez
+      - Boris Ivanov
+      - Brigitte Werner
+      - Bruno Costa
+      - Burak Özdemir
+      - Carla Nunes
+      - Carlos Mendoza
+      - Carmen Álvarez
+      - Carsten Maier
+      - Céline Dubois
+      - Charlotte Weber
+      - Chiara Romano
+      - Chloe Martin
+      - Christian Becker
+      - Christina Hoffmann
+      - Christopher Müller
+      - Clara-Luisa Hinüber
+      - Claudia Vogt
+      - Cornelia Brandt
+      - Daniel Neumann
+      - Daniela Keller
+      - Danilo Russo
+      - David Schneider
+      - Derya Yılmaz
+      - Diana Petrova
+      - Diego Fernández
+      - Dimitri Volkov
+      - Dominik Schulz
+      - Dorothea Klein
+      - Ebru Demir
+      - Edith Schubert
+      - Eduardo Morales
+      - Elena Petrova
+      - Elias Braun
+      - Elisa Conti
+      - Eliza Nowak
+      - Ella Fischer
+      - Elodie Laurent
+      - Emil Andersson
+      - Emilia Kowalska
+      - Emma Weiß
+      - Enzo Moretti
+      - Erik Nilsson
+      - Esra Kaplan
+      - Esther Müller
+      - Eva Wagner
+      - Fabian König
+      - Fatima Zahra
+      - Felix Neumann
+      - Filip Novak
+      - Florian Richter
+      - Francesca Bianchi
+      - Franz Bauer
+      - Frederik Hansen
+      - Frieda Lehmann
+      - Gabriel Sousa
+      - Gabriela López
+      - Gianluca Romano
+      - Giovanni De Luca
+      - Greta Vogel
+      - Hadi Al-Salem
+      - Hanna Krüger
+      - Hannah Schmidt
+      - Hans-Peter König
+      - Hasan Mahmoud
+      - Helena Schneider
+      - Hendrik Becker
+      - Henrik Sørensen
+      - Hideo Yamamoto
+      - Hiroshi Tanaka
+      - Huong Nguyen
+      - Ibrahim Khalil
+      - Ida Svensson
+      - Inga Johansson
+      - Irene Weber
+      - Isabel García
+      - Isabella Romano
+      - Ivan Dimitrov
+      - Jack Wilson
+      - Jakob Schmid
+      - Jamal Abdi
+      - Jan Kowalski
+      - Jana Berger
+      - Janine Thomsen
+      - Jasmin Ali
+      - Jean Dupont
+      - Jean-Luc Moreau
+      - Jens Fischer
+      - Jessica Braun
+      - Ji-Hoon Park
+      - Jing Li
+      - João Pereira
+      - Jonas Baumann
+      - Jonathan Keller
+      - Jorge Ramírez
+      - Josef Novak
+      - Julia Lange
+      - Julian Maier
+      - Jürgen Hoffmann
+      - Kai Neumann
+      - Kamila Novakova
+      - Karim Said
+      - Karl-Heinz Bauer
+      - Kaspar Vogel
+      - Katarina Horvat
+      - Katja Weber
+      - Kerem Demir
+      - Kevin Schulze
+      - Kim Nguyen
+      - Konstantin Ivanov
+      - Kristina Müller
+      - Lara Fischer
+      - Lars Petersen
+      - Laura Schäfer
+      - Lea Krause
+      - Leila Hassan
+      - Lena Hoffmann
+      - Leo Wagner
+      - Leona Becker
+      - Leonhard Schuster
+      - Leyla Alavi
+      - Lilia Petrova
+      - Lina Meier
+      - Lisa Schneider
+      - Lorena Rossi
+      - Louis Dubois
+      - Luana Costa
+      - Luca Müller
+      - Lucas Weber
+      - Lucía González
+      - Luis Fernández
+      - Lukas Becker
+      - Mahmoud Ali
+      - Malik Johnson
+      - Malte Hoffmann
+      - Manuel Ortega
+      - Marcus Müller
+      - Marek Nowak
+      - Maria Santos
+      - Mariana Oliveira
+      - Marie-Claire Dupuis
+      - Marie Schmidt
+      - Mario Müller
+      - Marko Petrovic
+      - Martin Huber
+      - Martina Krüger
+      - Mathilde Laurent
+      - Matteo Romano
+      - Maximilian Schröder
+      - Mehmet Yılmaz
+      - Michael Fischer
+      - Michelle Keller
+      - Miguel Hernández
+      - Mina Khaled
+      - Mohammed Farouk
+      - Monika Bauer
+      - Mustafa Özkan
+      - Nadine Klein
+      - Naoki Watanabe
+      - Natalia Petrova
+      - Natalie Vogt
+      - Natascha König
+      - Nele Braun
+      - Nico Becker
+      - Nicole Maier
+      - Niklas Hoffmann
+      - Nina Weber
+      - Noah Zimmermann
+      - Nora Lindström
+      - Nour Al-Hassan
+      - Oliver Becker
+      - Olivia Weber
+      - Omar Hussein
+      - Oskar Johansson
+      - Pablo García
+      - Pascal Schmitt
+      - Patrik Novak
+      - Paul König
+      - Paula Schmidt
+      - Petra Novak
+      - Philipp Hoffmann
+      - Pierre Dupont
+      - Piotr Kowalski
+      - Priya Sharma
+      - Rafael Silva
+      - Rahim Khan
+      - Rami Abou-Hassan
+      - Rashid Karim
+      - Rebecca Schneider
+      - Renata Costa
+      - Riccardo Moretti
+      - Robert Fischer
+      - Robin Sauer
+      - Rolf Berger
+      - Roman Nowak
+      - Rüdiger Brandt
+      - Sabine Lehmann
+      - Said El-Masri
+      - Salma Idris
+      - Samuel Wagner
+      - Sandra Becker
+      - Sara Novak
+      - Sarah Meier
+      - Sascha Schuster
+      - Sebastian Klein
+      - Selim Kaya
+      - Selina Roth
+      - Severin König
+      - Shirin Rahman
+      - Silvia Ricci
+      - Simone Weber
+      - Sophia Müller-Meyer
+      - Sophie Müller
+      - Stefan Bauer
+      - Stella König
+      - Sven Hansen
+      - Taiki Nakamura
+      - Tamara Schulz
+      - Tarek Haddad
+      - Tatjana Ivanova
+      - Theresa Vogel
+      - Thomas Neumann
+      - Thorsten Klein
+      - Tobias Meyer
+      - Tomás Rodríguez
+      - Tuğba Demir
+      - Ulrike Becker
+      - Valentina Rossi
+      - Vanessa Klein
+      - Vera Hofmann
+      - Verena Weber
+      - Viktor Novák
+      - Viola Hansen
+      - Vladimir Orlov
+      - Walid Al-Mahdi
+      - Walter König
+      - Wei Zhang
+      - William Johnson
+      - Wojciech Kowalski
+      - Xiaoming Chen
+      - Xinyi Liu
+      - Yasmin Ahmed
+      - Youssef El-Khalil
+      - Yuki Nakamura
+      - Yuna Sato
+      - Yusuf Demir
+      - Zainab Ali
+      - Zoé Laurent
+      - Zofia Nowak
+      - Željko Horvat
+      - Élodie Lefèvre
+      - François Martin
+      - Óscar Hernández
+      - Íñigo Martínez
+      - Łukasz Kowalczyk
+      - Łucja Nowak
+      - İsmail Kaya
+      - Şule Demir
+      - Ömer Yılmaz
+      - Álvaro Fernández
+      - Íris Duarte
+      - Éva Nagy
+      - Ólafur Jónsson
+      - Björn Andersen
+      - Henrik Müller
+      - Ingeborg Wagner
+      - Gábor Tóth
+      - Ágnes Kovács
+      - João Carvalho
+      - Rui Almeida
+      - Paulo Duarte
+      - Ricardo Batista
+      - Catarina Mendes
+      - Daniela Gomes
+      - Pedro Monteiro
+      - Hugo Fernandes
+      - Sofia Silva
+      - Tomás Correia
+
+  - intent: user_name_inform
+    examples: |
+      - Mein Name ist [Marie Diesacheistdie](person_name)
+      - Ich bin [Marcel Weber](person_name)
+      - Ich heiße [Ann-Kathrin Müller](person_name)
+      - Mein Name lautet [Sophie Apfel-Horn](person_name)
+      - Ich bin [Clara von Bayern](person_name)
+      - Ich heiße [Abdullah von Hindenburg](person_name)
+      - Ich bin [Peter Becker](person_name)
+      - Mein Name ist [Franz-Josef Effenberg](person_name)
+      - Ich heiße [Andreas Nagel](person_name)
+      - Ich bin [Fritz Hesse](person_name)
+      - Mein Name lautet [Robin Sauer](person_name)
+      - [Philipp Blattgold](person_name)
+      - [Roxy Beyer](person_name), mein Name.
+      - [Sophie Maxton](person_name)
+      - [Carminia Brado](person_name)
+      - [Mohammed Abel](person_name)
+      - Sie finden mich unter [Janine Thomsen](person_name)
+      - Mein vollständiger Name ist [Luisa Marie von Heiden](person_name)
+      - Hallo, ich bin [Sascha Klein](person_name)
+      - Ich stelle mich kurz vor: [Karl-Heinz Bergmann](person_name)
+      - [Nora Linde](person_name), freut mich
+      - ich heiße [Paul Heller](person_name)
+      - [lena meier](person_name)
+      - mein name [Rudi Rammel](person_name)
+      - ich sag dir gleich meinen namen
+      - darf ich mich kurz vorstellen?
+      - [John Smith](person_name)
+      - meine namen ist vollstaendig: [Jason Carpenter](person_name)
+      - name ist [Michael O'Connor](person_name)
+      - ihc heissen [Jason Salakis](person_name)
+      - Ich heiße [Lukas Schmidt](person_name)
+      - Mein Name ist [Sofia Müller](person_name)
+      - Ich bin [Anna-Lena Becker](person_name)
+      - Mein Name lautet [Emilia Wagner](person_name)
+      - Ich heiße [Maximilian Schulz](person_name)
+      - Mein Name ist [Noah Fischer](person_name)
+      - Ich bin [Marie Lehmann](person_name)
+      - Mein Name lautet [Jakob Hoffmann](person_name)
+      - Ich heiße [Lena Richter](person_name)
+      - Ich bin [Felix Weber](person_name)
+      - Mein Name ist [Oliver Maier](person_name)
+      - Ich heiße [Leonie Wolf](person_name)
+      - Mein Name lautet [Sophia Neumann](person_name)
+      - Ich bin [David Braun](person_name)
+      - Ich heiße [Mia Krüger](person_name)
+      - Ich bin [Jonas Zimmermann](person_name)
+      - Mein Name ist [Emma Lange](person_name)
+      - Ich heiße [Elias Schmitt](person_name)
+      - Ich bin [Nina Hartmann](person_name)
+      - Mein Name lautet [Paul Köhler](person_name)
+      - Ich heiße [Yuki Tanaka](person_name)      
+      - Mein Name ist [Hiroshi Yamamoto](person_name)
+      - Ich heiße [Sakura Aoki](person_name)
+      - Ich bin [Lian Chen](person_name)       
+      - Mein Name lautet [Wei Zhang](person_name)
+      - Ich heiße [Mei Ling](person_name)
+      - Ich bin [Carlos García](person_name)    
+      - Mein Name lautet [Ana López](person_name)
+      - Ich heiße [José Martínez](person_name)
+      - Ich bin [Lucia Rossi](person_name)      
+      - Mein Name lautet [Giovanni Bianchi](person_name)
+      - Ich heiße [Elena Ferrara](person_name)
+      - Ich bin [Olga Ivanova](person_name)     
+      - Mein Name lautet [Dmitri Petrov](person_name)
+      - Ich heiße [Svetlana Kuznetsova](person_name)
+      - Ich bin [Fatima Hassan](person_name)    
+      - Mein Name lautet [Ali Khalid](person_name)
+      - Ich heiße [Layla Mahmoud](person_name)
+      - Ich bin [John Smith](person_name)       
+      - Mein Name lautet [Emily Johnson](person_name)
+      - Ich heiße [Michael Brown](person_name)
+      - Ich bin [Isabella Silva](person_name)   
+      - Mein Name lautet [Lucas Pereira](person_name)
+      - Ich heiße [Sofia Costa](person_name)
+      - Ich bin [Hans Müller](person_name)       
+      - Mein Name lautet [Katrin Schneider](person_name)
+      - Ich heiße [Tobias Richter](person_name)
+      - Ich bin [Emma Dubois](person_name)     
+      - Mein Name lautet [Julien Lefevre](person_name)
+      - Ich heiße [Chloé Bernard](person_name)
+      - [Anne-Marie Müller](person_name)
+      - [Léa Dupont](person_name)
+      - [Jörg Schäfer](person_name)
+      - [Sofia González](person_name)
+      - [Jean-Luc Picard](person_name)
+      - [Émilie Durand](person_name)
+      - [Hans-Peter Becker](person_name)
+      - [Clara-Luisa von Hinüber](person_name)
+      - [René König](person_name)
+      - [José Ángel Martínez](person_name)
+      - [Marta Fernández](person_name)
+      - [Frédéric Moreau](person_name)
+      - [Olivier Dubois](person_name)
+      - [Chloé Bernard](person_name)
+      - [Nina Schütz](person_name)
+      - [Björn Löwe](person_name)
+      - [André Hoffmann](person_name)
+      - [Tobias-Siegfried Müller](person_name)
+      - [Éric Lévesque](person_name)
+      - [Cláudia Pereira](person_name)
+      - [Ana-María López](person_name)
+      - [Søren Larsen](person_name)
+      - [Håkon Østberg](person_name)
+      - [Zoë Krüger](person_name)
+      - [Lucía Rodríguez](person_name)
+      - [Michał Kowalski](person_name)
+      - [Łukasz Nowak](person_name)
+      - [Álvaro Silva](person_name)
+      - [François Dupuis](person_name)
+      - [Géraldine Morel](person_name)
+      - [Marie-Anne Leclerc](person_name)
+      - [Élodie Martin](person_name)
+      - [Paweł Zieliński](person_name)
+      - [Andrés Jiménez](person_name)
+      - [Júlia Szabó](person_name)
+      - [Sébastien Lemoine](person_name)
+      - [Renata Kowalczyk](person_name)
+      - [Mário Fernandes](person_name)
+      - [Clémentine Dubois](person_name)
+      - [João Pedro Silva](person_name)
+      - [Franck-Olivier Noël](person_name)
+      - [Lúcia Almeida](person_name)
+      - [Jürgen Hoffmann](person_name)
+      - [Åsa Nilsson](person_name)
+      - [Bjarke Jensen](person_name)
+      - [Éric Dupont](person_name)
+      - [Tímea Nagy](person_name)
+      - [Márton Kovács](person_name)
+      - [Sofia-Maria García](person_name)
+      - [Renée Dubois](person_name)
+      - [Łucja Nowak](person_name)
+      - [Andréa Léon](person_name)
+
+  - intent: user_mail_inform
+    examples: |
+      - Meine E-Mail-Adresse ist [Tobias.Meyer@web.de](user_mail)
+      - Sie können mich unter [Marcel.Weber123@t-online.de](user_mail) erreichen
+      - Meine Mail lautet [AnnKatrhin.Mueller@web.de](user_mail)
+      - Meine Adresse ist [sophie1.muellermeyer@gmx.de](user_mail)
+      - Schreiben Sie bitte an [clara.vanBayern44@t-online.de](user_mail)
+      - Sie können mir eine Mail an [claraluise.vonhinueber1@web.de](user_mail) schicken
+      - Kontaktieren Sie mich über [peterbecker@gmx.de](user_mail)
+      - Meine Mailadresse lautet [Klaus123.meyer1@tt.de](user_mail)
+      - [Tobias.Meyer@web.de](user_mail)
+      - [Marcel.Weber123@t-online.de](user_mail)
+      - [AnnKatrhin.Mueller@web.de](user_mail)
+      - [sophie1.muellermeyer@gmx.de](user_mail)
+      - [clara.vanBayern44@t-online.de](user_mail)
+      - [claraluise.vonhinueber1@web.de](user_mail)
+      - [peterbecker@gmx.de](user_mail)
+      - [Klaus123.meyer1@tt.de](user_mail)

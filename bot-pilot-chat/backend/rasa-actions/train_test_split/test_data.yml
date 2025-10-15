@@ -1,0 +1,296 @@
+version: "3.1"
+nlu:
+- intent: parking
+  examples: |
+    - Wo kann ich parken?
+- intent: nlu_fallback
+  examples: |
+    - ALLLES
+- intent: anreise
+  examples: |
+    - Wie kommt man zur Kanzlei?
+- intent: standort
+  examples: |
+    - Wo befindet sich die Kanzlei?
+- intent: positive_feedback
+  examples: |
+    - super
+- intent: zeiten
+  examples: |
+    - Wann habt ihr geöffnet?
+    - Wie lange dauert die Erstberatung?
+- intent: kosten
+  examples: |
+    - Können die Kosten für einen Steuerberater abgesetzt werden?
+    - Wie viel muss ich zahlen?
+    - Welche Kosten gelten als absetzbar?
+- intent: unterlagen
+  examples: |
+    - Bekomme ich meine Unterlagen zurück?
+    - Gibt es eine Möglichkeit, Belege digital zu übermitteln?
+    - Welche Unterlagen soll ich zum Erstgespräch mitnehmen?
+- intent: bereiche
+  examples: |
+    - Bei welchen Themen wird Unternehmen geholfen?
+    - Übernehmen Sie die Archivierung meiner Daten?
+    - Können Sie meine Buchhaltung übernehmen?
+- intent: user_mail_inform
+  examples: |
+    - [Tobias.Meyer@web.de](user_mail)
+    - Meine Adresse ist [sophie1.muellermeyer@gmx.de](user_mail)
+    - [Marcel.Weber123@t-online.de](user_mail)
+- intent: steuerberatung
+  examples: |
+    - Wer braucht eine Steuerkanzlei?
+    - Welche Pflichten hat ein Steuerberater?
+    - Wann muss man einen Steuerberater bezahlen?
+    - Was prüft ein Steuerberater?
+- intent: stop
+  examples: |
+    - Brica ab
+    - Halt
+    - Ich möchte den Vorgang stoppen
+    - Abbrechen
+    - Bitte den Vorgang stoppen
+- intent: consultant_inform
+  examples: |
+    - [Fritz Hesse](person_name)
+    - Mein Berater heißt [Tobias Meyer](person_name)
+    - Mein Berater ist [Peter Becker](person_name)
+    - [Robin Sauer](person_name)
+    - [Sophie Müller-Meyer](person_name) ist meine Beraterin
+- intent: steuererklaerung
+  examples: |
+    - Wie erkenne ich, ob ich zur Abgabe einer Steuererklärung verpflichtet bin?
+    - Muss jeder eine Steuererklärung machen?
+    - Wann ist die Frist zur Abgabe meiner Steuererklärung?
+    - welche Unterlagen brauche ich für die Steuererklärung?
+    - Muss ich überhaupt eine Steuererklärung einreichen?
+- intent: general_bot
+  examples: |
+    - Wie heißt du?
+    - Wie kann ich dich benutzen?
+    - Hast du ein Gesicht?
+    - Was kannst du?
+    - Wer bist du?
+- intent: faq
+  examples: |
+    - Was soll ich tun, wenn ich Post vom Finanzamt bekomme?
+    - Wie versteuere ich Einkünfte aus Kryptowährungen?
+    - Wie unterscheiden sich Ihre Leistungen für Privatpersonen und Unternehmen?
+    - Was zählt als absetzbares Arbeitsmittel?
+    - Kann ich meine laufende Buchführung an Sie übergeben?
+    - Unterstützen Sie auch Freelancer und Freiberufler?
+    - Wie nehme ich Kontakt auf?
+- intent: verabschiedung
+  examples: |
+    - ciao ciao
+    - tschöß
+    - ich bin dann mal weg
+    - bye bye
+    - danke, tschüss
+    - jo tschüss
+    - bis später
+- intent: deny
+  examples: |
+    - ich möchte den Vorgang abbrechen
+    - nö, danke schön
+    - ich möchte den Prozess stoppen
+    - nein, danke schön
+    - nix
+    - auf keinen fall
+    - auf keinen fall nicht
+    - niemals
+- intent: affirm
+  examples: |
+    - selbstverständlich
+    - natürlich
+    - ja, bitte sehr
+    - aber sicher doch bitte schön
+    - ja, natürlich bitte schön
+    - sicher
+    - ja, bitte schön
+- intent: negative_feedback
+  examples: |
+    - nein, das war nicht die Antwort, die ich mir erhofft habe
+    - oh nein, das war nicht hilfreich
+    - Die Antwort ist falsch
+    - oh nein, das war nicht die Antwort, die ich gesucht habe
+    - nein, das war nicht die Antwort, die ich gesucht habe
+    - Das war nicht gemeint
+    - nein, das war nicht das, was ich wollte
+    - nein, das war nicht die Antwort, die ich brauchte
+- intent: termin_vereinbaren
+  examples: |
+    - Kannst du mir helfen eine [Erstberatung](termin_type) zu buchen?
+    - Wie ist es möglich an einen [Termin](termin_type) zu kommen?
+    - ich will eien [termin](termin_type) machen
+    - Wann könnte ich ein [Meeting](termin_type) vereinbaren?
+    - Wie schnell bekomme ich einen [Termin](termin_type)?
+    - Wie kann ich einen [Termin](termin_type) vereinbaren?
+    - Kannst du mir helfen einen [Termin](termin_type) zu machen?
+    - Ich möchte einen [Termin](termin_type) bekommen.
+- intent: begruessung
+  examples: |
+    - hallo, guten tag
+    - schönen guten tag
+    - hallo zusammen
+    - hi
+    - hallo, guten morgen
+    - guten morgen
+    - servus
+    - was geht ab, alter
+- intent: termin_medium_inform
+  examples: |
+    - mit [E-Mail]{"entity": "termin_medium", "value": "mail"}
+    - [anrufen]{"entity": "termin_medium", "value": "telefon"}
+    - [chatbot]{"entity": "termin_medium", "value": "bot"}
+    - per [E-Mail]{"entity": "termin_medium", "value": "mail"} wäre super
+    - per [Mail]{"entity": "termin_medium", "value": "mail"}
+    - gerne per [mail](termin_medium)
+    - [Telefon]{"entity": "termin_medium", "value": "telefon"}
+    - bitte über [email]{"entity": "termin_medium", "value": "mail"}
+    - gerne über [email]{"entity": "termin_medium", "value": "mail"}
+    - ich möchte, dass [du]{"entity": "termin_medium", "value": "bot"} das für mich machst
+    - über [anruf]{"entity": "termin_medium", "value": "telefon"}
+    - über [mail](termin_medium)
+    - mach [du]{"entity": "termin_medium", "value": "bot"} das für mich
+    - [email]{"entity": "termin_medium", "value": "mail"}
+- intent: user_name_inform
+  examples: |
+    - [Márton Kovács](person_name)
+    - Ich heiße [Tobias Richter](person_name)
+    - Mein Name ist [Emma Lange](person_name)
+    - Ich heiße [Sofia Costa](person_name)
+    - Ich stelle mich kurz vor: [Karl-Heinz Bergmann](person_name)
+    - [Émilie Durand](person_name)
+    - Ich heiße [Andreas Nagel](person_name)
+    - Ich heiße [Leonie Wolf](person_name)
+    - Mein Name ist [Marie Diesacheistdie](person_name)
+    - Mein Name lautet [Robin Sauer](person_name)
+    - [Éric Dupont](person_name)
+    - Mein Name lautet [Sophia Neumann](person_name)
+    - [Tímea Nagy](person_name)
+    - [Sofia-Maria García](person_name)
+    - Hallo, ich bin [Sascha Klein](person_name)
+    - Mein Name lautet [Jakob Hoffmann](person_name)
+    - Ich bin [Marie Lehmann](person_name)
+    - Ich bin [Jonas Zimmermann](person_name)
+    - Ich bin [Fatima Hassan](person_name)
+    - [Hans-Peter Becker](person_name)
+    - [Sofia González](person_name)
+    - Mein Name lautet [Emily Johnson](person_name)
+    - [Carminia Brado](person_name)
+    - Mein vollständiger Name ist [Luisa Marie von Heiden](person_name)
+    - Ich bin [Anna-Lena Becker](person_name)
+    - [lena meier](person_name)
+- synonym: termin
+  examples: |
+    - Termin
+    - Gespräch
+    - treffen
+    - Beratung
+    - Beratungstermin
+    - meeting
+    - Erstberatung
+    - zusammenkunft
+    - sitzung
+    - termine
+- synonym: telefon
+  examples: |
+    - Telefon
+    - durchklingeln
+    - anrufen
+    - phone
+    - durchrufen
+    - anruf
+    - per Telefon
+    - über telefon
+    - telefonisch
+    - über anruf
+- synonym: mail
+  examples: |
+    - E-Mail
+    - Mail
+    - email
+    - mail
+    - per mail
+    - per e-mail
+    - per E-Mail
+    - per Mail
+    - e-mail
+- synonym: online-termin
+  examples: |
+    - online
+    - online-termin
+    - online-beratung
+    - online-sitzung
+    - online-erstberatung
+    - online-zusammenkunft
+    - online-meeting
+- synonym: bot
+  examples: |
+    - Bot
+    - Chatbot
+    - chatbot
+    - du
+- regex: person_name
+  examples: |
+    - ([A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*|[a-zäöüß]+)( ([A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*|[a-zäöüß]+))?
+- regex: user_mail
+  examples: |
+    - ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+- lookup: person_name
+  examples: |
+    - Anne-Marie Müller
+    - Léa Dupont
+    - Jörg Schäfer
+    - Sofia González
+    - Jean-Luc Picard
+    - Émilie Durand
+    - Hans-Peter Becker
+    - Clara-Luisa von Hinüber
+    - René König
+    - José Ángel Martínez
+    - Marta Fernández
+    - Frédéric Moreau
+    - Olivier Dubois
+    - Chloé Bernard
+    - Nina Schütz
+    - Björn Löwe
+    - André Hoffmann
+    - Tobias-Siegfried Müller
+    - Éric Lévesque
+    - Cláudia Pereira
+    - Ana-María López
+    - Søren Larsen
+    - Håkon Østberg
+    - Zoë Krüger
+    - Lucía Rodríguez
+    - Michał Kowalski
+    - Łukasz Nowak
+    - Álvaro Silva
+    - François Dupuis
+    - Géraldine Morel
+    - Marie-Anne Leclerc
+    - Élodie Martin
+    - Paweł Zieliński
+    - Andrés Jiménez
+    - Júlia Szabó
+    - Sébastien Lemoine
+    - Renata Kowalczyk
+    - Mário Fernandes
+    - Clémentine Dubois
+    - João Pedro Silva
+    - Franck-Olivier Noël
+    - Lúcia Almeida
+    - Jürgen Hoffmann
+    - Åsa Nilsson
+    - Bjarke Jensen
+    - Éric Dupont
+    - Tímea Nagy
+    - Márton Kovács
+    - Sofia-Maria García
+    - Renée Dubois
+    - Łucja Nowak
+    - Andréa Léon

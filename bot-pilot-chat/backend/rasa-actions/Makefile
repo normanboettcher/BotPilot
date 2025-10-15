@@ -34,4 +34,8 @@ rasa_test:
 	@echo "Running Rasa tests..."
 	python -m tox -e rasa_tests
 
+rasa_test_stories:
+	@echo "Running Rasa story tests..."
+	python -m tox -e rasa_story_tests
+
 build: format lint unit_test rasa_test

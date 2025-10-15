@@ -51,7 +51,7 @@ stories:
           - requested_slot: null
       - action: termin_form
       - active_loop: null
-      - action: action_switch_user_type_form
+      - action: action_switch_form
       - slot_was_set:
           - next_form_name: user_type_form
           - termin_medium: mail
@@ -86,7 +86,7 @@ stories:
           - requested_slot: null
       - action: termin_form
       - active_loop: null
-      - action: action_switch_user_type_form
+      - action: action_switch_form
       - slot_was_set:
           - termin_medium_attempts: 0
           - termin_medium: mail
@@ -104,7 +104,15 @@ stories:
           - user_type: privatperson
       - action: user_type_form
       - active_loop: null
-      - action: action_submit_termin
+      - action: action_switch_form
+      - slot_was_set:
+          - next_form_name: user_info_form
+          - user_type: privatperson
+          - termin_medium_attempts: 0
+          - termin_medium: mail
+          - termin_type: erstberatung
+      - action: user_info_form
+      - active_loop: user_info_form
 
   - story: happy path greet and ask what you can do
     steps:

@@ -23,6 +23,5 @@ def make_termin_from_medium(tracker: Tracker) -> tuple[str, str]:
         logger.debug(f"termin_medium: {medium}")
         return message, medium
     return (
-        "Bei der Verarbeitung Ihrer Terminanfrage ist leider "
-        "ein Fehler aufgetreten."
+        "Bei der Verarbeitung Ihrer Terminanfrage ist leider " "ein Fehler aufgetreten."
     ), f"{medium}"

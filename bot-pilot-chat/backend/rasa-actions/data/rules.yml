@@ -77,6 +77,16 @@ rules:
       - intent: termin_vereinbaren
       - action: termin_form
       - active_loop: termin_form
+
+  - rule: End consultant form
+    condition:
+      - active_loop: consultant_form
+      - slot_was_set:
+          - requested_slot: null
+    steps:
+      - action: consultant_form
+      - active_loop: null
+
   - rule: Switch to user_type_form
     condition:
       - active_loop: termin_form
@@ -85,13 +95,13 @@ rules:
     steps:
       - action: termin_form
       - active_loop: null
-      - action: action_switch_user_type_form
+      - action: action_switch_form
       - slot_was_set:
           - next_form_name: user_type_form
       - action: user_type_form
       - active_loop: user_type_form
 
-  - rule: Submit user_type_form
+  - rule: Switch from user type form to user info form
     condition:
       - active_loop: user_type_form
       - slot_was_set:
@@ -99,7 +109,25 @@ rules:
     steps:
       - action: user_type_form
       - active_loop: null
-      - action: action_submit_termin
+      - action: action_switch_form
+      - slot_was_set:
+          - next_form_name: user_info_form
+      - action: user_info_form
+      - active_loop: user_info_form
+
+  - rule: Switch from user info form to consultant form
+    condition:
+      - active_loop: user_info_form
+      - slot_was_set:
+          - requested_slot: null
+    steps:
+      - action: user_info_form
+      - active_loop: null
+      - action: action_switch_form
+      - slot_was_set:
+          - next_form_name: consultant_form
+      - action: consultant_form
+      - active_loop: consultant_form
 
   - rule: ask termin_form continue and affirm
     steps:

@@ -1,8 +1,12 @@
+from unittest.mock import patch
+
 import emoji
 
+from bot_pilot.domain.tax_consultant import TaxConsultant
 from bot_pilot.service.provider.button_factory import (
     make_buttons_termin_mediums,
     make_buttons_termin_types,
+    make_buttons_tax_consultant,
 )
 
 
@@ -39,3 +43,18 @@ def test_make_buttons_termin_type():
             "payload": '/termin_type_inform{"termin_type": "folgeberatung"}',
         },
     ]
+
+
+@patch("bot_pilot.service.provider.button_factory.get_consultant")
+def test_make_buttons_tax_consultant(service_mock):
+    consultants = dict()
+    consultants["1"] = TaxConsultant("1", "Doe", "John")
+    service_mock.return_value = consultants
+    result_buttons: list[dict] = make_buttons_tax_consultant("default")
+
+    assert len(result_buttons) == 1
+    assert result_buttons[0].get("title") == f'{emoji.emojize(":consultant:")} John Doe'
+    assert (
+        result_buttons[0].get("payload")
+        == '/consultant_inform{"consultant_name":"John Doe"}'
+    )

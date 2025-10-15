@@ -49,7 +49,7 @@ stories:
           - requested_slot: null
       - action: termin_form
       - active_loop: null
-      - action: action_switch_user_type_form
+      - action: action_switch_form
 
   - story: happy path switch to user_type_form
     steps:
@@ -58,13 +58,13 @@ stories:
           - requested_slot: null
       - action: termin_form
       - active_loop: null
-      - action: action_switch_user_type_form
+      - action: action_switch_form
       - slot_was_set:
           - next_form_name: user_type_form
       - action: user_type_form
       - active_loop: user_type_form
 
-  - story: happy path collect user_type and submit
+  - story: happy path collect user_type and switch to user info form
     steps:
       - slot_was_set:
           - next_form_name: user_type_form
@@ -77,4 +77,51 @@ stories:
           - requested_slot: null
       - action: user_type_form
       - active_loop: null
-      - action: action_submit_termin
+      - action: action_switch_form
+      - slot_was_set:
+          - next_form_name: user_info_form
+      - action: user_info_form
+      - active_loop: user_info_form
+
+  - story: happy path collect user_name and user_mail
+    steps:
+      - action: user_info_form
+      - active_loop: user_info_form
+      - slot_was_set:
+          - requested_slot: user_name
+      - intent: user_name_inform
+      - action: user_info_form
+      - active_loop: user_info_form
+      - slot_was_set:
+          - requested_slot: user_mail
+      - intent: user_mail_inform
+      - slot_was_set:
+          - requested_slot: null
+      - action: user_info_form
+      - active_loop: null
+      - action: action_switch_form
+
+  - story: happy path collect consultant_name
+    steps:
+      - slot_was_set:
+          - next_form_name: consultant_form
+      - active_loop: consultant_form
+      - slot_was_set:
+          - requested_slot: consultant_name
+      - action: action_ask_consultant
+      - intent: consultant_inform
+      - action: consultant_form
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+
+  - story: happy path switch to consultant_form
+    steps:
+      - action: action_switch_form
+      - slot_was_set:
+          - next_form_name: consultant_form
+      - action: consultant_form
+      - active_loop: consultant_form
+
+
+

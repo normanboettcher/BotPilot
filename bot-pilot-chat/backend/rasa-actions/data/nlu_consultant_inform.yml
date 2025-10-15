@@ -1,0 +1,30 @@
+version: '3.1'
+nlu:
+  - intent: consultant_inform
+    examples: |
+      - Mein Berater heißt [Tobias Meyer](person_name)
+      - Mein Steuerberater ist [Tobias Meyer](person_name)
+      - Ich arbeite mit [Tobias Meyer](person_name) zusammen
+      - Mein Ansprechpartner war [Marcel Weber](person_name)
+      - Ich wurde zuletzt von Herrn [Marcel Weber](person_name) betreut
+      - Frau [Ann-Kathrin Müller](person_name) ist meine Steuerberaterin
+      - [Sophie Müller-Meyer](person_name) ist meine Beraterin
+      - Ich bin bei [Clara von Bayern](person_name) in Betreuung
+      - [Clara-Luisa von Hinüber](person_name) hat mir geholfen
+      - Mein Berater ist [Peter Becker](person_name)
+      - [Peter-Siegfried Müller-Meyer](person_name) ist mein Ansprechpartner
+      - Ich hatte ein Gespräch mit [Andreas Nagel](person_name)
+      - [Fritz Hesse](person_name) hat mich beraten
+      - Mein Steuerberater heißt [Robin Sauer](person_name)
+      - [Tobias Meyer](person_name)
+      - [Marcel Weber](person_name)
+      - [Ann-Kathrin Müller](person_name)
+      - [Sophie Müller-Meyer](person_name)
+      - [Clara von Bayern](person_name)
+      - [Clara-Luisa von Hinüber](person_name)
+      - [Peter Becker](person_name)
+      - [Peter-Siegfried Müller-Meyer](person_name)
+      - [Andreas Nagel](person_name)
+      - [Fritz Hesse](person_name)
+      - [Robin Sauer](person_name)
+      - mein Berater war Herr [Otto Meier](person_name)
