@@ -88,8 +88,12 @@ stories:
       - slot_was_set:
           - requested_slot: user_name
       - intent: user_name_inform
-      - action: action_ask_confirm_name
+      - action: user_info_form
+      - active_loop: user_info_form
       - intent: affirm
+      - action: action_handle_user_name_confirm
+      - slot_was_set:
+          - requested_slot: user_mail
       - action: user_info_form
       - active_loop: user_info_form
       - slot_was_set:
@@ -130,12 +134,14 @@ stories:
       - slot_was_set:
           - requested_slot: user_name
       - intent: user_name_inform
-      - action: action_ask_confirm_name
-      - intent: affirm
       - action: user_info_form
       - active_loop: user_info_form
+      - intent: affirm
+      - action: action_handle_user_name_confirm
       - slot_was_set:
           - requested_slot: user_mail
+      - action: user_info_form
+      - active_loop: user_info_form
 
   - story: collect user_name and name was denied in first step
     steps:
@@ -144,14 +150,16 @@ stories:
       - slot_was_set:
           - requested_slot: user_name
       - intent: user_name_inform
-      - action: action_ask_confirm_name
+      - action: user_info_form
+      - active_loop: user_info_form
       - intent: deny
       - slot_was_set:
           - requested_slot: user_name
       - action: user_info_form
       - active_loop: user_info_form
       - intent: user_name_inform
-      - action: action_ask_confirm_name
+      - action: user_info_form
+      - active_loop: user_info_form
       - intent: affirm
       - slot_was_set:
           - requested_slot: user_mail

@@ -33,7 +33,16 @@ entities:
   - termin_type
   - user_mail
   - person_name
+  - name_confirmed
 slots:
+  user_name_confirmed:
+    type: bool
+    initial_value: false
+    mappings:
+      - type: custom
+        conditions:
+          - active_loop: user_info_form
+            requested_slot: user_name
   next_form_name:
     mappings:
       - type: custom
@@ -141,6 +150,7 @@ forms:
   user_info_form:
     required_slots:
       - user_name
+      - user_name_confirmed
       - user_mail
   consultant_form:
     required_slots:
@@ -174,7 +184,7 @@ actions:
   - action_ask_user_mail
   - action_switch_form
   - action_ask_consultant
-  - action_ask_confirm_name
+  - action_handle_user_name_confirm
 
 session_config:
   session_expiration_time: 60

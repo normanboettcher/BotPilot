@@ -59,12 +59,12 @@ USER_TYPES: dict[str, ButtonOption] = {
 AFFIRM_DENY: dict[str, ButtonOption] = {
     "affirm": ButtonOption(
         "Ja",
-        "/affirm",
+        '/affirm',
         f'{emoji.emojize(":white_check_mark:")}',
     ),
     "deny": ButtonOption(
         "Nein",
-        "/deny",
+        '/deny',
         f'{emoji.emojize(":cross_mark:")}',
     ),
 }

@@ -15,4 +15,5 @@ class ActionAskConsultant(Action):
         buttons = make_buttons_tax_consultant("default")
 
         res = BotResponse.with_answer_and_buttons(message, buttons)
-        return dispatcher.utter_message(json_message=send_response(res.as_dict()))
+        dispatcher.utter_message(json_message=send_response(res.as_dict()))
+        return []

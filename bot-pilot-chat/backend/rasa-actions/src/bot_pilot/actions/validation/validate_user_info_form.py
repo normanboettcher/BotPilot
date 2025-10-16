@@ -1,14 +1,18 @@
 import logging
 from typing import Text, Any, Dict
 
+from markdown_strings import bold
 from rasa_sdk import Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
 
+from bot_pilot.domain.response import BotResponse
+from bot_pilot.service.provider.button_factory import make_affirm_deny_buttons
 from bot_pilot.service.validation.user_info_form_validation_service import (
     validate_input_user_name,
     validate_input_user_mail,
 )
+from bot_pilot.utils.response_wrapper import send_response
 
 logger = logging.getLogger(__name__)
 
@@ -34,14 +38,18 @@ class ValidateUserInfoForm(FormValidationAction):
             f"slot value: "
             f"{[item for item in tracker.get_latest_entity_values('person_name')]}"
         )
-        values = tracker.get_latest_entity_values("person_name")
-        if values is not None:
-            value = None
-            for item in values:
-                value = item
-                break
-            if value is not None and validate_input_user_name(slot_value):
-                return {"user_name": None}
+        person_name = next(tracker.get_latest_entity_values("person_name"), None)
+        name_confirmed = tracker.get_slot("user_name_confirmed")
+        logger.debug(f'name confirmed: [{name_confirmed}]')
+        if person_name is not None and name_confirmed is False:
+            buttons = make_affirm_deny_buttons()
+            message = f"Ich habe den Namen {bold(person_name)} verstanden. Ist das korrekt?"
+            res = BotResponse.with_answer_and_buttons(message, buttons)
+            dispatcher.utter_message(json_message=send_response(res.as_dict()))
+            return {"user_name": None}
+        if person_name is not None and name_confirmed is True and validate_input_user_name(
+                person_name):
+            return {"user_name": person_name.lower()}
         return {"user_name": None}
 
     def validate_user_mail(
