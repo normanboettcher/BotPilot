@@ -78,7 +78,7 @@ stories:
       - action: user_info_form
       - active_loop: user_info_form
 
-  - story: happy path collect user_name and user_mail
+  - story: happy path collect user_name
     steps:
       - action: user_info_form
       - active_loop: user_info_form
@@ -91,14 +91,6 @@ stories:
       - slot_was_set:
           - requested_slot: user_mail
       - action: user_info_form
-      - slot_was_set:
-          - requested_slot: user_mail
-      - intent: user_mail_inform
-      - slot_was_set:
-          - requested_slot: null
-      - action: user_info_form
-      - active_loop: null
-      - action: action_switch_form
 
   - story: happy path collect consultant_name
     steps:
