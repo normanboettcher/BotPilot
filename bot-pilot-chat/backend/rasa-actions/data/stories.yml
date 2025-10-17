@@ -64,8 +64,6 @@ stories:
 
   - story: happy path collect user_type and switch to user info form
     steps:
-      - slot_was_set:
-          - next_form_name: user_type_form
       - action: user_type_form
       - active_loop: user_type_form
       - slot_was_set:
