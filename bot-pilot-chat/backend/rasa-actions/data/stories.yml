@@ -92,6 +92,18 @@ stories:
           - requested_slot: user_mail
       - action: user_info_form
 
+  - story: happy path collect user_mail
+    steps:
+      - action: user_info_form
+      - active_loop: user_info_form
+      - slot_was_set:
+          - requested_slot: user_mail
+      - intent: user_mail_inform
+      - action: user_info_form
+      - slot_was_set:
+          - requested_slot: null
+
+
   - story: happy path collect consultant_name
     steps:
       - action: consultant_form
