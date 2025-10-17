@@ -30,7 +30,7 @@ stories:
       - action: termin_form
       - active_loop: termin_form
 
-  - story: happy path collect termin_medium and termin_type
+  - story: happy path collect termin_medium
     steps:
       - intent: termin_vereinbaren
       - action: termin_form
@@ -39,14 +39,15 @@ stories:
           - requested_slot: termin_medium
       - intent: termin_medium_inform
       - action: termin_form
+
+  - story: happy path collect termin_type
+    steps:
+      - action: termin_form
+      - active_loop: termin_form
       - slot_was_set:
           - requested_slot: termin_type
       - intent: termin_type_inform
-      - slot_was_set:
-          - requested_slot: null
       - action: termin_form
-      - active_loop: null
-      - action: action_switch_form
 
   - story: happy path switch to user_type_form
     steps:
@@ -82,8 +83,6 @@ stories:
       - action: user_info_form
       - intent: affirm
       - action: action_handle_user_name_confirm
-      - slot_was_set:
-          - requested_slot: user_mail
       - action: user_info_form
 
   - story: happy path collect user_mail
