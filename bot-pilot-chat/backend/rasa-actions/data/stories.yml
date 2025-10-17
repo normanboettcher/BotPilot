@@ -80,7 +80,6 @@ stories:
       - slot_was_set:
           - requested_slot: user_name
       - intent: user_name_inform
-      - action: user_info_form
       - intent: affirm
       - action: action_handle_user_name_confirm
       - action: user_info_form
@@ -124,7 +123,6 @@ stories:
       - slot_was_set:
           - requested_slot: user_name
       - intent: user_name_inform
-      - action: user_info_form
       - intent: affirm
       - action: action_handle_user_name_confirm
       - action: user_info_form
@@ -136,7 +134,6 @@ stories:
       - slot_was_set:
           - requested_slot: user_name
       - intent: user_name_inform
-      - action: user_info_form
       - intent: deny
       - action: action_handle_user_name_confirm
       - action: user_info_form

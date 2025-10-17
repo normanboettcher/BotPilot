@@ -10,7 +10,7 @@ stories:
       - user: |-
           Mein Name ist [Jane Doe](person_name).
         intent: user_name_inform
-      - action: action_ask_confirm_name
+      - action: user_info_form
       - intent: affirm
       - slot_was_set:
           - user_name_confirmed: true
@@ -30,7 +30,7 @@ stories:
       - user: |-
           Mein Name ist [Jane Doe](person_name).
         intent: user_name_inform
-      - action: action_ask_confirm_name
+      - action: user_info_form
       - intent: deny
       - slot_was_set:
           - user_name_confirmed: false
@@ -40,7 +40,7 @@ stories:
       - user: |-
           Nochmal: ich heiße [Jane Doe](person_name)."
         intent: user_name_inform
-      - action: action_ask_confirm_name
+      - action: user_info_form
       - intent: affirm
       - slot_was_set:
           - user_name_confirmed: true
