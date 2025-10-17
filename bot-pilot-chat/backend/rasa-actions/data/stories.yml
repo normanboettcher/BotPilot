@@ -1,38 +1,51 @@
 version: '3.1'
 stories:
 
-  - story: user makes three mistakes and denies
+  - story: happy path start with termin_form directly
     steps:
       - intent: termin_vereinbaren
       - action: termin_form
       - active_loop: termin_form
-      - slot_was_set:
-          - requested_slot: termin_medium
-      - intent: nlu_fallback
-      - slot_was_set:
-          - termin_medium_attempts: 3
-      - action: action_ask_continue
-      - intent: deny
-      - active_loop: null
 
-  - story: user makes three mistakes and affirms
+  - story: happy path general_bot and goodbye
     steps:
+      - intent: general_bot
+      - action: action_general_bot
+      - intent: verabschiedung
+      - action: action_verabschiedung
+
+  - story: happy path greet and goodbye
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: verabschiedung
+      - action: action_verabschiedung
+
+  - story: happy path greet and ask general bot
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: general_bot
+      - action: action_general_bot
+
+  - story: happy path greet and start termin_form
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
       - intent: termin_vereinbaren
       - action: termin_form
       - active_loop: termin_form
-      - slot_was_set:
-          - requested_slot: termin_medium
-      - intent: nlu_fallback
-      - slot_was_set:
-          - termin_medium_attempts: 3
-      - action: action_ask_continue
-      - intent: affirm
+
+  - story: happy path general_bot and start termin_form
+    steps:
+      - intent: general_bot
+      - action: action_general_bot
+      - intent: termin_vereinbaren
       - action: termin_form
       - active_loop: termin_form
 
   - story: happy path collect termin_medium
     steps:
-      - intent: termin_vereinbaren
       - action: termin_form
       - active_loop: termin_form
       - slot_was_set:
