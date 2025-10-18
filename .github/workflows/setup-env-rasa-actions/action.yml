@@ -4,9 +4,9 @@ inputs:
   python-version:
     description: Python version to use
     default: '3.10'
-    required: false
+    required: true
 runs:
-  using: composite
+  using: "composite"
   steps:
     - name: Checkout code
       uses: actions/checkout@v4
