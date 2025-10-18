@@ -20,7 +20,7 @@ jobs:
         run: tox -e lint
 
   test:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: bot-pilot-chat/backend/rasa-actions
