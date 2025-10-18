@@ -3,7 +3,7 @@ description: Common setup for lint and test jobs
 inputs:
   python-version:
     description: Python version to use
-    default: 'python3.10'
+    default: '3.10'
     required: true
 runs:
   using: "composite"
@@ -12,6 +12,7 @@ runs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ inputs.python-version }}
+        python-location: system
         cache: 'pip'
 
     - name: Cache tox environments
