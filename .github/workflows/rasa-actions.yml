@@ -32,7 +32,5 @@ jobs:
       - uses: ./.github/workflows/setup-env-rasa-actions
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Run unit tests
-        run: make unit_test
-      - name: Run rasa tests
-        run: make rasa_test
+      - name: Run tests
+        run: tox -e unit_test, rasa_test
