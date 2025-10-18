@@ -33,4 +33,4 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Run tests
-        run: tox -e unit_test, rasa_test
+        run: tox -e unit_test,rasa_test
