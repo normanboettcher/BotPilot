@@ -1,7 +1,7 @@
 name: Setup Environment
 description: Common setup for lint and test jobs
 runs:
-  using: "composite"
+  using: composite
   steps:
     - name: Checkout code
       uses: actions/checkout@v4
