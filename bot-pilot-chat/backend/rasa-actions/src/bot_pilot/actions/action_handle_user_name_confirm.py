@@ -1,6 +1,5 @@
 import logging
 
-from markdown_strings import bold
 from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
 
@@ -25,14 +24,15 @@ class ActionHandleUserNameConfirm(Action):
             message = f"Perfekt, danke {person_name}!"
             res = BotResponse.with_answer(message)
             dispatcher.utter_message(json_message=send_response(res.as_dict()))
-            return [SlotSet("user_name", person_name),
-                    SlotSet("user_name_confirmed", True)]
+            return [
+                SlotSet("user_name", person_name),
+                SlotSet("user_name_confirmed", True),
+            ]
 
         elif last_intent == "deny":
-            message = 'Okay, bitte sag mir deinen Namen nochmal.'
+            message = "Okay, bitte sag mir deinen Namen nochmal."
             res = BotResponse.with_answer(message)
             dispatcher.utter_message(json_message=send_response(res.as_dict()))
-            return [SlotSet("user_name_confirmed", False),
-                    SlotSet("user_name", None)]
+            return [SlotSet("user_name_confirmed", False), SlotSet("user_name", None)]
 
         return []

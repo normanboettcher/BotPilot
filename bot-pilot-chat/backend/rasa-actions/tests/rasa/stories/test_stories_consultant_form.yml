@@ -25,8 +25,9 @@ stories:
       - user: |-
           Mein Name ist [Jane Doe](person_name).
         intent: user_name_inform
-      - action: action_ask_confirm_name
+      - action: user_info_form
       - intent: affirm
+      - action: action_handle_user_name_confirm
       - slot_was_set:
           - user_name_confirmed: true
       - action: user_info_form
