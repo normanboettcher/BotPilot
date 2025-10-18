@@ -19,10 +19,14 @@ jobs:
         run: tox -e lint
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: bot-pilot-chat/backend/rasa-actions
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        python-version: [ '3.10' ]
     steps:
       - uses: ./setup-env-rasa-actions
       - name: Run unit tests
