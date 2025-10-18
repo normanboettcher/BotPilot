@@ -1,5 +1,9 @@
 name: Setup Environment
 description: Common setup for lint and test jobs
+inputs:
+  python-version:
+    description: Python version to use
+    default: '3.10'
 runs:
   using: composite
   steps:
@@ -9,7 +13,7 @@ runs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: { matrix.os.python-version }
+        python-version: { inputs.python-version }
         cache: 'pip'
 
     - name: Cache tox environments
