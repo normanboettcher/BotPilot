@@ -20,7 +20,7 @@ deps = [
     "-e ."
 ]
 commands = [
-    ["python", "-m", "pytest", "tests/unit"],
+    ["python3.10", "-m", "pytest", "tests/unit"],
 ]
 
 [tool.tox.env.integration_test]
@@ -30,7 +30,7 @@ deps = [
     "-e ."
 ]
 commands = [
-    ["python", "-m", "pytest", "integration_tests/"]
+    ["python3.10", "-m", "pytest", "integration_tests/"]
 ]
 
 [tool.tox.env.lint]
