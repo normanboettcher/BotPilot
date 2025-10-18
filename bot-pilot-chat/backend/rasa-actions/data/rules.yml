@@ -129,24 +129,55 @@ rules:
       - action: consultant_form
       - active_loop: consultant_form
 
-  - rule: ask termin_form continue and affirm
+  - rule: end termin_form after ask_continue_and_deny
+    condition:
+      - active_loop: termin_form
+      - slot_was_set:
+          - termin_medium_attempts: 3
     steps:
       - action: action_ask_continue
+      - intent: deny
       - active_loop: null
+
+  - rule: ask to confirm name after user_name_inform with affirm
+    condition:
+      - active_loop: user_info_form
+      - slot_was_set:
+          - requested_slot: user_name
+    steps:
+      - intent: affirm
+      - action: action_handle_user_name_confirm
+      - action: user_info_form
+      - active_loop: user_info_form
+
+  - rule: ask to confirm name after user_name_inform with deny
+    condition:
+      - active_loop: user_info_form
+      - slot_was_set:
+          - requested_slot: user_name
+    steps:
+      - intent: deny
+      - action: action_handle_user_name_confirm
+      - action: user_info_form
+      - active_loop: user_info_form
+
+  - rule: end termin_form after ask_continue deny
+    condition:
+      - active_loop: termin_form
+      - slot_was_set:
+          - termin_medium_attempts: 3
+    steps:
+      - action: action_ask_continue
+      - intent: deny
+      - active_loop: null
+
+  - rule: progress termin_form after ask_continue affirm
+    condition:
+      - active_loop: termin_form
+      - slot_was_set:
+          - termin_medium_attempts: 3
+    steps:
+      - action: action_ask_continue
       - intent: affirm
       - action: termin_form
       - active_loop: termin_form
-
-  - rule: ask continue and deny
-    steps:
-      - action: action_ask_continue
-      - active_loop: null
-      - intent: deny
-      - action: action_deny
-
-  - rule: ask continue after stop intent
-    steps:
-      - intent: stop
-      - action: action_stop
-      - action: action_ask_continue
-      - active_loop: null

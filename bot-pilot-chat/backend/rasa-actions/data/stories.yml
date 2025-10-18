@@ -1,55 +1,66 @@
 version: '3.1'
 stories:
 
-  - story: user makes three mistakes and denies
+  - story: happy path start with termin_form directly
     steps:
       - intent: termin_vereinbaren
-      - action: termin_form
-      - active_loop: termin_form
-      - slot_was_set:
-          - requested_slot: termin_medium
-      - intent: nlu_fallback
-      - slot_was_set:
-          - termin_medium_attempts: 3
-      - action: action_ask_continue
-      - active_loop: null
-      - intent: deny
-      - action: action_deny
-
-  - story: user makes three mistakes and affirms
-    steps:
-      - intent: termin_vereinbaren
-      - action: termin_form
-      - active_loop: termin_form
-      - slot_was_set:
-          - requested_slot: termin_medium
-      - intent: nlu_fallback
-      - slot_was_set:
-          - termin_medium_attempts: 3
-      - action: action_ask_continue
-      - active_loop: null
-      - intent: affirm
       - action: termin_form
       - active_loop: termin_form
 
-  - story: happy path collect termin_medium and termin_type
+  - story: happy path general_bot and goodbye
     steps:
+      - intent: general_bot
+      - action: action_general_bot
+      - intent: verabschiedung
+      - action: action_verabschiedung
+
+  - story: happy path greet and goodbye
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: verabschiedung
+      - action: action_verabschiedung
+
+  - story: happy path greet and ask general bot
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: general_bot
+      - action: action_general_bot
+
+  - story: happy path greet and start termin_form
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
       - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+
+  - story: happy path general_bot and start termin_form
+    steps:
+      - intent: general_bot
+      - action: action_general_bot
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+
+  - story: happy path collect termin_medium
+    steps:
       - action: termin_form
       - active_loop: termin_form
       - slot_was_set:
           - requested_slot: termin_medium
       - intent: termin_medium_inform
       - action: termin_form
+
+  - story: happy path collect termin_type
+    steps:
+      - action: termin_form
       - active_loop: termin_form
       - slot_was_set:
           - requested_slot: termin_type
       - intent: termin_type_inform
-      - slot_was_set:
-          - requested_slot: null
       - action: termin_form
-      - active_loop: null
-      - action: action_switch_form
 
   - story: happy path switch to user_type_form
     steps:
@@ -66,8 +77,6 @@ stories:
 
   - story: happy path collect user_type and switch to user info form
     steps:
-      - slot_was_set:
-          - next_form_name: user_type_form
       - action: user_type_form
       - active_loop: user_type_form
       - slot_was_set:
@@ -76,35 +85,32 @@ stories:
       - slot_was_set:
           - requested_slot: null
       - action: user_type_form
-      - active_loop: null
-      - action: action_switch_form
-      - slot_was_set:
-          - next_form_name: user_info_form
-      - action: user_info_form
-      - active_loop: user_info_form
 
-  - story: happy path collect user_name and user_mail
+  - story: happy path collect user_name
     steps:
       - action: user_info_form
       - active_loop: user_info_form
       - slot_was_set:
           - requested_slot: user_name
       - intent: user_name_inform
+      - intent: affirm
+      - action: action_handle_user_name_confirm
+      - action: user_info_form
+
+  - story: happy path collect user_mail
+    steps:
       - action: user_info_form
       - active_loop: user_info_form
       - slot_was_set:
           - requested_slot: user_mail
       - intent: user_mail_inform
+      - action: user_info_form
       - slot_was_set:
           - requested_slot: null
-      - action: user_info_form
-      - active_loop: null
-      - action: action_switch_form
 
   - story: happy path collect consultant_name
     steps:
-      - slot_was_set:
-          - next_form_name: consultant_form
+      - action: consultant_form
       - active_loop: consultant_form
       - slot_was_set:
           - requested_slot: consultant_name
@@ -123,5 +129,25 @@ stories:
       - action: consultant_form
       - active_loop: consultant_form
 
+  - story: collect user_name and name confirmed directly
+    steps:
+      - action: user_info_form
+      - active_loop: user_info_form
+      - slot_was_set:
+          - requested_slot: user_name
+      - intent: user_name_inform
+      - intent: affirm
+      - action: action_handle_user_name_confirm
+      - action: user_info_form
 
+  - story: collect user_name and name was denied in first step
+    steps:
+      - action: user_info_form
+      - active_loop: user_info_form
+      - slot_was_set:
+          - requested_slot: user_name
+      - intent: user_name_inform
+      - intent: deny
+      - action: action_handle_user_name_confirm
+      - action: user_info_form
 

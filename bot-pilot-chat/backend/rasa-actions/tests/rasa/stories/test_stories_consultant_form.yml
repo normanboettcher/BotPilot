@@ -20,10 +20,16 @@ stories:
       - action: user_info_form
       - active_loop: user_info_form
       - slot_was_set:
+          - user_name_confirmed: false
           - requested_slot: user_name
       - user: |-
           Mein Name ist [Jane Doe](person_name).
         intent: user_name_inform
+      - action: user_info_form
+      - intent: affirm
+      - action: action_handle_user_name_confirm
+      - slot_was_set:
+          - user_name_confirmed: true
       - action: user_info_form
       - slot_was_set:
           - user_name: Jane Doe
@@ -38,7 +44,7 @@ stories:
       - active_loop: null
       - action: action_switch_form
       - slot_was_set:
-          - user_name: Thomas Reif
+          - user_name: Jane Doe
           - user_mail: jane.doe@email.de
           - next_form_name: consultant_form
       - action: consultant_form

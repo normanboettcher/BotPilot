@@ -55,3 +55,16 @@ USER_TYPES: dict[str, ButtonOption] = {
         f'{emoji.emojize(":handshake:")}',
     ),
 }
+
+AFFIRM_DENY: dict[str, ButtonOption] = {
+    "affirm": ButtonOption(
+        "Ja",
+        "/affirm",
+        f'{emoji.emojize(":white_check_mark:")}',
+    ),
+    "deny": ButtonOption(
+        "Nein",
+        "/deny",
+        f'{emoji.emojize(":cross_mark:")}',
+    ),
+}
