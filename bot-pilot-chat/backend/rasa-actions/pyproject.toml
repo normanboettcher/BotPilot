@@ -46,10 +46,10 @@ commands = [
 description = "Run Rasa tests"
 deps = [
     "rasa==3.6.21",
-    "spacy==3.7.4"
+    "spacy==3.7.4",
+    "https://github.com/explosion/spacy-models/releases/download/de_core_news_md-3.7.0/de_core_news_md-3.7.0.tar.gz"
 ]
 commands = [
-    ["python", "-m", "spacy", "download", "de_core_news_md"],
     ["rasa", "test", "--stories", "tests/rasa/stories"]
 ]
 
@@ -57,10 +57,11 @@ commands = [
 description = "Run Rasa story tests"
 deps = [
     "rasa==3.6.21",
-    "spacy==3.7.4"
+    "spacy==3.7.4",
+    "https://github.com/explosion/spacy-models/releases/download/de_core_news_md-3.7.0/de_core_news_md-3.7.0.tar.gz"
 ]
+
 commands = [
-    ["python", "-m", "spacy", "download", "de_core_news_md"],
     ["rasa", "test", "core", "--fail-on-prediction-errors", "--stories", "tests/rasa/stories"]
 ]
 
