@@ -14,11 +14,11 @@ class ValidateConsultantForm(FormValidationAction):
         return "validate_consultant_form"
 
     def validate_consultant_name(
-            self,
-            slot_value: Any,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: DomainDict,
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
     ) -> Dict[Text, Any]:
         """
         Validate consultant_name value.

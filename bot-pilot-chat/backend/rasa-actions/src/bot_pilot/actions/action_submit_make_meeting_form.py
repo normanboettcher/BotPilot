@@ -9,8 +9,13 @@ from bot_pilot.utils.response_wrapper import send_response
 
 logger = logging.getLogger(__name__)
 
-collected_slots = ['termin_type', 'user_type', 'user_name', 'user_mail',
-                   'meeting_datetime']
+collected_slots = [
+    "termin_type",
+    "user_type",
+    "user_name",
+    "user_mail",
+    "meeting_datetime",
+]
 
 
 class ActionSubmitMakeMeetingForm(Action):
@@ -19,7 +24,8 @@ class ActionSubmitMakeMeetingForm(Action):
 
     def run(self, dispatcher, tracker, domain):
         logger.debug(
-            f"{['slot:' + tracker.get_slot(slot) for slot in collected_slots]}")
+            f"{['slot:' + tracker.get_slot(slot) for slot in collected_slots]}"
+        )
         meeting_datetime = tracker.get_slot("meeting_datetime")
         user_name = tracker.get_slot("user_name")
         user_mail = tracker.get_slot("user_mail")
@@ -27,7 +33,8 @@ class ActionSubmitMakeMeetingForm(Action):
         message = f"""
         Vielen Dank! Ich habe Ihnen einen Termin am {bold(formatted_meeting_datetime)}
         eingestellt.
-        Für den Kunde: {bold(user_name)}. Zur Verifizierung verwendet: {bold(user_mail)}.
+        Für den Kunde: {bold(user_name)}.
+        Zur Verifizierung verwendet: {bold(user_mail)}.
         """.strip()
         res = BotResponse.with_answer(message)
         dispatcher.utter_message(json_message=send_response(res.as_dict()))

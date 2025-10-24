@@ -19,7 +19,7 @@ class ActionHandleUserNameConfirm(Action):
         logger.debug(f"last intent: {last_intent}")
         logger.debug(f"person name: {person_name}")
         if person_name is None:
-            return [SlotSet('user_name', None)]
+            return [SlotSet("user_name", None)]
 
         if last_intent == "affirm":
             message = f"Perfekt, danke {person_name}!"
