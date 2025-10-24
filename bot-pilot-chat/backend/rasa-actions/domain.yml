@@ -212,6 +212,7 @@ actions:
   - action_handle_user_name_confirm
   - action_submit_make_meeting_form
   - action_ask_feedback
+  - action_ask_user_name_confirmed
 
 session_config:
   session_expiration_time: 60

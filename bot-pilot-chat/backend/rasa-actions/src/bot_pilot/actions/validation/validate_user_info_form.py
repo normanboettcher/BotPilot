@@ -22,12 +22,23 @@ class ValidateUserInfoForm(FormValidationAction):
     def name(self) -> Text:
         return "validate_user_info_form"
 
+    def validate_user_name_confirmed(
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate user_name_confirmed value."""
+        logger.debug(f"validate_user_info_form called for "
+                     f"user_name_confirmed. slot_value: {slot_value}")
+
     def validate_user_name(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: DomainDict,
     ) -> Dict[Text, Any]:
         """
         Validate user_name value.
@@ -39,38 +50,25 @@ class ValidateUserInfoForm(FormValidationAction):
             f"{[item for item in tracker.get_latest_entity_values('person_name')]}"
         )
         person_name = next(tracker.get_latest_entity_values("person_name"), None)
-        name_confirmed = tracker.get_slot("user_name_confirmed")
-        logger.debug(f"name confirmed: [{name_confirmed}]")
-        if person_name is not None and name_confirmed is False:
-            buttons = make_affirm_deny_buttons()
-            message = (
-                f"Ich habe den Namen {bold(person_name)} verstanden. Ist das korrekt?"
-            )
-            res = BotResponse.with_answer_and_buttons(message, buttons)
-            dispatcher.utter_message(json_message=send_response(res.as_dict()))
+        if person_name is None:
             return {"user_name": None}
-        if (
-            person_name is not None
-            and name_confirmed is True
-            and validate_input_user_name(person_name)
-        ):
-            return {"user_name": person_name.lower()}
-        return {"user_name": None}
+        return {"user_name": person_name.lower()}
 
-    def validate_user_mail(
+
+def validate_user_mail(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
-    ) -> Dict[Text, Any]:
-        """Validate user_mail value."""
-        logger.debug(f"validate_user_info_form called. slot_value: {slot_value}")
+) -> Dict[Text, Any]:
+    """Validate user_mail value."""
+    logger.debug(f"validate_user_info_form called. slot_value: {slot_value}")
 
-        if slot_value and validate_input_user_mail(slot_value):
-            # validation succeeded, set the value of the "user_mail" slot
-            # to value
-            return {"user_mail": slot_value.lower()}
-        # validation failed, set this slot to None so that the
-        # user will be asked for the slot again
-        return {"user_mail": None}
+    if slot_value and validate_input_user_mail(slot_value):
+        # validation succeeded, set the value of the "user_mail" slot
+        # to value
+        return {"user_mail": slot_value.lower()}
+    # validation failed, set this slot to None so that the
+    # user will be asked for the slot again
+    return {"user_mail": None}
