@@ -27,6 +27,7 @@ intents:
   - consultant_inform
   - user_name_inform
   - user_mail_inform
+  - meeting_datetime_inform
 entities:
   - termin_medium
   - user_type
@@ -34,7 +35,17 @@ entities:
   - user_mail
   - person_name
   - name_confirmed
+  - meeting_datetime
 slots:
+  meeting_datetime:
+    mappings:
+      - type: from_entity
+        entity: meeting_datetime
+      - type: from_text
+        conditions:
+          - active_loop: make_meeting_form
+            requested_slot: meeting_datetime
+    type: text
   user_name_confirmed:
     type: bool
     initial_value: false
@@ -155,6 +166,9 @@ forms:
   consultant_form:
     required_slots:
       - consultant_name
+  make_meeting_form:
+    required_slots:
+      - meeting_datetime
 actions:
   - action_submit_termin
   - action_begruessung
@@ -185,6 +199,8 @@ actions:
   - action_switch_form
   - action_ask_consultant
   - action_handle_user_name_confirm
+  - action_submit_make_meeting_form
+  - action_ask_feedback
 
 session_config:
   session_expiration_time: 60

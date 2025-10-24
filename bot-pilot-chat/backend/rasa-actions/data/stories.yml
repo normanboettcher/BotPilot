@@ -120,14 +120,21 @@ stories:
       - slot_was_set:
           - requested_slot: null
       - active_loop: null
-
-  - story: happy path switch to consultant_form
-    steps:
       - action: action_switch_form
+
+  - story: happy path collect meeting_datetime
+    steps:
+      - action: make_meeting_form
+      - active_loop: make_meeting_form
       - slot_was_set:
-          - next_form_name: consultant_form
-      - action: consultant_form
-      - active_loop: consultant_form
+          - requested_slot: meeting_datetime
+      - intent: meeting_datetime_inform
+      - action: make_meeting_form
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_submit_make_meeting_form
+      - action: action_ask_feedback
 
   - story: collect user_name and name confirmed directly
     steps:
@@ -150,4 +157,3 @@ stories:
       - intent: deny
       - action: action_handle_user_name_confirm
       - action: user_info_form
-
