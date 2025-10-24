@@ -78,7 +78,7 @@ rules:
       - action: termin_form
       - active_loop: termin_form
 
-  - rule: End consultant form
+  - rule: switch to make_meeting_form
     condition:
       - active_loop: consultant_form
       - slot_was_set:
@@ -86,6 +86,11 @@ rules:
     steps:
       - action: consultant_form
       - active_loop: null
+      - action: action_switch_form
+      - slot_was_set:
+          - next_form_name: make_meeting_form
+      - action: make_meeting_form
+      - active_loop: make_meeting_form
 
   - rule: Switch to user_type_form
     condition:
@@ -181,3 +186,19 @@ rules:
       - intent: affirm
       - action: termin_form
       - active_loop: termin_form
+
+  - rule: submit all slots after make_meeting_form
+    condition:
+      - active_loop: make_meeting_form
+      - slot_was_set:
+          - requested_slot: null
+    steps:
+      - action: make_meeting_form
+      - active_loop: null
+      - action: action_submit_make_meeting_form
+      - action: action_ask_feedback
+
+  - rule: ask for feedback after submit make_meeting_form
+    steps:
+      - action: action_submit_make_meeting_form
+      - action: action_ask_feedback

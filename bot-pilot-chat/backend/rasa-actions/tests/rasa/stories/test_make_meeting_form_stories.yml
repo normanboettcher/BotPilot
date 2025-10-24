@@ -1,0 +1,39 @@
+version: "3.1"
+stories:
+  - story: happy path collect meeting_datetime
+    steps:
+      - action: make_meeting_form
+      - active_loop: make_meeting_form
+      - slot_was_set:
+          - requested_slot: meeting_datetime
+      - user: |
+          /meeting_datetime_inform{"meeting_datetime": "10.03.2022 10:00:00Z"}
+        intent: meeting_datetime_inform
+      - action: make_meeting_form
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_submit_make_meeting_form
+      - action: action_ask_feedback
+
+  - story: unhappy path collect meeting_datetime
+    steps:
+      - action: make_meeting_form
+      - active_loop: make_meeting_form
+      - slot_was_set:
+          - requested_slot: meeting_datetime
+      - user: |
+          am 30.12.25 bitte
+        intent: action_default_fallback
+      - action: make_meeting_form
+      - slot_was_set:
+          - requested_slot: meeting_datetime
+      - user: |
+          /meeting_datetime_inform{"meeting_datetime": "10.03.2022 10:00:00Z"}
+        intent: meeting_datetime_inform
+      - action: make_meeting_form
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_submit_make_meeting_form
+      - action: action_ask_feedback

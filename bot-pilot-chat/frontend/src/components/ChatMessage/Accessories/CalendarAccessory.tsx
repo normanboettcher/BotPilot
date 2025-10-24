@@ -57,7 +57,7 @@ export const CalendarAccessory: React.FC = () => {
   const now = dayjs();
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(now);
   const { eventIntervallViews } = useEventIntervall();
-  const { sendMessageAndGetResponse } = useMessageService();
+  const { sendDateMessageAndGetResponse } = useMessageService();
   return (
     <Box data-testid={'calendar-accessory'}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'de'}>
@@ -95,7 +95,7 @@ export const CalendarAccessory: React.FC = () => {
           }}
           onAccept={async () => {
             if (selectedDate) {
-              await sendMessageAndGetResponse(selectedDate.format('DD.MM.YYYY HH:mm'));
+              await sendDateMessageAndGetResponse(selectedDate);
             }
           }}
           value={selectedDate}

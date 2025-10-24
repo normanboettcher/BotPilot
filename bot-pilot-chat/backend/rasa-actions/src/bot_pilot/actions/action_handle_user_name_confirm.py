@@ -16,9 +16,10 @@ class ActionHandleUserNameConfirm(Action):
     def run(self, dispatcher, tracker, domain):
         person_name = next(tracker.get_latest_entity_values("person_name"), None)
         last_intent = tracker.get_intent_of_latest_message()
-
-        if not person_name:
-            return []
+        logger.debug(f"last intent: {last_intent}")
+        logger.debug(f"person name: {person_name}")
+        if person_name is None:
+            return [SlotSet("user_name", None)]
 
         if last_intent == "affirm":
             message = f"Perfekt, danke {person_name}!"
