@@ -146,6 +146,9 @@ stories:
           - requested_slot: user_name_confirmed
       - intent: affirm
       - action: user_info_form
+      - slot_was_set:
+          - requested_slot: user_email
+
 
   - story: collect user_name and name was denied in first step
     steps:
@@ -157,4 +160,3 @@ stories:
       - action: user_info_form
       - slot_was_set:
           - requested_slot: user_name
-      - action: user_info_form
