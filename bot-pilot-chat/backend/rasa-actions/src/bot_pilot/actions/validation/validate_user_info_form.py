@@ -33,6 +33,17 @@ class ValidateUserInfoForm(FormValidationAction):
         logger.debug(f"validate_user_info_form called for "
                      f"user_name_confirmed. slot_value: {slot_value}")
 
+        user_name_confirmed = next(
+            tracker.get_latest_entity_values("user_name_confirmed"), None)
+        person_name = next(tracker.get_latest_entity_values("person_name"), None)
+
+        if person_name is not None and user_name_confirmed is not None:
+            if user_name_confirmed == "true" or slot_value == '/affirm':
+                return {"user_name_confirmed": True}
+            elif user_name_confirmed == "false" or slot_value == '/deny':
+                return {"user_name_confirmed": False, "user_name": None}
+        return {"user_name_confirmed": None}
+
     def validate_user_name(
             self,
             slot_value: Any,
