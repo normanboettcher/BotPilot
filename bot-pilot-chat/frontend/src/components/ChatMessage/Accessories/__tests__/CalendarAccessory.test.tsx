@@ -20,10 +20,12 @@ import type { BusyEventResponse } from '../../../../domain/BusyEvent.ts';
 import * as message_service from '../../../../service/MessageService.ts';
 
 const useMessageServiceSpy = vi.spyOn(message_service, 'default');
+const sendDateMessageAndGetResponseMock = vi.fn();
 const sendMessageAndGetResponseMock = vi.fn();
 
 useMessageServiceSpy.mockReturnValue({
   sendMessageAndGetResponse: sendMessageAndGetResponseMock,
+  sendDateMessageAndGetResponse: sendDateMessageAndGetResponseMock,
 });
 vi.mock('../../../ChatInput/useHandleSend.ts');
 vi.mock('../useCalendarDetails.ts');
