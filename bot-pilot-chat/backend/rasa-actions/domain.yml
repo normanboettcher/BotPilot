@@ -34,7 +34,6 @@ entities:
   - termin_type
   - user_mail
   - person_name
-  - name_confirmed
   - meeting_datetime
 slots:
   meeting_datetime:
@@ -50,10 +49,22 @@ slots:
     type: bool
     initial_value: false
     mappings:
+      - type: from_intent
+        conditions:
+          - active_loop: user_info_form
+            requested_slot: user_name_confirmed
+        intent: affirm
+        value: true
+      - type: from_intent
+        conditions:
+          - active_loop: user_info_form
+            requested_slot: user_name_confirmed
+        intent: deny
+        value: false
       - type: custom
         conditions:
           - active_loop: user_info_form
-            requested_slot: user_name
+            requested_slot: user_name_confirmed
   next_form_name:
     mappings:
       - type: custom
