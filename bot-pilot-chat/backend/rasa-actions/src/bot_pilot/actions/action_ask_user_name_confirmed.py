@@ -13,8 +13,10 @@ class ActionAskUserNameConfirmed(Action):
     def run(self, dispatcher, tracker, domain):
         person_name = next(tracker.get_latest_entity_values("person_name"), None)
         if person_name is not None:
-            message = (f"Ich habe den Namen {bold(person_name)} verstanden."
-                       f"Ist das korrekt?")
+            message = (
+                f"Ich habe den Namen {bold(person_name)} verstanden."
+                f"Ist das korrekt?"
+            )
             buttons = make_affirm_deny_buttons()
             res = BotResponse.with_answer_and_buttons(message, buttons)
             dispatcher.utter_message(json_message=send_response(res.as_dict()))

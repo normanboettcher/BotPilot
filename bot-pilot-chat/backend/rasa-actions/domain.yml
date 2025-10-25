@@ -47,21 +47,16 @@ slots:
     type: text
   user_name_confirmed:
     type: bool
-    initial_value: false
     mappings:
       - type: from_intent
-        conditions:
-          - active_loop: user_info_form
-            requested_slot: user_name_confirmed
         intent: affirm
         value: true
-      - type: from_intent
         conditions:
           - active_loop: user_info_form
             requested_slot: user_name_confirmed
+      - type: from_intent
         intent: deny
         value: false
-      - type: custom
         conditions:
           - active_loop: user_info_form
             requested_slot: user_name_confirmed
@@ -208,7 +203,7 @@ actions:
   - action_ask_user_name
   - action_ask_user_mail
   - action_switch_form
-  - action_ask_consultant
+  - action_ask_consultant_name
   - action_handle_user_name_confirm
   - action_submit_make_meeting_form
   - action_ask_feedback

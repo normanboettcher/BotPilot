@@ -24,7 +24,7 @@ stories:
           - requested_slot: meeting_datetime
       - user: |
           am 30.12.25 bitte
-        intent: action_default_fallback
+        intent: nlu_fallback
       - action: make_meeting_form
       - slot_was_set:
           - requested_slot: meeting_datetime

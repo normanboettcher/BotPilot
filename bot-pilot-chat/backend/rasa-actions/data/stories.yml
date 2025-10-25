@@ -116,7 +116,6 @@ stories:
       - active_loop: consultant_form
       - slot_was_set:
           - requested_slot: consultant_name
-      - action: action_ask_consultant
       - intent: consultant_inform
       - action: consultant_form
       - slot_was_set:
