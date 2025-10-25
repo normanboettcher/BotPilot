@@ -93,8 +93,10 @@ stories:
       - slot_was_set:
           - requested_slot: user_name
       - intent: user_name_inform
+      - slot_was_set:
+          - requested_slot: user_name_confirmed
+      - action: user_info_form
       - intent: affirm
-      - action: action_handle_user_name_confirm
       - action: user_info_form
 
   - story: happy path collect user_mail
@@ -114,7 +116,6 @@ stories:
       - active_loop: consultant_form
       - slot_was_set:
           - requested_slot: consultant_name
-      - action: action_ask_consultant
       - intent: consultant_inform
       - action: consultant_form
       - slot_was_set:
@@ -141,19 +142,20 @@ stories:
       - action: user_info_form
       - active_loop: user_info_form
       - slot_was_set:
-          - requested_slot: user_name
-      - intent: user_name_inform
+          - requested_slot: user_name_confirmed
       - intent: affirm
-      - action: action_handle_user_name_confirm
       - action: user_info_form
+      - slot_was_set:
+          - requested_slot: user_email
+
 
   - story: collect user_name and name was denied in first step
     steps:
       - action: user_info_form
       - active_loop: user_info_form
       - slot_was_set:
-          - requested_slot: user_name
-      - intent: user_name_inform
+          - requested_slot: user_name_confirmed
       - intent: deny
-      - action: action_handle_user_name_confirm
       - action: user_info_form
+      - slot_was_set:
+          - requested_slot: user_name

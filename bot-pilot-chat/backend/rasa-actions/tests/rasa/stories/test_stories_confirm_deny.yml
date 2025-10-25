@@ -5,15 +5,17 @@ stories:
       - action: user_info_form
       - active_loop: user_info_form
       - slot_was_set:
-          - user_name_confirmed: false
           - requested_slot: user_name
       - user: |-
           Mein Name ist [Jane Doe](person_name).
         intent: user_name_inform
       - action: user_info_form
+      - slot_was_set:
+          - requested_slot: user_name_confirmed
       - intent: affirm
       - slot_was_set:
           - user_name_confirmed: true
+          - user_name: Jane Doe
       - action: user_info_form
       - active_loop: user_info_form
       - slot_was_set:
@@ -25,15 +27,16 @@ stories:
       - action: user_info_form
       - active_loop: user_info_form
       - slot_was_set:
-          - user_name_confirmed: false
           - requested_slot: user_name
       - user: |-
           Mein Name ist [Jane Doe](person_name).
         intent: user_name_inform
       - action: user_info_form
+      - slot_was_set:
+          - user_name: Jane Doe
+          - requested_slot: user_name_confirmed
       - intent: deny
       - slot_was_set:
-          - user_name_confirmed: false
           - requested_slot: user_name
       - action: user_info_form
       - active_loop: user_info_form
@@ -41,9 +44,13 @@ stories:
           Nochmal: ich heiße [Jane Doe](person_name)."
         intent: user_name_inform
       - action: user_info_form
+      - slot_was_set:
+          - user_name: Jane Doe
+          - requested_slot: user_name_confirmed
       - intent: affirm
       - slot_was_set:
           - user_name_confirmed: true
+          - user_name: Jane Doe
       - action: user_info_form
       - active_loop: user_info_form
       - slot_was_set:

@@ -34,7 +34,6 @@ entities:
   - termin_type
   - user_mail
   - person_name
-  - name_confirmed
   - meeting_datetime
 slots:
   meeting_datetime:
@@ -48,12 +47,19 @@ slots:
     type: text
   user_name_confirmed:
     type: bool
-    initial_value: false
     mappings:
-      - type: custom
+      - type: from_intent
+        intent: affirm
+        value: true
         conditions:
           - active_loop: user_info_form
-            requested_slot: user_name
+            requested_slot: user_name_confirmed
+      - type: from_intent
+        intent: deny
+        value: false
+        conditions:
+          - active_loop: user_info_form
+            requested_slot: user_name_confirmed
   next_form_name:
     mappings:
       - type: custom
@@ -197,10 +203,11 @@ actions:
   - action_ask_user_name
   - action_ask_user_mail
   - action_switch_form
-  - action_ask_consultant
+  - action_ask_consultant_name
   - action_handle_user_name_confirm
   - action_submit_make_meeting_form
   - action_ask_feedback
+  - action_ask_user_name_confirmed
 
 session_config:
   session_expiration_time: 60

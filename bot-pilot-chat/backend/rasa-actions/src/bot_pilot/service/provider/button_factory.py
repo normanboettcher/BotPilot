@@ -26,7 +26,7 @@ def make_buttons_tax_consultant(customer_id: str) -> list[dict]:
 
     def make_consultant_button(c: TaxConsultant):
         name = f"{c.tax_consultant_firstname} {c.tax_consultant_lastname}"
-        payload = "/consultant_inform{" f'"consultant_name":"{name}"' + "}"
+        payload = '/consultant_inform{"person_name":' + f'"{name}"' + "}"
         return ButtonOption(name, payload, emoji=":consultant:")
 
     return [

@@ -56,5 +56,5 @@ def test_make_buttons_tax_consultant(service_mock):
     assert result_buttons[0].get("title") == f'{emoji.emojize(":consultant:")} John Doe'
     assert (
         result_buttons[0].get("payload")
-        == '/consultant_inform{"consultant_name":"John Doe"}'
+        == '/consultant_inform{"person_name":"John Doe"}'
     )

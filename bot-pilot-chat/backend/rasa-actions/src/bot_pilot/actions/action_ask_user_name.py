@@ -13,7 +13,7 @@ class ActionAskUserName(Action):
         message = (
             "Bitte geben Sie Ihren Vor- und Nachnamen ein. "
             "Damit ich es besser verstehen kann, bspw. in der folgenden Form: "
-            f"{bold('Mein Name ist Vorname Nachname')}"
+            f"{bold('Mein Name ist: Vorname Nachname')}"
         )
         response = BotResponse.with_answer(message)
         dispatcher.utter_message(json_message=send_response(response.as_dict()))

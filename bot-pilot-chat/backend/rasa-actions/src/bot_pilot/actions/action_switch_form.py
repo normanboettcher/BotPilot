@@ -20,6 +20,8 @@ class ActionSwitchForm(Action):
             next_form_name = "user_info_form"
         elif last_action_name == "user_info_form":
             next_form_name = "consultant_form"
+        elif last_action_name == "consultant_form":
+            next_form_name = "make_meeting_form"
         return [
             SlotSet("next_form_name", next_form_name),
         ]
