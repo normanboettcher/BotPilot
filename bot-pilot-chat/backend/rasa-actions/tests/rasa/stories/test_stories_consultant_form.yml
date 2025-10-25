@@ -30,6 +30,8 @@ stories:
       - user: |-
           Mein Name ist [Jane Doe](person_name).
         intent: user_name_inform
+      - entities:
+          - person_name: Jane Doe
       - action: user_info_form
       - slot_was_set:
           - user_name: Jane Doe
@@ -43,6 +45,8 @@ stories:
       - user: |-
           Sie erreichen mich unter der Adresse: [jane.doe@email.de](user_mail)
         intent: user_mail_inform
+      - entities:
+          - user_mail: jane.doe@email.de
       - action: user_info_form
       - slot_was_set:
           - user_mail: jane.doe@email.de

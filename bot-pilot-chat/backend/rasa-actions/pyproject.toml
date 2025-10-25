@@ -52,7 +52,7 @@ deps = [
     "https://github.com/explosion/spacy-models/releases/download/de_core_news_md-3.7.0/de_core_news_md-3.7.0.tar.gz"
 ]
 commands = [
-    ["rasa", "test", "--stories", "tests/rasa/stories"]
+    ["rasa", "test", "nlu", "--fail-on-prediction-errors"]
 ]
 
 [tool.tox.env.rasa_story_tests]
