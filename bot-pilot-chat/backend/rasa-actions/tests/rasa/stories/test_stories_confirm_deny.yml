@@ -9,18 +9,19 @@ stories:
       - user: |-
           Mein Name ist [Jane Doe](person_name).
         intent: user_name_inform
+      - entities:
+          - person_name: Jane Doe
       - action: user_info_form
       - slot_was_set:
+          - user_name: Jane Doe
           - requested_slot: user_name_confirmed
       - intent: affirm
       - slot_was_set:
           - user_name_confirmed: true
           - user_name: Jane Doe
+          - requested_slot: user_mail
       - action: user_info_form
       - active_loop: user_info_form
-      - slot_was_set:
-          - user_name: Jane Doe
-          - requested_slot: user_mail
 
   - story: happy path user name was denied at first
     steps:
@@ -31,6 +32,8 @@ stories:
       - user: |-
           Mein Name ist [Jane Doe](person_name).
         intent: user_name_inform
+      - entities:
+          - person_name: Jane Doe
       - action: user_info_form
       - slot_was_set:
           - user_name: Jane Doe
@@ -43,6 +46,8 @@ stories:
       - user: |-
           Nochmal: ich heiße [Jane Doe](person_name)."
         intent: user_name_inform
+      - entities:
+          - person_name: Jane Doe
       - action: user_info_form
       - slot_was_set:
           - user_name: Jane Doe
@@ -51,11 +56,10 @@ stories:
       - slot_was_set:
           - user_name_confirmed: true
           - user_name: Jane Doe
+          - requested_slot: user_mail
       - action: user_info_form
       - active_loop: user_info_form
-      - slot_was_set:
-          - user_name: Jane Doe
-          - requested_slot: user_mail
+
 
 
 
