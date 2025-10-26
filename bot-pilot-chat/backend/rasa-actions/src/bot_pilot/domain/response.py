@@ -6,13 +6,13 @@ from typing import List
 class BotResponse:
 
     def __init__(
-            self,
-            answer: str,
-            success: bool,
-            score=None,
-            sender=None,
-            buttons: List[dict] | None = None,
-            accessory=None,
+        self,
+        answer: str,
+        success: bool,
+        score=None,
+        sender=None,
+        buttons: List[dict] | None = None,
+        accessory=None,
     ):
         self._success = success
         self._timestamp = datetime.now().strftime("%d.%m.%Y %H:%M")
