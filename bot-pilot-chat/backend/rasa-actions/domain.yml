@@ -208,6 +208,7 @@ actions:
   - action_submit_make_meeting_form
   - action_ask_feedback
   - action_ask_user_name_confirmed
+  - action_ask_meeting_datetime
 
 session_config:
   session_expiration_time: 60
