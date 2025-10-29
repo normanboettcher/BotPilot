@@ -40,6 +40,9 @@ slots:
     mappings:
       - type: from_entity
         entity: meeting_datetime
+        conditions:
+          - active_loop: make_meeting_form
+            requested_slot: meeting_datetime
       - type: from_text
         conditions:
           - active_loop: make_meeting_form
@@ -200,6 +203,8 @@ actions:
   - action_ask_user_type
   - action_stop
   - validate_user_info_form
+  - validate_consultant_form
+  - validate_make_meeting_form
   - action_ask_user_name
   - action_ask_user_mail
   - action_switch_form
@@ -208,6 +213,7 @@ actions:
   - action_submit_make_meeting_form
   - action_ask_feedback
   - action_ask_user_name_confirmed
+  - action_ask_meeting_datetime
 
 session_config:
   session_expiration_time: 60

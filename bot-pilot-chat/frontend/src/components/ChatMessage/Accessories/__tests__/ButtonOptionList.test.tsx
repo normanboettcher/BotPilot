@@ -8,11 +8,9 @@ import * as message_service from '../../../../service/MessageService.ts';
 
 const useMessageServiceSpy = vi.spyOn(message_service, 'default');
 const sendMessageAndGetResponseMock = vi.fn();
-const sendDateMessageAndGetResponseMock = vi.fn();
 
 useMessageServiceSpy.mockReturnValue({
   sendMessageAndGetResponse: sendMessageAndGetResponseMock,
-  sendDateMessageAndGetResponse: sendDateMessageAndGetResponseMock,
 });
 describe('ButtonOptionList', () => {
   beforeEach(() => {

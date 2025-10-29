@@ -14,7 +14,9 @@ import type { BusyEventResponse } from '../../../domain/BusyEvent.ts';
 import getBusyEvents from './getBusyEvents.ts';
 import type { CalendarDetails } from '../../../domain/CalendarDetails.ts';
 import useMessageService from '../../../service/MessageService.ts';
+import utc from 'dayjs/plugin/utc';
 
+dayjs.extend(utc);
 const useEventIntervall = (): { eventIntervallViews: DateOrTimeView[] } => {
   return { eventIntervallViews: ['year', 'month', 'day', 'hours', 'minutes'] };
 };
@@ -57,7 +59,7 @@ export const CalendarAccessory: React.FC = () => {
   const now = dayjs();
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(now);
   const { eventIntervallViews } = useEventIntervall();
-  const { sendDateMessageAndGetResponse } = useMessageService();
+  const { sendMessageAndGetResponse } = useMessageService();
   return (
     <Box data-testid={'calendar-accessory'}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'de'}>
@@ -95,7 +97,11 @@ export const CalendarAccessory: React.FC = () => {
           }}
           onAccept={async () => {
             if (selectedDate) {
-              await sendDateMessageAndGetResponse(selectedDate);
+              await sendMessageAndGetResponse(
+                selectedDate.toISOString(),
+                undefined,
+                true
+              );
             }
           }}
           value={selectedDate}

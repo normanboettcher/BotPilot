@@ -62,6 +62,10 @@ class BotResponse:
         return BotResponse(answer, success=True, sender="bot")
 
     @staticmethod
+    def with_calendar(answer: str):
+        return BotResponse(answer, success=True, sender="bot", accessory="calendar")
+
+    @staticmethod
     def with_answer_and_score(answer: str, score: float):
         return BotResponse(answer, success=True, score=score, sender="bot")
 
