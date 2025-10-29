@@ -16,7 +16,8 @@ export const ButtonOptionComponent: React.FC<GeneralButtonProps & Props> = ({
   return (
     <Button
       sx={{
-        fontSize: '0.7rem',
+        fontSize: '0.8rem',
+        textTransform: 'none',
       }}
       value={button.payload}
       title={button.title}
