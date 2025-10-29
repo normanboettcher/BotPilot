@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Box, Stack, Typography, useTheme } from '@mui/material';
 import type { ChatMessageText } from '../../domain/ChatMessageText.ts';
 import useBotResponsive from '../../hooks/useBotResponsive.ts';
 import AlarmClock from '../icons/AlarmClock.tsx';
 import Markdown from 'react-markdown';
 import ChatMessageTextComponent from './ChatMessageTextComponent.tsx';
-import CalendarAccessory from './Accessories/CalendarAccessory.tsx';
-import ButtonOptionList from './Accessories/ButtonOptionList.tsx';
 
 type Props = {
   msg: ChatMessageText;
@@ -16,6 +14,12 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
   const { sender, message: text, timestamp } = msg;
   const isUser = sender === 'user';
   const theme = useTheme();
+  const CalendarAccessory = React.lazy(
+    () => import('./Accessories/CalendarAccessory.tsx')
+  );
+  const ButtonOptionList = React.lazy(
+    () => import('./Accessories/ButtonOptionList.tsx')
+  );
   const { isDarkTheme } = useBotResponsive();
   // Farben & Styles je nach Absender
   const backgroundColor = isUser
@@ -69,10 +73,12 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
       >
         {text}
       </Markdown>
-      {msg.accessory === 'calendar' && <CalendarAccessory />}
-      {msg.accessory === 'buttons' && msg.buttons && (
-        <ButtonOptionList buttons={msg.buttons} />
-      )}
+      <Suspense fallback={null}>
+        {msg.accessory === 'calendar' && <CalendarAccessory />}
+        {msg.accessory === 'buttons' && msg.buttons && (
+          <ButtonOptionList buttons={msg.buttons} />
+        )}
+      </Suspense>
       <Stack
         direction={'row'}
         pt={1}

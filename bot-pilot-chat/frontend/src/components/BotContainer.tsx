@@ -1,12 +1,12 @@
 import { Box, Stack } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import ChatBotButton from './Buttons/ChatBotButton.tsx';
-import Chatbox from './Chatbox';
 import useBotResponsive from '../hooks/useBotResponsive.ts';
 
 const BotContainer = (): React.ReactNode => {
   const [visible, setVisible] = useState<boolean>(false);
   const { isMobile } = useBotResponsive();
+  const Chatbox = React.lazy(() => import('./Chatbox'));
 
   useEffect(() => {
     const setVH = () => {
@@ -45,7 +45,9 @@ const BotContainer = (): React.ReactNode => {
       >
         <ChatBotButton onClick={() => setVisible(!visible)} />
       </Box>
-      <Chatbox visible={visible} />
+      <Suspense>
+        <Chatbox visible={visible} />
+      </Suspense>
     </Stack>
   );
 };
