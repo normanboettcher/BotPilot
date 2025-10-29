@@ -18,7 +18,7 @@ const ButtonOptionList: React.FC<Props> = ({ buttons }) => {
   };
   return (
     <Box>
-      <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 8 }}>
+      <Grid container spacing={{ xs: 2, md: 2 }} columns={1}>
         {(selectedIndex !== null ? [buttons[selectedIndex]] : buttons).map(
           (option, index) => (
             <Grid key={index} size={{ xs: 2, sm: 4, md: 4 }}>
