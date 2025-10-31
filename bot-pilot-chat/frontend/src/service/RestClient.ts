@@ -6,9 +6,10 @@ export interface RestClient {
 }
 
 const useRestClient = (): RestClient => {
+  const VITE_RASA_API_URL = import.meta.env.VITE_RASA_API_URL;
   const send = async (query: Query) => {
     try {
-      return await fetch(`http://192.168.178.65:5005/webhooks/rest/webhook`, {
+      return await fetch(`${VITE_RASA_API_URL}/webhooks/rest/webhook`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
