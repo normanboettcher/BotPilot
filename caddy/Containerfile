@@ -1,0 +1,3 @@
+FROM caddy:latest
+COPY caddy-dev.json /etc/caddy/caddy-dev.json
+CMD ["caddy", "run", "--config", "/etc/caddy/caddy-dev.json"]
