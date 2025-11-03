@@ -11,9 +11,9 @@
           <mxGeometry x="370" y="130" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell id="uVgmXxveCOXLxYAD8tpp-6" value="" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="170" y="200" width="570" height="320" as="geometry" />
+          <mxGeometry x="150" y="200" width="590" height="320" as="geometry" />
         </mxCell>
-        <mxCell id="uVgmXxveCOXLxYAD8tpp-7" value="Red Hat Enterpise Linux 10" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
+        <mxCell id="uVgmXxveCOXLxYAD8tpp-7" value="Red Hat Enterpise Linux 10 Virtual Machine" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" vertex="1" parent="1">
           <mxGeometry x="365" y="160" width="170" height="26" as="geometry" />
         </mxCell>
         <mxCell id="uVgmXxveCOXLxYAD8tpp-3" value="&amp;lt;&amp;lt; artifact &amp;gt;&amp;gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" vertex="1" parent="1">
