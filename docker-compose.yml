@@ -1,0 +1,16 @@
+name: 'bot-pilot-dev'
+networks:
+  caddy-dev:
+services:
+  caddy-dev:
+    image: caddy:latest
+    container_name: caddy-dev
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - caddy-dev
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./bot-pilot-chat/frontend/dist:/www/apps/bot-pilot-frontend

@@ -1,3 +1,4 @@
 FROM caddy:latest
-COPY caddy-dev.json /etc/caddy/caddy-dev.json
-CMD ["caddy", "run", "--config", "/etc/caddy/caddy-dev.json"]
+COPY bot-pilot-chat/frontend/dist/ www/apps/bot-pilot-frontend/
+COPY caddy/Caddyfile /etc/caddy/Caddyfile
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile"]

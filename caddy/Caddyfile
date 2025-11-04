@@ -1,0 +1,8 @@
+{
+	local_certs
+}
+
+dev.staging.bot-pilot.de {
+	file_server
+	root * /www/apps/bot-pilot-frontend
+}
