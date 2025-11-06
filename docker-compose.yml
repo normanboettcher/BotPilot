@@ -7,10 +7,10 @@ services:
     container_name: caddy-dev
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:8080"
+      - "8443:8443"
     networks:
       - caddy-dev
     volumes:
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
-      - ./bot-pilot-chat/frontend/dist:/www/apps/bot-pilot-frontend
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro,Z
+      - ./bot-pilot-chat/frontend/dist:/var/www/bot-pilot-frontend:ro

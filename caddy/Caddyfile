@@ -2,7 +2,7 @@
 	local_certs
 }
 
-dev.staging.bot-pilot.de {
+dev.staging.bot-pilot:8443 {
 	file_server
-	root * /www/apps/bot-pilot-frontend
+	root * /var/www/bot-pilot-frontend
 }
