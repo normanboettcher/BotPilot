@@ -1,0 +1,14 @@
+.git
+.gitignore
+.env.local
+.prettierignore
+docker-compose.yml
+Containerfile
+eslint.config.js
+build.sh
+prettier.config.js
+vitest.config.ts
+node_modules
+dist
+.idea
+.dockerignore
