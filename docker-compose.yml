@@ -12,5 +12,6 @@ services:
     networks:
       - caddy-dev
     volumes:
+      - ./caddy/certs/:/root/certs/:ro,Z
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro,Z
       - ./bot-pilot-chat/frontend/dist:/var/www/bot-pilot-frontend:ro

@@ -2,7 +2,8 @@
 	local_certs
 }
 
-dev.staging.bot-pilot:8443 {
+dev.staging.bot-pilot.de:8443 {
+	tls /root/certs/dev.staging.bot-pilot.de.pem /root/certs/dev.staging.bot-pilot.de-key.pem
 	file_server
 	root * /var/www/bot-pilot-frontend
 }
