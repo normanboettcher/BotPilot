@@ -24,7 +24,7 @@ jobs:
         with:
           registry: docker.io
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
           
       - name: Build and Push Frontend container image
         uses: docker/build-push-action@v6
