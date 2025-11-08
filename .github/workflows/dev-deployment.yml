@@ -13,12 +13,10 @@ jobs:
     runs-on: dev-stage
 
     steps:
-      - name: Log in to docker.io
-        uses: redhat-actions/podman-login@v1
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-          registry: docker.io
+      - name: Login to Docker Hub manually for Podman
+        run: |
+          podman login docker.io -u "${{ secrets.DOCKER_HUB_USERNAME }}" -p "${{ secrets.DOCKER_HUB_TOKEN }}"
+          echo "REGISTRY_AUTH_FILE=$(podman info --format '{{ .Store.ConfigFile }}')" >> $GITHUB_ENV
       - name: Fetch current configs
         run: |
           ssh deploy@localhost "cd /home/deploy/apps/bot-pilot-config"
