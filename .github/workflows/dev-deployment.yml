@@ -12,8 +12,12 @@ jobs:
     runs-on: dev-stage
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Log in to docker.io
+        uses: docker/login-action@v3
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
       - name: Fetch current configs
         run: |
           ssh deploy@localhost "cd /home/deploy/apps/bot-pilot-config"
