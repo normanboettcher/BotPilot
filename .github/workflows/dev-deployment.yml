@@ -22,9 +22,8 @@ jobs:
         run: |
           ssh deploy@localhost "cd /home/deploy/apps/bot-pilot-config"
           echo "Fetch current config files from bot-pilot-config"
-          git fetch
           echo "Pull new config files for dev-stage"
-          git pull
+        
           
       - name: Deploy application services
         run: |
