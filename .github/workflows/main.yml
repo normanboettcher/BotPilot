@@ -1,0 +1,31 @@
+name: Deploy Dev-Stage CI
+
+on:
+  workflow_run:
+    workflows: ["Docker Image CI"]  
+    types:
+      - completed
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: dev-stage
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Fetch current configs
+        working-directory: ~/apps/bot-pilot-config
+        run: |
+          echo "Fetch current config files from bot-pilot-config"
+          git fetch
+          echo "Pull new config files for dev-stage"
+          git pull
+          
+      - name: Deploy application
+        working-directory: ~/deployment
+        run: |
+          echo "Stopping all services in dev-stage"
+          podman-compose down
+          echo "Start services in dev-stage"
+          podman-compose up --detach
