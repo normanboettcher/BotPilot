@@ -15,7 +15,7 @@ jobs:
       - name: Log in to docker.io
         uses: redhat-actions/podman-login@v1
         with:
-          username: ${{ secrets.DOCKER_HUB_USER }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
           registry: docker.io
       - name: Fetch current configs
