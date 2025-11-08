@@ -15,16 +15,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Fetch current configs
-        working-directory: ~/apps/bot-pilot-config
         run: |
+          ssh deploy@localhost "cd /home/deploy/apps/bot-pilot-config"
           echo "Fetch current config files from bot-pilot-config"
           git fetch
           echo "Pull new config files for dev-stage"
           git pull
           
-      - name: Deploy application
-        working-directory: ~/deployment
+      - name: Deploy application services
         run: |
+          ssh deploy@localhost "cd /home/deploy/deployment"
           echo "Stopping all services in dev-stage"
           podman-compose down
           echo "Start services in dev-stage"
