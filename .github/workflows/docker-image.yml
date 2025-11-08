@@ -1,0 +1,37 @@
+name: Docker Image CI
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches: [ "main" ]
+
+jobs:
+  run-on-merge:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to docker.io
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          
+      - name: Build and Push Frontend container image
+        uses: docker/build-push-action@v6
+        with:
+          context: bot-pilot-chat/frontend/
+          push: true
+          tags: docker.io/normanboettcher/bot-pilot:frontend-latest
+      - name: Post Build Message
+        run: echo "Frontend Image bot-pilot:frontend-latest erfolgreich hochgeladen!"
+        
+
+        
