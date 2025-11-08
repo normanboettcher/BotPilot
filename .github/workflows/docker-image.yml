@@ -30,6 +30,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: bot-pilot-chat/frontend/
+          file: bot-pilot-chat/frontend/Containerfile
           push: true
           tags: docker.io/normanboettcher/bot-pilot:frontend-latest
       - name: Post Build Message
