@@ -1,0 +1,26 @@
+name: 'bot-pilot-dev'
+networks:
+  caddy-dev:
+services:
+  caddy-dev:
+    image: caddy:latest
+    container_name: caddy-dev
+    restart: unless-stopped
+    ports:
+      - "8443:8443"
+    networks:
+      - caddy-dev
+    volumes:
+      - ./caddy/certs/:/root/certs/:ro,Z
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro,Z
+    depends_on:
+      - bot-pilot-frontend
+
+  bot-pilot-frontend:
+    image: docker.io/normanboettcher/bot-pilot:frontend-latest
+    container_name: bot-pilot-frontend
+    restart: unless-stopped
+    networks:
+      - caddy-dev
+    expose:
+      - "80"
