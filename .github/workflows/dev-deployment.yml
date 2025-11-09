@@ -21,13 +21,13 @@ jobs:
       - name: Fetch current configs
         run: |
           echo "Fetch current config files from bot-pilot-config"
-          ssh deploy@localhost "cd /home/deploy/apps/bot-pilot-config && git fetch && git reset --hard origin/main"
+          cd /home/npbtst/apps/bot-pilot-config && git fetch && git reset --hard origin/main
           echo "Current config files fetched successfully"
         
           
       - name: Deploy application services
         run: |
           echo "Stopping all services in dev-stage"
-          ssh deploy@localhost "cd /home/deploy/apps/bot-pilot-config/deployment && podman-compose down"
+          cd /home/nbptst/apps/bot-pilot-config/deployment && podman-compose down
           echo "Start services in dev-stage"
-          ssh deploy@localhost "cd /home/deploy/apps/bot-pilot-config/deployment && podman-compose up --detach"
+          cd /home/nbptst/apps/bot-pilot-config/deployment && podman-compose up -d
