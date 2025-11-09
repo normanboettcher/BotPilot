@@ -27,7 +27,6 @@ jobs:
           
       - name: Deploy application services
         run: |
-          env | grep -E 'XDG|HOME|USER|PATH'
           echo "Stopping all services in dev-stage"
           cd /home/nbptst/apps/bot-pilot-config/deployment && podman-compose down
           echo "Start services in dev-stage"
