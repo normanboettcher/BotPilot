@@ -28,6 +28,11 @@ jobs:
           echo "RUNTIME: $XDG_RUNTIME_DIR"
           loginctl show-user $(id -un)
           systemctl --user status podman.socket || echo "no user socket"
+      - name: Prepare Podman Env
+        run: |
+          export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+          export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
+          export HOME="/home/nbptst"
 
       - name: Deploy Applications to Dev
         run: |
