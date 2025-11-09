@@ -23,6 +23,7 @@ jobs:
           echo "Fetch current config files from bot-pilot-config"
           cd /home/nbptst/apps/bot-pilot-config && git fetch && git reset --hard origin/main
           echo "Current config files fetched successfully"
-      - name: Deploy over SSH
+      - name: Deploy Applications to Dev
         run: |
+          whoami
           cd /home/nbptst/apps/bot-pilot-config/deployment && podman-compose down --remove-orphans && podman-compose up -d
