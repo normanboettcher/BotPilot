@@ -28,8 +28,6 @@ jobs:
       - name: Deploy application services
         run: |
           echo "Stopping all services in dev-stage"
-          podman system migrate || true
           cd /home/nbptst/apps/bot-pilot-config/deployment && podman-compose down --remove-orphans
           echo "Start services in dev-stage"
-          podman system migrate || true
           cd /home/nbptst/apps/bot-pilot-config/deployment && podman-compose up -d --build
