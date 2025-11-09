@@ -25,4 +25,4 @@ jobs:
           echo "Current config files fetched successfully"
       - name: Deploy over SSH
         run: |
-          ssh nbptst@localhost 'cd /home/nbptst/apps/bot-pilot-config/deployment && podman-compose down --remove-orphans && podman-compose up -d'
+          cd /home/nbptst/apps/bot-pilot-config/deployment && podman-compose down --remove-orphans && podman-compose up -d
