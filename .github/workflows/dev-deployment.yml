@@ -23,6 +23,12 @@ jobs:
           echo "Fetch current config files from bot-pilot-config"
           cd /home/nbptst/apps/bot-pilot-config && git fetch && git reset --hard origin/main
           echo "Current config files fetched successfully"
+      - name: Debug Env
+        run: |
+          echo "RUNTIME: $XDG_RUNTIME_DIR"
+          loginctl show-user $(id -un)
+          systemctl --user status podman.socket || echo "no user socket"
+
       - name: Deploy Applications to Dev
         run: |
           whoami
