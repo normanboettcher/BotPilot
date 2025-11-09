@@ -20,15 +20,14 @@ jobs:
           echo "REGISTRY_AUTH_FILE=$(podman info --format '{{ .Store.ConfigFile }}')" >> $GITHUB_ENV
       - name: Fetch current configs
         run: |
-          ssh deploy@localhost "cd /home/deploy/apps/bot-pilot-config"
           echo "Fetch current config files from bot-pilot-config"
-          echo "Pull new config files for dev-stage"
+          ssh deploy@localhost "cd /home/deploy/apps/bot-pilot-config && git fetch && git reset --hard origin/main"
+          echo "Current config files fetched successfully"
         
           
       - name: Deploy application services
         run: |
-          ssh deploy@localhost "cd /home/deploy/deployment"
           echo "Stopping all services in dev-stage"
-          podman-compose down
+          ssh deploy@localhost "cd /home/deploy/apps/bot-pilot-config/deployment && podman-compose down"
           echo "Start services in dev-stage"
-          podman-compose up --detach
+          ssh deploy@localhost "cd /home/deploy/apps/bot-pilot-config/deployment && podman-compose up --detach"
