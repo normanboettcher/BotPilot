@@ -25,4 +25,5 @@ jobs:
           echo "Current config files fetched successfully"
       - name: Deploy Applications to Dev
         run: |
+          export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
           cd /home/nbptst/apps/bot-pilot-config/deployment && docker compose down && docker compose up -d
