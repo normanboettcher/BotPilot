@@ -1,4 +1,4 @@
-#                        
+#                                  
 
 **About arc42**
 
@@ -133,7 +133,15 @@ Important Interfaces
 
 # Deployment View
 
-## Infrastructure Dev-Stage
+## Infrastructure Dev-Stage - A High-Level View
+
+The following deployment view shows the infrastructure elements used in the
+development stage of the system. At this stage of documentation it shows only the High-
+Level components of the infrastructure and how they are connected.
+
+![Deployment View Dev Stage MVP-Phase High Level](images/deployment_view/deployment_view_dev_stage_mvp_high_level.png)
+
+## Infrastructure Dev-Stage - A detailed View
 
 The following infrastructure elements are used in the development
 stage of the system.
