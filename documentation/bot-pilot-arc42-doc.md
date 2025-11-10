@@ -1,4 +1,4 @@
-#                  
+#                                  
 
 **About arc42**
 
@@ -133,7 +133,15 @@ Important Interfaces
 
 # Deployment View
 
-## Infrastructure Dev-Stage
+## Infrastructure Dev-Stage - A High-Level View
+
+The following deployment view shows the infrastructure elements used in the
+development stage of the system. At this stage of documentation it shows only the High-
+Level components of the infrastructure and how they are connected.
+
+![Deployment View Dev Stage MVP-Phase High Level](images/deployment_view/deployment_view_dev_stage_mvp_high_level.png)
+
+## Infrastructure Dev-Stage - A detailed View
 
 The following infrastructure elements are used in the development
 stage of the system.
@@ -147,15 +155,28 @@ a developers machine.
 A client website can import the bot-pilot using *iframe* or *script* tag. The *src*
 needs
 to point to the Dev-Stage Server from where the frontend is served.
-As a Loadbalancer, a simple *Caddy* webserver is used. This webserver is responsible for
+As an API Gateway, a *Caddy* webserver is used. This webserver is responsible for
 routing the requests to the frontend. While developing in the MVP-Phase, the
-microservcies for
-backend functionality, the frontend and the caddy webserver are all running on the same
-machine.
+microservices for backend functionality, the frontend and the caddy webserver are all
+running on the same machine.
 To run them, a docker-compose file is used. Doing so, the early product stage can be
-deployed easily
-to evaluate the infrastructure and the architecture at this very early stage.
-The frontend is served using the React framework with Typescript and vite as bundle
+deployed easily to evaluate the infrastructure and the architecture at this very early
+stage.
+The backend services are running behind another API Gateway (Caddy) and are not exposed
+to the outside world. The frontend can access the backend services using the API
+Gateway.
+The backend services are using persistent Storages. For Relational Databases, a
+MariaDB database is used. In the MVP-Stage, there are three different databases of
+interest:
+
+- **model_storage_dev**: Contains the trained model which the *rasa-core* service uses
+  for predictions
+- **calendar_connectors_dev**: The Storage for API Tokens for the calendar connectors
+  such as *Google Calendar API* (MVP-Stage)
+- **user_storage_dev**: The Storage for the user data such as the user's name, address,
+  etc. (MVP-Stage)
+
+The frontend is served using the React framework with Typescript and Vite as bundle
 tool.
 The Rasa Server (Core + NLU) is running with `Sanic`, an asynchronous web framework.
 The Rasa Action-Server is running with `Flask` and is not implemented asynchronous.
