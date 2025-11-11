@@ -26,4 +26,4 @@ jobs:
       - name: Deploy Applications to Dev
         run: |
           export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
-          cd /home/nbptst/apps/bot-pilot-config/deployment && docker compose down && docker compose up -d
+          cd /home/nbptst/apps/bot-pilot-config/deployment && docker compose down && docker compose pull && docker compose up -d
