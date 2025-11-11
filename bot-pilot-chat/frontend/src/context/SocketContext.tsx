@@ -11,7 +11,7 @@ import type { BotResponse } from '../domain/BotResponse.ts';
 import useMessageCreator from '../service/MessageCreator.ts';
 import { useChatverlauf } from './ChatContext.tsx';
 
-const socket: Socket = io('http://localhost:5005');
+const socket: Socket = io('/api/socket/connection');
 
 export const SocketContext = createContext<{
   socket: Socket;
