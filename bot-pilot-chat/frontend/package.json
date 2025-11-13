@@ -10,7 +10,8 @@
     "test:unit": "vitest run",
     "lint": "eslint src --ext .ts,.tsx",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "serve:local": "vite --mode dev"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.1",

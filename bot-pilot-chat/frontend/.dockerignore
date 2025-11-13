@@ -1,6 +1,6 @@
 .git
 .gitignore
-.env.local
+.env.dev
 .prettierignore
 docker-compose.yml
 Containerfile

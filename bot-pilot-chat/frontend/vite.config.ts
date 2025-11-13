@@ -1,6 +1,13 @@
 // https://vite.dev/config/
 import { defineConfig } from 'vite';
 
+const getTarget = () => {
+	const env = process.env.NODE_ENV
+	if(env === 'local') {
+		return 'http://localhost:5005/'
+		}
+	}
+
 export default defineConfig({
   //plugins: [react(), tsconfigPaths()],
   server: {
@@ -8,7 +15,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://localhost:5005',
+        target: getTarget(),
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },

@@ -1,12 +1,21 @@
 name: 'bot-pilot-dev'
 networks:
-  caddy-dev:
+  dev-network:
 services:
   bot-pilot-frontend:
     image: docker.io/normanboettcher/bot-pilot:frontend-latest
     container_name: bot-pilot-frontend
     restart: unless-stopped
     networks:
-      - caddy-dev
+      - dev-network
     ports:
       - "8080:80"
+
+  bot-pilot-rasa-core:
+    image: docker.io/normanboettcher/bot-pilot:bot-pilot-rasa-latest
+    container_name: bot-pilot-rasa-core
+    restart: unless-stopped
+    networks:
+      - dev-network
+    ports:
+      - "5005:5005"

@@ -1,0 +1,10 @@
+FROM rasa/rasa:3.6.21-spacy-de
+USER root
+RUN chmod -R a+w /opt/venv/
+USER 1000
+RUN pip install https://github.com/explosion/spacy-models/releases/download/de_core_news_md-3.7.0/de_core_news_md-3.7.0.tar.gz
+WORKDIR APP
+COPY credentials.yml ./credentials.yml
+COPY endpoints.yml ./endpoints.yml
+COPY models/ ./models/
+ENTRYPOINT ["rasa", "run", "--enable-api", "--cors", "*", "--connector", "socketio", "--port", "5005"]
