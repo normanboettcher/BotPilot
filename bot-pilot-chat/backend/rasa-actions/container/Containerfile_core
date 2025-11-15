@@ -7,4 +7,5 @@ WORKDIR APP
 COPY credentials.yml ./credentials.yml
 COPY endpoints.yml ./endpoints.yml
 COPY models/ ./models/
-ENTRYPOINT ["rasa", "run", "--enable-api", "--cors", "*", "--connector", "socketio", "--port", "5005"]
+ENV LOG_LEVEL=debug
+ENTRYPOINT ["sh", "-c", "rasa run --enable-api --cors \"*\" --connector socketio --port 5005 --$LOG_LEVEL"]

@@ -8,8 +8,7 @@ RUN yarn set version 4.9.2
 COPY . .
 RUN yarn install --immutable
 RUN yarn build
-
-FROM  nginx:stable-alpine AS production
-COPY --from=builder /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+ENV SERVE_API=local
+ENV PORT=3000
+EXPOSE 3000
+CMD ["sh", "-c", "yarn serve:$SERVE_API --port $PORT"]

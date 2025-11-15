@@ -3,17 +3,27 @@ networks:
   dev-network:
 services:
   bot-pilot-frontend:
-    image: docker.io/normanboettcher/bot-pilot:frontend-latest
+    build:
+      context: ./bot-pilot-chat/frontend
+      dockerfile: ./dev/Containerfile
     container_name: bot-pilot-frontend
     restart: unless-stopped
+    env_file:
+      - ./bot-pilot-chat/frontend/.env.dev
+    environment:
+      - SERVE_API=local
     networks:
       - dev-network
     ports:
-      - "8080:80"
+      - "8080:3000"
 
   bot-pilot-rasa-core:
-    image: docker.io/normanboettcher/bot-pilot:bot-pilot-rasa-latest
+    build:
+      context: ./bot-pilot-chat/backend/rasa-actions
+      dockerfile: ./container/Containerfile_core
     container_name: bot-pilot-rasa-core
+    environment:
+      - LOG_LEVEL=debug
     restart: unless-stopped
     networks:
       - dev-network
