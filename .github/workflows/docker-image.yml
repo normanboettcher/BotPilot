@@ -39,8 +39,16 @@ jobs:
           file: bot-pilot-config/deployment/frontend/Containerfile
           push: true
           tags: docker.io/normanboettcher/bot-pilot:frontend-latest
-      - name: Post Build Message
-        run: echo "Frontend Image bot-pilot:frontend-latest erfolgreich hochgeladen!"
-        
+      - name: Build an Push bot-pilot-core container image
+        uses: docker/build-push-action@v6
+        with:
+          context: bot-pilot-chat/backend/rasa-actions
+          file: bot-pilot-config/deployment/backend/core
+          push: true
+          tags: docker.io/normanboettcher/bot-pilot:bot-pilot-core-latest
+      
+      
+    
+    
 
         
