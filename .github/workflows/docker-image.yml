@@ -9,7 +9,7 @@ on:
 
 jobs:
   run-on-merge:
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true || ${{github.event == 'workflow_dispatch'}}
     runs-on: ubuntu-latest
     
     steps:
