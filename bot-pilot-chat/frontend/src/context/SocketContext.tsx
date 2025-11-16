@@ -11,6 +11,7 @@ import type { BotResponse } from '../domain/BotResponse.ts';
 import useMessageCreator from '../service/MessageCreator.ts';
 import { useChatverlauf } from './ChatContext.tsx';
 
+console.log(`try to connect to: [${import.meta.env.VITE_SOCKET_URL}]`)
 const socket: Socket = io(import.meta.env.VITE_SOCKET_URL);
 
 export const SocketContext = createContext<{
