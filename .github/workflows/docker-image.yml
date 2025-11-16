@@ -13,8 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout repository bot-pilot
+        uses: actions/checkout@v5
+      - name: Checkout repository bot-pilot-config
+        uses: actions/checkout@v5
+        with:
+          repository: normanboettcher/bot-pilot-config
+          token: ${{ secrets.BOT_PILOT_CONFIG_TOKEN }}
+          path: bot-pilot-config
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -30,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: bot-pilot-chat/frontend/
-          file: bot-pilot-chat/frontend/Containerfile
+          file: bot-pilot-config/deployment/frontend/Containerfile
           push: true
           tags: docker.io/normanboettcher/bot-pilot:frontend-latest
       - name: Post Build Message
