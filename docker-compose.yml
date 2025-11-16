@@ -1,26 +1,31 @@
 name: 'bot-pilot-dev'
 networks:
-  caddy-dev:
+  dev-network:
 services:
-  caddy-dev:
-    image: caddy:latest
-    container_name: caddy-dev
-    restart: unless-stopped
-    ports:
-      - "8443:8443"
-    networks:
-      - caddy-dev
-    volumes:
-      - ./caddy/certs/:/root/certs/:ro,Z
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro,Z
-    depends_on:
-      - bot-pilot-frontend
-
   bot-pilot-frontend:
-    image: docker.io/normanboettcher/bot-pilot:frontend-latest
+    build:
+      context: ./bot-pilot-chat/frontend
+      dockerfile: ./dev/Containerfile
     container_name: bot-pilot-frontend
     restart: unless-stopped
+    env_file:
+      - ./bot-pilot-chat/frontend/.env.dev
+    environment:
+      - SERVE_API=local
     networks:
-      - caddy-dev
-    expose:
-      - "80"
+      - dev-network
+    ports:
+      - "8080:3000"
+
+  bot-pilot-rasa-core:
+    build:
+      context: ./bot-pilot-chat/backend/rasa-actions
+      dockerfile: ./container/Containerfile_core
+    container_name: bot-pilot-rasa-core
+    environment:
+      - LOG_LEVEL=debug
+    restart: unless-stopped
+    networks:
+      - dev-network
+    ports:
+      - "5005:5005"

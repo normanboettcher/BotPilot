@@ -1,6 +1,6 @@
 .git
 .gitignore
-.env.local
+.env.dev
 .prettierignore
 docker-compose.yml
 Containerfile
@@ -10,5 +10,6 @@ prettier.config.js
 vitest.config.ts
 node_modules
 dist
+dev/Containerfile
 .idea
 .dockerignore

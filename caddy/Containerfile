@@ -1,4 +1,0 @@
-FROM caddy:latest
-COPY bot-pilot-chat/frontend/dist/ www/apps/bot-pilot-frontend/
-COPY caddy/Caddyfile /etc/caddy/Caddyfile
-CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile"]
