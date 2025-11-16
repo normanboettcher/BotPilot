@@ -43,7 +43,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: bot-pilot-chat/backend/rasa-actions
-          file: bot-pilot-config/deployment/backend/core
+          file: bot-pilot-config/deployment/backend/core/Containerfile
           push: true
           tags: docker.io/normanboettcher/bot-pilot:bot-pilot-core-latest
       
