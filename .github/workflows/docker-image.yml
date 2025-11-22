@@ -40,6 +40,7 @@ jobs:
           push: true
           build-args: |
             MODE=development
+            ENV_FILE=bot-pilot-config/deployment/frontend/.env.development
           tags: docker.io/normanboettcher/bot-pilot:frontend-latest
       - name: Build an Push bot-pilot-core container image
         uses: docker/build-push-action@v6
