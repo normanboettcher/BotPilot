@@ -31,7 +31,11 @@ jobs:
           registry: docker.io
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
-          
+      
+      - name: Copy .env.development file into context directory
+        run: |
+          cp bot-pilot-config/frontend/deployment/.env.development bot-pilot-chat/frontend
+      
       - name: Build and Push Frontend container image
         uses: docker/build-push-action@v6
         with:
@@ -40,7 +44,6 @@ jobs:
           push: true
           build-args: |
             MODE=development
-            ENV_FILE=../../bot-pilot-config/deployment/frontend/.env.development
           tags: docker.io/normanboettcher/bot-pilot:frontend-latest
       - name: Build an Push bot-pilot-core container image
         uses: docker/build-push-action@v6
