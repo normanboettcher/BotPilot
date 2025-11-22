@@ -34,7 +34,7 @@ jobs:
       
       - name: Copy .env.development file into context directory
         run: |
-          cp bot-pilot-config/frontend/deployment/.env.development bot-pilot-chat/frontend
+          cp bot-pilot-config/deployment/frontend/.env.development bot-pilot-chat/frontend
       
       - name: Build and Push Frontend container image
         uses: docker/build-push-action@v6
