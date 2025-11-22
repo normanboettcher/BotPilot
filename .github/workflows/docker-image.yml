@@ -38,6 +38,8 @@ jobs:
           context: bot-pilot-chat/frontend/
           file: bot-pilot-config/deployment/frontend/Containerfile
           push: true
+          build-args: |
+            MODE=development
           tags: docker.io/normanboettcher/bot-pilot:frontend-latest
       - name: Build an Push bot-pilot-core container image
         uses: docker/build-push-action@v6
