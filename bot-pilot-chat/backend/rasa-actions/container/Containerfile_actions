@@ -1,0 +1,16 @@
+FROM rasa/rasa:3.6.21
+
+WORKDIR APP
+COPY ./requirements.txt ./requirements.txt
+COPY ./pyproject.toml ./pyproject.toml
+RUN pip install -r requirements.txt
+COPY ./src ./src
+RUN pip install .
+ENV PORT=5055
+ENV LOG_LEVEL=debug
+
+ENTRYPOINT ["sh", "-c", "rasa run actions bot_pilot.actions --port $PORT --$LOG_LEVEL"]
+
+
+
+
