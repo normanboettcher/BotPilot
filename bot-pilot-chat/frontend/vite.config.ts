@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 
 const getTarget = () => {
 	const env = process.env.NODE_ENV
+	console.log(`env: [${env}]`)
 	if(env === 'local') {
 		return 'http://localhost:5005/'
 		}
