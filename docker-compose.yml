@@ -11,6 +11,7 @@ services:
     env_file:
       - ./bot-pilot-chat/frontend/.env.dev
     environment:
+      - NODE_ENV=local
       - SERVE_API=local
     networks:
       - dev-network
