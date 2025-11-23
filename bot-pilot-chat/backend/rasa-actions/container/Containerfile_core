@@ -8,4 +8,4 @@ COPY credentials.yml ./credentials.yml
 COPY endpoints.yml ./endpoints.yml
 COPY models/ ./models/
 ENV LOG_LEVEL=debug
-ENTRYPOINT ["sh", "-c", "rasa run --enable-api --cors \"*\" --connector socketio --port 5005 --$LOG_LEVEL"]
+ENTRYPOINT ["sh", "-c", "rasa run --enable-api --cors \"*\" --connector socketio --endpoints endpoints.yml --port 5005 --$LOG_LEVEL"]

@@ -1,16 +1,36 @@
-FROM rasa/rasa:3.6.21
+##########################
+# Stage 1 – Build venv
+##########################
+FROM python:3.10-slim AS builder
 
-WORKDIR APP
-COPY ./requirements.txt ./requirements.txt
-COPY ./pyproject.toml ./pyproject.toml
-RUN pip install -r requirements.txt
+ENV VENV=/opt/venv
+RUN python -m venv $VENV
+ENV PATH="$VENV/bin:$PATH"
+
+# System deps needed by TF, Torch, SpaCy
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements early (enable cache)
+COPY ./requirements.txt .
+COPY ./pyproject.toml .
+
+# Install PyTorch CPU first (prevents heavy CUDA installs)
+RUN pip install --no-cache-dir torch==1.11.0 --index-url https://download.pytorch.org/whl/cpu
+
+# Install sentence-transformers but without also installing PyTorch again
+RUN pip install --no-cache-dir sentence-transformers==2.3.0 --no-deps
+
+# Install all other requirements including tensorflow==2.12
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY ./src ./src
 RUN pip install .
-ENV PORT=5055
-ENV LOG_LEVEL=debug
 
-ENTRYPOINT ["sh", "-c", "rasa run actions bot_pilot.actions --port $PORT --$LOG_LEVEL"]
+ENV ACTIONS_PORT=5055
+ENV ACTIONS_LOG_LEVEL=debug
+EXPOSE 5055
 
-
-
-
+ENTRYPOINT ["sh", "-c", "rasa run actions --actions bot_pilot.actions --port $ACTIONS_PORT --$ACTIONS_LOG_LEVEL"]

@@ -19,6 +19,8 @@ services:
       - "8080:3000"
 
   bot-pilot-rasa-core:
+    depends_on:
+      - bot-pilot-actions
     build:
       context: ./bot-pilot-chat/backend/rasa-actions
       dockerfile: ./container/Containerfile_core
@@ -30,3 +32,16 @@ services:
       - dev-network
     ports:
       - "5005:5005"
+
+  bot-pilot-actions:
+    build:
+      context: ./bot-pilot-chat/backend/rasa-actions
+      dockerfile: ./container/Containerfile_actions
+    container_name: bot-pilot-actions
+    restart: unless-stopped
+    networks:
+      - dev-network
+    environment:
+      - ACTIONS_LOG_LEVEL=debug
+    ports:
+      - "5055:5055"
