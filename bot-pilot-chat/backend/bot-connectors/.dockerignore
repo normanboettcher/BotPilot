@@ -1,0 +1,6 @@
+.tox
+tests
+.flake8
+.gitignore
+README.md
+Makefile
