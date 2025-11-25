@@ -11,8 +11,8 @@ class GoogleCalendarService implements CalendarService {
 
   readBusyEvents = async (next?: number) => {
     const url = next
-      ? `/api/calendar/google/events/busy?next_days=${next}`
-      : '/api/calendar/google/events/busy';
+      ? `/calendar/google/events/busy?next_days=${next}`
+      : '/calendar/google/events/busy';
     const response = await this.restClient.get(url);
     if (!response) {
       throw new Error(
