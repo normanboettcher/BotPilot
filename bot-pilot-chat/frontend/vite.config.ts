@@ -20,6 +20,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
+  '/api/calendar': {
+	  target: 'http://bot-connectors:8000',
+	  changeOrigin: true,
+	  rewrite: (path) => path.replace(/^\/api/, ''),
+	  }
     },
   },
 });

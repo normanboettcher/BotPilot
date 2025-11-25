@@ -45,3 +45,16 @@ services:
       - ACTIONS_LOG_LEVEL=debug
     ports:
       - "5055:5055"
+
+  bot-connectors:
+    build:
+      context: ./bot-pilot-chat/backend/bot-connectors
+      dockerfile: ./Containerfile
+    container_name: bot-connectors
+    restart: unless-stopped
+    networks:
+      - dev-network
+    env_file:
+      - ./bot-pilot-chat/backend/bot-connectors/.env
+    ports:
+      - "8000:8000"
