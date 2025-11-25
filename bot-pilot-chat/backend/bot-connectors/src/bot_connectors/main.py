@@ -10,6 +10,7 @@ import os
 
 from starlette.middleware.cors import CORSMiddleware
 
+from bot_connectors.config import get_config
 from bot_connectors.domain.calendar.events.busy_events_response import (
     BusyEventsResponse,
 )
@@ -66,11 +67,6 @@ SCOPES = [
 
 # path to downloaded OAuth 2.0 Client IDs json file
 CLIENT_SECRETS_FILE = os.path.join(os.path.dirname(__file__), "config.json")
-
-logging.basicConfig(
-    level=DEBUG,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-)
 
 logger = logging.getLogger(__name__)
 logger.debug("Starting prototype bot-connector for Google Calendar OAuth2")
