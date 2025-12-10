@@ -18,7 +18,6 @@ description = "Run unit tests"
 deps = [
     "pytest==7.4.4",
     "emoji==2.14.1",
-    "sentence-transformers==2.3.0",
     "rasa_sdk==3.6.2",
     "rasa==3.6.21",
     "markdown_strings==3.4.0",

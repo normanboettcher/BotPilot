@@ -20,19 +20,14 @@ jobs:
         run: tox -e lint
 
   test:
-    runs-on: dev-stage
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: bot-pilot-chat/backend/rasa-actions
     steps:
       - uses: actions/checkout@v5
       - name: Run unit tests
-        run: |
-          podman run --rm \
-          -v $PWD:/app:Z \
-          -w /app \
-          normanboettcher/py310-tox-430-base:latest \
-          tox -e unit_tests
+        run: tox -e unit_tests
 
   rasa_test:
     runs-on: ubuntu-latest
