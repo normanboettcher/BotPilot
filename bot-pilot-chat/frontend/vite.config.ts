@@ -2,12 +2,19 @@
 import { defineConfig } from 'vite';
 
 const getTarget = () => {
-	const env = process.env.NODE_ENV
-	console.log(`env: [${env}]`)
-	if(env === 'local') {
-		return 'http://localhost:5005/'
-		}
-	}
+  const env = process.env.NODE_ENV;
+  if (env === 'local') {
+    return 'http://localhost:5005/';
+  }
+};
+
+const getCalendarApiTarget = () => {
+	const env = process.env.NODE_ENV;
+	  if (env === 'local') {
+		return 'http://bot-connectors:8000/';
+	  }
+}
+
 
 export default defineConfig({
   //plugins: [react(), tsconfigPaths()],
@@ -20,10 +27,10 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
-	  '/calendar': {
-		  target: 'http://localhost:8000',
-		  changeOrigin: true,
-	  }
+      '/calendar': {
+        target: getCalendarApiTarget(),
+        changeOrigin: true,
+      },
     },
   },
 });
