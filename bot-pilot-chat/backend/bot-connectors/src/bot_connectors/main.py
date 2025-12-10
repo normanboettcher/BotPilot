@@ -1,6 +1,5 @@
 import logging
 from contextlib import asynccontextmanager
-from logging import DEBUG
 
 from fastapi import FastAPI, Request
 from fastapi.params import Depends
@@ -10,7 +9,6 @@ import os
 
 from starlette.middleware.cors import CORSMiddleware
 
-from bot_connectors.config import get_config
 from bot_connectors.domain.calendar.events.busy_events_response import (
     BusyEventsResponse,
 )
