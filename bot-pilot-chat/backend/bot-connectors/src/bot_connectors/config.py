@@ -8,4 +8,4 @@ def get_config():
     DATABASE_SECRET = os.getenv('CONNECTORS_DB_SECRET')
     return {
         'DATABASE_URL': f'mysql+pymysql://{DATABASE_SECRET}@{DATABASE_IP}:{DATABASE_PORT}/{DATABASE_NAME}',
-        'LOG_LEVEL': os.getenv('LOG_LEVEL', 'INFO')}
+        'LOG_LEVEL': os.getenv('LOG_LEVEL', 'info')}
