@@ -1,7 +1,12 @@
 import os.path
 
-from dotenv import dotenv_values
-
 
 def get_config():
-    return dotenv_values(os.path.join(os.path.dirname(__file__), "..", "..", ".env"))
+    DATABASE_NAME = os.getenv('CONNECTORS_DB_NAME')
+    DATABASE_IP = os.getenv('CONNECTORS_DB_IP')
+    DATABASE_PORT = os.getenv('CONNECTORS_DB_PORT')
+    DATABASE_SECRET = os.getenv('CONNECTORS_DB_SECRET')
+    return {
+        'DATABASE_URL': (f'mysql+pymysql://{DATABASE_SECRET}@{DATABASE_IP}'
+                         f':{DATABASE_PORT}/{DATABASE_NAME}'),
+        'LOG_LEVEL': os.getenv('LOG_LEVEL', 'info')}

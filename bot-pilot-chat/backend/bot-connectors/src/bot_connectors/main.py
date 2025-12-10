@@ -1,6 +1,5 @@
 import logging
 from contextlib import asynccontextmanager
-from logging import DEBUG
 
 from fastapi import FastAPI, Request
 from fastapi.params import Depends
@@ -66,11 +65,6 @@ SCOPES = [
 
 # path to downloaded OAuth 2.0 Client IDs json file
 CLIENT_SECRETS_FILE = os.path.join(os.path.dirname(__file__), "config.json")
-
-logging.basicConfig(
-    level=DEBUG,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-)
 
 logger = logging.getLogger(__name__)
 logger.debug("Starting prototype bot-connector for Google Calendar OAuth2")

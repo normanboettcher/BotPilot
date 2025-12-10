@@ -1,3 +1,7 @@
+[project]
+version = "0.1.0"
+name = "bot_pilot"
+
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
@@ -87,7 +91,3 @@ commands = [
     ["black", "tests/unit"],
     ["black", "integration_tests/"],
 ]
-
-[project]
-version = "0.1.0"
-name = "bot_pilot"

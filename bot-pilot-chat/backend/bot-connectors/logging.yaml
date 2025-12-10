@@ -17,7 +17,7 @@ loggers:
     handlers: [ console ]
     propagate: no
   uvicorn.error:
-    level: INFO
+    level: ERROR
     handlers: [ console ]
     propagate: no
   uvicorn.access:
