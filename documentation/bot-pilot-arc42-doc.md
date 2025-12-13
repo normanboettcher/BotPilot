@@ -1,4 +1,4 @@
-#                                    
+#                                      
 
 **About arc42**
 
@@ -152,6 +152,16 @@ Using this approach, the application does not need to store the database credent
 in its configuration. Instead, the application can request them from Vault at runtime.
 Further, a strict TTL bound ensures that the credentials are only valid for a short
 time.
+
+### Security Characteristics
+
+These aspects should be considered when implementing new or refactoring new features:
+
+- No static database credentials are stored
+- Vault tokens are short-lived and scoped by policy
+- Database users are dynamically created and revoked
+- Compromised credentials have limited blast radius
+- Root credentials never leave Vault
 
 ## \<Runtime Scenario 2\>
 
