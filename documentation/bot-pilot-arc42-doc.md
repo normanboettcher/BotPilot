@@ -1,4 +1,4 @@
-#                                  
+#                                    
 
 **About arc42**
 
@@ -118,12 +118,40 @@ Important Interfaces
 
 # Runtime View
 
-## \<Runtime Scenario 1\>
+## Dynamic Credential Handling for DB Access
 
-- *\<insert runtime diagram or textual description of the scenario\>*
+```mermaid
+sequenceDiagram
+    participant App as Application;
+    participant Vault as HashiCorp Vault;
+    participant DB
+    Note over App: Startup / Runtime;
+    App ->> Vault: POST /auth/approle/login<br/> (role_id, secret_id);
+    Vault -->> App: App-Token (short lived);
+    Note over App: Token cached in memory;
+    App ->> Vault: GET /database/creds/bot-connectors-calendar-role<br/>(X-Vault-Token=App-Token);
+    Vault ->> DB: CREATE USER v-xxx;
+    Vault ->> DB: GRANT PRIVILEGES on database_dev;
+    DB -->> Vault: Short-Lived username with password;
+    Vault -->> App: DB username + password (TTL-bound);
+    Note over App: Use credentials to connect to DB;
+    App ->> DB: Connect using dynamic credentials;
+    Note over Vault: Credentials expire after TTL;
+    Vault ->> DB: REVOKE username + password;
+```
 
-- *\<insert description of the notable aspects of the interactions
-  between the building block instances depicted in this diagram.\>*
+1. The application starts and loads its RoleID and SecretID
+2. The application authenticates against Vault using AppRole
+3. Vault issues a short-lived client token
+4. The application uses the token to request dynamic database credentials
+5. Vault creates a temporary database user with limited privileges
+6. The application connects to the database using these credentials
+7. Credentials automatically expire and are revoked by Vault
+
+Using this approach, the application does not need to store the database credentials
+in its configuration. Instead, the application can request them from Vault at runtime.
+Further, a strict TTL bound ensures that the credentials are only valid for a short
+time.
 
 ## \<Runtime Scenario 2\>
 

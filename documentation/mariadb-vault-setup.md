@@ -20,12 +20,16 @@
 
 [10. Testing and Debugging](#10-testing-and-debugging)
 
+---
+
 ## 1. Prerequisites
 
 - A virtial machine or cloud instance with REHL 10 is up and running.
 - MariaDB 10.11.x is installed and running.
 - `vault` CLI is installed
 - Root-Token and Unseal-Keys are saved offline.
+
+---
 
 ## 2. Vault - Installation and Setup
 
@@ -45,6 +49,7 @@ If errors are thrown by systemctl check the logs via
 Some errors: port 8200 is already in use or bugs in vault.hcl.
 E.g. if you have HTTPS and HTTP Listeners enabled in your `vault.hcl` file, you
 will get an error if both are pointing to a path with the same port such as 8200
+---
 
 ## 3. `vault.hcl` - minimal config
 
@@ -80,6 +85,8 @@ If not, create it manually.
 sudo mkdir -p /opt/vault/data && sudo chown vault:vault /opt/vault/data
 ```
 
+---
+
 ## 4. Initialize and Unseal
 
 If you have not done so already, initialize and unseal Vault.
@@ -114,6 +121,8 @@ sudo mkdir -p /var/log/vault && sudo chown vault:vault /var/log/vault
 vault audit enable file file_path=/var/log/vault/audit.log
 ```
 
+---
+
 ## 6. Activate Database Secrets Engine
 
 To activate the Database Secrets Engine, run the following command:
@@ -140,6 +149,7 @@ Vault.
 So we can use `127.0.0.1` in the `connection_url`.
 **Note:** The `connection_url` is important for vault because this is how the actual
 connection to the MariaDB Instance is established.
+---
 
 ## 7. MariaDB: User and Privileges
 
@@ -160,6 +170,8 @@ GRANT ALL PRIVILEGES ON calendar_connectors_dev.* TO 'vault_usr'@'%' WITH GRANT 
 FLUSH PRIVILEGES;
 ```
 
+---
+
 ## 8. Create a Vault Role (creation_statements)
 
 The Role is important because it connects the database config (vault internal) with the
@@ -175,11 +187,67 @@ vault write database/roles/bot-connectors-role \
   max_ttl="2h"
 ```
 
+---
+
 ## 9. AppRole (optional) & Policy
 
 It is recommended to use AppRole authentication instead of the default token
-authentication.
-To do so, create an `.hcl`-File defining the AppRole and the Policy.
+authentication. HashiCorp Vaults AppRole authentication was configured
+to allow an application to securely access dynamic database credentials
+without using a root token or environment-based secrets.
+
+---
+
+### 9.1 Goal
+
+Enable an application (e.g. Python service, Docker container) to authenticate
+against Vault using **AppRole** and retrieve dynamic database credentials.
+
+The application should:
+
+- Not use a root token
+- Not store long-lived secrets in `.env` files
+- Only have the minimum required permissions
+
+---
+
+### 9.2 Runtime View
+
+```mermaid
+sequenceDiagram
+    participant App as Application;
+    participant Vault as HashiCorp Vault;
+    participant DB
+    Note over App: Startup / Runtime;
+    App ->> Vault: POST /auth/approle/login<br/> (role_id, secret_id);
+    Vault -->> App: App-Token (short lived);
+    Note over App: Token cached in memory;
+    App ->> Vault: GET /database/creds/bot-connectors-calendar-role<br/>(X-Vault-Token=App-Token);
+    Vault ->> DB: CREATE USER v-xxx;
+    Vault ->> DB: GRANT PRIVILEGES on database_dev;
+    DB -->> Vault: Short-Lived username with password;
+    Vault -->> App: DB username + password (TTL-bound);
+    Note over App: Use credentials to connect to DB;
+    App ->> DB: Connect using dynamic credentials;
+    Note over Vault: Credentials expire after TTL;
+    Vault ->> DB: REVOKE username + password;
+```
+
+#### Description
+
+### Runtime Authentication Flow (AppRole)
+
+1. The application starts and loads its RoleID and SecretID
+2. The application authenticates against Vault using AppRole
+3. Vault issues a short-lived client token
+4. The application uses the token to request dynamic database credentials
+5. Vault creates a temporary database user with limited privileges
+6. The application connects to the database using these credentials
+7. Credentials automatically expire and are revoked by Vault
+
+---
+
+To create your AppRole, create an `.hcl`-File defining the AppRole and the Policy.
 
 ```hcl
 path "database/creds/bot-connectors-role" {
