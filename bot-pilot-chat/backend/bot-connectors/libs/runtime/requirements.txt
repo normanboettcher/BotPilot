@@ -13,8 +13,3 @@ python-dateutil==2.8.2
 
 sqlalchemy==2.0.43
 pymysql==1.1.1
-
-# Dev Tools
-pytest==8.3.2
-flake8==7.1.1
-black==24.8.0
