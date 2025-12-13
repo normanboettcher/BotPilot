@@ -33,10 +33,13 @@ from bot_connectors.service.calendar.google.google_calendar_events_provider impo
 from bot_connectors.service.calendar.google.google_calendar_events_writer import (
     get_google_calendar_events_writer,
 )
+from bot_connectors.service.client.database_connector import DatabaseConnector, \
+    get_connectors_db_connector
 
 
-def create_tables_at_startup():
-    Base.metadata.create_all(bind=get_db_engine())
+def create_tables_at_startup(
+        connector: DatabaseConnector = Depends(get_connectors_db_connector)):
+    Base.metadata.create_all(bind=connector.get_engine())
 
 
 @asynccontextmanager

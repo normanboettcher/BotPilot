@@ -1,9 +1,12 @@
+from fastapi.params import Depends
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 from typing import Optional, Dict
 
+from sqlalchemy.orm import sessionmaker
+
 from bot_connectors.config import get_config
-from bot_connectors.service.client.vault_client import VaultClient
+from bot_connectors.service.client.vault_client import VaultClient, get_vault_client
 
 
 class DatabaseConnector:
@@ -24,3 +27,20 @@ class DatabaseConnector:
         # Create a new engine each time to ensure fresh credentials if rotated
         self.engine = create_engine(db_url, pool_pre_ping=True)
         return self.engine
+
+    def get_db_session(self):
+        SessionLocal = sessionmaker(bind=self.get_engine(), autoflush=False,
+                                    autocommit=False)
+        db = SessionLocal()
+        try:
+            yield db
+        finally:
+            db.close()
+
+
+def get_connectors_db_connector(config: dict = Depends(get_config),
+                                vault_client: VaultClient = Depends(
+                                    get_vault_client)) -> DatabaseConnector:
+    return DatabaseConnector(vault_client,
+                             "bot-connectors-calendar-role",
+                             config)

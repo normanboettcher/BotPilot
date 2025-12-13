@@ -4,6 +4,10 @@ import hvac
 from datetime import datetime, timedelta, UTC
 from typing import Dict
 
+from fastapi import Depends
+
+from bot_connectors.config import get_config
+
 logger = logging.getLogger(__name__)
 
 
@@ -43,3 +47,10 @@ class VaultClient:
         if not creds or 'data' not in creds:
             raise RuntimeError(f"Failed to fetch DB credentials for role {db_role}")
         return creds['data']
+
+
+def get_vault_client(config: dict = Depends(get_config)) -> VaultClient:
+    vault_addr = config['VAULT_ADDR']
+    app_role_id = config['CONNECTORS_VAULT_APP_ROLE_ID']
+    secret_id = config['CONNECTORS_VAULT_SECRET_ID']
+    return VaultClient(vault_addr, app_role_id, secret_id)
