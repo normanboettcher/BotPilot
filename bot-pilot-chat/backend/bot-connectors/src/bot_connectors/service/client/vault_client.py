@@ -22,7 +22,7 @@ class VaultClient:
 
     def _authenticate(self):
         """Authenticate using AppRole and store token with expiry."""
-        response = self.client.auth_approle.login(
+        response = self.client.auth.approle.login(
             role_id=self.role_id,
             secret_id=self.secret_id
         )
@@ -53,4 +53,5 @@ def get_vault_client(config: dict = Depends(get_config)) -> VaultClient:
     vault_addr = config['VAULT_ADDR']
     app_role_id = config['CONNECTORS_VAULT_APP_ROLE_ID']
     secret_id = config['CONNECTORS_VAULT_SECRET_ID']
+    logger.info(f"[VaultClient] Initializing with Vault addr {vault_addr}")
     return VaultClient(vault_addr, app_role_id, secret_id)

@@ -1,3 +1,5 @@
+import logging
+
 from fastapi.params import Depends
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
@@ -7,6 +9,8 @@ from sqlalchemy.orm import sessionmaker
 
 from bot_connectors.config import get_config
 from bot_connectors.service.client.vault_client import VaultClient, get_vault_client
+
+logger = logging.getLogger(__name__)
 
 
 class DatabaseConnector:
@@ -19,9 +23,10 @@ class DatabaseConnector:
     def get_engine(self) -> Engine:
         """Return SQLAlchemy Engine using dynamic credentials."""
         creds = self.vault_client.get_db_creds(self.db_role)
-        db_ip = creds['CONNECTORS_DB_IP']
-        db_port = creds['CONNECTORS_DB_PORT']
-        db_name = creds['CONNECTORS_DB_NAME']
+        logger.info('get vars from config')
+        db_port = self.config['CONNECTORS_DB_PORT']
+        db_name = self.config['CONNECTORS_DB_NAME']
+        db_ip = self.config['CONNECTORS_DB_IP']
         db_url = (f"mysql+pymysql://{creds['username']}:{creds['password']}"
                   f"@{db_ip}:{db_port}/{db_name}")
         # Create a new engine each time to ensure fresh credentials if rotated

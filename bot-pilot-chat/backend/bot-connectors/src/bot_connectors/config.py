@@ -1,4 +1,7 @@
+import logging
 import os.path
+
+logger = logging.getLogger(__name__)
 
 
 def get_config():
@@ -8,6 +11,7 @@ def get_config():
     VAULT_ADDR = os.getenv('VAULT_ADDR')
     CONNECTORS_VAULT_APP_ROLE_ID = os.getenv('CONNECTORS_VAULT_APP_ROLE_ID')
     CONNECTORS_VAULT_SECRET_ID = os.getenv('CONNECTORS_VAULT_SECRET_ID')
+    logger.info(f'database ip: [{DATABASE_IP}]')
     return {
         'LOG_LEVEL': os.getenv('LOG_LEVEL', 'info'),
         'CONNECTORS_DB_IP': DATABASE_IP,

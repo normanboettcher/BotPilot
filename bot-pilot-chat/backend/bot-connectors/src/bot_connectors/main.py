@@ -7,7 +7,7 @@ from fastapi.responses import RedirectResponse, JSONResponse
 from google_auth_oauthlib.flow import Flow
 import os
 
-from sqlalchemy import Engine
+from sqlalchemy import Engine, text
 from starlette.middleware.cors import CORSMiddleware
 
 from bot_connectors.domain.calendar.events.busy_events_response import (
@@ -37,19 +37,13 @@ from bot_connectors.service.client.database_connector import DatabaseConnector, 
     get_connectors_db_connector
 
 
-def get_db_engine(
-        connector: DatabaseConnector = Depends(get_connectors_db_connector)) -> Engine:
-    return connector.get_engine()
-
-
-def create_tables_at_startup(
-        connector: DatabaseConnector = Depends(get_connectors_db_connector)):
-    Base.metadata.create_all(bind=connector.get_engine())
+# def create_tables_at_startup():
+#    Base.metadata.create_all(bind=get_db_engine())
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    create_tables_at_startup()
+    # create_tables_at_startup()
     yield
 
 
@@ -96,10 +90,12 @@ def auth_start():
 
 
 @app.get("/test-db-connection")
-def test_db(engine: Engine = Depends(get_db_engine)):
+def test_db(connector: DatabaseConnector = Depends(get_connectors_db_connector)):
     try:
+        engine = connector.get_engine()
+        logger.debug(f"engine: {engine}")
         with engine.connect() as conn:
-            result = conn.execute("SELECT NOW()").fetchone()
+            result = conn.execute(text('SELECT NOW()')).fetchone()
         return {"status": "ok", "db_time": str(result[0])}
     except Exception as e:
         return {"status": "error", "detail": str(e)}
