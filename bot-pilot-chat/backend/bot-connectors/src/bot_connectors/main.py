@@ -7,6 +7,7 @@ from fastapi.responses import RedirectResponse, JSONResponse
 from google_auth_oauthlib.flow import Flow
 import os
 
+from sqlalchemy import text
 from starlette.middleware.cors import CORSMiddleware
 
 from bot_connectors.domain.calendar.events.busy_events_response import (
@@ -15,8 +16,6 @@ from bot_connectors.domain.calendar.events.busy_events_response import (
 from bot_connectors.domain.calendar.events.create_event_request import (
     CreateGoogleCalendarEventRequest,
 )
-from bot_connectors.domain.persistence_model_base import Base
-from bot_connectors.persistence.db_session_factory import get_db_engine
 from bot_connectors.persistence.google_calendar_credentials_das import (
     GoogleCalendarCredentialsDas,
     get_google_calendar_credentials_das,
@@ -33,15 +32,17 @@ from bot_connectors.service.calendar.google.google_calendar_events_provider impo
 from bot_connectors.service.calendar.google.google_calendar_events_writer import (
     get_google_calendar_events_writer,
 )
+from bot_connectors.service.client.database_connector import DatabaseConnector, \
+    get_connectors_db_connector
 
 
-def create_tables_at_startup():
-    Base.metadata.create_all(bind=get_db_engine())
+# def create_tables_at_startup():
+#    Base.metadata.create_all(bind=get_db_engine())
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    create_tables_at_startup()
+    # create_tables_at_startup()
     yield
 
 
@@ -85,6 +86,18 @@ def auth_start():
     user_tokens["state"] = state
     logger.debug(f"user_tokens: {user_tokens}")
     return RedirectResponse(auth_url)
+
+
+@app.get("/test-db-connection")
+def test_db(connector: DatabaseConnector = Depends(get_connectors_db_connector)):
+    try:
+        engine = connector.get_engine()
+        logger.debug(f"engine: {engine}")
+        with engine.connect() as conn:
+            result = conn.execute(text('SELECT NOW()')).fetchone()
+        return {"status": "ok", "db_time": str(result[0])}
+    except Exception as e:
+        return {"status": "error", "detail": str(e)}
 
 
 @app.get("/oauth2/callback")

@@ -56,5 +56,7 @@ services:
       - dev-network
     env_file:
       - ./bot-pilot-chat/backend/bot-connectors/.env
+    volumes:
+      - /home/norman/connectors_secret_id.cert:/run/secrets/bot-connectors-secret-id:ro,Z
     ports:
       - "8000:8000"
