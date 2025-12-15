@@ -1,9 +1,6 @@
 name: 'bot-pilot-dev'
 networks:
   dev-network:
-secrets:
-  bot-connectors-secret-id:
-    file: /home/norman/connectors_secret_id.cert
 services:
   bot-pilot-frontend:
     build:
@@ -59,7 +56,7 @@ services:
       - dev-network
     env_file:
       - ./bot-pilot-chat/backend/bot-connectors/.env
+    volumes:
+      - /home/norman/connectors_secret_id.cert:/run/secrets/bot-connectors-secret-id:ro,Z
     ports:
       - "8000:8000"
-    secrets:
-      - bot-connectors-secret-id
