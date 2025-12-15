@@ -12,6 +12,7 @@ requires-python = ">=3.12"
 dependencies = [
     "fastapi",
     "uvicorn[standard]",
+    "hvac",
     "google-api-python-client",
     "google-auth",
     "google-auth-oauthlib",
@@ -37,7 +38,7 @@ env_list = ["test", "lint", "format"]
 
 [tool.tox.env.test]
 description = "Run tests with pytest"
-deps = ["-rrequirements.txt"]
+deps = ["-r./libs/runtime/requirements.txt", "-r./libs/tools/requirements.txt"]
 commands = [
     ["pytest"]
 ]

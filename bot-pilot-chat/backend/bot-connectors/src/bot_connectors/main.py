@@ -7,7 +7,7 @@ from fastapi.responses import RedirectResponse, JSONResponse
 from google_auth_oauthlib.flow import Flow
 import os
 
-from sqlalchemy import Engine, text
+from sqlalchemy import text
 from starlette.middleware.cors import CORSMiddleware
 
 from bot_connectors.domain.calendar.events.busy_events_response import (
@@ -16,7 +16,6 @@ from bot_connectors.domain.calendar.events.busy_events_response import (
 from bot_connectors.domain.calendar.events.create_event_request import (
     CreateGoogleCalendarEventRequest,
 )
-from bot_connectors.domain.persistence_model_base import Base
 from bot_connectors.persistence.google_calendar_credentials_das import (
     GoogleCalendarCredentialsDas,
     get_google_calendar_credentials_das,

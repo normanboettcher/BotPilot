@@ -3,7 +3,7 @@ import logging
 from fastapi.params import Depends
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
-from typing import Optional, Dict
+from typing import Optional
 
 from sqlalchemy.orm import sessionmaker
 
