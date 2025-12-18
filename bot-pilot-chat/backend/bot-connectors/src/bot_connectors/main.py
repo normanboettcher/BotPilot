@@ -88,7 +88,7 @@ def auth_start():
     return RedirectResponse(auth_url)
 
 
-@app.get("/test-db-connection")
+@app.get("/calendar/test-db-connection")
 def test_db(connector: DatabaseConnector = Depends(get_connectors_db_connector)):
     try:
         engine = connector.get_engine()
