@@ -7,7 +7,7 @@ const getTarget = () => {
     return 'http://localhost:5005/';
   }
   if (env === 'dev') {
-    return 'https://dev.staging.bot-pilot.de';
+    return 'https://dev.staging.bot-pilot.de/';
   }
 };
 
@@ -17,7 +17,7 @@ const getCalendarApiTarget = () => {
     return 'http://bot-connectors:8000/';
   }
   if (env === 'dev') {
-    return 'http://dev.staging.bot-pilot.de:8000/';
+    return 'https://dev.staging.bot-pilot.de/';
   }
 };
 
