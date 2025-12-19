@@ -7,6 +7,7 @@ const getTarget = () => {
     return 'http://localhost:5005/';
   }
   if (env === 'dev') {
+    console.log(`env: [${env}]`);
     return 'https://dev.staging.bot-pilot.de/';
   }
 };

@@ -16,7 +16,9 @@ console.log(`mode: [${env}]`);
 const URL =
   env === 'staging' || env === 'development' || env === 'production'
     ? undefined
-    : 'http://localhost:5005';
+    : env === 'dev'
+      ? 'https://dev.staging.bot-pilot.de/'
+      : 'http://localhost:5005';
 
 console.log(`try to connect to: [${URL}]`);
 const socket: Socket = io(URL);
