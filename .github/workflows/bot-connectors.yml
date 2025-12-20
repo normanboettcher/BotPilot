@@ -3,7 +3,7 @@ name: BotPilot Connectors CI
 on:
   push:
     paths:
-      - 'bot-pilot-chat/backend/bot-connectors/**'
+      - './bot-pilot-chat/backend/bot-connectors/**'
       - '.github/workflows/bot-connectors.yml'
   pull_request:
     branches: [ main ]
