@@ -5,16 +5,22 @@ import type { ColorKey } from '../../domain/graphics/ColorKey.ts';
 interface Props {
   chatTextColor: string;
   chatBubbleColorUser: string;
+  chatBubbleColorBot: string;
 }
 
 export const useChatMessageGraphicsService = (): Props => {
   const [textColor, setTextColor] = useState<string>();
   const [chatBubbleColorUser, setChatBubbleColorUser] = useState<string>();
+  const [chatBubbleColorBot, setChatBubbleColorBot] = useState<string>();
   useEffect(() => {
     const fetchData = async () => {
       const chatTextColor = await fetchColor('chat_text');
       const chatBubbleUserColor = await fetchColor('user_chat_bubble');
+      const chatBubbleColorBot = await fetchColor('bot_chat_bubble');
 
+      if (chatBubbleColorBot) {
+        setChatBubbleColorBot(chatBubbleColorBot);
+      }
       if (chatTextColor) {
         setTextColor(chatTextColor);
       }
@@ -35,5 +41,6 @@ export const useChatMessageGraphicsService = (): Props => {
   return {
     chatTextColor: textColor ?? '',
     chatBubbleColorUser: chatBubbleColorUser ?? '',
+    chatBubbleColorBot: chatBubbleColorBot ?? '',
   };
 };

@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Box, Stack, Typography, useTheme } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import type { ChatMessageText } from '../../domain/ChatMessageText.ts';
 import AlarmClock from '../icons/AlarmClock.tsx';
 import Markdown from 'react-markdown';
@@ -13,8 +13,8 @@ type Props = {
 const ChatMessage: React.FC<Props> = ({ msg }) => {
   const { sender, message: text, timestamp } = msg;
   const isUser = sender === 'user';
-  const theme = useTheme();
-  const { chatTextColor, chatBubbleColorUser } = useChatMessageGraphicsService();
+  const { chatTextColor, chatBubbleColorUser, chatBubbleColorBot } =
+    useChatMessageGraphicsService();
   const CalendarAccessory = React.lazy(
     () => import('./Accessories/CalendarAccessory.tsx')
   );
@@ -22,7 +22,7 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
     () => import('./Accessories/ButtonOptionList.tsx')
   );
   // Farben & Styles je nach Absender
-  const backgroundColor = isUser ? chatBubbleColorUser : theme.palette.grey[500];
+  const backgroundColor = isUser ? chatBubbleColorUser : chatBubbleColorBot;
   const align = isUser ? 'flex-end' : 'flex-start';
 
   return (
