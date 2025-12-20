@@ -1,36 +1,20 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense } from 'react';
 import { Box, Stack, Typography, useTheme } from '@mui/material';
 import type { ChatMessageText } from '../../domain/ChatMessageText.ts';
 import AlarmClock from '../icons/AlarmClock.tsx';
 import Markdown from 'react-markdown';
 import ChatMessageTextComponent from './ChatMessageTextComponent.tsx';
-import { useColorService } from '../../service/graphics/ColorServiceImpl.ts';
+import { useChatMessageGraphicsService } from '../../service/graphics/ChatMessageGraphicsService.ts';
 
 type Props = {
   msg: ChatMessageText;
 };
 
 const ChatMessage: React.FC<Props> = ({ msg }) => {
-  // TODO: write a ChatMessageGraphicsService
-  useEffect(() => {
-    const fetchData = async () => {
-      await fetchTextColor();
-    };
-    fetchData();
-  }, []);
-
-  // TODO: write a ChatMessageGraphicsService
-  const fetchTextColor = async () => {
-    const colorService = useColorService();
-    const { textColor } = await colorService.getColor('chat_text');
-    if (textColor) {
-      setTextColor(textColor);
-    }
-  };
   const { sender, message: text, timestamp } = msg;
-  const [textColor, setTextColor] = useState<string>();
   const isUser = sender === 'user';
   const theme = useTheme();
+  const { chatTextColor, chatBubbleColorUser } = useChatMessageGraphicsService();
   const CalendarAccessory = React.lazy(
     () => import('./Accessories/CalendarAccessory.tsx')
   );
@@ -38,7 +22,7 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
     () => import('./Accessories/ButtonOptionList.tsx')
   );
   // Farben & Styles je nach Absender
-  const backgroundColor = isUser ? theme.palette.primary.main : theme.palette.grey[500];
+  const backgroundColor = isUser ? chatBubbleColorUser : theme.palette.grey[500];
   const align = isUser ? 'flex-end' : 'flex-start';
 
   return (
@@ -49,7 +33,7 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
         flexDirection: 'column',
         alignText: align,
         backgroundColor,
-        color: textColor,
+        color: chatTextColor,
         borderRadius: '16px',
         borderTopLeftRadius: sender === 'bot' ? '0px' : '16px',
         borderTopRightRadius: sender === 'user' ? '0px' : '16px',
