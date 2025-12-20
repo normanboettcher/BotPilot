@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { Box, Stack, Typography, useTheme } from '@mui/material';
 import type { ChatMessageText } from '../../domain/ChatMessageText.ts';
-import useBotResponsive from '../../hooks/useBotResponsive.ts';
 import AlarmClock from '../icons/AlarmClock.tsx';
 import Markdown from 'react-markdown';
 import ChatMessageTextComponent from './ChatMessageTextComponent.tsx';
@@ -38,13 +37,8 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
   const ButtonOptionList = React.lazy(
     () => import('./Accessories/ButtonOptionList.tsx')
   );
-  const { isDarkTheme } = useBotResponsive();
   // Farben & Styles je nach Absender
-  const backgroundColor = isUser
-    ? theme.palette.primary.main
-    : isDarkTheme
-      ? theme.palette.grey[500]
-      : theme.palette.grey[500];
+  const backgroundColor = isUser ? theme.palette.primary.main : theme.palette.grey[500];
   const align = isUser ? 'flex-end' : 'flex-start';
 
   return (
