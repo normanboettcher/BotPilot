@@ -5,9 +5,23 @@ import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 import { userEvent } from '@testing-library/user-event';
 import * as message_service from '../../../../service/MessageService.ts';
+import { SocketContext } from '../../../../context/SocketContext.tsx';
+import type { Socket } from 'socket.io-client';
 
 const useMessageServiceSpy = vi.spyOn(message_service, 'default');
 const sendMessageAndGetResponseMock = vi.fn();
+
+const TestComponent = (buttons: ButtonOption[]) => {
+  return render(
+    <>
+      <SocketContext.Provider
+        value={{ socket: vi.fn()() as Socket, sessionId: 'test', isConnected: true }}
+      >
+        <ButtonOptionList buttons={buttons} />
+      </SocketContext.Provider>
+    </>
+  );
+};
 
 useMessageServiceSpy.mockReturnValue({
   sendMessageAndGetResponse: sendMessageAndGetResponseMock,
@@ -28,7 +42,7 @@ describe('ButtonOptionList', () => {
     };
 
     // when
-    const { getByText } = render(<ButtonOptionList buttons={[button1, button2]} />);
+    const { getByText } = TestComponent([button1, button2]);
     // then
     expect(getByText('button 1')).toBeInTheDocument();
     expect(getByText('button 2')).toBeInTheDocument();
@@ -52,7 +66,7 @@ describe('ButtonOptionList', () => {
 
       const user = userEvent.setup();
       // when
-      const { queryByText } = render(<ButtonOptionList buttons={[button1, button2]} />);
+      const { queryByText } = TestComponent([button1, button2]);
       const button = queryByText(buttonName);
       expect(button).not.toBeNull();
       await user.click(button!);
@@ -78,7 +92,7 @@ describe('ButtonOptionList', () => {
       const user = userEvent.setup();
 
       // when
-      const { queryByText } = render(<ButtonOptionList buttons={[button1, button2]} />);
+      const { queryByText } = TestComponent([button1, button2]);
       const button = queryByText(buttonName);
       expect(button).not.toBeNull();
       // then
@@ -102,7 +116,7 @@ describe('ButtonOptionList', () => {
 
     // when
     const user = userEvent.setup();
-    const { queryByText } = render(<ButtonOptionList buttons={[button1]} />);
+    const { queryByText } = TestComponent([button1]);
     const button = queryByText('button 1');
     expect(button).not.toBeNull();
 
@@ -124,7 +138,7 @@ describe('ButtonOptionList', () => {
 
     // when
     const user = userEvent.setup();
-    const { queryByText } = render(<ButtonOptionList buttons={[button1]} />);
+    const { queryByText } = TestComponent([button1]);
     const button = queryByText('button 1');
     expect(button).not.toBeNull();
 
