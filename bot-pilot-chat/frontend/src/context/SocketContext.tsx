@@ -11,6 +11,7 @@ import type { BotResponse } from '../domain/BotResponse.ts';
 import useMessageCreator from '../service/MessageCreator.ts';
 import { useChatverlauf } from './ChatContext.tsx';
 
+//TODO: write into its own component
 const env = process.env.NODE_ENV;
 console.log(`mode: [${env}]`);
 const URL =
@@ -20,9 +21,7 @@ const URL =
       ? 'https://dev.staging.bot-pilot.de/'
       : 'http://localhost:5005';
 
-console.log(`try to connect to: [${URL}]`);
 const socket: Socket = io(URL);
-
 export const SocketContext = createContext<{
   socket: Socket;
   isConnected: boolean;

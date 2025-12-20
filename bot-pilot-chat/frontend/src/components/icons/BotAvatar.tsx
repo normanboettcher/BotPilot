@@ -1,7 +1,6 @@
 import type { SVGProps } from 'react';
 import React from 'react';
 import { Avatar } from '@mui/material';
-import useBotResponsive from '../../hooks/useBotResponsive.ts';
 
 export function MessageChatbot(props?: SVGProps<SVGSVGElement>) {
   return (
@@ -27,15 +26,14 @@ export function MessageChatbot(props?: SVGProps<SVGSVGElement>) {
 }
 
 const BotAvatar = () => {
-  const { isDarkTheme } = useBotResponsive();
   return (
     <Avatar
       sx={{
-        bgcolor: isDarkTheme ? 'grey.500' : 'grey.800',
+        bgcolor: 'grey.800',
         fontSize: '27px',
       }}
     >
-      {MessageChatbot({ color: isDarkTheme ? 'white' : 'grey.200' })}
+      {MessageChatbot({ color: 'grey.200' })}
     </Avatar>
   );
 };
