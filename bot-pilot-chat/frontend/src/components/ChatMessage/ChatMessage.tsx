@@ -1,17 +1,35 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Box, Stack, Typography, useTheme } from '@mui/material';
 import type { ChatMessageText } from '../../domain/ChatMessageText.ts';
 import useBotResponsive from '../../hooks/useBotResponsive.ts';
 import AlarmClock from '../icons/AlarmClock.tsx';
 import Markdown from 'react-markdown';
 import ChatMessageTextComponent from './ChatMessageTextComponent.tsx';
+import { useColorService } from '../../service/graphics/ColorServiceImpl.ts';
 
 type Props = {
   msg: ChatMessageText;
 };
 
 const ChatMessage: React.FC<Props> = ({ msg }) => {
+  // TODO: write a ChatMessageGraphicsService
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchTextColor();
+    };
+    fetchData();
+  }, []);
+
+  // TODO: write a ChatMessageGraphicsService
+  const fetchTextColor = async () => {
+    const colorService = useColorService();
+    const { textColor } = await colorService.getColor('chat_text');
+    if (textColor) {
+      setTextColor(textColor);
+    }
+  };
   const { sender, message: text, timestamp } = msg;
+  const [textColor, setTextColor] = useState<string>();
   const isUser = sender === 'user';
   const theme = useTheme();
   const CalendarAccessory = React.lazy(
@@ -27,8 +45,8 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
     : isDarkTheme
       ? theme.palette.grey[500]
       : theme.palette.grey[500];
-  const textColor = 'white';
   const align = isUser ? 'flex-end' : 'flex-start';
+
   return (
     <Box
       sx={{
