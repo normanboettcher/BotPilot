@@ -6,6 +6,9 @@ on:
       - "bot-pilot-chat/frontend/**"
       - ".github/workflows/frontend.yml"
   pull_request:
+    types: [ opened, synchronize ]
+    branches:
+      - "main"
     paths:
       - "bot-pilot-chat/frontend/**"
 
