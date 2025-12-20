@@ -3,7 +3,11 @@ name: Deploy Dev-Stage CI
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Docker Image CI"]  
+    workflows:
+      - Connectors Image CI
+      - Frontend Image CI
+      - Actions Image CI
+      - Bot-Pilot Core CI
     types:
       - completed
 
