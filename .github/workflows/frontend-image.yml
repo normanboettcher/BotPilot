@@ -6,6 +6,8 @@ on:
     types:
       - closed
     branches: [ "main" ]
+    paths:
+      - './bot-pilot-chat/frontend/**'
 
 jobs:
   run-on-merge:
