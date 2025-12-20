@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Frontend Image CI
 
 on:
   workflow_dispatch:
@@ -50,13 +50,7 @@ jobs:
           file: bot-pilot-config/deployment/backend/actions/Containerfile
           push: true
           tags: docker.io/normanboettcher/bot-pilot:bot-pilot-actions-latest
-      - name: Buld and Push bot-connectors container image
-        uses: docker/build-push-action@v6
-        with:
-          context: bot-pilot-chat/backend/bot-connectors
-          file: bot-pilot-config/deployment/backend/connectors/Containerfile
-          push: true
-          tags: docker.io/normanboettcher/bot-pilot:bot-connectors-latest
+
       
       
     
