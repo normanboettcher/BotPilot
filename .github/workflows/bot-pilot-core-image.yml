@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
     paths:
       - './bot-pilot-chat/backend/rasa-actions/**'
-      - './.github/workflows/bot-pilot-core-image.yml.yml'
+      - '.github/workflows/bot-pilot-core-image.yml'
 
 jobs:
   run-on-merge:
