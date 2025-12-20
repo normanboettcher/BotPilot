@@ -6,7 +6,13 @@ on:
       - './bot-pilot-chat/backend/bot-connectors/**'
       - '.github/workflows/bot-connectors.yml'
   pull_request:
-    branches: [ main ]
+    types:
+      - opened
+      - synchronize
+    branches:
+      - 'main'
+    paths:
+      - './bot-pilot-chat/backend/bot-connectors/**'
 
 jobs:
   lint:
