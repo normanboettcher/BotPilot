@@ -7,7 +7,7 @@ on:
       - closed
     branches: [ "main" ]
     paths:
-      - './bot-pilot-chat/frontend/**'
+      - 'bot-pilot-chat/frontend/**'
       - '.github/workflows/frontend-image.yml'
 
 jobs:
