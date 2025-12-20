@@ -1,6 +1,0 @@
-name: docker-io-login
-description: Logs into docker.io
-
-runs:
-  using: "composite"
-  steps:
