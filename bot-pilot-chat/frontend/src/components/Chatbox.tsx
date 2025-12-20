@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Chatbox: React.FC<Props> = ({ visible }) => {
-  const { isMobile, isDarkTheme } = useBotResponsive();
+  const { isMobile } = useBotResponsive();
   return (
     <Paper
       id="chatbox"
@@ -21,7 +21,7 @@ const Chatbox: React.FC<Props> = ({ visible }) => {
         display: visible ? 'flex' : 'none',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        backgroundColor: isDarkTheme ? 'grey.800' : 'grey.200',
+        backgroundColor: 'grey.200',
         border: '1px solid #ccc',
         padding: '1rem',
         boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
