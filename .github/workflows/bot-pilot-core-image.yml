@@ -25,7 +25,7 @@ jobs:
           path: bot-pilot-config
 
       - name: Log in to docker.io
-        uses: ./.github/workflows/docker-actions/action.yml
+        uses: ./.github/workflows/docker-actions
       - name: Build and Push bot-pilot-core container image
         uses: docker/build-push-action@v6
         with:
