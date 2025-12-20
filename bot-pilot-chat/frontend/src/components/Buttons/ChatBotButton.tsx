@@ -1,19 +1,21 @@
 import { Box, Button } from '@mui/material';
 import React from 'react';
 import { MessageChatbot } from '../icons/BotAvatar.tsx';
+import { useChatMessageGraphicsService } from '../../service/graphics/ChatMessageGraphicsService.ts';
 
 type Props = {
   onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
 const ChatBotButton: React.FC<Props> = ({ onClick }) => {
+  const { chatBubbleColorUser } = useChatMessageGraphicsService();
   return (
     <Box>
       <Button
         id="chatbot-toggle"
         onClick={onClick}
         sx={{
-          backgroundColor: 'primary.main',
+          backgroundColor: chatBubbleColorUser,
           color: 'white',
           border: 'none',
           borderRadius: '50%',
@@ -27,7 +29,7 @@ const ChatBotButton: React.FC<Props> = ({ onClick }) => {
           },
         }}
       >
-        {MessageChatbot()}
+        {MessageChatbot({ fill: 'white' })}
       </Button>
     </Box>
   );

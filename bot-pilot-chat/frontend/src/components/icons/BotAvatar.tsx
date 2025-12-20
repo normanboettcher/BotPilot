@@ -1,6 +1,7 @@
 import type { SVGProps } from 'react';
 import React from 'react';
 import { Avatar } from '@mui/material';
+import { useChatMessageGraphicsService } from '../../service/graphics/ChatMessageGraphicsService.ts';
 
 export function MessageChatbot(props?: SVGProps<SVGSVGElement>) {
   return (
@@ -11,29 +12,20 @@ export function MessageChatbot(props?: SVGProps<SVGSVGElement>) {
       height="1em"
       {...props}
     >
-      <g
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-      >
-        <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-5l-5 3v-3H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3zM9.5 9h.01m4.99 0h.01"></path>
-        <path d="M9.5 13a3.5 3.5 0 0 0 5 0"></path>
-      </g>
+      <path d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4C22,2.89 21.1,2 20,2Z" />
     </svg>
   );
 }
 
 const BotAvatar = () => {
+  const { chatBubbleColorBot } = useChatMessageGraphicsService();
   return (
     <Avatar
       sx={{
-        bgcolor: 'grey.800',
-        fontSize: '27px',
+        bgcolor: chatBubbleColorBot,
       }}
     >
-      {MessageChatbot({ color: 'grey.200' })}
+      {MessageChatbot({ fill: 'white' })}
     </Avatar>
   );
 };
