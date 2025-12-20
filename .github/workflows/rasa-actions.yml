@@ -6,7 +6,11 @@ on:
       - 'bot-pilot-chat/backend/rasa-actions/**'
       - '.github/workflows/rasa-actions.yml'
   pull_request:
-    branches: [ main ]
+    branches:
+      - 'main'
+    paths:
+      - 'bot-pilot-chat/backend/rasa-actions/**'
+    types: [ opened, synchronize ]
 jobs:
   lint:
     runs-on: ubuntu-latest
