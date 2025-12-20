@@ -2,10 +2,15 @@ import type { ColorService } from './ColorService.ts';
 import type { ColorKey } from '../../domain/graphics/ColorKey.ts';
 
 class ColorServiceImpl implements ColorService {
-  public async getColor(_colorKey: ColorKey): Promise<{ textColor: string }> {
+  public async getColor(colorKey: ColorKey): Promise<{ color: string }> {
     //TODO: change later to real backend call to get color
-    const payload = await Promise.resolve({ color: 'black' });
-    return { textColor: payload.color };
+    if (colorKey === 'user_chat_bubble') {
+      return { color: '#7593A2' };
+    }
+    if (colorKey === 'chat_text') {
+      return { color: 'black' };
+    }
+    return Promise.resolve({ color: 'black' });
   }
 }
 

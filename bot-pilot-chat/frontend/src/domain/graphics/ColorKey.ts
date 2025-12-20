@@ -1,1 +1,1 @@
-export type ColorKey = 'chat_text';
+export type ColorKey = 'chat_text' | 'user_chat_bubble';

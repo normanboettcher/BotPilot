@@ -1,6 +1,7 @@
 import type { SVGProps } from 'react';
 import React from 'react';
 import { Avatar } from '@mui/material';
+import { useChatMessageGraphicsService } from '../../service/graphics/ChatMessageGraphicsService.ts';
 
 function User3Fill(props?: SVGProps<SVGSVGElement>) {
   return (
@@ -20,7 +21,8 @@ function User3Fill(props?: SVGProps<SVGSVGElement>) {
 }
 
 const UserAvatar = () => {
-  const style = { bgcolor: 'primary.main' };
+  const { chatBubbleColorUser } = useChatMessageGraphicsService();
+  const style = { bgcolor: chatBubbleColorUser };
   return <Avatar sx={style}>{User3Fill()}</Avatar>;
 };
 
