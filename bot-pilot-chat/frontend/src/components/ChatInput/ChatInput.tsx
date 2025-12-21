@@ -13,6 +13,12 @@ const ChatInput: React.FC = () => {
   > = (e) => {
     setInput(e.target.value);
   };
+
+  const sendMessageIfNotEmpty = async () => {
+    if (input !== '') {
+      await sendMessageAndGetResponse(input);
+    }
+  };
   return (
     <Box
       id="chatbot-input"
@@ -30,7 +36,7 @@ const ChatInput: React.FC = () => {
         sendButton={
           <SendIconButton
             onClick={async () => {
-              await sendMessageAndGetResponse(input);
+              await sendMessageIfNotEmpty();
               setInput('');
             }}
           />
@@ -38,8 +44,8 @@ const ChatInput: React.FC = () => {
         value={input}
         onKeyDown={async (e) => {
           if (e.key === 'Enter' && !e.shiftKey) {
+            await sendMessageIfNotEmpty();
             e.preventDefault();
-            await sendMessageAndGetResponse(input);
             setInput('');
           }
         }}
