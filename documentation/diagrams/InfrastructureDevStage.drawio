@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0" version="29.3.6">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0" version="29.3.7">
   <diagram name="Page-1" id="hHgt21N0WRwJexab-7Mq">
-    <mxGraphModel dx="1149" dy="636" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1379" dy="763" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -85,7 +85,7 @@
         <mxCell id="PcwtJ-EkJhmc_AP37sSY-48" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;b&gt;Shared infrastructure access&lt;/b&gt;" vertex="1">
           <mxGeometry height="30" width="60" x="350" y="290" as="geometry" />
         </mxCell>
-        <mxCell id="PcwtJ-EkJhmc_AP37sSY-54" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#d2d3d3, #121212);fontColor=#ffffff;strokeColor=#314354;" value="" vertex="1">
+        <mxCell id="PcwtJ-EkJhmc_AP37sSY-54" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
           <mxGeometry height="60" width="120" x="490" y="363.65999999999997" as="geometry" />
         </mxCell>
         <mxCell id="PcwtJ-EkJhmc_AP37sSY-56" edge="1" parent="1" source="PcwtJ-EkJhmc_AP37sSY-24" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="PcwtJ-EkJhmc_AP37sSY-54">
