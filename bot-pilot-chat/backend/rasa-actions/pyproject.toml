@@ -13,81 +13,72 @@ where = ["src"]
 line-length = 88
 target-version = ['py310']
 
-[tool.tox]
-envlist = ['format', 'lint', 'unit_tests', 'coverage', 'rasa_tests', 'rasa_story_tests']
-requires = ["tox>=4.30"]
+# ---------------------------------------------------------------------------
+# Hatch – environment definitions and scripts
+# ---------------------------------------------------------------------------
+# Install hatch itself: pip install hatch
+# Run any script: hatch run <env>:<script> e.g. hatch run lint:check
+# Run default env: hatch run <script> e.g. hatch run unit
+# ---------------------------------------------------------------------------
 
-[tool.tox.env.unit_tests]
-description = "Run unit tests"
-deps = [
+# fmt env – only black, no rasa pins to conflict with
+[tool.hatch.envs.fmt]
+dependencies = ["black==24.4.2"]
+
+[tool.hatch.envs.fmt.scripts]
+run   = ["black src/ tests/unit integration_tests/"]
+check = ["black --check src/ tests/unit integration_tests/"]
+
+# lint env – only flake8
+[tool.hatch.envs.lint]
+dependencies = ["flake8==7.1.0"]
+
+[tool.hatch.envs.lint.scripts]
+run = [
+    "flake8 src/",
+    "flake8 tests/unit",
+    "flake8 integration_tests/",
+]
+
+# test env – rasa + pytest; isolated so rasa's strict pins don't bleed into fmt/lint
+[tool.hatch.envs.test]
+dependencies = [
     "pytest==7.4.4",
+    "pytest-cov==4.1.0",
     "emoji==2.14.1",
     "rasa_sdk==3.6.2",
     "rasa==3.6.21",
     "markdown_strings==3.4.0",
-    "-e ."
-]
-commands = [
-    ["python", "-m", "pytest", "tests/unit"],
 ]
 
-[tool.tox.env.integration_test]
-description = "Run integration tests"
-deps = [
-    "-rrequirements.txt",
-    "-e ."
-]
-commands = [
-    ["python", "-m", "pytest", "integration_tests/"]
+[tool.hatch.envs.test.scripts]
+unit     = ["python -m pytest tests/unit"]
+coverage = ["python -m pytest tests/unit --cov=src --cov-report=term-missing --cov-report=html"]
+
+# ---------------------------------------------------------------------------
+# Integration-test env – uses the full requirements.txt
+# ---------------------------------------------------------------------------
+[tool.hatch.envs.integration]
+dependencies = [
+    "-r requirements.txt",
 ]
 
-[tool.tox.env.lint]
-description = "Run flake8 linter"
-deps = ["flake8"]
-commands = [
-    ["flake8", "src/"],
-    ["flake8", "tests/unit"],
-    ["flake8", "integration_tests/"],
-]
+[tool.hatch.envs.integration.scripts]
+test = ["python -m pytest integration_tests/"]
 
-[tool.tox.env.rasa_tests]
-description = "Run Rasa tests"
-deps = [
+# ---------------------------------------------------------------------------
+# Rasa NLU + story test env
+# Kept separate because Rasa + SpaCy have heavy, slow-to-resolve deps.
+# ---------------------------------------------------------------------------
+[tool.hatch.envs.rasa]
+dependencies = [
     "rasa==3.6.21",
     "spacy==3.7.4",
-    "https://github.com/explosion/spacy-models/releases/download/de_core_news_md-3.7.0/de_core_news_md-3.7.0.tar.gz"
-]
-commands = [
-    ["rasa", "test", "nlu", "--fail-on-prediction-errors"]
+    "de_core_news_md @ https://github.com/explosion/spacy-models/releases/download/de_core_news_md-3.7.0/de_core_news_md-3.7.0.tar.gz",
 ]
 
-[tool.tox.env.rasa_story_tests]
-description = "Run Rasa story tests"
-deps = [
-    "rasa==3.6.21",
-    "spacy==3.7.4",
-    "https://github.com/explosion/spacy-models/releases/download/de_core_news_md-3.7.0/de_core_news_md-3.7.0.tar.gz"
-]
-
-commands = [
-    ["rasa", "test", "core", "--fail-on-prediction-errors", "--stories", "tests/rasa/stories"]
-]
-
-[tool.tox.env.coverage]
-description = "Run tests and generate HTML coverage report"
-deps = [
-    "-rrequirements.txt",
-    "-e ."
-]
-commands = [
-    ["python", "-m", "pytest", "tests/unit"]
-]
-
-[tool.tox.env.format]
-description = "Run black formatter"
-deps = ["black"]
-commands = [
-    ["black", "src/"],
-    ["black", "tests/unit"],
-    ["black", "integration_tests/"],
+[tool.hatch.envs.rasa.scripts]
+nlu    = ["rasa test nlu --fail-on-prediction-errors"]
+stories = [
+    "rasa test core --fail-on-prediction-errors --stories tests/rasa/stories",
 ]
