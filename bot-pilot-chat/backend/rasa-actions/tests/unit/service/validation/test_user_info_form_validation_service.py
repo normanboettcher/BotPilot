@@ -2,8 +2,6 @@ import pytest
 
 from bot_pilot.service.validation.user_info_form_validation_service import (
     validate_input_user_mail,
-)
-from bot_pilot.service.validation.user_info_form_validation_service import (
     validate_input_user_name,
 )
 
@@ -19,15 +17,8 @@ from bot_pilot.service.validation.user_info_form_validation_service import (
         "richard.becker88@t-online.de",
     ],
 )
-def test_validate_user_mail_success(email):
-    # given
-    valid_email = email
-
-    # when
-    result = validate_input_user_mail(valid_email)
-
-    # then
-    assert result == True
+def test_validate_user_mail_success(email: str):
+    assert validate_input_user_mail(email)
 
 
 @pytest.mark.parametrize(
@@ -42,15 +33,8 @@ def test_validate_user_mail_success(email):
         "peter@.de",
     ],
 )
-def test_validate_user_mail_failure(email):
-    # given
-    invalid_email = email
-
-    # when
-    result = validate_input_user_mail(invalid_email)
-
-    # then
-    assert result == False
+def test_validate_user_mail_failure(email: str | None):
+    assert not validate_input_user_mail(email)
 
 
 @pytest.mark.parametrize(
@@ -64,26 +48,12 @@ def test_validate_user_mail_failure(email):
         "peter meyer",
     ],
 )
-def test_validate_user_name_success(user_name):
-    # given
-    valid_user_name = user_name.strip().title()
-
-    # when
-    result = validate_input_user_name(valid_user_name)
-
-    # then
-    assert result == True
+def test_validate_user_name_success(user_name: str):
+    assert validate_input_user_name(user_name.strip().title())
 
 
 @pytest.mark.parametrize(
     "user_name", ["PeterMeyer", "Peter", "Lisa-Sophie-Becker", "Becker-Müller"]
 )
-def test_validate_user_name_failure(user_name):
-    # given
-    invalid_user_name = user_name.strip()
-
-    # when
-    result = validate_input_user_name(invalid_user_name)
-
-    # then
-    assert result == False
+def test_validate_user_name_failure(user_name: str):
+    assert not validate_input_user_name(user_name.strip())

@@ -2,7 +2,7 @@ import logging
 
 from rasa_sdk import Action
 
-logger = logging.Logger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class ActionSubmitTermin(Action):
@@ -22,8 +22,5 @@ class ActionSubmitTermin(Action):
             tracker.get_slot(item) for item in slots if tracker.slots[item] is not None
         ]
 
-        logger.debug(
-            "Collected items for termin submission: "
-            f"{[print(item) for item in collected_items]}"
-        )
+        logger.debug("Collected items for termin submission: %s", collected_items)
         return []
