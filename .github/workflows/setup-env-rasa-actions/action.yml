@@ -14,16 +14,16 @@ runs:
         python-version: ${{ inputs.python-version }}
         cache: 'pip'
 
-    - name: Cache tox environments
+    - name: Cache hatch environments
       uses: actions/cache@v4
       with:
-        path: bot-pilot-chat/backend/rasa-actions/.tox
-        key: ${{ runner.os }}-tox-${{ hashFiles('**/pyproject.toml', '**/requirements*.txt') }}
+        path: ~/.local/share/hatch/env
+        key: ${{ runner.os }}-hatch-${{ hashFiles('**/pyproject.toml', '**/requirements*.txt') }}
         restore-keys: |
-          ${{ runner.os }}-tox-
+          ${{ runner.os }}-hatch-
 
-    - name: Install dependencies
+    - name: Install hatch
       shell: bash
       run: |
         pip install --upgrade pip
-        pip install tox==4.31.0
+        pip install hatch
