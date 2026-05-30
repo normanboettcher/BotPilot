@@ -88,6 +88,17 @@ nlu:
     examples: |
       - Gibt es Parkplätze?
       - Wo kann ich parken?
+      - Gibt es Parkplätze in der Nähe?
+      - Wo kann ich mein Auto abstellen?
+      - Gibt es kostenlose Parkplätze?
+      - Ist Parken vor der Kanzlei möglich?
+      - Wie viel kostet das Parken in der Nähe?
+      - Gibt es eine Tiefgarage?
+      - Wo parke ich am besten?
+      - Kann ich direkt vor der Kanzlei parken?
+      - Ist Parken kostenfrei?
+      - Gibt es Behindertenparkplätze?
+      - Wo ist der nächste Parkplatz?
   - intent: kosten
     examples: |
       - Wie hoch sind Ihre Kosten?
@@ -154,12 +165,29 @@ nlu:
       - Wo ist der nächste Standort?
       - Wo ist die nächste Kanzlei?
       - Wo genau befindet sich Ihre Praxis/Kanzlei?
+      - Welche Adresse hat Ihre Kanzlei?
+      - Wie lautet Ihre Adresse?
+      - Wo haben Sie Ihre Büros?
+      - In welcher Stadt ist Ihre Kanzlei?
+      - Haben Sie mehrere Standorte?
+      - In welchem Stadtteil befinden Sie sich?
+      - Ich suche Ihre Adresse.
   - intent: anreise
     examples: |
       - Anreise Kanzlei
       - Wie kommt man zur Kanzlei?
       - Wie ist der beste Weg zur Kanzlei?
       - Welche Öffis fahren zur Kanzlei?
+      - Mit welchen öffentlichen Verkehrsmitteln komme ich zu Ihnen?
+      - Wie erreiche ich Ihre Kanzlei mit der U-Bahn?
+      - Welche Buslinie fährt zur Kanzlei?
+      - Gibt es eine Straßenbahn in der Nähe?
+      - Wie weit ist es vom Bahnhof?
+      - Ist die Kanzlei mit dem Zug erreichbar?
+      - Wie lange brauche ich vom Hauptbahnhof?
+      - Mit welcher S-Bahn komme ich zu Ihnen?
+      - Wie komme ich mit dem ÖPNV zu Ihnen?
+      - Welche U-Bahn-Station ist in der Nähe?
   - intent: bereiche
     examples: |
       - Welche Leistungen bietet Ihre Kanzlei an?
@@ -216,38 +244,31 @@ nlu:
       - Welche Vorteile habe ich, wenn ich einen Steuerberater beauftrage?
   - intent: faq
     examples: |
-      - Welche Ausgaben kann ich steuerlich absetzen ?
+      - Welche Ausgaben kann ich steuerlich absetzen?
       - Wie nehme ich Kontakt auf?
       - Gibt es online-Beratungen?
       - Kann ich die Kosten für die Kita absetzen?
       - Wie versteuere ich Einkünfte aus Kryptowährungen?
-      - Was kann ich im Homeoffice absetzen?
-      - Welche Arbeitsmittel kann ich steuerlich absetzen?
-      - Wen betreuen Sie alles?
-      - Ich habe ein Schreiben vom Finanzamt erhalten – was nun?
-      - Bieten Sie auch Unterstützung für Selbstständige an?
-      - Ich bin zum ersten Mal steuerpflichtig – was muss ich beachten?
-      - Kann ich bei Ihnen auch meine Buchhaltung abgeben?
-      - Kann ich Betreuungskosten für mein Kind steuerlich geltend machen?
       - Muss ich Gewinne aus Kryptowährungen versteuern?
-      - Welche Homeoffice-Kosten kann ich anrechnen lassen?
-      - Was zählt als absetzbares Arbeitsmittel?
+      - Ich habe ein Schreiben vom Finanzamt erhalten – was nun?
       - Was soll ich tun, wenn ich Post vom Finanzamt bekomme?
-      - Unterstützen Sie auch Freelancer und Freiberufler?
-      - Kann ich meine laufende Buchführung an Sie übergeben?
-      - Wie unterscheiden sich Ihre Leistungen für Privatpersonen und Unternehmen?
+      - Ich bin zum ersten Mal steuerpflichtig – was muss ich beachten?
+      - Kann ich Betreuungskosten für mein Kind steuerlich geltend machen?
       - Was passiert, wenn ich die Steuerfrist verpasse?
       - Welche Steuerklassen gibt es und wie wähle ich die richtige?
       - Wie gehe ich vor, wenn ich eine Nachzahlung leisten muss?
-      - Wie kann ich meine Steuerlast als Selbstständiger senken?
       - Was ist eine Einnahmen-Überschuss-Rechnung (EÜR)?
       - Gibt es Förderprogramme, über die ich steuerliche Vorteile bekomme?
-      - Nehmen Sie neue Leute auf?
       - Nehmen Sie neue Mandanten auf?
       - Nehmen Sie noch neue Mandanten auf?
       - Wie hoch ist der Grundfreibetrag?
-      - Gibt es eine Veschwiegenheitspflicht?
+      - Gibt es eine Schweigepflicht?
       - Passt Ihre Kanzlei zu mir?
+      - Wie läuft das erste Gespräch ab?
+      - Kann ich Sie auch per E-Mail kontaktieren?
+      - Bieten Sie kostenlose Erstgespräche an?
+      - Wie schnell antworten Sie auf Anfragen?
+      - Kann ich online einen Termin buchen?
   - intent: positive_feedback
     examples: |
       - super, danke
@@ -263,43 +284,30 @@ nlu:
   - intent: negative_feedback
     examples: |
       - oh nein
-      - oh nein, das war nicht das, was ich wollte
-      - oh nein, das war nicht hilfreich
-      - oh nein, das war nicht die Antwort, die ich wollte
-      - oh nein, das war nicht die Antwort, die ich gesucht habe
-      - oh nein, das war nicht die Antwort, die ich brauchte
-      - oh nein, das war nicht die Antwort, die ich erwartet habe
-      - oh nein, das war nicht die Antwort, die ich mir erhofft habe
-      - oh nein, das war nicht die Antwort, die ich mir gewünscht habe
-      - oh nein, das war nicht die Antwort, die ich mir vorgestellt habe
-      - oh nein, das war nicht die Antwort, die ich mir ausgemalt habe
-      - oh nein, das war nicht die Antwort, die ich mir gedacht habe
-      - oh nein, das war nicht die Antwort, die ich mir erträumt habe
-      - nein, das war nicht das, was ich wollte
-      - nein, das war nicht hilfreich
-      - nein, das war nicht die Antwort, die ich wollte
-      - nein, das war nicht die Antwort, die ich gesucht habe
-      - nein, das war nicht die Antwort, die ich brauchte
-      - nein, das war nicht die Antwort, die ich erwartet habe
-      - nein, das war nicht die Antwort, die ich mir erhofft habe
-      - nein, das war nicht die Antwort, die ich mir gewünscht habe
-      - nein, das war nicht die Antwort, die ich mir vorgestellt habe
-      - nein, das war nicht die Antwort, die ich mir ausgemalt habe
-      - nein, das war nicht die Antwort, die ich mir gedacht habe
-      - das war nicht das, was ich wollte
       - das war nicht hilfreich
-      - das war nicht die Antwort, die ich wollte
       - das war nicht die Antwort, die ich gesucht habe
-      - das war nicht die Antwort, die ich brauchte
       - oh man, du verstehst es nicht
       - Blöde Antwort
       - Hilft mir nicht
       - Du verstehst es nicht
-      - Du verstehst gar nichts
       - Du hast mich falsch verstanden
       - Das war nicht gemeint
       - Deine Antwort ist falsch
-      - Die Antwort ist falsch
+      - Das hat mir nicht geholfen
+      - Das ist nicht richtig
+      - Das stimmt nicht
+      - Falsche Antwort
+      - Das trifft es nicht
+      - Ich meinte etwas anderes
+      - Das beantwortet meine Frage nicht
+      - Leider nicht das, wonach ich gesucht habe
+      - Das war eine schlechte Antwort
+      - Bitte versuch es nochmal
+      - Das war nicht korrekt
+      - Ich bin nicht zufrieden mit der Antwort
+      - Das hat nichts mit meiner Frage zu tun
+      - Kannst du das besser erklären?
+      - Das verstehe ich nicht, erkläre es anders
   - intent: general_bot
     examples: |
       - Wer bist du?
@@ -358,16 +366,11 @@ nlu:
       - ne, danke sehr
       - nein, danke sehr
       - nö, danke sehr
-      - prozess abbrechen
-      - abbruch
-      - ich möchte den Prozess abbrechen
-      - Bitte lass uns den Vorgang beenden
-      - abbrechen
-      - ich möchte den Vorgang abbrechen
-      - abbrechen bitte
-      - ich möchte den Vorgang abbrechen bitte
-      - ich möchte den Prozess stoppen
-      - brich den Vorgang bitte ab
+      - das möchte ich nicht
+      - das will ich nicht
+      - lieber nicht
+      - ich lehne ab
+      - nicht nötig
   - intent: affirm
     examples: |
       - ja

@@ -146,7 +146,170 @@ stories:
       - intent: affirm
       - action: user_info_form
       - slot_was_set:
-          - requested_slot: user_email
+          - requested_slot: user_mail
+
+  # ── Complete end-to-end flows ─────────────────────────────────────────────
+
+  - story: complete path greet ask general bot then termin and bye
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: general_bot
+      - action: action_general_bot
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - slot_was_set:
+          - requested_slot: termin_type
+      - intent: termin_type_inform
+      - slot_was_set:
+          - requested_slot: termin_medium
+      - action: termin_form
+      - active_loop: termin_form
+      - intent: termin_medium_inform
+      - slot_was_set:
+          - requested_slot: null
+      - action: termin_form
+      - active_loop: null
+      - action: action_switch_form
+      - slot_was_set:
+          - next_form_name: user_type_form
+      - action: user_type_form
+      - active_loop: user_type_form
+      - slot_was_set:
+          - requested_slot: user_type
+      - intent: user_type_inform
+      - slot_was_set:
+          - requested_slot: null
+      - action: user_type_form
+      - active_loop: null
+      - action: action_switch_form
+      - slot_was_set:
+          - next_form_name: user_info_form
+      - action: user_info_form
+      - active_loop: user_info_form
+
+  - story: complete path faq then termin vereinbaren
+    steps:
+      - intent: faq
+      - action: action_get_faq
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - slot_was_set:
+          - requested_slot: termin_type
+      - intent: termin_type_inform
+      - slot_was_set:
+          - requested_slot: termin_medium
+      - action: termin_form
+      - active_loop: termin_form
+
+  - story: complete path info questions then termin
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: kosten
+      - action: action_kosten
+      - intent: zeiten
+      - action: action_zeiten
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+
+  - story: complete path submit meeting and positive feedback then bye
+    steps:
+      - action: make_meeting_form
+      - active_loop: make_meeting_form
+      - slot_was_set:
+          - requested_slot: meeting_datetime
+      - intent: meeting_datetime_inform
+      - slot_was_set:
+          - requested_slot: null
+      - action: make_meeting_form
+      - active_loop: null
+      - action: action_submit_make_meeting_form
+      - action: action_ask_feedback
+      - intent: positive_feedback
+      - action: action_positive_feedback
+      - intent: verabschiedung
+      - action: action_verabschiedung
+
+  - story: complete path submit meeting and negative feedback
+    steps:
+      - action: make_meeting_form
+      - active_loop: make_meeting_form
+      - slot_was_set:
+          - requested_slot: meeting_datetime
+      - intent: meeting_datetime_inform
+      - slot_was_set:
+          - requested_slot: null
+      - action: make_meeting_form
+      - active_loop: null
+      - action: action_submit_make_meeting_form
+      - action: action_ask_feedback
+      - intent: negative_feedback
+      - action: action_negative_feedback
+
+  # ── Chitchat in conversation ───────────────────────────────────────────────
+
+  - story: chitchat wie gehts then termin
+    steps:
+      - intent: chitchat_wie_gehts
+      - action: utter_chitchat_wie_gehts
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+
+  - story: greet then chitchat witz then faq
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: chitchat_witz
+      - action: utter_chitchat_witz
+      - intent: faq
+      - action: action_get_faq
+
+  - story: chitchat kompliment then bye
+    steps:
+      - intent: chitchat_kompliment
+      - action: utter_chitchat_kompliment
+      - intent: verabschiedung
+      - action: action_verabschiedung
+
+  # ── Unhappy paths ──────────────────────────────────────────────────────────
+
+  - story: user stops during termin_form
+    steps:
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - slot_was_set:
+          - requested_slot: termin_type
+      - intent: stop
+      - action: action_stop
+      - active_loop: null
+
+  - story: user asks info question then resumes termin
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: standort
+      - action: action_standort
+      - intent: parking
+      - action: action_parking
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+
+  - story: nlu fallback during conversation
+    steps:
+      - intent: begruessung
+      - action: action_begruessung
+      - intent: nlu_fallback
+      - action: action_default_fallback
+      - intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
 
   - story: collect user_name and name was denied in first step
     steps:

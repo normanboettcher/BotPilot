@@ -28,6 +28,9 @@ intents:
   - user_name_inform
   - user_mail_inform
   - meeting_datetime_inform
+  - chitchat_wie_gehts
+  - chitchat_witz
+  - chitchat_kompliment
 entities:
   - termin_medium
   - user_type
@@ -158,6 +161,19 @@ slots:
         conditions:
           - active_loop: consultant_form
             requested_slot: consultant_name
+
+responses:
+  utter_chitchat_wie_gehts:
+    - text: "Mir geht es ausgezeichnet, danke der Nachfrage! Womit kann ich Ihnen bei Ihrem Steueranliegen behilflich sein?"
+    - text: "Bestens, danke! Ich bin bereit, Ihnen zu helfen. Was kann ich für Sie tun?"
+
+  utter_chitchat_witz:
+    - text: "Warum liebt der Steuerberater keine Witze? Weil er immer auf den Punkt kommen muss! Aber im Ernst – womit kann ich Ihnen helfen?"
+    - text: "Was sagt ein Buchhalter zum anderen? Unser Job ist bilanzierend schön! Darf ich Ihnen jetzt bei Ihrem Anliegen helfen?"
+
+  utter_chitchat_kompliment:
+    - text: "Vielen Dank, das freut mich sehr! Ich bin hier, um Ihnen bei Ihren Steuer- und Kanzleifragen zu helfen. Was möchten Sie wissen?"
+    - text: "Das ist sehr nett von Ihnen! Wie kann ich Ihnen heute behilflich sein?"
 
 forms:
   termin_form:

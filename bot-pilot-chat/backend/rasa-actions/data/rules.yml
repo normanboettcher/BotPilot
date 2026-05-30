@@ -1,6 +1,21 @@
 version: "3.1"
 
 rules:
+  - rule: Chitchat - Wie geht's
+    steps:
+      - intent: chitchat_wie_gehts
+      - action: utter_chitchat_wie_gehts
+
+  - rule: Chitchat - Witz
+    steps:
+      - intent: chitchat_witz
+      - action: utter_chitchat_witz
+
+  - rule: Chitchat - Kompliment
+    steps:
+      - intent: chitchat_kompliment
+      - action: utter_chitchat_kompliment
+
   - rule: Begrüßung antworten
     steps:
       - intent: begruessung

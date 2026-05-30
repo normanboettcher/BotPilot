@@ -1,0 +1,71 @@
+version: "3.1"
+
+stories:
+  - story: user stops during termin_form
+    steps:
+      - user: |
+          Ich möchte einen Termin vereinbaren
+        intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+      - slot_was_set:
+          - requested_slot: termin_type
+      - user: |
+          Stopp
+        intent: stop
+      - action: action_stop
+      - active_loop: null
+
+  - story: nlu fallback then recovery
+    steps:
+      - user: |
+          Hallo
+        intent: begruessung
+      - action: action_begruessung
+      - user: |
+          asdfghjkl
+        intent: nlu_fallback
+      - action: action_default_fallback
+      - user: |
+          Ich möchte einen Termin vereinbaren
+        intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+
+  - story: faq then info then termin
+    steps:
+      - user: |
+          Wie hoch ist der Grundfreibetrag?
+        intent: faq
+      - action: action_get_faq
+      - user: |
+          Was kostet eine Beratung?
+        intent: kosten
+      - action: action_kosten
+      - user: |
+          Ich möchte einen Termin vereinbaren
+        intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+
+  - story: positive feedback after meeting booked then goodbye
+    steps:
+      - action: action_submit_make_meeting_form
+      - action: action_ask_feedback
+      - user: |
+          Super, danke
+        intent: positive_feedback
+      - action: action_positive_feedback
+      - user: |
+          Tschüss
+        intent: verabschiedung
+      - action: action_verabschiedung
+
+  - story: negative feedback after meeting booked
+    steps:
+      - action: action_submit_make_meeting_form
+      - action: action_ask_feedback
+      - user: |
+          Das hat mir nicht geholfen
+        intent: negative_feedback
+      - action: action_negative_feedback

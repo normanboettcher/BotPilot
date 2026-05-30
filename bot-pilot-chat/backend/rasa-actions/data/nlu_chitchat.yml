@@ -1,0 +1,46 @@
+version: "3.1"
+
+nlu:
+  - intent: chitchat_wie_gehts
+    examples: |
+      - Wie geht es dir?
+      - Wie geht's dir?
+      - Wie läuft's bei dir?
+      - Alles gut bei dir?
+      - Wie geht es Ihnen?
+      - Na, wie geht's?
+      - Wie fühlst du dich heute?
+      - Bist du fit?
+      - Geht's dir gut?
+      - Wie ist deine Stimmung heute?
+      - Wie läuft der Tag für dich?
+      - Alles klar bei dir?
+
+  - intent: chitchat_witz
+    examples: |
+      - Erzähl mir einen Witz
+      - Kannst du Witze erzählen?
+      - Hast du einen Witz für mich?
+      - Mach mich zum Lachen
+      - Ich brauche einen Witz
+      - Sag mir was Lustiges
+      - Kennst du einen guten Witz?
+      - Witz bitte
+      - Hast du Humor?
+      - Kannst du witzig sein?
+      - Bitte einen Witz
+
+  - intent: chitchat_kompliment
+    examples: |
+      - Du bist super
+      - Du machst das toll
+      - Du bist ein toller Assistent
+      - Ich mag dich
+      - Du bist klasse
+      - Du bist wirklich hilfreich
+      - Du bist der beste Bot
+      - Gut gemacht
+      - Weiter so
+      - Du bist wunderbar
+      - Das machst du gut
+      - Ich finde dich sympathisch
