@@ -1,17 +1,15 @@
 import os
+from dataclasses import dataclass
 
 
-def app_config():
-    return {
-        "APP_PREFIX": "api",
-        "FAQ_DATA_PATH": os.path.join(
-            "/home/norman/projects",
-            "bot-pilot",
-            "bot-pilot-chat",
-            "backend",
-            "rasa-actions",
-            "src",
-            "data",
-            "faqs.json",
-        ),
-    }
+@dataclass(frozen=True)
+class AppConfig:
+    faq_service_url: str
+
+    @classmethod
+    def from_env(cls) -> "AppConfig":
+        return cls(
+            faq_service_url=os.getenv(
+                "FAQ_SERVICE_URL", "http://localhost:8000/api/faqs"
+            ),
+        )

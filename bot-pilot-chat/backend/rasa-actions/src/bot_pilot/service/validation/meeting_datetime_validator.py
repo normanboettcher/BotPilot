@@ -1,9 +1,8 @@
 from datetime import datetime
 
 
-def is_utc_datetime(s):
+def is_utc_datetime(s: str) -> bool:
     try:
-        # Z am Ende bedeutet UTC
         datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ")
         return True
     except ValueError:

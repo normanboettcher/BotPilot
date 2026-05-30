@@ -1,27 +1,24 @@
-import requests
 from rasa_sdk import Action
 
-from bot_pilot.domain.response import BotResponse
+from bot_pilot.adapters.http_faq_adapter import HttpFaqAdapter
+from bot_pilot.config.config import AppConfig
+from bot_pilot.domain.tenant_context import TenantContext
+from bot_pilot.ports.faq_port import FaqPort
 from bot_pilot.utils.response_wrapper import send_response
 
 
 class ActionGetFaq(Action):
-    def name(self):
+    def __init__(self) -> None:
+        config = AppConfig.from_env()
+        self._faq_port: FaqPort = HttpFaqAdapter(config.faq_service_url)
+
+    def name(self) -> str:
         return "action_get_faq"
 
     def run(self, dispatcher, tracker, domain):
-        try:
-            faq = requests.post(
-                "http://localhost:8000/api/faqs",
-                json={"question": tracker.latest_message.get("text", "")},
-            )
-            dispatcher.utter_message(json_message=send_response(faq.json()))
-        except Exception:
-            message = BotResponse.with_answer(
-                "Es tut mir leid, ich konnte die Antwort zu dieser Frage "
-                "gerade nicht abrufen."
-                "Bitte versuchen Sie es später erneut."
-            )
-            dispatcher.utter_message(json_message=send_response(message.as_dict()))
-
+        context = TenantContext(tenant_id="default")
+        response = self._faq_port.find_answer(
+            tracker.latest_message.get("text", ""), context
+        )
+        dispatcher.utter_message(json_message=send_response(response.as_dict()))
         return []

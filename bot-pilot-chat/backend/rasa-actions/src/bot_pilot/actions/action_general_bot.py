@@ -1,9 +1,14 @@
 import textwrap
 
 import emoji
-from bot_pilot.domain.response import BotResponse
 from markdown_strings import unordered_list, bold
 from rasa_sdk import Action
+
+from bot_pilot.adapters.hardcoded_tenant_config_adapter import (
+    HardcodedTenantConfigAdapter,
+)
+from bot_pilot.domain.response import BotResponse
+from bot_pilot.domain.tenant_context import TenantContext
 from bot_pilot.utils.response_wrapper import send_response
 
 
@@ -12,6 +17,9 @@ class ActionGeneralBot(Action):
         return "action_general_bot"
 
     def run(self, dispatcher, tracker, domain):
+        context = TenantContext(tenant_id="default")
+        firm_name = HardcodedTenantConfigAdapter().get_firm_name(context)
+
         feature_list = unordered_list(
             [
                 "Terminabstimmung",
@@ -22,7 +30,7 @@ class ActionGeneralBot(Action):
             ]
         )
         digitaler_assistent = "_digitaler Assistent_"
-        kanzlei_name = bold("Musterpartner")
+        kanzlei_name = bold(firm_name)
         message = textwrap.dedent(
             f"Als {digitaler_assistent} der Kanzlei {kanzlei_name} helfe ich "
             f"Ihnen bei den folgenden Themen: {emoji.emojize(':clipboard:')} "

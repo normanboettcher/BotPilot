@@ -1,44 +1,22 @@
 import textwrap
+from dataclasses import dataclass, field
 from datetime import datetime
-from typing import List
 
 
+@dataclass
 class BotResponse:
-
-    def __init__(
-        self,
-        answer: str,
-        success: bool,
-        score=None,
-        sender=None,
-        buttons: List[dict] | None = None,
-        accessory=None,
-    ):
-        self._success = success
-        self._timestamp = datetime.now().strftime("%d.%m.%Y %H:%M")
-        self._answer = answer
-        self._score = score
-        self._sender = sender
-        self._buttons = buttons
-        self._accessory = accessory
-
-    def get_answer(self):
-        return self._answer
-
-    def get_success(self):
-        return self._success
-
-    def get_timestamp(self):
-        return self._timestamp
-
-    def get_score(self):
-        return self._score
-
-    def get_sender(self):
-        return self._sender
+    answer: str
+    success: bool
+    score: float | None = None
+    sender: str | None = None
+    buttons: list[dict] | None = None
+    accessory: str | None = None
+    timestamp: str = field(
+        default_factory=lambda: datetime.now().strftime("%d.%m.%Y %H:%M")
+    )
 
     @staticmethod
-    def no_answer_found():
+    def no_answer_found() -> "BotResponse":
         not_found_message = textwrap.dedent(
             """
             Zu dieser Anfrage konnte ich leider keine passende Antwort finden.
@@ -48,7 +26,7 @@ class BotResponse:
         return BotResponse(not_found_message, success=False, sender="bot")
 
     @staticmethod
-    def with_answer_and_buttons(answer: str, buttons: List[dict]):
+    def with_answer_and_buttons(answer: str, buttons: list[dict]) -> "BotResponse":
         return BotResponse(
             answer,
             success=True,
@@ -58,24 +36,24 @@ class BotResponse:
         )
 
     @staticmethod
-    def with_answer(answer: str):
+    def with_answer(answer: str) -> "BotResponse":
         return BotResponse(answer, success=True, sender="bot")
 
     @staticmethod
-    def with_calendar(answer: str):
+    def with_calendar(answer: str) -> "BotResponse":
         return BotResponse(answer, success=True, sender="bot", accessory="calendar")
 
     @staticmethod
-    def with_answer_and_score(answer: str, score: float):
+    def with_answer_and_score(answer: str, score: float) -> "BotResponse":
         return BotResponse(answer, success=True, score=score, sender="bot")
 
     def as_dict(self) -> dict:
         return {
-            "answer": self._answer,
-            "success": self._success,
-            "timestamp": self._timestamp,
-            "score": self._score,
-            "sender": self._sender,
-            "buttons": self._buttons,
-            "accessory": self._accessory,
+            "answer": self.answer,
+            "success": self.success,
+            "timestamp": self.timestamp,
+            "score": self.score,
+            "sender": self.sender,
+            "buttons": self.buttons,
+            "accessory": self.accessory,
         }
