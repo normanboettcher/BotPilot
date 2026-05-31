@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.botpilot</groupId>
+        <artifactId>bot-pilot-faqs</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bot-pilot-faqs-application</artifactId>
+    <name>bot-pilot-faqs-application</name>
+    <description>
+        Use-case layer: orchestrates the two-phase FAQ retrieval pipeline.
+        Depends only on the domain module (ports + model) — no framework, no I/O.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-faqs-domain</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

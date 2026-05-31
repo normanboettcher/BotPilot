@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.botpilot</groupId>
+        <artifactId>bot-pilot-faqs</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bot-pilot-faqs-api</artifactId>
+    <name>bot-pilot-faqs-api</name>
+    <description>
+        Driving adapter: Spring MVC REST controller.
+        Calls the application use case and serialises the result to JSON.
+        Depends on domain (for BotResponse) and application (for the use case).
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-faqs-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-faqs-application</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

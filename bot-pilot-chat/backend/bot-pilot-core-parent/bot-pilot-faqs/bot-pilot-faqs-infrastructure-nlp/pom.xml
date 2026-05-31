@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.botpilot</groupId>
+        <artifactId>bot-pilot-faqs</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bot-pilot-faqs-infrastructure-nlp</artifactId>
+    <name>bot-pilot-faqs-infrastructure-nlp</name>
+    <description>
+        NLP adapter: implements EmbeddingPort and SimilaritySearchPort using
+        Deep Java Library (DJL) with the HuggingFace PyTorch engine.
+        Models are downloaded on first use from the DJL model zoo.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-faqs-domain</artifactId>
+        </dependency>
+
+        <!-- DJL core API -->
+        <dependency>
+            <groupId>ai.djl</groupId>
+            <artifactId>api</artifactId>
+        </dependency>
+
+        <!-- HuggingFace tokenizer (Java binding of the Rust tokenizer) -->
+        <dependency>
+            <groupId>ai.djl.huggingface</groupId>
+            <artifactId>tokenizers</artifactId>
+        </dependency>
+
+        <!-- ONNX Runtime engine: supports dynamic sequence lengths for transformer models -->
+        <dependency>
+            <groupId>ai.djl.onnxruntime</groupId>
+            <artifactId>onnxruntime-engine</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!--
+            jakarta.annotation-api provides @PostConstruct and @PreDestroy.
+            Not pulled in transitively by the DJL artifacts, so we declare it
+            explicitly. spring-boot-starter-web (in the app module) also brings
+            this in, but infrastructure modules must compile without depending on app.
+        -->
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>
