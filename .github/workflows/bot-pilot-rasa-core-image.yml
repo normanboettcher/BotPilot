@@ -1,0 +1,43 @@
+name: Bot-Pilot Rasa Core CI
+on:
+  workflow_dispatch:
+  pull_request:
+    types:
+      - closed
+    branches: [ "main" ]
+    paths:
+      - './bot-pilot-chat/backend/rasa-actions/**'
+      - '.github/workflows/bot-pilot-rasa-core-image.yml'
+
+jobs:
+  run-on-merge:
+    if: github.event.pull_request.merged == true || ${{github.event == 'workflow_dispatch'}}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository bot-pilot
+        uses: actions/checkout@v5
+      - name: Checkout repository bot-pilot-config
+        uses: actions/checkout@v5
+        with:
+          repository: normanboettcher/bot-pilot-config
+          token: ${{ secrets.BOT_PILOT_CONFIG_TOKEN }}
+          path: bot-pilot-config
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to docker.io
+        uses: docker/login-action@v3
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Build and Push bot-pilot-rasa-core container image
+        uses: docker/build-push-action@v6
+        with:
+          context: bot-pilot-chat/backend/rasa-actions
+          file: bot-pilot-config/deployment/backend/core/rasa/Containerfile
+          push: true
+          tags: docker.io/normanboettcher/bot-pilot:bot-pilot-rasa-core-latest
