@@ -2,6 +2,7 @@ import { Button } from '@mui/material';
 import React from 'react';
 import type { GeneralButtonProps } from '../../../domain/GeneralButtonProps.ts';
 import type { ButtonOption } from '../../../domain/ButtonOption.ts';
+import { useTenantTheme } from '../../../context/TenantThemeContext.tsx';
 
 type Props = {
   button: ButtonOption;
@@ -13,18 +14,29 @@ export const ButtonOptionComponent: React.FC<GeneralButtonProps & Props> = ({
   button,
   filled,
 }) => {
+  const { primaryColor } = useTenantTheme();
   return (
     <Button
       sx={{
         fontSize: '0.8rem',
         textTransform: 'none',
+        borderRadius: '8px',
+        ...(filled
+          ? {
+              backgroundColor: primaryColor,
+              color: '#ffffff',
+              '&:hover': { backgroundColor: primaryColor, filter: 'brightness(1.1)' },
+            }
+          : {
+              borderColor: primaryColor,
+              color: primaryColor,
+              '&:hover': { borderColor: primaryColor, bgcolor: 'rgba(30,64,175,0.06)' },
+            }),
       }}
       value={button.payload}
       title={button.title}
       onClick={(e) => {
-        if (!filled) {
-          onClick(e);
-        }
+        if (!filled) onClick(e);
       }}
       variant={filled ? 'contained' : 'outlined'}
       size="small"

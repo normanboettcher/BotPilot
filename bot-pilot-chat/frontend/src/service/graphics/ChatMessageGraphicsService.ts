@@ -1,46 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useColorService } from './ColorServiceImpl.ts';
-import type { ColorKey } from '../../domain/graphics/ColorKey.ts';
+import { useTenantTheme } from '../../context/TenantThemeContext.tsx';
 
-interface Props {
+interface ChatMessageGraphics {
   chatTextColor: string;
   chatBubbleColorUser: string;
   chatBubbleColorBot: string;
+  userTextColor: string;
 }
 
-export const useChatMessageGraphicsService = (): Props => {
-  const [textColor, setTextColor] = useState<string>();
-  const [chatBubbleColorUser, setChatBubbleColorUser] = useState<string>();
-  const [chatBubbleColorBot, setChatBubbleColorBot] = useState<string>();
-  useEffect(() => {
-    const fetchData = async () => {
-      const chatTextColor = await fetchColor('chat_text');
-      const chatBubbleUserColor = await fetchColor('user_chat_bubble');
-      const chatBubbleColorBot = await fetchColor('bot_chat_bubble');
-
-      if (chatBubbleColorBot) {
-        setChatBubbleColorBot(chatBubbleColorBot);
-      }
-      if (chatTextColor) {
-        setTextColor(chatTextColor);
-      }
-      if (chatBubbleUserColor) {
-        setChatBubbleColorUser(chatBubbleUserColor);
-      }
-    };
-    fetchData();
-  }, []);
-
-  // TODO: write a ChatMessageGraphicsService
-  const fetchColor = async (key: ColorKey) => {
-    const colorService = useColorService();
-    const { color } = await colorService.getColor(key);
-
-    return color;
-  };
+export const useChatMessageGraphicsService = (): ChatMessageGraphics => {
+  const theme = useTenantTheme();
   return {
-    chatTextColor: textColor ?? '',
-    chatBubbleColorUser: chatBubbleColorUser ?? '',
-    chatBubbleColorBot: chatBubbleColorBot ?? '',
+    chatTextColor: theme.botBubbleTextColor,
+    chatBubbleColorUser: theme.userBubbleColor,
+    chatBubbleColorBot: theme.botBubbleColor,
+    userTextColor: theme.userBubbleTextColor,
   };
 };

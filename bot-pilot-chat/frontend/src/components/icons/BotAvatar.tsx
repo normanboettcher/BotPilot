@@ -1,7 +1,7 @@
 import type { SVGProps } from 'react';
 import React from 'react';
 import { Avatar } from '@mui/material';
-import { useChatMessageGraphicsService } from '../../service/graphics/ChatMessageGraphicsService.ts';
+import { useTenantTheme } from '../../context/TenantThemeContext.tsx';
 
 export function MessageChatbot(props?: SVGProps<SVGSVGElement>) {
   return (
@@ -18,15 +18,12 @@ export function MessageChatbot(props?: SVGProps<SVGSVGElement>) {
 }
 
 const BotAvatar = () => {
-  const { chatBubbleColorBot } = useChatMessageGraphicsService();
+  const { primaryColor } = useTenantTheme();
   return (
-    <Avatar
-      sx={{
-        bgcolor: chatBubbleColorBot,
-      }}
-    >
-      {MessageChatbot({ fill: 'white' })}
+    <Avatar sx={{ bgcolor: primaryColor, width: 30, height: 30 }}>
+      {MessageChatbot({ fill: 'white', width: '0.85em', height: '0.85em' })}
     </Avatar>
   );
 };
+
 export default BotAvatar;
