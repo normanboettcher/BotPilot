@@ -29,15 +29,15 @@ RUN --mount=type=cache,target=/root/.m2 \
 # Splits dependency resolution from compilation into two RUN steps so that
 # a source-only change hits the layer cache after the dependency download.
 #
-# The BOM is already in /root/.m2 (via the cache mount) — no inter-stage
-# COPY needed; the cache mount makes it available to both stages.
+# FROM bom-install (not a fresh base) gives BuildKit an explicit ordering
+# guarantee: bom-install's RUN step writes the BOM into the cache mount
+# *before* this stage's dependency:go-offline reads from it. Without this
+# dependency chain, BuildKit may execute the two stages in parallel and
+# app-build would fail to resolve de.botpilot:bot-pilot-core-bom.
 # =============================================================================
-FROM eclipse-temurin:25-jdk-jammy@sha256:1cba4b363eec8f82675b6db12a4914fd6d3894bbe680cd4c45e54f81063323b1 AS app-build
+FROM bom-install AS app-build
 
 WORKDIR /build
-
-COPY --chmod=0755 bot-pilot-core-bom/mvnw             ./mvnw
-COPY              bot-pilot-core-bom/.mvn              ./.mvn
 
 # --- dependency resolution pass ---
 # Copy only POM files first. The dependency:go-offline goal downloads every
