@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.botpilot</groupId>
+        <artifactId>bot-pilot-core-parent</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bot-pilot-faqs</artifactId>
+    <packaging>pom</packaging>
+    <name>bot-pilot-faqs</name>
+    <description>Aggregator for the FAQ similarity-search microservice modules</description>
+
+    <!--
+        Module declaration order determines the default sequential build order.
+        Maven parallel build (-T 4) will still honour the inter-module dependency
+        graph: domain has no deps on siblings, so it builds first; application
+        depends only on domain; infrastructure modules depend on domain only;
+        api depends on domain+application; app depends on everything.
+
+        That gives us two parallelisable tiers:
+          Tier 1 (parallel): domain
+          Tier 2 (parallel): application, infrastructure-json, infrastructure-nlp
+          Tier 3 (parallel): api
+          Tier 4 (sequential): app (assembler — needs all of the above)
+    -->
+    <modules>
+        <module>bot-pilot-faqs-domain</module>
+        <module>bot-pilot-faqs-application</module>
+        <module>bot-pilot-faqs-infrastructure-json</module>
+        <module>bot-pilot-faqs-infrastructure-nlp</module>
+        <module>bot-pilot-faqs-api</module>
+        <module>bot-pilot-faqs-app</module>
+    </modules>
+
+</project>

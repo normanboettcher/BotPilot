@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.botpilot</groupId>
+        <artifactId>bot-pilot-faqs</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bot-pilot-faqs-domain</artifactId>
+    <name>bot-pilot-faqs-domain</name>
+    <description>
+        Pure domain model: value objects, entities, and port interfaces.
+        Zero framework dependencies — this module must remain framework-agnostic
+        so it can be tested in isolation and reused without any Spring context.
+    </description>
+
+    <!--
+        Intentionally no dependencies beyond test scope.
+        The domain layer is the innermost hexagon ring; it must not depend on
+        any adapter, framework, or infrastructure library.
+    -->
+
+</project>

@@ -1,0 +1,41 @@
+name: Bot-Pilot Core CI
+
+on:
+  push:
+    paths:
+      - 'bot-pilot-chat/backend/bot-pilot-core-bom/**'
+      - 'bot-pilot-chat/backend/bot-pilot-core-parent/**'
+      - '.github/workflows/bot-pilot-core.yml'
+  pull_request:
+    types: [ opened, synchronize ]
+    branches:
+      - main
+    paths:
+      - 'bot-pilot-chat/backend/bot-pilot-core-bom/**'
+      - 'bot-pilot-chat/backend/bot-pilot-core-parent/**'
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: bot-pilot-chat/backend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 25
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Install BOM
+        run: ./bot-pilot-core-bom/mvnw -f bot-pilot-core-bom/pom.xml install -DskipTests -q
+
+      - name: Build and test
+        run: ./bot-pilot-core-bom/mvnw -f bot-pilot-core-parent/pom.xml verify -T 2C -q

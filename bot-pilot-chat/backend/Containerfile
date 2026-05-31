@@ -1,0 +1,124 @@
+# =============================================================================
+# Stage 1 — bom-install
+#
+# Installs the Bill of Materials POM into the local Maven repository so that
+# the app-build stage can resolve its dependencyManagement imports.
+#
+# Only the BOM's own pom.xml, mvnw, and wrapper config are copied here.
+# This means the BOM layer is cached until any of those three files change —
+# source code changes in bot-pilot-core-parent never touch this stage.
+# =============================================================================
+FROM eclipse-temurin:25-jdk-jammy@sha256:1cba4b363eec8f82675b6db12a4914fd6d3894bbe680cd4c45e54f81063323b1 AS bom-install
+
+WORKDIR /build
+
+COPY --chmod=0755 bot-pilot-core-bom/mvnw             ./mvnw
+COPY              bot-pilot-core-bom/.mvn              ./.mvn
+COPY              bot-pilot-core-bom/pom.xml           ./pom.xml
+
+# --mount=type=cache persists /root/.m2 across Podman/BuildKit builds.
+# mvnw stores the Maven binary under ${MAVEN_USER_HOME}/wrapper/dists/,
+# which also defaults to /root/.m2, so Maven itself is cached here too.
+# -q silences download progress noise while keeping actionable ERROR output.
+RUN --mount=type=cache,target=/root/.m2 \
+    ./mvnw install -DskipTests -q
+
+# =============================================================================
+# Stage 2 — app-build
+#
+# Splits dependency resolution from compilation into two RUN steps so that
+# a source-only change hits the layer cache after the dependency download.
+#
+# The BOM is already in /root/.m2 (via the cache mount) — no inter-stage
+# COPY needed; the cache mount makes it available to both stages.
+# =============================================================================
+FROM eclipse-temurin:25-jdk-jammy@sha256:1cba4b363eec8f82675b6db12a4914fd6d3894bbe680cd4c45e54f81063323b1 AS app-build
+
+WORKDIR /build
+
+COPY --chmod=0755 bot-pilot-core-bom/mvnw             ./mvnw
+COPY              bot-pilot-core-bom/.mvn              ./.mvn
+
+# --- dependency resolution pass ---
+# Copy only POM files first. The dependency:go-offline goal downloads every
+# declared dependency into the cache mount without touching source code.
+# This layer is re-used on every build where only .java files changed.
+COPY bot-pilot-core-parent/pom.xml                                                                              ./bot-pilot-core-parent/pom.xml
+COPY bot-pilot-core-parent/bot-pilot-faqs/pom.xml                                                               ./bot-pilot-core-parent/bot-pilot-faqs/pom.xml
+COPY bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-api/pom.xml                                           ./bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-api/pom.xml
+COPY bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-app/pom.xml                                           ./bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-app/pom.xml
+COPY bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-application/pom.xml                                   ./bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-application/pom.xml
+COPY bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-domain/pom.xml                                        ./bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-domain/pom.xml
+COPY bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-infrastructure-json/pom.xml                           ./bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-infrastructure-json/pom.xml
+COPY bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-infrastructure-nlp/pom.xml                            ./bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-infrastructure-nlp/pom.xml
+
+RUN --mount=type=cache,target=/root/.m2 \
+    ./mvnw -f bot-pilot-core-parent/pom.xml dependency:go-offline -q
+
+# --- compilation and packaging pass ---
+# Source code arrives here. Cache miss only when .java / resources change.
+COPY bot-pilot-core-parent/ ./bot-pilot-core-parent/
+
+RUN --mount=type=cache,target=/root/.m2 \
+    ./mvnw -f bot-pilot-core-parent/pom.xml package -DskipTests -q
+
+# =============================================================================
+# Stage 3 — app-extract
+#
+# Explodes the fat JAR into Spring Boot's layertools layers so that the
+# final image can be assembled with one layer per bucket:
+#   dependencies        — stable third-party JARs (changes rarely)
+#   spring-boot-loader  — the Boot loader classes (changes with Boot upgrades)
+#   snapshot-dependencies — SNAPSHOT JARs (changes on every snapshot update)
+#   application         — your own classes and resources (changes most often)
+#
+# Keeping these as separate image layers means a source-only change only
+# pushes the thin `application` layer to the registry — not the full fat JAR.
+#
+# find_jar locates the fat JAR by pattern so the SNAPSHOT version string in
+# the filename never needs to be updated here when the project version bumps.
+# =============================================================================
+FROM eclipse-temurin:25-jdk-jammy@sha256:1cba4b363eec8f82675b6db12a4914fd6d3894bbe680cd4c45e54f81063323b1 AS app-extract
+
+WORKDIR /build
+
+COPY --from=app-build /build/bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-app/target/bot-pilot-faqs-app-*.jar \
+     ./app.jar
+
+RUN java -Djarmode=layertools -jar app.jar extract --destination /extracted
+
+# =============================================================================
+# Stage 4 — final
+#
+# Minimal JRE-only image; JDK is not present in the runtime layer.
+# A locked-down non-root user is created before any application files land
+# so that no build step runs as root.
+# =============================================================================
+FROM eclipse-temurin:25-jre-jammy@sha256:b38303429a9ed8eab08786820b5f49077141fcd69fc63d8ddee250a1cbe7e437 AS final
+
+ARG UID=10001
+
+# can own files and be switched to, but cannot be logged into interactively.
+RUN adduser \
+    --disabled-password \
+    --gecos "" \
+    --home "/nonexistent" \
+    --shell "/sbin/nologin" \
+    --no-create-home \
+    --uid "${UID}" \
+    appuser
+
+USER appuser
+
+WORKDIR /app
+
+# Copy layers from least-to-most volatile so a source-only rebuild only
+# invalidates the final `application` layer in the registry.
+COPY --from=app-extract /extracted/dependencies/         ./
+COPY --from=app-extract /extracted/spring-boot-loader/   ./
+COPY --from=app-extract /extracted/snapshot-dependencies/ ./
+COPY --from=app-extract /extracted/application/          ./
+
+EXPOSE 8081
+
+ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]

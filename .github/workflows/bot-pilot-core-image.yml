@@ -1,28 +1,26 @@
-name: Bot-Pilot Core CI
+name: BotPilot Core Image CI
+
 on:
   workflow_dispatch:
   pull_request:
     types:
       - closed
-    branches: [ "main" ]
+    branches:
+      - main
     paths:
-      - './bot-pilot-chat/backend/rasa-actions/**'
+      - 'bot-pilot-chat/backend/bot-pilot-core-bom/**'
+      - 'bot-pilot-chat/backend/bot-pilot-core-parent/**'
+      - 'bot-pilot-chat/backend/Containerfile'
       - '.github/workflows/bot-pilot-core-image.yml'
 
 jobs:
-  run-on-merge:
-    if: github.event.pull_request.merged == true || ${{github.event == 'workflow_dispatch'}}
+  build-and-push:
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository bot-pilot
-        uses: actions/checkout@v5
-      - name: Checkout repository bot-pilot-config
-        uses: actions/checkout@v5
-        with:
-          repository: normanboettcher/bot-pilot-config
-          token: ${{ secrets.BOT_PILOT_CONFIG_TOKEN }}
-          path: bot-pilot-config
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -34,10 +32,12 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      - name: Build and Push bot-pilot-core container image
+      - name: Build and push bot-pilot-core container image
         uses: docker/build-push-action@v6
         with:
-          context: bot-pilot-chat/backend/rasa-actions
-          file: bot-pilot-config/deployment/backend/core/Containerfile
+          context: bot-pilot-chat/backend
+          file: bot-pilot-chat/backend/Containerfile
           push: true
           tags: docker.io/normanboettcher/bot-pilot:bot-pilot-core-latest
+          cache-from: type=registry,ref=docker.io/normanboettcher/bot-pilot:bot-pilot-core-buildcache
+          cache-to: type=registry,ref=docker.io/normanboettcher/bot-pilot:bot-pilot-core-buildcache,mode=max

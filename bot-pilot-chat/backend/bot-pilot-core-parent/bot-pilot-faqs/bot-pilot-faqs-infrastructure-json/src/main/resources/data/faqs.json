@@ -1,0 +1,225 @@
+[
+  {
+    "id": 1,
+    "question": "Was brauche ich für meine Steuererklärung?",
+    "answer": "Sie benötigen Gehaltsabrechnungen, Nachweise über Werbungskosten, Sonderausgaben und ggf. Belege zu Vermietung oder Kapitalerträgen.",
+    "category": "Steuern",
+    "tags": [
+      "Steuererklärung",
+      "Unterlagen",
+      "Belege"
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Bis wann muss ich die Steuererklärung abgeben?",
+    "answer": "In der Regel ist die Abgabefrist der 31. Juli des Folgejahres. Bei Nutzung eines Steuerberaters verlängert sich die Frist auf Ende Februar des übernächsten Jahres.",
+    "category": "Steuern",
+    "tags": [
+      "Frist",
+      "Abgabe",
+      "Steuerberater"
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Welche Ausgaben kann ich steuerlich absetzen?",
+    "answer": "Dazu zählen u.a. Arbeitsmittel, Fahrtkosten, Fortbildungen, doppelte Haushaltsführung, Kinderbetreuungskosten und Spenden.",
+    "category": "Steuern",
+    "tags": [
+      "Absetzen",
+      "Werbungskosten",
+      "Sonderausgaben"
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Wie buche ich einen Termin?",
+    "answer": "Nutzen Sie unser Kontaktformular auf der Website oder rufen Sie uns direkt unter der angegebenen Telefonnummer an.",
+    "category": "Organisation",
+    "tags": [
+      "Termin",
+      "Kontakt",
+      "Buchung"
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Wo finde ich Ihre Kanzlei?",
+    "answer": "Unsere Kanzlei befindet sich in der Musterstraße 10, 12345 Musterstadt. Eine Anfahrtsbeschreibung finden Sie auf unserer Website.",
+    "category": "Organisation",
+    "tags": [
+      "Adresse",
+      "Standort",
+      "Anfahrt"
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Kann ich die Kosten für die Kita absetzen?",
+    "answer": "Ja, zwei Drittel der Betreuungskosten für Kinder unter 14 Jahren sind bis zu 4.000€ pro Kind und Jahr absetzbar.",
+    "category": "Familie",
+    "tags": [
+      "Kinder",
+      "Kita",
+      "Kinderbetreuung",
+      "Absetzen"
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Wie versteuere ich Einkünfte aus Kryptowährungen?",
+    "answer": "Gewinne aus dem Verkauf von Kryptowährungen sind steuerpflichtig, wenn sie innerhalb eines Jahres erzielt wurden.",
+    "category": "Finanzen",
+    "tags": [
+      "Krypto",
+      "Bitcoin",
+      "Steuern",
+      "Kapitalerträge"
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Was kann ich im Homeoffice absetzen?",
+    "answer": "Sie können eine Pauschale von 6€ pro Tag für bis zu 210 Tage geltend machen, wenn kein anderer Arbeitsplatz zur Verfügung steht.",
+    "category": "Arbeit",
+    "tags": [
+      "Homeoffice",
+      "Arbeitszimmer",
+      "Steuerpauschale"
+    ]
+  },
+  {
+    "id": 9,
+    "question": "Welche Arbeitsmittel kann ich steuerlich absetzen?",
+    "answer": "Zum Beispiel Büromöbel, Laptop, Drucker, Software oder Fachliteratur – sofern sie beruflich genutzt werden.",
+    "category": "Arbeit",
+    "tags": [
+      "Arbeitsmittel",
+      "Laptop",
+      "Beruf",
+      "Kosten"
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Wie lange dauert eine Steuererstattung?",
+    "answer": "Meist erfolgt die Erstattung wenige Tage nach dem Steuerbescheid. In der Regel innerhalb von 2 Wochen.",
+    "category": "Steuern",
+    "tags": [
+      "Erstattung",
+      "Steuerbescheid",
+      "Finanzamt"
+    ]
+  },
+  {
+    "id": 11,
+    "question": "Welche Unterlagen brauche ich für meine Steuererklärung?",
+    "answer": "Damit wir Ihre Steuererklärung effizient bearbeiten können, benötigen wir u.a. Ihre Lohnsteuerbescheinigung, Angaben zu Versicherungen, Spenden, evtl. Miet- oder Kapitaleinkünften. Eine vollständige Liste senden wir Ihnen gern zu – nehmen Sie einfach Kontakt mit uns auf.",
+    "category": "Steuererklärung",
+    "tags": [
+      "Unterlagen",
+      "Vorbereitung",
+      "Privatpersonen"
+    ]
+  },
+  {
+    "id": 12,
+    "question": "Wie kann ich einen Termin vereinbaren?",
+    "answer": "Sie können Ihren Wunschtermin bequem über unser Kontaktformular oder telefonisch vereinbaren. Alternativ bieten wir auch Videoberatungen an – ganz flexibel von zu Hause aus.",
+    "category": "Kontakt",
+    "tags": [
+      "Termin",
+      "Erreichbarkeit",
+      "Beratung"
+    ]
+  },
+  {
+    "id": 13,
+    "question": "Ich habe ein Schreiben vom Finanzamt erhalten – was nun?",
+    "answer": "Bitte leiten Sie uns das Schreiben so schnell wie möglich weiter. Wir prüfen den Inhalt und klären, ob Handlungsbedarf besteht. Nutzen Sie dafür gern unser Upload-Formular oder vereinbaren Sie einen kurzen Rückruf.",
+    "category": "Finanzamt",
+    "tags": [
+      "Bescheid",
+      "Prüfung",
+      "Fristen"
+    ]
+  },
+  {
+    "id": 14,
+    "question": "Bieten Sie auch Unterstützung für Selbstständige an?",
+    "answer": "Ja, wir betreuen zahlreiche Freiberufler und Selbstständige – von der Einnahmenüberschussrechnung bis zur Umsatzsteuer-Voranmeldung. Vereinbaren Sie gern ein kostenloses Erstgespräch zur Einschätzung Ihres Bedarfs.",
+    "category": "Selbstständige",
+    "tags": [
+      "EÜR",
+      "Umsatzsteuer",
+      "Freiberufler"
+    ]
+  },
+  {
+    "id": 15,
+    "question": "Ich bin zum ersten Mal steuerpflichtig – was muss ich beachten?",
+    "answer": "Für Berufseinsteiger oder neue Mandanten bieten wir eine persönliche Orientierung an. So klären wir gemeinsam, welche Pflichten auf Sie zukommen und wie Sie alles rechtzeitig vorbereiten. Melden Sie sich einfach über das Kontaktformular.",
+    "category": "Erstberatung",
+    "tags": [
+      "Berufseinsteiger",
+      "Pflichten",
+      "Neukunden"
+    ]
+  },
+  {
+    "id": 16,
+    "question": "Kann ich bei Ihnen auch meine Buchhaltung abgeben?",
+    "answer": "Gerne übernehmen wir Ihre laufende Buchführung – digital oder vor Ort. Unser Team richtet Ihnen auf Wunsch auch den digitalen Belegaustausch ein. Schreiben Sie uns, um ein individuelles Angebot zu erhalten.",
+    "category": "Buchhaltung",
+    "tags": [
+      "Belege",
+      "Digitale Prozesse",
+      "Mandantenservice"
+    ]
+  },
+  {
+    "id": 17,
+    "question": "Wie hoch sind Ihre Kosten?",
+    "answer": "Unsere Leistungen richten sich nach der Steuerberatervergütungsverordnung. Für eine erste Kosteneinschätzung senden Sie uns gern kurz Ihre Unterlagen oder rufen Sie uns an – wir beraten Sie transparent und unverbindlich.",
+    "category": "Kosten",
+    "tags": [
+      "Gebühren",
+      "Honorar",
+      "Transparenz"
+    ]
+  },
+  {
+    "id": 18,
+    "question": "Machen Sie auch Erbschafts- oder Schenkungssteuer?",
+    "answer": "Ja, wir begleiten Mandanten auch bei Erbschaften und Schenkungen – von der Bewertung bis zur Steuererklärung. Gerade hier ist frühzeitige Beratung entscheidend. Gern besprechen wir mit Ihnen die nächsten Schritte.",
+    "category": "Erbschaft",
+    "tags": [
+      "Schenkung",
+      "Nachlass",
+      "Steuerberatung"
+    ]
+  },
+  {
+    "id": 19,
+    "question": "Ich bin unsicher, ob ich überhaupt eine Steuererklärung abgeben muss.",
+    "answer": "Das kommt auf verschiedene Faktoren an – z.B. Nebeneinkünfte, Lohnersatzleistungen oder Steuerklassen. Wir helfen Ihnen gern bei der Einschätzung – ein kurzes Erstgespräch genügt.",
+    "category": "Pflichten",
+    "tags": [
+      "Abgabepflicht",
+      "Steuerklasse",
+      "Erstgespräch"
+    ]
+  },
+  {
+    "id": 20,
+    "question": "Gibt es eine Möglichkeit, Belege digital zu übermitteln?",
+    "answer": "Ja – wir arbeiten mit DATEV Unternehmen Online und anderen digitalen Tools. Damit sparen Sie Zeit und Papier. Wir helfen Ihnen gerne bei der Einrichtung.",
+    "category": "Digitalisierung",
+    "tags": [
+      "DATEV",
+      "Belegtransfer",
+      "Digitales Büro"
+    ]
+  }
+]

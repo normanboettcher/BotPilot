@@ -7,7 +7,9 @@ on:
       - Connectors Image CI
       - Frontend Image CI
       - Actions Image CI
+      - Bot-Pilot Rasa Core CI
       - Bot-Pilot Core CI
+      - Bot-Pilot Core Image CI
     types:
       - completed
 
