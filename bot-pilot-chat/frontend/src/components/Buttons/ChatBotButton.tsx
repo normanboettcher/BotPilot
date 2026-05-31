@@ -1,36 +1,43 @@
-import { Box, Button } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import React from 'react';
 import { MessageChatbot } from '../icons/BotAvatar.tsx';
-import { useChatMessageGraphicsService } from '../../service/graphics/ChatMessageGraphicsService.ts';
+import CloseIcon from '@mui/icons-material/Close';
+import { useTenantTheme } from '../../context/TenantThemeContext.tsx';
 
 type Props = {
-  onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  isOpen: boolean;
 };
 
-const ChatBotButton: React.FC<Props> = ({ onClick }) => {
-  const { chatBubbleColorUser } = useChatMessageGraphicsService();
+const ChatBotButton: React.FC<Props> = ({ onClick, isOpen }) => {
+  const { primaryColor } = useTenantTheme();
   return (
     <Box>
-      <Button
+      <IconButton
         id="chatbot-toggle"
         onClick={onClick}
+        aria-label={isOpen ? 'Chat schließen' : 'Chat öffnen'}
         sx={{
-          backgroundColor: chatBubbleColorUser,
-          color: 'white',
-          border: 'none',
-          borderRadius: '50%',
-          width: '60px',
-          height: '60px',
-          fontSize: '35px',
-          cursor: 'pointer',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
+          backgroundColor: primaryColor,
+          color: '#ffffff',
+          width: 56,
+          height: 56,
+          boxShadow: '0 4px 16px rgba(30,64,175,0.4)',
+          transition: 'transform 0.2s, box-shadow 0.2s, filter 0.2s',
           '&:hover': {
-            backgroundColor: '#2563eb',
+            backgroundColor: primaryColor,
+            filter: 'brightness(1.12)',
+            boxShadow: '0 6px 20px rgba(30,64,175,0.5)',
+            transform: 'translateY(-2px)',
           },
         }}
       >
-        {MessageChatbot({ fill: 'white' })}
-      </Button>
+        {isOpen ? (
+          <CloseIcon sx={{ fontSize: '1.4rem' }} />
+        ) : (
+          MessageChatbot({ fill: 'white', width: '1.4em', height: '1.4em' })
+        )}
+      </IconButton>
     </Box>
   );
 };

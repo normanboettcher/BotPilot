@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
 import type { ChatMessageText } from '../../domain/ChatMessageText.ts';
-import AlarmClock from '../icons/AlarmClock.tsx';
 import Markdown from 'react-markdown';
 import ChatMessageTextComponent from './ChatMessageTextComponent.tsx';
 import { useChatMessageGraphicsService } from '../../service/graphics/ChatMessageGraphicsService.ts';
@@ -13,54 +12,49 @@ type Props = {
 const ChatMessage: React.FC<Props> = ({ msg }) => {
   const { sender, message: text, timestamp } = msg;
   const isUser = sender === 'user';
-  const { chatTextColor, chatBubbleColorUser, chatBubbleColorBot } =
+  const { chatBubbleColorUser, chatBubbleColorBot, userTextColor, chatTextColor } =
     useChatMessageGraphicsService();
-  const CalendarAccessory = React.lazy(
-    () => import('./Accessories/CalendarAccessory.tsx')
-  );
-  const ButtonOptionList = React.lazy(
-    () => import('./Accessories/ButtonOptionList.tsx')
-  );
-  // Farben & Styles je nach Absender
+
+  const CalendarAccessory = React.lazy(() => import('./Accessories/CalendarAccessory.tsx'));
+  const ButtonOptionList = React.lazy(() => import('./Accessories/ButtonOptionList.tsx'));
+
   const backgroundColor = isUser ? chatBubbleColorUser : chatBubbleColorBot;
-  const align = isUser ? 'flex-end' : 'flex-start';
+  const textColor = isUser ? userTextColor : chatTextColor;
 
   return (
     <Box
       sx={{
         display: 'flex',
-        position: 'relative',
         flexDirection: 'column',
-        alignText: align,
         backgroundColor,
-        color: chatTextColor,
-        borderRadius: '16px',
-        borderTopLeftRadius: sender === 'bot' ? '0px' : '16px',
-        borderTopRightRadius: sender === 'user' ? '0px' : '16px',
+        color: textColor,
+        borderRadius: isUser ? '16px 4px 16px 16px' : '4px 16px 16px 16px',
         hyphens: 'auto',
         lang: 'de',
-        p: 1.5,
-        m: 0.5,
-        maxWidth: '80%',
-        textShadow: '0 1px 1px rgba(0, 0, 0, 0.2)',
+        px: 1.5,
+        pt: 1.25,
+        pb: 0.75,
+        maxWidth: '100%',
         overflowWrap: 'break-word',
         wordBreak: 'break-word',
-        whiteSpace: 'pre-wrap',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
       }}
     >
       <Markdown
         components={{
           p: ({ node, ...props }) => (
-            <ChatMessageTextComponent>{props.children}</ChatMessageTextComponent>
+            <ChatMessageTextComponent sx={{ color: textColor }}>
+              {props.children}
+            </ChatMessageTextComponent>
           ),
           ul: ({ node, ...props }) => (
-            <Box component={'ul'} sx={{ pl: 2, mt: 0, mb: 0, listStyleType: 'disc' }}>
+            <Box component="ul" sx={{ pl: 2, mt: 0, mb: 0, listStyleType: 'disc' }}>
               {props.children}
             </Box>
           ),
           li: ({ node, ...props }) => (
-            <Box component={'li'} sx={{ display: 'list-item', mb: 0 }}>
-              <ChatMessageTextComponent pb={0} pt={0} component={'span'}>
+            <Box component="li" sx={{ display: 'list-item', mb: 0 }}>
+              <ChatMessageTextComponent pb={0} pt={0} component="span" sx={{ color: textColor }}>
                 {props.children}
               </ChatMessageTextComponent>
             </Box>
@@ -69,23 +63,22 @@ const ChatMessage: React.FC<Props> = ({ msg }) => {
       >
         {text}
       </Markdown>
+
       <Suspense fallback={null}>
         {msg.accessory === 'calendar' && <CalendarAccessory />}
         {msg.accessory === 'buttons' && msg.buttons && (
           <ButtonOptionList buttons={msg.buttons} />
         )}
       </Suspense>
-      <Stack
-        direction={'row'}
-        pt={1}
-        sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          alignItems: 'start',
-        }}
-      >
-        <AlarmClock />
-        <Typography variant={'caption'} sx={{ paddingLeft: '5px' }}>
+
+      <Stack direction="row" justifyContent="flex-end" alignItems="center" mt={0.5}>
+        <Typography
+          sx={{
+            fontSize: '0.65rem',
+            color: isUser ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.4)',
+            lineHeight: 1,
+          }}
+        >
           {timestamp}
         </Typography>
       </Stack>
