@@ -1,0 +1,57 @@
+version: "3.1"
+
+stories:
+  - story: chitchat wie geht es
+    steps:
+      - user: |
+          Wie geht es dir?
+        intent: chitchat_wie_gehts
+      - action: utter_chitchat_wie_gehts
+
+  - story: chitchat witz
+    steps:
+      - user: |
+          Erzähl mir einen Witz
+        intent: chitchat_witz
+      - action: utter_chitchat_witz
+
+  - story: chitchat kompliment
+    steps:
+      - user: |
+          Du bist super
+        intent: chitchat_kompliment
+      - action: utter_chitchat_kompliment
+
+  - story: greet then chitchat wie geht es
+    steps:
+      - user: |
+          Hallo
+        intent: begruessung
+      - action: action_begruessung
+      - user: |
+          Wie geht's dir?
+        intent: chitchat_wie_gehts
+      - action: utter_chitchat_wie_gehts
+
+  - story: chitchat dann termin vereinbaren
+    steps:
+      - user: |
+          Wie geht es dir?
+        intent: chitchat_wie_gehts
+      - action: utter_chitchat_wie_gehts
+      - user: |
+          Ich möchte einen Termin vereinbaren
+        intent: termin_vereinbaren
+      - action: termin_form
+      - active_loop: termin_form
+
+  - story: kompliment dann faq
+    steps:
+      - user: |
+          Du machst das toll
+        intent: chitchat_kompliment
+      - action: utter_chitchat_kompliment
+      - user: |
+          Wie hoch ist der Grundfreibetrag?
+        intent: faq
+      - action: action_get_faq
