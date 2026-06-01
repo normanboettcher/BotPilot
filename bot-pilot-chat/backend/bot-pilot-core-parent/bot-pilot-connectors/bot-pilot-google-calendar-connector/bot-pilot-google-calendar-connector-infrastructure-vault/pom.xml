@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.botpilot</groupId>
+        <artifactId>bot-pilot-google-calendar-connector</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bot-pilot-google-calendar-connector-infrastructure-vault</artifactId>
+    <name>bot-pilot-google-calendar-connector-infrastructure-vault</name>
+    <description>
+        Infrastructure adapter: Spring Cloud Vault integration.
+
+        Provides dynamic database credentials via Vault's Database secrets engine.
+        Authenticates using AppRole (role-id from env, secret-id from file at
+        /run/secrets/bot-connectors-secret-id — matching the Python config.py pattern).
+
+        Vault role: bot-connectors-calendar-role (same as Python DatabaseConnector).
+
+        Why Spring Cloud Vault instead of a direct hvac equivalent?
+        Spring Cloud Vault integrates with Spring's Environment abstraction, meaning
+        dynamic DB credentials from Vault are automatically injected into DataSource
+        configuration without manual credential refresh plumbing.  The Python code
+        had to manage token expiry and refresh manually; Spring Cloud Vault handles this.
+
+        This module contains only the bootstrap/configuration class; no domain logic.
+    </description>
+
+    <dependencies>
+        <!-- Spring Cloud Vault core: AppRole authentication, secret fetching -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-vault-config</artifactId>
+        </dependency>
+        <!-- Vault Database secrets engine support: injects DB creds into DataSource -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-vault-config-databases</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

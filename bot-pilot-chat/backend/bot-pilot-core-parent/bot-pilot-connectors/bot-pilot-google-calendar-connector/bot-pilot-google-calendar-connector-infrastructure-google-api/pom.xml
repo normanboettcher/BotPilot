@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.botpilot</groupId>
+        <artifactId>bot-pilot-google-calendar-connector</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bot-pilot-google-calendar-connector-infrastructure-google-api</artifactId>
+    <name>bot-pilot-google-calendar-connector-infrastructure-google-api</name>
+    <description>
+        Driven adapter: Google Calendar Java API client.
+
+        Contains:
+          - GoogleCalendarClientFactory — builds com.google.api.services.calendar.Calendar
+            from stored credentials, handles token refresh via google-auth-library
+          - GoogleCalendarEventReaderAdapter — implements CalendarEventReader,
+            calls Calendar.Freebusy.query() and maps the response to BusyEvent records
+          - GoogleCalendarEventWriterAdapter — implements CalendarEventWriter,
+            calls Calendar.Events.insert() and maps the result to CalendarEventCreationResult
+
+        The Google API client library is intentionally isolated here.  The use case
+        and REST layer never import com.google.api.*; they speak the SPI language.
+        If Google deprecates the v3 API, only this module changes.
+    </description>
+
+    <dependencies>
+        <!-- SPI ports this adapter implements -->
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-connectors-calendar-spi</artifactId>
+        </dependency>
+        <!-- Google-specific credential entity (needed to load credentials from DB) -->
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-google-calendar-connector-domain</artifactId>
+        </dependency>
+        <!-- Persistence port (CredentialRepository) to load stored OAuth tokens -->
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-google-calendar-connector-infrastructure-persistence</artifactId>
+        </dependency>
+        <!-- Google Calendar REST client (v3 API) -->
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-calendar</artifactId>
+        </dependency>
+        <!-- Google Auth library: handles OAuth2 credentials and token refresh -->
+        <dependency>
+            <groupId>com.google.auth</groupId>
+            <artifactId>google-auth-library-oauth2-http</artifactId>
+        </dependency>
+        <!-- Gson HTTP transport for Google API client.
+             GsonFactory is the non-deprecated replacement for JacksonFactory;
+             google-http-client-gson is pulled in transitively by the calendar API
+             but declared explicitly here to make the intent clear. -->
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client-jackson2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+</project>

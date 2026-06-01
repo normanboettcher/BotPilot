@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.botpilot</groupId>
+        <artifactId>bot-pilot-google-calendar-connector</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bot-pilot-google-calendar-connector-domain</artifactId>
+    <name>bot-pilot-google-calendar-connector-domain</name>
+    <description>
+        Google Calendar connector domain module.
+
+        Contains the GoogleCalendarCredentials JPA entity — the one piece of the domain
+        that is inherently Google-specific (it persists OAuth2 tokens from Google's auth flow).
+
+        Why is this NOT in the calendar-spi?
+        The credential schema (access_token, refresh_token, token_uri, scopes) is specific
+        to Google OAuth2.  Outlook would have a completely different credential structure.
+        Keeping it here means the SPI stays provider-agnostic, and each connector owns its
+        own persistence model.
+
+        This module may reference JPA annotations (jakarta.persistence) because the entity
+        annotation is part of the domain model definition, not an infrastructure concern.
+        Spring itself is NOT imported here.
+    </description>
+
+    <dependencies>
+        <!-- Google-specific credential entity maps to the google_credentials table -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

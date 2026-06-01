@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.botpilot</groupId>
+        <artifactId>bot-pilot-connectors</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bot-pilot-connectors-calendar-spi</artifactId>
+    <name>bot-pilot-connectors-calendar-spi</name>
+    <description>
+        Calendar SPI (Service Provider Interface) — the shared contract for ALL calendar connectors.
+
+        Contains:
+          - Generic value objects: EventTime, EventAttendee, BusyEvent, BusyEventsResponse, CalendarEvent
+          - Result type: CalendarEventCreationResult (sealed interface)
+          - Driven port interfaces: CalendarEventReader, CalendarEventWriter, CredentialRepository
+          - Exception types: NotAuthenticatedException
+
+        Why a dedicated SPI module instead of putting these in the Google connector's domain?
+        Because Outlook Calendar, Apple Calendar, etc. should all speak the SAME language as
+        far as the application layer and REST adapter are concerned.  The SPI module is the
+        shared vocabulary.  Each concrete connector (Google, Outlook) provides implementations
+        of the port interfaces defined here — the use cases never import anything Google-specific.
+
+        This module has zero framework dependencies: no Spring, no JPA.
+        It is the innermost ring of the hexagon and must remain pure Java.
+    </description>
+
+    <!--
+        Intentionally no <dependencies> beyond what the parent provides (JUnit/Mockito test scope).
+        The SPI is the innermost ring; it must not depend on any adapter, framework, or library.
+    -->
+
+</project>

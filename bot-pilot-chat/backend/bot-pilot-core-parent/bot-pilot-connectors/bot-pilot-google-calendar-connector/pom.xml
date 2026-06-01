@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.botpilot</groupId>
+        <artifactId>bot-pilot-connectors</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bot-pilot-google-calendar-connector</artifactId>
+    <packaging>pom</packaging>
+    <name>bot-pilot-google-calendar-connector</name>
+    <description>
+        Aggregator for the Google Calendar connector modules.
+
+        Follows the same hexagonal structure as bot-pilot-faqs:
+          domain    — Google-specific entities (GoogleCalendarCredentials JPA entity)
+          application  — use cases (depends on calendar-spi + domain)
+          infrastructure-persistence — JPA + Spring Data adapter
+          infrastructure-vault       — Spring Cloud Vault AppRole adapter
+          infrastructure-google-api  — Google Calendar Java client adapter
+          rest       — Spring MVC driving adapter (OAuthController, CalendarController)
+          app        — Spring Boot assembler (composition root)
+
+        Build tiers (parallel with -T N):
+          Tier 1 (parallel): domain  [calendar-spi already built by parent aggregator]
+          Tier 2 (parallel): application, infrastructure-persistence,
+                             infrastructure-vault, infrastructure-google-api
+          Tier 3 (sequential): rest
+          Tier 4 (sequential): app
+    </description>
+
+    <modules>
+        <module>bot-pilot-google-calendar-connector-domain</module>
+        <module>bot-pilot-google-calendar-connector-application</module>
+        <module>bot-pilot-google-calendar-connector-infrastructure-persistence</module>
+        <module>bot-pilot-google-calendar-connector-infrastructure-vault</module>
+        <module>bot-pilot-google-calendar-connector-infrastructure-google-api</module>
+        <module>bot-pilot-google-calendar-connector-rest</module>
+        <module>bot-pilot-google-calendar-connector-app</module>
+    </modules>
+
+</project>
