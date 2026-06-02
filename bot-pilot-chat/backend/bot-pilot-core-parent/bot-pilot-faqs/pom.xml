@@ -34,7 +34,6 @@
         <module>bot-pilot-faqs-infrastructure-json</module>
         <module>bot-pilot-faqs-infrastructure-nlp</module>
         <module>bot-pilot-faqs-api</module>
-        <module>bot-pilot-faqs-app</module>
     </modules>
 
 </project>

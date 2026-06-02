@@ -1,0 +1,114 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>de.botpilot</groupId>
+        <artifactId>bot-pilot-core-parent</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>bot-pilot-core-runner</artifactId>
+    <name>bot-pilot-core-runner</name>
+
+
+    <description>
+        Spring Boot application assembler — the composition root.
+
+        This is the ONLY module that:
+        1. Declares @SpringBootApplication
+        2. Knows about all adapter implementations simultaneously
+        3. Wires ports to adapters via @Configuration + @Bean
+
+        No business logic lives here. The module only collects all the pieces from the
+        other modules and assembles them together.
+
+        The spring-boot-maven-plugin repackage goal runs only here to produce the
+        executable fat JAR (all other modules produce plain JARs).
+    </description>
+    <dependencies>
+        <!-- bot-pilot-connectors -->
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-connectors-calendar-spi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-google-calendar-connector-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-google-calendar-connector-application</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-google-calendar-connector-infrastructure-persistence
+            </artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-google-calendar-connector-infrastructure-vault
+            </artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-google-calendar-connector-infrastructure-google-api
+            </artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-google-calendar-connector-rest</artifactId>
+        </dependency>
+
+        <!-- bot-pilot-faqs -->
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-faqs-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-faqs-application</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-faqs-infrastructure-json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-faqs-infrastructure-nlp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-faqs-api</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Web: embedded Tomcat + DispatcherServlet -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- Actuator: health + info endpoints for readiness checks -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Only the app module produces an executable fat JAR -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

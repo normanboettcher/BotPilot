@@ -22,6 +22,8 @@
 
     <modules>
         <module>bot-pilot-faqs</module>
+        <module>bot-pilot-connectors</module>
+        <module>bot-pilot-core-runner</module>
     </modules>
 
     <properties>
@@ -30,18 +32,176 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring-boot.version>3.5.0</spring-boot.version>
+        <spring-cloud-vault.version>4.2.1</spring-cloud-vault.version>
+        <djl.version>0.33.0</djl.version>
+        <jackson.version>2.19.0</jackson.version>
+        <junit.version>5.11.4</junit.version>
+        <mockito.version>5.14.2</mockito.version>
+        <google-calendar-api.version>v3-rev20240111-2.0.0</google-calendar-api.version>
+        <google-auth.version>1.23.0</google-auth.version>
+        <google-http-client.version>1.44.2</google-http-client.version>
+        <mysql-connector.version>9.3.0</mysql-connector.version>
+
     </properties>
 
-    <!-- Import the BOM: all managed dependency versions flow from here -->
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>de.botpilot</groupId>
-                <artifactId>bot-pilot-core-bom</artifactId>
-                <version>0.1.0-SNAPSHOT</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+                <!-- Spring Boot BOM: importing this lets us use all Spring Boot starters
+                     without specifying versions for them individually. -->
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-dependencies</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <type>pom</type>
+                    <scope>import</scope>
+                </dependency>
+
+                <!-- Internal modules: centralising internal artifact versions here means
+                     parent/child POMs never hardcode a sibling version. -->
+                <dependency>
+                    <groupId>de.botpilot</groupId>
+                    <artifactId>bot-pilot-faqs-domain</artifactId>
+                    <version>0.1.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>de.botpilot</groupId>
+                    <artifactId>bot-pilot-faqs-application</artifactId>
+                    <version>0.1.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>de.botpilot</groupId>
+                    <artifactId>bot-pilot-faqs-infrastructure-json</artifactId>
+                    <version>0.1.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>de.botpilot</groupId>
+                    <artifactId>bot-pilot-faqs-infrastructure-nlp</artifactId>
+                    <version>0.1.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>de.botpilot</groupId>
+                    <artifactId>bot-pilot-faqs-api</artifactId>
+                    <version>0.1.0-SNAPSHOT</version>
+                </dependency>
+
+                <!-- DJL core API — engine-agnostic; actual inference happens via engine jars below -->
+                <dependency>
+                    <groupId>ai.djl</groupId>
+                    <artifactId>api</artifactId>
+                    <version>${djl.version}</version>
+                </dependency>
+
+                <!-- DJL HuggingFace tokenizers (Java port of the Rust tokenizer library) -->
+                <dependency>
+                    <groupId>ai.djl.huggingface</groupId>
+                    <artifactId>tokenizers</artifactId>
+                    <version>${djl.version}</version>
+                </dependency>
+
+                <!-- DJL ONNX Runtime engine: supports dynamic input shapes unlike the PyTorch
+                     TorchScript engine, which is traced with a fixed sequence length. -->
+                <dependency>
+                    <groupId>ai.djl.onnxruntime</groupId>
+                    <artifactId>onnxruntime-engine</artifactId>
+                    <version>${djl.version}</version>
+                </dependency>
+
+                <!-- Jackson: already managed by spring-boot-dependencies, but listed here
+                     explicitly so modules that don't pull a Spring starter can still use it. -->
+                <dependency>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                    <version>${jackson.version}</version>
+                </dependency>
+
+                <!-- Google Calendar Java client (v3 API) -->
+                <dependency>
+                    <groupId>com.google.apis</groupId>
+                    <artifactId>google-api-services-calendar</artifactId>
+                    <version>${google-calendar-api.version}</version>
+                </dependency>
+                <!-- Google Auth library: OAuth2 credentials and token refresh -->
+                <dependency>
+                    <groupId>com.google.auth</groupId>
+                    <artifactId>google-auth-library-oauth2-http</artifactId>
+                    <version>${google-auth.version}</version>
+                </dependency>
+                <!-- HTTP transport for Google API clients (Jackson-backed) -->
+                <dependency>
+                    <groupId>com.google.http-client</groupId>
+                    <artifactId>google-http-client-jackson2</artifactId>
+                    <version>${google-http-client.version}</version>
+                </dependency>
+                <!-- MySQL JDBC driver: used by the persistence adapter -->
+                <dependency>
+                    <groupId>com.mysql</groupId>
+                    <artifactId>mysql-connector-j</artifactId>
+                    <version>${mysql-connector.version}</version>
+                </dependency>
+                <!-- Spring Cloud Vault: AppRole authentication + dynamic DB credentials -->
+                <dependency>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-vault-config</artifactId>
+                    <version>${spring-cloud-vault.version}</version>
+                </dependency>
+                <!-- Spring Cloud Vault Database secrets engine support -->
+                <dependency>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-vault-config-databases</artifactId>
+                    <version>${spring-cloud-vault.version}</version>
+                </dependency>
+
+                <!-- Internal connector modules -->
+                <dependency>
+                    <groupId>de.botpilot</groupId>
+                    <artifactId>bot-pilot-connectors-calendar-spi</artifactId>
+                    <version>0.1.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>de.botpilot</groupId>
+                    <artifactId>bot-pilot-google-calendar-connector-domain</artifactId>
+                    <version>0.1.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>de.botpilot</groupId>
+                    <artifactId>bot-pilot-google-calendar-connector-application</artifactId>
+                    <version>0.1.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>de.botpilot</groupId>
+                    <artifactId>bot-pilot-google-calendar-connector-infrastructure-persistence</artifactId>
+                    <version>0.1.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>de.botpilot</groupId>
+                    <artifactId>bot-pilot-google-calendar-connector-infrastructure-vault</artifactId>
+                    <version>0.1.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>de.botpilot</groupId>
+                    <artifactId>bot-pilot-google-calendar-connector-infrastructure-google-api</artifactId>
+                    <version>0.1.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>de.botpilot</groupId>
+                    <artifactId>bot-pilot-google-calendar-connector-rest</artifactId>
+                    <version>0.1.0-SNAPSHOT</version>
+                </dependency>
+
+                <!-- JUnit 5 + Mockito (test scope) -->
+                <dependency>
+                    <groupId>org.junit.jupiter</groupId>
+                    <artifactId>junit-jupiter</artifactId>
+                    <version>${junit.version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.mockito</groupId>
+                    <artifactId>mockito-junit-jupiter</artifactId>
+                    <version>${mockito.version}</version>
+                    <scope>test</scope>
+                </dependency>
         </dependencies>
     </dependencyManagement>
 

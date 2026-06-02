@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.botpilot</groupId>
+        <artifactId>bot-pilot-google-calendar-connector</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bot-pilot-google-calendar-connector-infrastructure-persistence
+    </artifactId>
+    <name>bot-pilot-google-calendar-connector-infrastructure-persistence</name>
+    <description>
+        Driven adapter: JPA + Spring Data persistence for Google Calendar credentials.
+
+        Implements the CredentialRepository port (from calendar-spi) using Spring Data
+        JPA
+        backed by MySQL. The adapter translates between the GoogleCalendarCredentials
+        JPA
+        entity (domain module) and the CredentialRepository contract (spi module).
+
+        Schema: table google_credentials — columns match the Python SQLAlchemy model
+        exactly.
+        ddl-auto: validate (schema is pre-created, never managed by Hibernate).
+
+        Why MySQL and not H2/Postgres?
+        The Python service used MySQL. Keeping the same RDBMS avoids a schema migration
+        and ensures the Vault role (bot-connectors-calendar-role) continues to work
+        without
+        changes to the Vault database secrets engine configuration.
+    </description>
+
+    <dependencies>
+        <!-- Domain entity (GoogleCalendarCredentials) -->
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-google-calendar-connector-domain</artifactId>
+        </dependency>
+        <!-- Port interface this adapter implements -->
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-connectors-calendar-spi</artifactId>
+        </dependency>
+        <!-- Spring Data JPA: provides JpaRepository, @Repository, EntityManager -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!-- MariaDB JDBC driver: required at runtime for DataSource auto-configuration -->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

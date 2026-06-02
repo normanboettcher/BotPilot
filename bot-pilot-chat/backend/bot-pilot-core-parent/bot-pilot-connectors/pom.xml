@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.botpilot</groupId>
+        <artifactId>bot-pilot-core-parent</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bot-pilot-connectors</artifactId>
+    <packaging>pom</packaging>
+    <name>bot-pilot-connectors</name>
+    <description>
+        Top-level aggregator for all connector families (calendar, messenger, etc.).
+
+        Each connector family gets its own shared SPI module (containing the generic
+        port interfaces and domain model that all concrete connectors must satisfy)
+        plus one sub-aggregator per concrete integration (e.g. Google Calendar, Outlook).
+
+        This two-level grouping means:
+          - Adding Outlook Calendar = add bot-pilot-outlook-calendar-connector here
+          - Adding Slack connector  = add a bot-pilot-connectors-messenger-spi + bot-pilot-slack-connector here
+        Neither change touches the parent POM or any existing module.
+    </description>
+
+    <!--
+        Module declaration order drives the default sequential build ordering.
+        Maven parallel build (-T N) honours the inter-module dependency graph:
+
+          Tier 1 (parallel): bot-pilot-connectors-calendar-spi
+          Tier 2 (sequential): bot-pilot-google-calendar-connector aggregator
+                               (its own internal graph then takes over)
+    -->
+    <modules>
+        <module>bot-pilot-connectors-calendar-spi</module>
+        <module>bot-pilot-google-calendar-connector</module>
+    </modules>
+
+</project>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.botpilot</groupId>
+        <artifactId>bot-pilot-google-calendar-connector</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bot-pilot-google-calendar-connector-rest</artifactId>
+    <name>bot-pilot-google-calendar-connector-rest</name>
+    <description>
+        Driving adapter: Spring MVC REST controllers.
+
+        Contains:
+          - OAuthController  — GET /oauth2/start, GET /oauth2/callback
+          - CalendarController — GET /calendar/google/events/busy,
+                                 POST /calendar/google/events/create
+
+        The OAuth flow (start + callback) is an adapter concern: it drives the Google
+        OAuth library to obtain credentials and then calls the application layer to
+        persist them.  It is NOT a use case — there is no business logic, only
+        protocol translation between HTTP and the application service.
+
+        CalendarController translates HTTP parameters to use-case calls and maps
+        CalendarEventCreationResult (sealed) to HTTP responses using pattern-matching switch,
+        exactly as FaqSearchController does with BotResponse.
+    </description>
+
+    <dependencies>
+        <!-- Use case layer -->
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-google-calendar-connector-application</artifactId>
+        </dependency>
+        <!-- SPI model (BusyEvent, CalendarEvent, CalendarEventCreationResult) -->
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-connectors-calendar-spi</artifactId>
+        </dependency>
+        <!-- Google API adapter (needed by OAuthController to build OAuth flow) -->
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-google-calendar-connector-infrastructure-google-api</artifactId>
+        </dependency>
+        <!-- Spring MVC for @RestController, @GetMapping, etc. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

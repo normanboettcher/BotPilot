@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.botpilot</groupId>
+        <artifactId>bot-pilot-google-calendar-connector</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bot-pilot-google-calendar-connector-application</artifactId>
+    <name>bot-pilot-google-calendar-connector-application</name>
+    <description>
+        Use-case layer: orchestrates calendar operations via the SPI port interfaces.
+
+        Contains:
+          - ReadBusyEventsUseCase  — delegates to CalendarEventReader port
+          - CreateCalendarEventUseCase — delegates to CalendarEventWriter port
+          - NotAuthenticatedException — thrown when no credentials exist for the context
+
+        This module depends ONLY on the calendar SPI (ports + generic model) and the
+        Google connector domain (for CredentialRepository typing in OAuth helpers).
+        There are no Google API imports, no Spring annotations, no JPA here.
+
+        No @Service/@Component — use cases are wired as @Bean in the -app assembler.
+        This makes them trivially testable with plain Mockito without a Spring context.
+    </description>
+
+    <dependencies>
+        <!-- Generic calendar port interfaces and domain model -->
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-connectors-calendar-spi</artifactId>
+        </dependency>
+        <!-- Google-specific credential entity (needed by OAuth application service) -->
+        <dependency>
+            <groupId>de.botpilot</groupId>
+            <artifactId>bot-pilot-google-calendar-connector-domain</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
