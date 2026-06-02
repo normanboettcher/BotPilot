@@ -1,30 +1,5 @@
 # =============================================================================
-# Stage 1 — bom-install
-#
-# Installs the Bill of Materials POM into the local Maven repository so that
-# the app-build stage can resolve its dependencyManagement imports.
-#
-# Only the BOM's own pom.xml, mvnw, and wrapper config are copied here.
-# This means the BOM layer is cached until any of those three files change —
-# source code changes in bot-pilot-core-parent never touch this stage.
-# =============================================================================
-FROM eclipse-temurin:25-jdk-jammy@sha256:1cba4b363eec8f82675b6db12a4914fd6d3894bbe680cd4c45e54f81063323b1 AS bom-install
-
-WORKDIR /build
-
-COPY --chmod=0755 bot-pilot-core-bom/mvnw             ./mvnw
-COPY              bot-pilot-core-bom/.mvn              ./.mvn
-COPY              bot-pilot-core-bom/pom.xml           ./pom.xml
-
-# --mount=type=cache persists /root/.m2 across Podman/BuildKit builds.
-# mvnw stores the Maven binary under ${MAVEN_USER_HOME}/wrapper/dists/,
-# which also defaults to /root/.m2, so Maven itself is cached here too.
-# -q silences download progress noise while keeping actionable ERROR output.
-RUN --mount=type=cache,target=/root/.m2 \
-    ./mvnw install -DskipTests -q
-
-# =============================================================================
-# Stage 2 — app-build
+# Stage 1 — app-build
 #
 # Splits dependency resolution from compilation into two RUN steps so that
 # a source-only change hits the layer cache after the dependency download.
@@ -35,7 +10,7 @@ RUN --mount=type=cache,target=/root/.m2 \
 # dependency chain, BuildKit may execute the two stages in parallel and
 # app-build would fail to resolve de.botpilot:bot-pilot-core-bom.
 # =============================================================================
-FROM bom-install AS app-build
+FROM eclipse-temurin:25-jdk-jammy@sha256:1cba4b363eec8f82675b6db12a4914fd6d3894bbe680cd4c45e54f81063323b1 AS app-build
 
 WORKDIR /build
 
@@ -43,27 +18,23 @@ WORKDIR /build
 # Copy only POM files first. The dependency:go-offline goal downloads every
 # declared dependency into the cache mount without touching source code.
 # This layer is re-used on every build where only .java files changed.
-COPY bot-pilot-core-parent/pom.xml                                                                              ./bot-pilot-core-parent/pom.xml
-COPY bot-pilot-core-parent/bot-pilot-faqs/pom.xml                                                               ./bot-pilot-core-parent/bot-pilot-faqs/pom.xml
-COPY bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-api/pom.xml                                           ./bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-api/pom.xml
-COPY bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-app/pom.xml                                           ./bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-app/pom.xml
-COPY bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-application/pom.xml                                   ./bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-application/pom.xml
-COPY bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-domain/pom.xml                                        ./bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-domain/pom.xml
-COPY bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-infrastructure-json/pom.xml                           ./bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-infrastructure-json/pom.xml
-COPY bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-infrastructure-nlp/pom.xml                            ./bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-infrastructure-nlp/pom.xml
+COPY --parents bot-pilot-core-parent/**/pom.xml ./
+COPY --parents bot-pilot-core-parent/mvnw bot-pilot-core-parent/.mvn/ ./
+
+RUN chmod +x bot-pilot-core-parent/mvnw
 
 RUN --mount=type=cache,target=/root/.m2 \
-    ./mvnw -f bot-pilot-core-parent/pom.xml dependency:go-offline -q
+    ./bot-pilot-core-parent/mvnw -f bot-pilot-core-parent/pom.xml dependency:go-offline -q
 
 # --- compilation and packaging pass ---
 # Source code arrives here. Cache miss only when .java / resources change.
 COPY bot-pilot-core-parent/ ./bot-pilot-core-parent/
 
 RUN --mount=type=cache,target=/root/.m2 \
-    ./mvnw -f bot-pilot-core-parent/pom.xml package -DskipTests -q
+    ./bot-pilot-core-parent/mvnw -f bot-pilot-core-parent/pom.xml package -DskipTests -q
 
 # =============================================================================
-# Stage 3 — app-extract
+# Stage 2 — app-extract
 #
 # Explodes the fat JAR into Spring Boot's layertools layers so that the
 # final image can be assembled with one layer per bucket:
@@ -82,7 +53,7 @@ FROM eclipse-temurin:25-jdk-jammy@sha256:1cba4b363eec8f82675b6db12a4914fd6d3894b
 
 WORKDIR /build
 
-COPY --from=app-build /build/bot-pilot-core-parent/bot-pilot-faqs/bot-pilot-faqs-app/target/bot-pilot-faqs-app-*.jar \
+COPY --from=app-build /build/bot-pilot-core-parent/bot-pilot-core-runner/target/bot-pilot-core-runner-*.jar \
      ./app.jar
 
 RUN java -Djarmode=layertools -jar app.jar extract --destination /extracted
