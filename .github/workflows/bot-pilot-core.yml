@@ -35,4 +35,4 @@ jobs:
           cache: 'maven'
 
       - name: Build and test
-        run: ./bot-pilot-core-bom/mvnw -f bot-pilot-core-parent/pom.xml verify -T 2C -q
+        run: ./bot-pilot-core-parent/mvnw -f bot-pilot-core-parent/pom.xml verify -T 2C -q
