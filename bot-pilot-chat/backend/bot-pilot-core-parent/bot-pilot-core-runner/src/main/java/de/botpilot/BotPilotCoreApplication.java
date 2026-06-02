@@ -13,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 public class BotPilotCoreApplication {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         SpringApplication.run(BotPilotCoreApplication.class, args);
     }
 }
