@@ -46,17 +46,17 @@ services:
     ports:
       - "5055:5055"
 
-  bot-connectors:
+  bot-pilot-core:
     build:
-      context: ./bot-pilot-chat/backend/bot-connectors
+      context: ./bot-pilot-chat/backend/
       dockerfile: ./Containerfile
-    container_name: bot-connectors
+    container_name: bot-pilot-core
     restart: unless-stopped
     networks:
       - dev-network
-    env_file:
-      - ./bot-pilot-chat/backend/bot-connectors/.env
+    #env_file:
+    #  - ./bot-pilot-chat/backend/bot-pilot-core-parent/.env
     volumes:
       - /home/norman/connectors_secret_id.cert:/run/secrets/bot-connectors-secret-id:ro,Z
     ports:
-      - "8000:8000"
+      - "8081:8081"
