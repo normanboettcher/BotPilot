@@ -1,0 +1,89 @@
+spring:
+  application:
+    name: bot-pilot-core
+  cloud:
+    vault:
+      uri: ${VAULT_ADDR:http://localhost:8200}
+      authentication: APPROLE
+      # ============================================================
+      # Spring Cloud Vault — AppRole authentication
+      # VAULT_ADDR env var provides the Vault server address.
+      # CONNECTORS_VAULT_APP_ROLE_ID env var provides the role-id.
+      # The secret-id is read from a file at /run/secrets/bot-connectors-secret-id
+      # (matches the Python config.get_secret_id() pattern: file-based, never env var value).
+      # ============================================================
+      app-role:
+        role-id: ${CONNECTORS_VAULT_APP_ROLE_ID:}
+        secret-id-mechanism: FILE
+        secret-id: ${VAULT_SECRET_ID_FILE:/run/secrets/bot-connectors-secret-id}
+      kv:
+        enabled: false
+      # ============================================================
+      # Spring Cloud Vault — Database secrets engine
+      # Vault injects dynamic MySQL credentials for the role bot-connectors-calendar-role.
+      # These credentials are rotated automatically by Vault; Spring Cloud Vault
+      # refreshes them before the lease expires.
+      # ============================================================
+      database:
+        enabled: true
+        role: bot-connectors-calendar-role
+        backend: database
+  # ============================================================
+  # MySQL DataSource
+  # Host/port/database name come from environment variables.
+  # Username and password are injected dynamically by Spring Cloud Vault above;
+  # they must NOT be hardcoded here.
+  # TODO: Will be fetched from Vault at runtime later.
+  # ============================================================
+  datasource:
+    url: jdbc:mariadb://${CONNECTORS_DB_IP:localhost}:${CONNECTORS_DB_PORT:3306}/${CONNECTORS_DB_NAME:bot_connectors}?useSSL=false&allowPublicKeyRetrieval=true
+    driver-class-name: org.mariadb.jdbc.Driver
+  # ============================================================
+  # JPA / Hibernate
+  # ddl-auto=validate: schema is pre-created; Hibernate validates entity mappings
+  # against the existing schema at startup but never modifies DDL.
+  # If you need to add a column, write a migration script — do NOT change this to create-drop.
+  # ============================================================
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    show-sql: false
+
+server:
+  port: 8081
+
+# Similarity threshold — minimum cross-encoder score to return a match.
+# Matches the Python default of 0.7. Tune per environment without recompiling.
+bot-pilot:
+  faqs:
+    similarity-threshold: 0.7
+  # ============================================================
+  # Google OAuth2 client configuration
+  # client-id and client-secret come from the Google Cloud Console.
+  # In production these should be externalised (Vault, Kubernetes secrets, etc.).
+  # redirect-uri must match the URI registered in the Google Cloud Console exactly.
+  # ============================================================
+  google:
+    oauth:
+      client-id: ${GOOGLE_OAUTH_CLIENT_ID:replace-me-in-production}
+      client-secret: ${GOOGLE_OAUTH_CLIENT_SECRET:replace-me-in-production}
+      redirect-uri: ${GOOGLE_OAUTH_REDIRECT_URI:http://localhost:8082/oauth2/callback}
+
+# DJL model cache directory (optional — defaults to ~/.djl.ai/cache)
+# Uncomment and set to a volume mount in containerised deployments:
+# djl:
+#   cache:
+#     dir: /opt/djl-cache
+
+# ============================================================
+# Actuator
+# ============================================================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info"
+  endpoint:
+    health:
+      show-details: always

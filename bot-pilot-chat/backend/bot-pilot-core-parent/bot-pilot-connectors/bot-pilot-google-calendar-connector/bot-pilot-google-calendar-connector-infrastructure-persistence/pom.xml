@@ -10,21 +10,26 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>bot-pilot-google-calendar-connector-infrastructure-persistence</artifactId>
+    <artifactId>bot-pilot-google-calendar-connector-infrastructure-persistence
+    </artifactId>
     <name>bot-pilot-google-calendar-connector-infrastructure-persistence</name>
     <description>
         Driven adapter: JPA + Spring Data persistence for Google Calendar credentials.
 
-        Implements the CredentialRepository port (from calendar-spi) using Spring Data JPA
-        backed by MySQL.  The adapter translates between the GoogleCalendarCredentials JPA
+        Implements the CredentialRepository port (from calendar-spi) using Spring Data
+        JPA
+        backed by MySQL. The adapter translates between the GoogleCalendarCredentials
+        JPA
         entity (domain module) and the CredentialRepository contract (spi module).
 
-        Schema: table google_credentials — columns match the Python SQLAlchemy model exactly.
+        Schema: table google_credentials — columns match the Python SQLAlchemy model
+        exactly.
         ddl-auto: validate (schema is pre-created, never managed by Hibernate).
 
         Why MySQL and not H2/Postgres?
-        The Python service used MySQL.  Keeping the same RDBMS avoids a schema migration
-        and ensures the Vault role (bot-connectors-calendar-role) continues to work without
+        The Python service used MySQL. Keeping the same RDBMS avoids a schema migration
+        and ensures the Vault role (bot-connectors-calendar-role) continues to work
+        without
         changes to the Vault database secrets engine configuration.
     </description>
 
@@ -44,10 +49,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <!-- MySQL JDBC driver: required at runtime for DataSource auto-configuration -->
+        <!-- MariaDB JDBC driver: required at runtime for DataSource auto-configuration -->
         <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
         </dependency>
     </dependencies>
 

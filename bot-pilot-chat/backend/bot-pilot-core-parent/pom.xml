@@ -23,6 +23,7 @@
     <modules>
         <module>bot-pilot-faqs</module>
         <module>bot-pilot-connectors</module>
+        <module>bot-pilot-core-runner</module>
     </modules>
 
     <properties>

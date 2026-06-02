@@ -1,4 +1,4 @@
-package de.botpilot.connectors.calendar.google.app;
+package de.botpilot.config;
 
 import de.botpilot.connectors.calendar.google.application.CreateCalendarEventUseCase;
 import de.botpilot.connectors.calendar.google.application.ReadBusyEventsUseCase;
@@ -36,7 +36,7 @@ import org.springframework.context.annotation.Configuration;
         "de.botpilot.connectors.calendar.google.infrastructure.vault",
         "de.botpilot.connectors.calendar.google.rest"
 })
-class GoogleCalendarConnectorConfiguration {
+public class GoogleCalendarConnectorConfiguration {
 
     @Value("${bot-pilot.google.oauth.client-id}")
     private String clientId;

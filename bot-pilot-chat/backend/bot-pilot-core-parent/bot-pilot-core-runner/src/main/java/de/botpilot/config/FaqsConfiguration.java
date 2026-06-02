@@ -1,4 +1,4 @@
-package de.botpilot.faqs.app;
+package de.botpilot.config;
 
 import de.botpilot.faqs.application.FindSimilarFaqUseCase;
 import de.botpilot.faqs.domain.port.EmbeddingPort;

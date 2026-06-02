@@ -17,20 +17,18 @@
         Aggregator for the Google Calendar connector modules.
 
         Follows the same hexagonal structure as bot-pilot-faqs:
-          domain    — Google-specific entities (GoogleCalendarCredentials JPA entity)
-          application  — use cases (depends on calendar-spi + domain)
-          infrastructure-persistence — JPA + Spring Data adapter
-          infrastructure-vault       — Spring Cloud Vault AppRole adapter
-          infrastructure-google-api  — Google Calendar Java client adapter
-          rest       — Spring MVC driving adapter (OAuthController, CalendarController)
-          app        — Spring Boot assembler (composition root)
+        domain — Google-specific entities (GoogleCalendarCredentials JPA entity)
+        application — use cases (depends on calendar-spi + domain)
+        infrastructure-persistence — JPA + Spring Data adapter
+        infrastructure-vault — Spring Cloud Vault AppRole adapter
+        infrastructure-google-api — Google Calendar Java client adapter
+        rest — Spring MVC driving adapter (OAuthController, CalendarController)
 
         Build tiers (parallel with -T N):
-          Tier 1 (parallel): domain  [calendar-spi already built by parent aggregator]
-          Tier 2 (parallel): application, infrastructure-persistence,
-                             infrastructure-vault, infrastructure-google-api
-          Tier 3 (sequential): rest
-          Tier 4 (sequential): app
+        Tier 1 (parallel): domain [calendar-spi already built by parent aggregator]
+        Tier 2 (parallel): application, infrastructure-persistence,
+        infrastructure-vault, infrastructure-google-api
+        Tier 3 (sequential): rest
     </description>
 
     <modules>
@@ -40,7 +38,6 @@
         <module>bot-pilot-google-calendar-connector-infrastructure-vault</module>
         <module>bot-pilot-google-calendar-connector-infrastructure-google-api</module>
         <module>bot-pilot-google-calendar-connector-rest</module>
-        <module>bot-pilot-google-calendar-connector-app</module>
     </modules>
 
 </project>
