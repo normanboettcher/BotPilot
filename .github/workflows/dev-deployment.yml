@@ -13,26 +13,103 @@ on:
     types:
       - completed
 
+env:
+  REMOTE_DEPLOY_DIR: /home/deploy/apps/bot-pilot-deploy
+  CONFIG_DEPLOY_SUBDIR: deployment
+
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }} || ${{github.event == 'workflow_dispatch'}}
-    
-    runs-on: dev-stage-runner
+    if: >-
+      ${{
+        github.event_name == 'workflow_dispatch' ||
+        github.event.workflow_run.conclusion == 'success'
+      }}
+
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Login to Docker Hub manually for Docker
+      - name: Checkout bot-pilot-config
+        uses: actions/checkout@v4
+        with:
+          repository: normanboettcher/bot-pilot-config
+          token: ${{ secrets.BOT_PILOT_CONFIG_TOKEN }}
+          path: bot-pilot-config
+
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v3
+        with:
+          authkey: ${{ secrets.TS_CLIENT_ID }}
+          args: --ephemeral
+
+      - name: Sync deployment config to dev server
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.DEV_SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.DEV_SSH_HOST }}
+          SSH_USER: ${{ secrets.DEV_SSH_USER }}
         run: |
-          echo "${{secrets.DOCKER_HUB_TOKEN}}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin 
-      - name: Login to Docker Hub manually for Podman
+          KEY_FILE=$(mktemp)
+          echo "$SSH_PRIVATE_KEY" > "$KEY_FILE"
+          chmod 600 "$KEY_FILE"
+
+          SSH_OPTS="-i $KEY_FILE -o StrictHostKeyChecking=no -o BatchMode=yes"
+
+          ssh $SSH_OPTS "${SSH_USER}@${SSH_HOST}" "mkdir -p ${REMOTE_DEPLOY_DIR}"
+
+          rsync -az --delete \
+            -e "ssh $SSH_OPTS" \
+            "bot-pilot-config/${CONFIG_DEPLOY_SUBDIR}/" \
+            "${SSH_USER}@${SSH_HOST}:${REMOTE_DEPLOY_DIR}/"
+
+          rm -f "$KEY_FILE"
+
+      - name: Deploy to dev server
+        uses: appleboy/ssh-action@v1
+        env:
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+        with:
+          host: ${{ secrets.DEV_SSH_HOST }}
+          username: ${{ secrets.DEV_SSH_USER }}
+          key: ${{ secrets.DEV_SSH_PRIVATE_KEY }}
+          script_stop: true
+          envs: REMOTE_DEPLOY_DIR,DOCKER_HUB_USERNAME,DOCKER_HUB_TOKEN
+          script: |
+            set -euo pipefail
+
+            PODMAN_SOCKET="/run/user/$(id -u)/podman/podman.sock"
+            export DOCKER_HOST="unix://${PODMAN_SOCKET}"
+
+            echo "${DOCKER_HUB_TOKEN}" | \
+              podman login docker.io -u "${DOCKER_HUB_USERNAME}" --password-stdin
+
+            cd "${REMOTE_DEPLOY_DIR}"
+
+            podman compose pull
+            podman compose down
+            podman compose up -d
+            podman compose ps
+
+      - name: Write deployment summary
+        if: always()
         run: |
-          podman login docker.io -u "${{ secrets.DOCKER_HUB_USERNAME }}" -p "${{ secrets.DOCKER_HUB_TOKEN }}"
-          echo "REGISTRY_AUTH_FILE=$(podman info --format '{{ .Store.ConfigFile }}')" >> $GITHUB_ENV
-      - name: Fetch current configs
-        run: |
-          echo "Fetch current config files from bot-pilot-config"
-          cd /home/nbptst/apps/bot-pilot-config && git fetch && git reset --hard origin/main
-          echo "Current config files fetched successfully"
-      - name: Deploy Applications to Dev
-        run: |
-          export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
-          cd /home/nbptst/apps/bot-pilot-config/deployment && docker compose down && docker compose pull && docker compose up -d
+          if [ "${{ job.status }}" = "success" ]; then
+            ICON="passed"
+            MSG="Deployment to **dev** completed successfully."
+          else
+            ICON="failed"
+            MSG="Deployment to **dev** FAILED. The previous stack may still be running — check the server."
+          fi
+
+          cat >> "$GITHUB_STEP_SUMMARY" <<EOF
+          ## Dev Deployment ${ICON}
+
+          ${MSG}
+
+          | Field | Value |
+          |---|---|
+          | Triggered by | \`${{ github.event_name }}\` |
+          | Upstream workflow | \`${{ github.event.workflow_run.name || 'N/A' }}\` |
+          | Actor | \`${{ github.actor }}\` |
+          | Commit / Ref | \`${{ github.sha || github.ref }}\` |
+          | Run | [${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
+          EOF
