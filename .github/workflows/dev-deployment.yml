@@ -39,7 +39,6 @@ jobs:
         uses: tailscale/github-action@v3
         with:
           authkey: ${{ secrets.TS_CLIENT_ID }}
-          args: --ephemeral
 
       - name: Sync deployment config to dev server
         env:
