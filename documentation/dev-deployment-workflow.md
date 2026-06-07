@@ -59,7 +59,8 @@ A Markdown summary is written to the GitHub Actions job summary (`$GITHUB_STEP_S
 
 | Secret | Description                                                                                                          |
 |---|----------------------------------------------------------------------------------------------------------------------|
-| `TAILSCALE_AUTHKEY` | Ephemeral, pre-authorized Tailscale auth key. Generate at tailscale.com/admin/settings/keys.                         |
+| `TS_CLIENT_ID` | OAuth client ID from the Tailscale admin console (Settings → OAuth clients, `devices` write scope). |
+| `TS_CLIENT_SECRET` | OAuth client secret paired with the above client ID. |
 | `DEV_SSH_PRIVATE_KEY` | Private key for SSH access to the dev server. Add the matching public key to `~/.ssh/authorized_keys` on the server. |
 | `DEV_SSH_HOST` | Tailscale MagicDNS hostname or IP of the dev server.                                                                 |
 | `DEV_SSH_USER` | SSH login user on the dev server (e.g. `deploy`).                                                                    |

@@ -72,7 +72,6 @@ jobs:
           host: ${{ secrets.DEV_SSH_HOST }}
           username: ${{ secrets.DEV_SSH_USER }}
           key: ${{ secrets.DEV_SSH_PRIVATE_KEY }}
-          script_stop: true
           envs: REMOTE_DEPLOY_DIR,DOCKER_HUB_USERNAME,DOCKER_HUB_TOKEN
           script: |
             set -euo pipefail
