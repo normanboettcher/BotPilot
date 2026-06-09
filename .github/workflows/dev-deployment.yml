@@ -4,12 +4,7 @@ on:
   workflow_dispatch:
   workflow_run:
     workflows:
-      - Connectors Image CI
-      - Frontend Image CI
-      - Actions Image CI
-      - Bot-Pilot Rasa Core CI
-      - Bot-Pilot Core CI
-      - Bot-Pilot Core Image CI
+      - Build All Images
     types:
       - completed
 
