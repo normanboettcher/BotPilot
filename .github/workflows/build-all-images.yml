@@ -46,7 +46,7 @@ jobs:
 
   # ─── bot-pilot-core ──────────────────────────────────────────────────────────
   build-core:
-    name: Build bot-pilot-rasa-core
+    name: Build bot-pilot-core
     if: ${{ github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
 
@@ -113,7 +113,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: bot-pilot-chat/backend/rasa-actions
-          file: bot-pilot-config/deployment/backend/core/rasa/Containerfile
+          file: bot-pilot-config/deployment/backend/rasa/core/Containerfile
           push: true
           tags: docker.io/normanboettcher/bot-pilot:bot-pilot-rasa-core-latest
 
