@@ -2,7 +2,6 @@ package de.botpilot.config;
 
 import de.botpilot.connectors.calendar.google.application.CreateCalendarEventUseCase;
 import de.botpilot.connectors.calendar.google.application.ReadBusyEventsUseCase;
-import de.botpilot.connectors.calendar.google.domain.GoogleCalendarCredentials;
 import de.botpilot.connectors.calendar.google.infrastructure.googleapi.GoogleCalendarClientFactory;
 import de.botpilot.connectors.calendar.google.infrastructure.googleapi.GoogleCalendarEventReaderAdapter;
 import de.botpilot.connectors.calendar.google.infrastructure.googleapi.GoogleCalendarEventWriterAdapter;
@@ -10,7 +9,6 @@ import de.botpilot.connectors.calendar.google.infrastructure.googleapi.GoogleOAu
 import de.botpilot.connectors.calendar.google.infrastructure.persistence.GoogleCalendarCredentialRepositoryAdapter;
 import de.botpilot.connectors.calendar.spi.port.CalendarEventReader;
 import de.botpilot.connectors.calendar.spi.port.CalendarEventWriter;
-import de.botpilot.connectors.calendar.spi.port.CredentialRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -97,17 +95,5 @@ public class GoogleCalendarConnectorConfiguration {
     @Bean
     CreateCalendarEventUseCase createCalendarEventUseCase(CalendarEventWriter calendarEventWriter) {
         return new CreateCalendarEventUseCase(calendarEventWriter);
-    }
-
-    /**
-     * Exposes the JPA adapter as the CredentialRepository port.
-     * The OAuthController depends on CredentialRepository<GoogleCalendarCredentials>,
-     * not on the JPA adapter directly — so swapping the storage layer requires
-     * only changing this bean.
-     */
-    @Bean
-    CredentialRepository<GoogleCalendarCredentials> credentialRepository(
-            GoogleCalendarCredentialRepositoryAdapter adapter) {
-        return adapter;
     }
 }

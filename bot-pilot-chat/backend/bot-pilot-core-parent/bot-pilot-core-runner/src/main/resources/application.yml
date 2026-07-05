@@ -1,42 +1,46 @@
 spring:
   application:
     name: bot-pilot-core
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+  config:
+    import:
+      - "optional:vault://"
+      - "optional:vault://secret/bot-pilot-core/${SPRING_PROFILES_ACTIVE:local}"
   cloud:
     vault:
-      uri: ${VAULT_ADDR:http://localhost:8200}
+      uri: ${VAULT_ADDR}
       authentication: APPROLE
       # ============================================================
       # Spring Cloud Vault — AppRole authentication
       # VAULT_ADDR env var provides the Vault server address.
-      # CONNECTORS_VAULT_APP_ROLE_ID env var provides the role-id.
-      # The secret-id is read from a file at /run/secrets/bot-connectors-secret-id
-      # (matches the Python config.get_secret_id() pattern: file-based, never env var value).
       # ============================================================
       app-role:
-        role-id: ${CONNECTORS_VAULT_APP_ROLE_ID:}
+        role-id: ${CORE_APP_ID}
         secret-id-mechanism: FILE
-        secret-id: ${VAULT_SECRET_ID_FILE:/run/secrets/bot-connectors-secret-id}
+        secret-id: ${CORE_SECRET_ID}
       kv:
         enabled: false
       # ============================================================
       # Spring Cloud Vault — Database secrets engine
-      # Vault injects dynamic MySQL credentials for the role bot-connectors-calendar-role.
+      # Vault injects dynamic MariaDB credentials for the role bot-pilot-core-db-role.
       # These credentials are rotated automatically by Vault; Spring Cloud Vault
       # refreshes them before the lease expires.
       # ============================================================
       database:
         enabled: true
-        role: bot-connectors-calendar-role
+        role: bot-pilot-core-db-role
         backend: database
+        username-property: spring.datasource.username
+        password-property: spring.datasource.password
   # ============================================================
-  # MySQL DataSource
+  # MariaDB DataSource
   # Host/port/database name come from environment variables.
   # Username and password are injected dynamically by Spring Cloud Vault above;
   # they must NOT be hardcoded here.
-  # TODO: Will be fetched from Vault at runtime later.
   # ============================================================
   datasource:
-    url: jdbc:mariadb://${CONNECTORS_DB_IP:localhost}:${CONNECTORS_DB_PORT:3306}/${CONNECTORS_DB_NAME:bot_connectors}?useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mariadb://${CORE_DB_HOST}:${CORE_DB_PORT:3306}/${CORE_DB_NAME}?useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: org.mariadb.jdbc.Driver
   # ============================================================
   # JPA / Hibernate
