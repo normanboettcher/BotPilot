@@ -20,7 +20,7 @@ spring:
         secret-id-mechanism: FILE
         secret-id: ${CORE_SECRET_ID}
       kv:
-        enabled: false
+        enabled: true
       # ============================================================
       # Spring Cloud Vault — Database secrets engine
       # Vault injects dynamic MariaDB credentials for the role bot-pilot-core-db-role.
@@ -43,10 +43,22 @@ spring:
     url: jdbc:mariadb://${CORE_DB_HOST}:${CORE_DB_PORT:3306}/${CORE_DB_NAME}?useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: org.mariadb.jdbc.Driver
   # ============================================================
+  # Liquibase — schema migrations
+  # FAIL-SAFE DEFAULT: disabled. Migrations never run from a developer machine.
+  # They run only on deployed stages, where SPRING_PROFILES_ACTIVE=dev (set in
+  # bot-pilot-config) activates application-dev.yml, which enables Liquibase and
+  # documents its dedicated credentials (spring.liquibase.url/user/password from
+  # Vault KV — separate from the dynamic runtime datasource credentials).
+  # Deliberate local override for a throwaway local DB: SPRING_LIQUIBASE_ENABLED=true.
+  # ============================================================
+  liquibase:
+    enabled: false
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+  # ============================================================
   # JPA / Hibernate
-  # ddl-auto=validate: schema is pre-created; Hibernate validates entity mappings
-  # against the existing schema at startup but never modifies DDL.
-  # If you need to add a column, write a migration script — do NOT change this to create-drop.
+  # ddl-auto=validate: schema is created/evolved by Liquibase; Hibernate validates
+  # entity mappings against the existing schema at startup but never modifies DDL.
+  # If you need to add a column, write a Liquibase changeset — do NOT change this to create-drop.
   # ============================================================
   jpa:
     hibernate:

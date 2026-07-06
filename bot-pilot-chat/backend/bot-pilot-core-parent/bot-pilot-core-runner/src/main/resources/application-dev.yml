@@ -1,0 +1,21 @@
+# ============================================================
+# Profile: dev — active ONLY on the deployed dev stage.
+# SPRING_PROFILES_ACTIVE=dev is set by the deployment configuration
+# (bot-pilot-config repo, applied by the dev-deployment workflow via
+# podman compose on the dev server). Developers never activate this
+# profile locally.
+# ============================================================
+spring:
+  # ============================================================
+  # Liquibase — ENABLED on the deployed dev stage only.
+  # Overrides the fail-safe `enabled: false` in application.yml.
+  #
+  # Credentials: Liquibase uses its own DDL-capable credentials
+  # (spring.liquibase.url / user / password), injected by Spring Cloud Vault
+  # from the KV secret imported in application.yml
+  # (vault://secret/bot-pilot-core/dev). They are intentionally NOT the
+  # dynamic runtime datasource credentials and are readable only by the
+  # deployed service's Vault AppRole policy.
+  # ============================================================
+  liquibase:
+    enabled: true
