@@ -13,7 +13,7 @@ import java.util.Optional;
  * implements the {@code CredentialRepository} port.  This prevents the JPA repository
  * from leaking into the application layer.
  */
-interface GoogleCalendarCredentialsJpaRepository
+public interface GoogleCalendarCredentialsJpaRepository
         extends JpaRepository<GoogleCalendarCredentials, String> {
 
     /**
