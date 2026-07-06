@@ -1,0 +1,17 @@
+# ============================================================
+# Liquibase master changelog for bot-pilot-core.
+#
+# Conventions:
+# - One directory per release (v1.0.0, v1.1.0, ...), included explicitly below.
+# - DDL changesets are written as formatted SQL (native MariaDB DDL) so they are
+#   directly reviewable against the schema documentation and the legacy Python
+#   SQLAlchemy model. Explicit includes (instead of includeAll) keep the applied
+#   order deterministic and reviewable — a changeset only runs if it is listed here.
+# - Hibernate stays on ddl-auto=validate: Liquibase creates/alters the schema,
+#   Hibernate only validates the entity mappings against it at startup.
+# ============================================================
+databaseChangeLog:
+  # ---- Release 1.0.0: initial schema ----
+  - include:
+      file: v1.0.0/0001-create-google-credentials.sql
+      relativeToChangelogFile: true

@@ -92,6 +92,18 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+        <!-- Liquibase: schema migrations, run automatically at startup by Spring Boot's
+             SpringLiquibase auto-configuration AFTER the DataSource bean exists — i.e.
+             after Spring Cloud Vault has injected the dynamic DB credentials.
+             Version is managed by the imported spring-boot-dependencies BOM.
+             The runner owns the changelogs (src/main/resources/db/changelog) because the
+             schema is a deployment concern of the assembled application, not of any
+             single bounded-context module. -->
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
