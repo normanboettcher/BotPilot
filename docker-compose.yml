@@ -54,9 +54,7 @@ services:
     restart: unless-stopped
     networks:
       - dev-network
-    #env_file:
-    #  - ./bot-pilot-chat/backend/bot-pilot-core-parent/.env
-    volumes:
-      - /home/norman/connectors_secret_id.cert:/run/secrets/bot-connectors-secret-id:ro,Z
+    #volumes:
+    #  - /home/norman/connectors_secret_id.cert:/run/secrets/bot-connectors-secret-id:ro,Z
     ports:
       - "8081:8081"

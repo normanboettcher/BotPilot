@@ -17,7 +17,7 @@ spring:
       # ============================================================
       app-role:
         role-id: ${CORE_APP_ID}
-        secret-id-mechanism: FILE
+        #secret-id-mechanism: FILE
         secret-id: ${CORE_SECRET_ID}
       kv:
         enabled: true
