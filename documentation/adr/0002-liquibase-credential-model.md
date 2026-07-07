@@ -6,8 +6,7 @@
 
 The runtime datasource uses **dynamic Vault credentials**
 (`database/creds/bot-pilot-core-db-role`, injected into `spring.datasource.*` by Spring
-Cloud Vault — see [vault-architecture.md](../vault-architecture.md)). That role currently
-grants `ALL PRIVILEGES`, i.e. the runtime identity can execute DDL. Liquibase
+Cloud Vault — see [vault-architecture.md](../vault-architecture.md)). Liquibase
 ([ADR 0001](0001-liquibase-schema-management.md)) needs DDL, the application at runtime
 does not. A dedicated **static** Liquibase user is delivered by Vault KV as
 `spring.liquibase.url/user/password` via the profile-keyed config import.
@@ -17,7 +16,8 @@ does not. A dedicated **static** Liquibase user is delivered by Vault KV as
 Adopt a **two-identity model with least privilege**, in this priority order:
 
 1. **Tighten the runtime role to DML-only** (`GRANT SELECT, INSERT, UPDATE, DELETE`
-   instead of `ALL PRIVILEGES`). This is the load-bearing control: without it, any holder
+   instead of `ALL PRIVILEGES`). This is the load-bearing control: without it, any
+   holder
    of runtime credentials can run DDL and the Liquibase separation is cosmetic.
 2. **Liquibase keeps its own DDL-capable credential path**, never shared with runtime.
 3. **Migrate the Liquibase credential from static KV to a dynamic Vault database role**
@@ -60,11 +60,13 @@ spring:
   Liquibase credentials cost one Vault role plus ~8 lines of YAML.
 - **Lease lifecycle is a non-issue for a one-shot startup migration**: `SpringLiquibase`
   runs seconds after the lease is issued; renewal is irrelevant; Vault dropping the
-  ephemeral user at TTL expiry is desired behaviour. Only rule: `default_ttl` must exceed
+  ephemeral user at TTL expiry is desired behaviour. Only rule: `default_ttl` must
+  exceed
   the longest migration.
 - **MariaDB-specific safety**: privileges are grant-based at schema level, not
   object-ownership-based. Each run's ephemeral user has identical grants on
-  `DATABASECHANGELOG`/`DATABASECHANGELOGLOCK` regardless of which past user created them.
+  `DATABASECHANGELOG`/`DATABASECHANGELOGLOCK` regardless of which past user created
+  them.
   (On PostgreSQL, table ownership follows the creating role — this pattern would need
   extra work there. Do not copy this ADR to a PostgreSQL service unmodified.)
 - Composes cleanly with a future decoupled migration step: a CI job would fetch
@@ -72,11 +74,11 @@ spring:
 
 ## Alternatives considered
 
-| Alternative | Assessment |
-|---|---|
-| Keep static Liquibase user in KV (current) | Correct shape, but a long-lived DDL credential; acceptable interim state |
+| Alternative                                               | Assessment                                                                                                                 |
+|-----------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Keep static Liquibase user in KV (current)                | Correct shape, but a long-lived DDL credential; acceptable interim state                                                   |
 | Vault static role with rotation (`database/static-creds`) | Legitimate middle ground (rotated password, no ephemeral users); dynamic is barely more work given the engine already runs |
-| Reuse runtime dynamic creds for Liquibase | Rejected — collapses the DDL/DML separation this ADR exists to create |
+| Reuse runtime dynamic creds for Liquibase                 | Rejected — collapses the DDL/DML separation this ADR exists to create                                                      |
 
 ## Consequences
 
@@ -91,9 +93,9 @@ spring:
 
 ## Implementation status
 
-| Step | Status |
-|---|---|
-| Dedicated Liquibase credential, separate from runtime (`spring.liquibase.*` from Vault KV) | **Implemented** (static user, server-side) |
-| Stage-gated execution (`spring.liquibase.enabled`) | **Implemented** ([ADR 0001](0001-liquibase-schema-management.md)) |
-| Runtime role tightened to DML-only | **TODO** (Vault `creation_statements` change) |
-| Dynamic `bot-pilot-core-liquibase-role` + `spring.cloud.vault.databases.*` wiring | **TODO** (planned as above) |
+| Step                                                                                       | Status                                                             |
+|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| Dedicated Liquibase credential, separate from runtime (`spring.liquibase.*` from Vault KV) | **Implemented** (static user, server-side)                         |
+| Stage-gated execution (`spring.liquibase.enabled`)                                         | **Implemented** ([ADR 0001](0001-liquibase-schema-management.md))  |
+| Runtime role tightened to DML-only                                                         | **Implemented** for `creation_statement` for dynamic runtime users |
+| Dynamic `bot-pilot-core-liquibase-role` + `spring.cloud.vault.databases.*` wiring          | **TODO** (planned as above)                                        |
