@@ -7,6 +7,18 @@
 # ============================================================
 spring:
   # ============================================================
+  # Spring Cloud Vault — AppRole authentication (deployed dev stage).
+  # role-id is non-sensitive (baked into deploy config); the secret-id
+  # is delivered out-of-band and injected as an env var / file by the
+  # deployment (bot-pilot-config). Never commit a real secret-id.
+  # ============================================================
+  cloud:
+    vault:
+      authentication: APPROLE
+      app-role:
+        role-id: ${CORE_APP_ID}
+        secret-id: ${CORE_SECRET_ID}
+  # ============================================================
   # Liquibase — ENABLED on the deployed dev stage only.
   # Overrides the fail-safe `enabled: false` in application.yml.
   #

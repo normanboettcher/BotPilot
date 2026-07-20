@@ -10,15 +10,18 @@ spring:
   cloud:
     vault:
       uri: ${VAULT_ADDR}
-      authentication: APPROLE
       # ============================================================
-      # Spring Cloud Vault — AppRole authentication
-      # VAULT_ADDR env var provides the Vault server address.
+      # Spring Cloud Vault — authentication method is PROFILE-SPECIFIC.
+      # There is intentionally NO `authentication:` key here.
+      #   - local profile  -> USERPASS   (application-local.yml)
+      #   - dev   profile   -> APPROLE    (application-dev.yml)
+      # A running app always has exactly one profile active
+      # (default `local`, or `dev` on the deployed stage), so exactly
+      # one auth method is ever contributed. Keeping the method out of
+      # this shared file prevents a stale APPROLE block from leaking
+      # into a local (userpass) run.
+      # VAULT_ADDR provides the Vault server address for every profile.
       # ============================================================
-      app-role:
-        role-id: ${CORE_APP_ID}
-        #secret-id-mechanism: FILE
-        secret-id: ${CORE_SECRET_ID}
       kv:
         enabled: true
       # ============================================================
