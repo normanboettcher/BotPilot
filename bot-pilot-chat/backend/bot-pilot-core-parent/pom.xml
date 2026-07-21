@@ -32,169 +32,188 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>3.5.0</spring-boot.version>
-        <spring-cloud-vault.version>4.2.1</spring-cloud-vault.version>
+        <spring-boot.version>4.0.7</spring-boot.version>
+        <!-- Spring Cloud release train 2025.1.x (Oakwood) — the train for Boot 4.0.x.
+             It manages spring-cloud-vault (5.0.x) for us, so there is no separate
+             spring-cloud-vault.version to keep in sync any more. -->
+        <spring-cloud.version>2025.1.2</spring-cloud.version>
         <djl.version>0.33.0</djl.version>
-        <jackson.version>2.19.0</jackson.version>
-        <junit.version>5.11.4</junit.version>
-        <mockito.version>5.14.2</mockito.version>
         <google-calendar-api.version>v3-rev20240111-2.0.0</google-calendar-api.version>
         <google-auth.version>1.23.0</google-auth.version>
         <google-http-client.version>1.44.2</google-http-client.version>
+        <!-- Surefire and Failsafe ship from the same release cycle; one property keeps
+             them in lockstep. Neither is version-managed for us: we import the Boot BOM
+             rather than inheriting spring-boot-starter-parent, and plugin management
+             lives in the parent, not the BOM. -->
+        <maven-surefire.version>3.5.6</maven-surefire.version>
+        <!-- Testcontainers is NOT managed by spring-boot-dependencies (unlike most test
+             libraries), so its BOM is imported separately below and needs its own version. -->
+        <testcontainers.version>1.21.3</testcontainers.version>
 
     </properties>
 
     <dependencyManagement>
         <dependencies>
-                <!-- Spring Boot BOM: importing this lets us use all Spring Boot starters
-                     without specifying versions for them individually. -->
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-dependencies</artifactId>
-                    <version>${spring-boot.version}</version>
-                    <type>pom</type>
-                    <scope>import</scope>
-                </dependency>
 
-                <!-- Internal modules: centralising internal artifact versions here means
-                     parent/child POMs never hardcode a sibling version. -->
-                <dependency>
-                    <groupId>de.botpilot</groupId>
-                    <artifactId>bot-pilot-faqs-domain</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                </dependency>
-                <dependency>
-                    <groupId>de.botpilot</groupId>
-                    <artifactId>bot-pilot-faqs-application</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                </dependency>
-                <dependency>
-                    <groupId>de.botpilot</groupId>
-                    <artifactId>bot-pilot-faqs-infrastructure-json</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                </dependency>
-                <dependency>
-                    <groupId>de.botpilot</groupId>
-                    <artifactId>bot-pilot-faqs-infrastructure-nlp</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                </dependency>
-                <dependency>
-                    <groupId>de.botpilot</groupId>
-                    <artifactId>bot-pilot-faqs-api</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-                <!-- DJL core API — engine-agnostic; actual inference happens via engine jars below -->
-                <dependency>
-                    <groupId>ai.djl</groupId>
-                    <artifactId>api</artifactId>
-                    <version>${djl.version}</version>
-                </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-                <!-- DJL HuggingFace tokenizers (Java port of the Rust tokenizer library) -->
-                <dependency>
-                    <groupId>ai.djl.huggingface</groupId>
-                    <artifactId>tokenizers</artifactId>
-                    <version>${djl.version}</version>
-                </dependency>
+            <!-- Testcontainers BOM. Boot manages spring-boot-testcontainers (the Spring
+                 integration) but NOT the org.testcontainers modules themselves, so without
+                 this import the container artifacts have no version at all. -->
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-                <!-- DJL ONNX Runtime engine: supports dynamic input shapes unlike the PyTorch
-                     TorchScript engine, which is traced with a fixed sequence length. -->
-                <dependency>
-                    <groupId>ai.djl.onnxruntime</groupId>
-                    <artifactId>onnxruntime-engine</artifactId>
-                    <version>${djl.version}</version>
-                </dependency>
+            <!-- Internal modules: centralising internal artifact versions here means
+                 parent/child POMs never hardcode a sibling version. -->
+            <dependency>
+                <groupId>de.botpilot</groupId>
+                <artifactId>bot-pilot-faqs-domain</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.botpilot</groupId>
+                <artifactId>bot-pilot-faqs-application</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.botpilot</groupId>
+                <artifactId>bot-pilot-faqs-infrastructure-json</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.botpilot</groupId>
+                <artifactId>bot-pilot-faqs-infrastructure-nlp</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.botpilot</groupId>
+                <artifactId>bot-pilot-faqs-api</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
 
-                <!-- Jackson: already managed by spring-boot-dependencies, but listed here
-                     explicitly so modules that don't pull a Spring starter can still use it. -->
-                <dependency>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-databind</artifactId>
-                    <version>${jackson.version}</version>
-                </dependency>
+            <!-- DJL core API — engine-agnostic; actual inference happens via engine jars below -->
+            <dependency>
+                <groupId>ai.djl</groupId>
+                <artifactId>api</artifactId>
+                <version>${djl.version}</version>
+            </dependency>
 
-                <!-- Google Calendar Java client (v3 API) -->
-                <dependency>
-                    <groupId>com.google.apis</groupId>
-                    <artifactId>google-api-services-calendar</artifactId>
-                    <version>${google-calendar-api.version}</version>
-                </dependency>
-                <!-- Google Auth library: OAuth2 credentials and token refresh -->
-                <dependency>
-                    <groupId>com.google.auth</groupId>
-                    <artifactId>google-auth-library-oauth2-http</artifactId>
-                    <version>${google-auth.version}</version>
-                </dependency>
-                <!-- HTTP transport for Google API clients (Jackson-backed) -->
-                <dependency>
-                    <groupId>com.google.http-client</groupId>
-                    <artifactId>google-http-client-jackson2</artifactId>
-                    <version>${google-http-client.version}</version>
-                </dependency>
-                <!-- Spring Cloud Vault: AppRole authentication + dynamic DB credentials -->
-                <dependency>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-vault-config</artifactId>
-                    <version>${spring-cloud-vault.version}</version>
-                </dependency>
-                <!-- Spring Cloud Vault Database secrets engine support -->
-                <dependency>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-vault-config-databases</artifactId>
-                    <version>${spring-cloud-vault.version}</version>
-                </dependency>
+            <!-- DJL HuggingFace tokenizers (Java port of the Rust tokenizer library) -->
+            <dependency>
+                <groupId>ai.djl.huggingface</groupId>
+                <artifactId>tokenizers</artifactId>
+                <version>${djl.version}</version>
+            </dependency>
 
-                <!-- Internal connector modules -->
-                <dependency>
-                    <groupId>de.botpilot</groupId>
-                    <artifactId>bot-pilot-connectors-calendar-spi</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                </dependency>
-                <dependency>
-                    <groupId>de.botpilot</groupId>
-                    <artifactId>bot-pilot-google-calendar-connector-domain</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                </dependency>
-                <dependency>
-                    <groupId>de.botpilot</groupId>
-                    <artifactId>bot-pilot-google-calendar-connector-application</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                </dependency>
-                <dependency>
-                    <groupId>de.botpilot</groupId>
-                    <artifactId>bot-pilot-google-calendar-connector-infrastructure-persistence</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                </dependency>
-                <dependency>
-                    <groupId>de.botpilot</groupId>
-                    <artifactId>bot-pilot-google-calendar-connector-infrastructure-vault</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                </dependency>
-                <dependency>
-                    <groupId>de.botpilot</groupId>
-                    <artifactId>bot-pilot-google-calendar-connector-infrastructure-google-api</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                </dependency>
-                <dependency>
-                    <groupId>de.botpilot</groupId>
-                    <artifactId>bot-pilot-google-calendar-connector-rest</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                </dependency>
+            <!-- DJL ONNX Runtime engine: supports dynamic input shapes unlike the PyTorch
+                 TorchScript engine, which is traced with a fixed sequence length. -->
+            <dependency>
+                <groupId>ai.djl.onnxruntime</groupId>
+                <artifactId>onnxruntime-engine</artifactId>
+                <version>${djl.version}</version>
+            </dependency>
 
-                <!-- JUnit 5 + Mockito (test scope) -->
-                <dependency>
-                    <groupId>org.junit.jupiter</groupId>
-                    <artifactId>junit-jupiter</artifactId>
-                    <version>${junit.version}</version>
-                    <scope>test</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.mockito</groupId>
-                    <artifactId>mockito-junit-jupiter</artifactId>
-                    <version>${mockito.version}</version>
-                    <scope>test</scope>
-                </dependency>
+            <!-- Jackson is intentionally NOT managed here.
+                 spring-boot-dependencies imports BOTH Jackson BOMs: com.fasterxml.jackson
+                 (Jackson 2.x, for compatibility) and tools.jackson (Jackson 3.x, the new
+                 default for Spring MVC message conversion). A dependencyManagement entry
+                 here would only re-pin Jackson 2 to an older version and drift from the
+                 Boot BOM. Child modules declare jackson-databind without a version and
+                 inherit the managed one through the imported BOM. -->
+
+            <!-- Google Calendar Java client (v3 API) -->
+            <dependency>
+                <groupId>com.google.apis</groupId>
+                <artifactId>google-api-services-calendar</artifactId>
+                <version>${google-calendar-api.version}</version>
+            </dependency>
+            <!-- Google Auth library: OAuth2 credentials and token refresh -->
+            <dependency>
+                <groupId>com.google.auth</groupId>
+                <artifactId>google-auth-library-oauth2-http</artifactId>
+                <version>${google-auth.version}</version>
+            </dependency>
+            <!-- HTTP transport for Google API clients (Jackson-backed) -->
+            <dependency>
+                <groupId>com.google.http-client</groupId>
+                <artifactId>google-http-client-jackson2</artifactId>
+                <version>${google-http-client.version}</version>
+            </dependency>
+            <!-- Spring Cloud Vault (spring-cloud-vault-config + -config-databases:
+                 AppRole/Userpass auth and the dynamic DB secrets engine) is intentionally
+                 NOT listed here. The spring-cloud-dependencies train imported above already
+                 manages both artifacts, and a local dependencyManagement entry takes
+                 precedence over an imported BOM — so re-declaring them here without a
+                 version resolves to nothing, and re-declaring them WITH a version is
+                 exactly how a Vault/Boot mismatch sneaks in. Child modules declare the
+                 artifacts with no version and inherit the train's. -->
+
+            <!-- Internal connector modules -->
+            <dependency>
+                <groupId>de.botpilot</groupId>
+                <artifactId>bot-pilot-connectors-calendar-spi</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.botpilot</groupId>
+                <artifactId>bot-pilot-google-calendar-connector-domain</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.botpilot</groupId>
+                <artifactId>bot-pilot-google-calendar-connector-application</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.botpilot</groupId>
+                <artifactId>
+                    bot-pilot-google-calendar-connector-infrastructure-persistence
+                </artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.botpilot</groupId>
+                <artifactId>bot-pilot-google-calendar-connector-infrastructure-vault
+                </artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.botpilot</groupId>
+                <artifactId>
+                    bot-pilot-google-calendar-connector-infrastructure-google-api
+                </artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.botpilot</groupId>
+                <artifactId>bot-pilot-google-calendar-connector-rest</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+
+            <!-- JUnit + Mockito are intentionally NOT managed here.
+                 spring-boot-dependencies imports org.junit:junit-bom and manages Mockito,
+                 so overriding them here would pin OLDER versions than the Boot BOM ships
+                 (Boot 4.0.7 brings JUnit 6.x and Mockito 5.20.x). The unconditional test
+                 dependencies below declare no version and resolve from the BOM. -->
         </dependencies>
     </dependencyManagement>
 
@@ -234,17 +253,52 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.5.2</version>
+                    <version>${maven-surefire.version}</version>
                     <configuration>
                         <!-- Required for enable-preview at test runtime -->
                         <argLine>--enable-preview</argLine>
                     </configuration>
                 </plugin>
 
+                <!-- Failsafe runs *IT classes in the integration-test phase, separately
+                     from Surefire's *Test classes. The split is deliberate: unit and
+                     context tests must run everywhere with no external dependencies,
+                     while the *IT tests need a Docker daemon for Testcontainers. Anyone
+                     without Docker can still run `mvn test` and get a green, meaningful
+                     build. -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${maven-surefire.version}</version>
+                    <configuration>
+                        <argLine>--enable-preview</argLine>
+                        <!-- Failsafe runs AFTER `package`, and in the runner module
+                             spring-boot-maven-plugin:repackage has by then replaced the
+                             main artifact with a fat JAR whose classes live under
+                             BOOT-INF/classes. Failsafe puts that artifact on the test
+                             classpath, so @SpringBootTest cannot see the application class
+                             and fails with "Unable to find a @SpringBootConfiguration".
+                             Pointing Failsafe at the plain output directory is Spring
+                             Boot's documented fix, and unlike adding a repackage
+                             <classifier> it leaves the deployable JAR's name unchanged. -->
+                        <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>3.5.0</version>
+                    <!-- Derived from the BOM version so the plugin can never drift
+                         from the Boot version it repackages against. -->
+                    <version>${spring-boot.version}</version>
                 </plugin>
 
             </plugins>
