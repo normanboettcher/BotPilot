@@ -1,0 +1,67 @@
+# ============================================================
+# Profile: test — active for every test in this module.
+#
+# Two things must NEVER happen when this profile is active:
+#
+#   1. Contacting Vault. The `local` profile (the production default) declares
+#      ${VAULT_USERPASS_USERNAME} and ${VAULT_ADDR} with no defaults, so it fails
+#      fast on an unset env var. Tests must not depend on a developer's Vault
+#      credentials, and CI has none at all.
+#
+#      IMPORTANT: `spring.cloud.vault.enabled: false` CANNOT be set here and have
+#      any effect. The `vault://` entries in spring.config.import are resolved during
+#      config-data processing, which happens BEFORE this profile document is applied
+#      — the loader runs, hits the unresolved ${VAULT_ADDR}, and the context dies with
+#      "Illegal character in path at index 1: ${VAULT_ADDR}". The flag must be set as
+#      an inlined property on the test class instead:
+#          @SpringBootTest(properties = "spring.cloud.vault.enabled=false")
+#      Inlined test properties enter the Environment early enough to suppress the
+#      import. Both test classes in this module do exactly that; do not remove it.
+#
+#      (The `optional:` prefix on those imports is a second layer of safety, not the
+#      primary one — `optional:` only tolerates a MISSING source, it would still
+#      attempt the connection.)
+#
+#   2. Migrating a real database. Liquibase already defaults to disabled in
+#      application.yml; it is pinned off again here so the fast context test can
+#      never reach a real schema, whatever the ambient environment says.
+#      LiquibaseMigrationIT re-enables it deliberately, against a throwaway
+#      MariaDB container.
+#
+# The datasource below is a disposable in-memory H2 that exists purely so the
+# JPA auto-configuration has something to bind to. It is not a schema fixture:
+# ddl-auto=create-drop lets Hibernate derive the tables from the entities, which
+# is enough to prove the mappings are structurally sound and the context wires up.
+# Whether the entities match the LIQUIBASE-built schema is a different question,
+# and only the IT can answer it.
+# ============================================================
+spring:
+  datasource:
+    url: jdbc:h2:mem:bot-pilot-test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  liquibase:
+    enabled: false
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    # Overrides the MariaDBDialect from application.yml — required, because the
+    # stand-in datasource is H2. The IT switches this back to MariaDBDialect.
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: false
+
+# Placeholders that application.yml resolves with no default. Supplying them here
+# keeps tests independent of the developer's shell environment.
+bot-pilot:
+  google:
+    oauth:
+      client-id: test-client-id
+      client-secret: test-client-secret
+      redirect-uri: http://localhost:8082/oauth2/callback
+
+logging:
+  level:
+    liquibase: INFO

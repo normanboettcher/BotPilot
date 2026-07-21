@@ -98,10 +98,57 @@
              Version is managed by the imported spring-boot-dependencies BOM.
              The runner owns the changelogs (src/main/resources/db/changelog) because the
              schema is a deployment concern of the assembled application, not of any
-             single bounded-context module. -->
+             single bounded-context module.
+
+             Spring Boot 4 note: this MUST be spring-boot-starter-liquibase, not a bare
+             org.liquibase:liquibase-core. Boot 4 split auto-configuration into per-technology
+             modules, and the Liquibase auto-configuration now lives in spring-boot-liquibase,
+             which the starter pulls in and liquibase-core does not. With only liquibase-core
+             on the classpath the application still starts — it just never runs a migration. -->
         <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-liquibase</artifactId>
+        </dependency>
+
+        <!-- ============================================================
+             Test dependencies
+
+             The runner is the only module that assembles a Spring context, so it is
+             the only module that can meaningfully verify the context boots.
+             ============================================================ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- H2 backs the fast context test as a throwaway stand-in DataSource.
+             It is NEVER used to verify migrations: the changesets are native MariaDB
+             DDL, and H2's MariaDB compatibility mode would either reject them or,
+             worse, accept them with different semantics and report a false pass.
+             Migration fidelity is LiquibaseMigrationIT's job, against a real MariaDB. -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Testcontainers: real, disposable MariaDB for the migration IT.
+             Versions come from the Boot BOM (which imports testcontainers-bom). -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-testcontainers</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>mariadb</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
@@ -119,6 +166,13 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- Activates the *IT execution configured in the parent's pluginManagement.
+                 Declared only here because this is the only module with integration tests. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
