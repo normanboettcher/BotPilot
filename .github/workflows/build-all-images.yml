@@ -60,7 +60,6 @@ jobs:
           repository: normanboettcher/bot-pilot-config
           token: ${{ secrets.BOT_PILOT_CONFIG_TOKEN }}
           path: bot-pilot-config
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -72,8 +71,12 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
+      - name: copy application-dev.yml to sources
+        run: cp bot-pilot-config/deployment/backend/core/application.yml bot-pilot-chat/backend
+
       - name: Build and push bot-pilot-core image
         uses: docker/build-push-action@v6
+
         with:
           context: bot-pilot-chat/backend
           file: bot-pilot-config/deployment/backend/core/Containerfile
